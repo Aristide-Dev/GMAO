@@ -30,11 +30,13 @@
     <link rel="stylesheet" href="/storage/assets/vendor/libs/node-waves/node-waves.css" />
     <link rel="stylesheet" href="/storage/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
     <link rel="stylesheet" href="/storage/assets/vendor/libs/typeahead-js/typeahead.css" />
+    <link rel="stylesheet" href="/storage/assets/vendor/libs/bootstrap-select/bootstrap-select.css" />
     <link rel="stylesheet" href="/storage/assets/vendor/libs/apex-charts/apex-charts.css" />
     <link rel="stylesheet" href="/storage/assets/vendor/libs/swiper/swiper.css" />
     <link rel="stylesheet" href="/storage/assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css">
     <link rel="stylesheet" href="/storage/assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css">
     <link rel="stylesheet" href="/storage/assets/vendor/libs/datatables-checkboxes-jquery/datatables.checkboxes.css">
+    <link rel="stylesheet" href="/storage/assets/vendor/libs/select2/select2.css" />
 
     <!-- Page CSS -->
     <link rel="stylesheet" href="/storage/assets/vendor/css/pages/cards-advance.css" />
@@ -55,11 +57,40 @@
 <body>
 
     <!-- Layout wrapper -->
-    <div class="layout-wrapper layout-content-navbar  ">
+    <div class="layout-wrapper layout-content-navbar ">
         <div class="layout-container">
 
             <!-- Menu -->
-            @include('layouts.gmao.sidebar')
+            <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+                <div class="app-brand demo ">
+                    <a href="index.html" class="app-brand-link">
+                        <span class="app-brand-logo">
+                            <img src="/storage/assets/img/logo.jpeg" alt="logo" width="100" />
+                        </span>
+                    </a>
+
+                    <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
+                        <i class="align-middle ti menu-toggle-icon d-none d-xl-block ti-sm"></i>
+                        <i class="align-middle ti ti-x d-block d-xl-none ti-sm"></i>
+                    </a>
+                </div>
+                @if(!empty($sidebar))
+                @switch($sidebar)
+                @case($sidebar == "demandeur")
+                @include('layouts.gmao.demandeur.sidebar')
+                @break
+                @case(2)
+
+                @break
+                @default
+                @include('layouts.gmao.sidebar')
+                @endswitch
+                @else
+                @include('layouts.gmao.sidebar')
+                @endif
+
+                <div class="menu-inner-shadow"></div>
+            </aside>
             <!-- / Menu -->
 
 
@@ -89,8 +120,8 @@
                 <!-- Content wrapper -->
             </div>
             <!-- / Layout page -->
-    <!-- Overlay -->
-    <div class="layout-overlay layout-menu-toggle"></div>
+            <!-- Overlay -->
+            <div class="layout-overlay layout-menu-toggle"></div>
         </div>
 
         <!-- Overlay -->
@@ -102,34 +133,36 @@
     </div>
     <!-- / Layout wrapper -->
 
-  <!-- Core JS -->
-  <!-- build:js assets/vendor/js/core.js -->
+    <!-- Core JS -->
+    <!-- build:js assets/vendor/js/core.js -->
 
-  <script src="/storage/assets/vendor/libs/jquery/jquery.js"></script>
-  <script src="/storage/assets/vendor/libs/popper/popper.js"></script>
-  <script src="/storage/assets/vendor/js/bootstrap.js"></script>
-  <script src="/storage/assets/vendor/libs/node-waves/node-waves.js"></script>
-  <script src="/storage/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-  <script src="/storage/assets/vendor/libs/hammer/hammer.js"></script>
-  <script src="/storage/assets/vendor/libs/i18n/i18n.js"></script>
-  <script src="/storage/assets/vendor/libs/typeahead-js/typeahead.js"></script>
-   <script src="/storage/assets/vendor/js/menu.js"></script>
+    <script src="/storage/assets/vendor/libs/jquery/jquery.js"></script>
+    <script src="/storage/assets/vendor/libs/popper/popper.js"></script>
+    <script src="/storage/assets/vendor/js/bootstrap.js"></script>
+    <script src="/storage/assets/vendor/libs/node-waves/node-waves.js"></script>
+    <script src="/storage/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="/storage/assets/vendor/libs/hammer/hammer.js"></script>
+    <script src="/storage/assets/vendor/libs/i18n/i18n.js"></script>
+    <script src="/storage/assets/vendor/libs/typeahead-js/typeahead.js"></script>
+    <script src="/storage/assets/vendor/js/menu.js"></script>
 
-  <!-- endbuild -->
+    <!-- endbuild -->
 
-  <!-- Vendors JS -->
-  <script src="/storage/assets/vendor/libs/apex-charts/apexcharts.js"></script>
-<script src="/storage/assets/vendor/libs/swiper/swiper.js"></script>
-<script src="/storage/assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
+    <!-- Vendors JS -->
+    <script src="/storage/assets/vendor/libs/select2/select2.js"></script>
+    <script src="/storage/assets/vendor/libs/apex-charts/apexcharts.js"></script>
+    <script src="/storage/assets/vendor/libs/swiper/swiper.js"></script>
+    <script src="/storage/assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
 
-  <!-- Main JS -->
-  <script src="/storage/assets/js/main.js"></script>
+    <!-- Main JS -->
+    <script src="/storage/assets/js/main.js"></script>
 
 
-  <!-- Page JS -->
-  <script src="/storage/assets/js/dashboards-analytics.js"></script>
+    <!-- Page JS -->
+    <script src="/storage/assets/js/dashboards-analytics.js"></script>
+    <script src="/storage/assets/js/forms-selects.js"></script>
 
-  @livewireScripts
+    @livewireScripts
 </body>
 </html>
 

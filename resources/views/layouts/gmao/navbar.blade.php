@@ -1,27 +1,33 @@
 
 <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
-    <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0   d-xl-none ">
-        <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+    <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none ">
+        <a class="px-0 nav-item nav-link me-xl-4" href="javascript:void(0)">
             <i class="ti ti-menu-2 ti-sm"></i>
         </a>
     </div>
 
 
     <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-        <h3>{{ $title_desc ?? '' }}</h3>
+        @if (isset($title_desc))
+        <div class="justify-between d-flex align-items-center">
+            <i class="px-1 fa-solid fa-bookmark fa-xl" style="color: #74C0FC;"></i>
+        <h5 class="p-0 m-0">{{ $title_desc ?? '' }}</h5>
+        </div>
+        @endif
 
 
-        <ul class="navbar-nav flex-row align-items-center ms-auto">
+
+        <ul class="flex-row navbar-nav align-items-center ms-auto">
             <!-- Notification -->
             <li class="nav-item dropdown-notifications navbar-dropdown dropdown me-3 me-xl-1">
                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
                     <i class="ti ti-bell ti-md"></i>
                     <span class="badge bg-danger rounded-pill badge-notifications">5</span>
                 </a>
-                <ul class="dropdown-menu dropdown-menu-end py-0">
+                <ul class="py-0 dropdown-menu dropdown-menu-end">
                     <li class="dropdown-menu-header border-bottom">
-                        <div class="dropdown-header d-flex align-items-center py-3">
-                            <h5 class="text-body mb-0 me-auto">Notification</h5>
+                        <div class="py-3 dropdown-header d-flex align-items-center">
+                            <h5 class="mb-0 text-body me-auto">Notification</h5>
                             <a href="javascript:void(0)" class="dropdown-notifications-all text-body" data-bs-toggle="tooltip" data-bs-placement="top" title="Mark all as read"><i class="ti ti-mail-opened fs-4"></i></a>
                         </div>
                     </li>
@@ -192,7 +198,7 @@
                         </ul>
                     </li>
                     <li class="dropdown-menu-footer border-top">
-                        <a href="javascript:void(0);" class="dropdown-item d-flex justify-content-center text-primary p-2 h-px-40 mb-1 align-items-center">
+                        <a href="javascript:void(0);" class="p-2 mb-1 dropdown-item d-flex justify-content-center text-primary h-px-40 align-items-center">
                             View all notifications
                         </a>
                     </li>
@@ -240,9 +246,9 @@
                     </li>
                     <li>
                         <a class="dropdown-item" href="pages-account-settings-billing.html">
-                            <span class="d-flex align-items-center align-middle">
+                            <span class="align-middle d-flex align-items-center">
                                 <i class="flex-shrink-0 ti ti-credit-card me-2 ti-sm"></i>
-                                <span class="flex-grow-1 align-middle">Billing</span>
+                                <span class="align-middle flex-grow-1">Billing</span>
                                 <span class="flex-shrink-0 badge badge-center rounded-pill bg-label-danger w-px-20 h-px-20">2</span>
                             </span>
                         </a>
