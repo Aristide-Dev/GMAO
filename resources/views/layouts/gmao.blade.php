@@ -153,6 +153,7 @@
     <script src="/storage/assets/vendor/libs/apex-charts/apexcharts.js"></script>
     <script src="/storage/assets/vendor/libs/swiper/swiper.js"></script>
     <script src="/storage/assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
+    
 
     <!-- Main JS -->
     <script src="/storage/assets/js/main.js"></script>
@@ -161,6 +162,7 @@
     <!-- Page JS -->
     <script src="/storage/assets/js/dashboards-analytics.js"></script>
     <script src="/storage/assets/js/forms-selects.js"></script>
+    <script src="/storage/assets/js/charts-apex.js"></script>
 
     @livewireScripts
 </body>

@@ -87,6 +87,7 @@
                     <h5>Vos demandes d'interventions</h5>
                 </div>
             </div>
+
             <div class="table-responsive text-nowrap d-none d-sm-none d-md-block">
                 <table class="table table-hover">
                     <caption class="ms-4">Liste de vos demandes d'interventions</caption>
@@ -110,7 +111,7 @@
                                     <span class="fw-bold">DI0000{{ rand(1,200) }}</span>
                                 </td>
                                 <td class="text-left">
-                                    {{ fake()->name }}
+                                    <a href="{{ route('demandeur.demandes.show', rand()) }}">St {{ fake()->name }}</a>
                                 </td>
                                 <td class="text-left">{{ fake()->name }}</td>
                                 <td class="p-2 text-wrap">
