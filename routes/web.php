@@ -95,4 +95,36 @@ Route::prefix('admin')->name('admin.')->group(function() {
     Route::get('/sites/{id}', function () {
         return view('admin.sites.show');
     })->name('sites.show');
+
+    Route::get('/prestataires', function () {
+        return view('admin.prestataires.index');
+    })->name('prestataires.index');
+
+    Route::get('/prestataires/{id}', function () {
+        return view('admin.prestataires.show');
+    })->name('prestataires.show');
+
+    Route::get('/utilisateurs', function () {
+        return view('admin.utilisateurs.index');
+    })->name('utilisateurs.index');
+
+    Route::get('/utilisateurs/{id}', function () {
+        return view('admin.utilisateurs.show');
+    })->name('utilisateurs.show');
+
+    Route::get('/stock', function () {
+        return view('admin.stock.index');
+    })->name('stock.index');
+
+    Route::get('/stock/{id}', function () {
+        return view('admin.stock.show');
+    })->name('stock.show');
+
+    Route::get('/pieces', function () {
+        return view('admin.pieces.index');
+    })->name('pieces.index');
+
+    Route::get('/pieces/{id}', function () {
+        return view('admin.pieces.show');
+    })->name('pieces.show');
 });

@@ -15,11 +15,43 @@
         </a>
     </x-gmao-nav-link>
 
-    <!-- Demandes -->
+    <!-- site -->
     <x-gmao-nav-link :active="request()->routeIs('admin.sites.*')">
         <a href="{{ route('admin.sites.index') }}" class="menu-link">
             <i class="menu-icon fa-solid fa-screwdriver-wrench"></i>
             <div data-i18n="Sites">Sites</div>
+        </a>
+    </x-gmao-nav-link>
+
+    <!-- prestataire -->
+    <x-gmao-nav-link :active="request()->routeIs('admin.prestataires.*')">
+        <a href="{{ route('admin.prestataires.index') }}" class="menu-link">
+            <i class="menu-icon fa-solid fa-screwdriver-wrench"></i>
+            <div data-i18n="Prestataires">Prestataires</div>
+        </a>
+    </x-gmao-nav-link>
+
+    <!-- utilisateur -->
+    <x-gmao-nav-link :active="request()->routeIs('admin.utilisateurs.*')">
+        <a href="{{ route('admin.utilisateurs.index') }}" class="menu-link">
+            <i class="menu-icon fa-solid fa-screwdriver-wrench"></i>
+            <div data-i18n="Utilisateurs">Utilisateurs</div>
+        </a>
+    </x-gmao-nav-link>
+
+    <!-- stock -->
+    <x-gmao-nav-link :active="request()->routeIs('admin.stock.*')">
+        <a href="{{ route('admin.stock.index') }}" class="menu-link">
+            <i class="menu-icon fa-solid fa-screwdriver-wrench"></i>
+            <div data-i18n="Stock">Stock</div>
+        </a>
+    </x-gmao-nav-link>
+
+    <!-- pieces -->
+    <x-gmao-nav-link :active="request()->routeIs('admin.pieces.*')">
+        <a href="{{ route('admin.pieces.index') }}" class="menu-link">
+            <i class="menu-icon fa-solid fa-screwdriver-wrench"></i>
+            <div data-i18n="Pieces">Pieces</div>
         </a>
     </x-gmao-nav-link>
 </ul>
