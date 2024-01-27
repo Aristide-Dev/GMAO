@@ -1,0 +1,3 @@
+creations, edition, listing, details d'un prestataire
+attribution/suppression d'un admin au prestataire
+renitialisation du mot de passe

@@ -1,0 +1,2 @@
+- ajout, edition, suppression d'une piece dans le stock
+- alerte de stock faible
