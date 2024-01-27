@@ -64,13 +64,13 @@ Route::prefix('prestataires')->name('prestataires.')->group(function() {
         return view('prestataires.demandes.show');
     })->name('demandes.show');
 
-    Route::get('/sites', function () {
-        return view('prestataires.sites.index');
-    })->name('sites.index');
+    Route::get('/utilisateurs', function () {
+        return view('prestataires.utilisateurs.index');
+    })->name('utilisateurs.index');
 
-    Route::get('/sites/{id}', function () {
-        return view('prestataires.sites.show');
-    })->name('sites.show');
+    Route::get('/utilisateurs/{id}', function () {
+        return view('prestataires.utilisateurs.show');
+    })->name('utilisateurs.show');
 });
 
 

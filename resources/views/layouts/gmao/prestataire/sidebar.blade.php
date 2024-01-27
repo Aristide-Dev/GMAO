@@ -16,10 +16,10 @@
     </x-gmao-nav-link>
 
     <!-- Demandes -->
-    <x-gmao-nav-link :active="request()->routeIs('prestataires.sites.*')">
-        <a href="{{ route('prestataires.sites.index') }}" class="menu-link">
-            <i class="menu-icon fa-solid fa-screwdriver-wrench"></i>
-            <div data-i18n="Sites">Sites</div>
+    <x-gmao-nav-link :active="request()->routeIs('prestataires.utilisateurs.*')">
+        <a href="{{ route('prestataires.utilisateurs.index') }}" class="menu-link">
+            <i class="menu-icon fa-solid fa-users"></i>
+            <div data-i18n="Utilisateurs">Utilisateurs</div>
         </a>
     </x-gmao-nav-link>
 </ul>
