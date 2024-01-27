@@ -72,3 +72,27 @@ Route::prefix('prestataires')->name('prestataires.')->group(function() {
         return view('prestataires.sites.show');
     })->name('sites.show');
 });
+
+
+
+Route::prefix('admin')->name('admin.')->group(function() {
+    Route::get('/dashboard', function () {
+        return view('admin.dashboard');
+    })->name('dashboard');
+
+    Route::get('/demandes', function () {
+        return view('admin.demandes.index');
+    })->name('demandes.index');
+
+    Route::get('/demandes/{id}', function () {
+        return view('admin.demandes.show');
+    })->name('demandes.show');
+
+    Route::get('/sites', function () {
+        return view('admin.sites.index');
+    })->name('sites.index');
+
+    Route::get('/sites/{id}', function () {
+        return view('admin.sites.show');
+    })->name('sites.show');
+});
