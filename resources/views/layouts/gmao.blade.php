@@ -84,6 +84,10 @@
                         @include('layouts.gmao.prestataire.sidebar')
                         @break
 
+                        @case($sidebar == "admin")
+                        @include('layouts.gmao.admin.sidebar')
+                        @break
+
                         @case(2)
                         @break
                         @default

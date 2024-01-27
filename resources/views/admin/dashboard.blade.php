@@ -1,7 +1,7 @@
 <x-gmao-layout>
-    <x-slot name="title">{{ __('hhgi') }}</x-slot>
+    <x-slot name="title">{{ __('Tableau de Board') }}</x-slot>
     <x-slot name="title_desc">{{ __('Tableau de Board') }}</x-slot>
-    <x-slot name="sidebar">prestataire</x-slot>
+    <x-slot name="sidebar">admin</x-slot>
     <x-slot name="header">
         <h2 class="text-xl font-semibold leading-tight text-gray-800">
             {{ __('Dashboard') }}

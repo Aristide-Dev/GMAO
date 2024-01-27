@@ -1,0 +1,5 @@
+- Creation, editions des demandes d'intervention (DI) en specifiant le demandeur dans le formulaire
+- creation, editions et suivis des bons de travail (BT)
+- validation des rapports d'interventions (RI)
+
+
