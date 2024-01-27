@@ -75,19 +75,25 @@
                     </a>
                 </div>
                 @if(!empty($sidebar))
-                @switch($sidebar)
-                @case($sidebar == "demandeur")
-                @include('layouts.gmao.demandeur.sidebar')
-                @break
-                @case(2)
+                    @switch($sidebar)
+                        @case($sidebar == "demandeur")
+                        @include('layouts.gmao.demandeur.sidebar')
+                        @break
 
-                @break
-                @default
-                @include('layouts.gmao.sidebar')
-                @endswitch
+                        @case($sidebar == "prestataire")
+                        @include('layouts.gmao.prestataire.sidebar')
+                        @break
+
+                        @case(2)
+                        @break
+                        @default
+                        @include('layouts.gmao.sidebar')
+                        @break
+                    @endswitch
                 @else
-                @include('layouts.gmao.sidebar')
+                    @include('layouts.gmao.sidebar')
                 @endif
+
 
                 <div class="menu-inner-shadow"></div>
             </aside>
@@ -153,7 +159,7 @@
     <script src="/storage/assets/vendor/libs/apex-charts/apexcharts.js"></script>
     <script src="/storage/assets/vendor/libs/swiper/swiper.js"></script>
     <script src="/storage/assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
-    
+
 
     <!-- Main JS -->
     <script src="/storage/assets/js/main.js"></script>
