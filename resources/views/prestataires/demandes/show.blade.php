@@ -3,8 +3,29 @@
     <x-slot name="title_desc">{{ __('Details de la Demande') }}</x-slot>
     <x-slot name="sidebar">prestataire</x-slot>
 
+    <div class="row">
+        <div class="mb-4 col-12">
+            <div class="mt-3 accordion" id="accordionExample">
+                <div class="card accordion-item">
+                    <h2 class="accordion-header" id="headingTwo">
+                        <button type="button" class="text-right shadow-lg accordion-button collapsed fw-bolder bg-label-primary" data-bs-toggle="collapse" data-bs-target="#accordionTwo" aria-expanded="false" aria-controls="accordionTwo">
+                            NOUVEAU RAPPORT
+                        </button>
+                    </h2>
+                    <div id="accordionTwo" class="pt-5 shadow-xl accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                        <div class="justify-between gap-2 accordion-body d-flex">
+                            <x-gmao-create-rapport-constat></x-gmao-create-rapport-constat>
+                            <x-gmao-create-rapport-remplacement></x-gmao-create-rapport-remplacement>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="row">
+
+
 
         {{-- Details de la Requete --}}
         <div class="mb-4 col-lg-7 col-md-12">
