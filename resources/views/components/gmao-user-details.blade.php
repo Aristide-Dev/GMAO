@@ -70,7 +70,7 @@
 
 
 <!-- User Content -->
-<div class="order-0 col-xl-8 col-lg-7 col-md-7">
+<div class="order-1 col-xl-8 col-lg-7 col-md-7">
     <div class="mb-3 text-center card">
         <div class="card-header">
             <ul class="nav nav-pills card-header-pills" role="tablist">
@@ -184,52 +184,52 @@
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="tab-pane fade" id="securite-tabs" role="tabpanel">
-                <!-- Change Password -->
-                <div class="mb-4 card">
-                    <h5 class="card-header">Changer mon mot de Passe</h5>
-                    <div class="card-body">
-                        <form id="formChangePassword" method="GET" onsubmit="return false">
-                            <div class="alert alert-danger" role="alert">
-                                <h5 class="mb-2 alert-heading">Ensure that these requirements are met</h5>
-                                <span>Minimum 8 characters long, uppercase & symbol</span>
-                            </div>
-                            <div class="mb-5 row form-password-toggle">
-                                <label class="form-label d-block text-start" for="current_password">Ancien Mot de passe</label>
-                                <div class="input-group input-group-merge">
-                                    <input class="form-control" type="password" id="current_password" name="current_password" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" />
-                                    <span class="cursor-pointer input-group-text"><i class="ti ti-eye-off"></i></span>
+                <div class="tab-pane fade" id="securite-tabs" role="tabpanel">
+                    <!-- Change Password -->
+                    <div class="mb-4 card">
+                        <h5 class="card-header">Changer mon mot de Passe</h5>
+                        <div class="card-body">
+                            <form id="formChangePassword" method="GET" onsubmit="return false">
+                                <div class="alert alert-danger" role="alert">
+                                    <h5 class="mb-2 alert-heading">Ensure that these requirements are met</h5>
+                                    <span>Minimum 8 characters long, uppercase & symbol</span>
                                 </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="mb-3 col-md-6 form-password-toggle">
-                                    <label class="form-label d-block text-start" for="new_password">Nouveau Mot de passe</label>
+                                <div class="mb-5 row form-password-toggle">
+                                    <label class="form-label d-block text-start" for="current_password">Ancien Mot de passe</label>
                                     <div class="input-group input-group-merge">
-                                        <input class="form-control" type="password" id="new_password" name="new_password" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" />
+                                        <input class="form-control" type="password" id="current_password" name="current_password" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" />
                                         <span class="cursor-pointer input-group-text"><i class="ti ti-eye-off"></i></span>
                                     </div>
                                 </div>
 
+                                <div class="row">
+                                    <div class="mb-3 col-md-6 form-password-toggle">
+                                        <label class="form-label d-block text-start" for="new_password">Nouveau Mot de passe</label>
+                                        <div class="input-group input-group-merge">
+                                            <input class="form-control" type="password" id="new_password" name="new_password" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" />
+                                            <span class="cursor-pointer input-group-text"><i class="ti ti-eye-off"></i></span>
+                                        </div>
+                                    </div>
 
-                                <div class="mb-3 col-md-6 form-password-toggle">
-                                    <label class="form-label d-block text-start" for="confirm_password">Confirmer Mot de passe</label>
-                                    <div class="input-group input-group-merge">
-                                        <input class="form-control" type="password" id="confirm_password" name="confirm_password" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" />
-                                        <span class="cursor-pointer input-group-text"><i class="ti ti-eye-off"></i></span>
+
+                                    <div class="mb-3 col-md-6 form-password-toggle">
+                                        <label class="form-label d-block text-start" for="confirm_password">Confirmer Mot de passe</label>
+                                        <div class="input-group input-group-merge">
+                                            <input class="form-control" type="password" id="confirm_password" name="confirm_password" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" />
+                                            <span class="cursor-pointer input-group-text"><i class="ti ti-eye-off"></i></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="m-0 justify-content-end row">
+                                        <button type="submit" class="btn btn-danger col-md-4">Enregistrer</button>
                                     </div>
                                 </div>
-
-                                <div class="m-0 justify-content-end row">
-                                    <button type="submit" class="btn btn-danger col-md-4">Enregistrer</button>
-                                </div>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
                     </div>
+                    <!--/ Change Password -->
                 </div>
-                <!--/ Change Password -->
             </div>
         </div>
     </div>
