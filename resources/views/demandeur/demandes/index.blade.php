@@ -48,7 +48,7 @@
                             <th>D.I</th>
                             <th class="text-left">Site</th>
                             <th class="text-left">Equipement</th>
-                            <th class="p-2">Description</th>
+                            <th class="py-2">Description</th>
                             <th>Status</th>
                         </tr>
                     </thead>
@@ -65,8 +65,8 @@
                                     <a href="{{ route('demandeur.demandes.show', rand()) }}">St {{ fake()->name }}</a>
                                 </td>
                                 <td class="text-left">{{ fake()->name }}</td>
-                                <td class="p-2 text-wrap">
-                                    {{ fake()->paragraph }}
+                                <td class="py-2">
+                                    {{ Illuminate\Support\Str::limit(fake()->paragraph, 20, $end = ' ...') }}
                                 </td>
                                 <td>
                                     @php

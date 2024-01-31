@@ -8,10 +8,11 @@
             <div class="mt-3 accordion" id="accordionExample">
                 <div class="card accordion-item">
                     <h2 class="accordion-header" id="headingTwo">
-                        <button type="button" class="text-right shadow-lg accordion-button collapsed fw-bolder bg-label-primary" data-bs-toggle="collapse" data-bs-target="#accordionTwo" aria-expanded="false" aria-controls="accordionTwo">
+                        <button type="button" class="text-right text-white shadow-lg accordion-button collapsed fw-bolder bg-twitter" data-bs-toggle="collapse" data-bs-target="#accordionTwo" aria-expanded="false" aria-controls="accordionTwo">
                             NOUVEAU RAPPORT
                         </button>
                     </h2>
+                    <img data-url="/storage/assets/img/logo.png" src="/storage/assets/img/logo.png" alt="image">
                     <div id="accordionTwo" class="pt-5 shadow-xl accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                         <div class="justify-between gap-2 accordion-body d-flex">
                             <x-gmao-create-rapport-constat></x-gmao-create-rapport-constat>
@@ -24,9 +25,6 @@
     </div>
 
     <div class="row">
-
-
-
         {{-- Details de la Requete --}}
         <div class="mb-4 col-lg-7 col-md-12">
             <div class="card h-100">

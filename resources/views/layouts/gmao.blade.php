@@ -38,6 +38,8 @@
     <link rel="stylesheet" href="/storage/assets/vendor/libs/datatables-checkboxes-jquery/datatables.checkboxes.css">
     <link rel="stylesheet" href="/storage/assets/vendor/libs/select2/select2.css" />
     <link rel="stylesheet" href="/storage/assets/vendor/libs/flatpickr/flatpickr.css" />
+    <link rel="stylesheet" href="/storage/assets/vendor/libs/dropzone/dropzone.css" />
+
 
     <!-- Page CSS -->
     <link rel="stylesheet" href="/storage/assets/vendor/css/pages/cards-advance.css" />
@@ -63,16 +65,11 @@
 
             <!-- Menu -->
             <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
-                <div class="app-brand demo ">
-                    <a href="index.html" class="app-brand-link">
+                <div class="app-brand demo">
+                    <a href="/" class="app-brand-link">
                         <span class="app-brand-logo">
-                            <img src="/storage/assets/img/logo.jpeg" alt="logo" width="100" />
+                            <img src="/storage/assets/img/logo.png" alt="logo" width="35%" />
                         </span>
-                    </a>
-
-                    <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
-                        <i class="align-middle ti menu-toggle-icon d-none d-xl-block ti-sm"></i>
-                        <i class="align-middle ti ti-x d-block d-xl-none ti-sm"></i>
                     </a>
                 </div>
                 @if(!empty($sidebar))
@@ -156,6 +153,7 @@
     <script src="/storage/assets/vendor/libs/i18n/i18n.js"></script>
     <script src="/storage/assets/vendor/libs/typeahead-js/typeahead.js"></script>
     <script src="/storage/assets/vendor/js/menu.js"></script>
+    <script src="/storage/assets/vendor/libs/dropzone/dropzone.js"></script>
 
     <!-- endbuild -->
 
@@ -175,6 +173,7 @@
     <script src="/storage/assets/js/dashboards-analytics.js"></script>
     <script src="/storage/assets/js/forms-selects.js"></script>
     <script src="/storage/assets/js/charts-apex.js"></script>
+    <script src="/storage/assets/js/forms-file-upload.js"></script>
 
     @livewireScripts
 </body>

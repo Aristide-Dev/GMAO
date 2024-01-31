@@ -19,33 +19,52 @@
         </div>
         <!-- /User Card -->
 
+        @php
+        $indice_color="";
+        $indice_label="";
+        $indice = rand(0,100);
+
+        if($indice < 30 ) 
+        { 
+            $indice_color="danger" ; 
+            $indice_label="Mauvais" ; 
+        }elseif($indice>= 30 && $indice < 60) 
+        { 
+            $indice_color="warning" ; 
+            $indice_label="Moyen" ; 
+        }elseif($indice>= 60 && $indice < 90) 
+        { 
+            $indice_color="primary" ; 
+            $indice_label="Bon" ; 
+        }elseif($indice>= 90 && $indice <= 100) 
+        { 
+            $indice_color="success" ; 
+            $indice_label="Excellent" ; 
+        } 
+    @endphp
         <!-- Plan Card -->
         <div class="mb-4 card">
-            <div class="card-header d-flex justify-content-between">
+            <div class="border-bottom card-header bg-label-{{ $indice_color }} d-flex justify-content-between rounded-3">
                 <h5 class="m-0 card-title me-2">Indice de performance</h5>
             </div>
-            <div class="card-body">
-                @php
-                $indice_color="";
-                $indice_label="";
-                $indice = rand(0,100);
-
-                if($indice < 30 ) { $indice_color="danger" ; $indice_label="Mauvais" ; }elseif($indice>= 30 && $indice < 60) { $indice_color="warning" ; $indice_label="Moyen" ; }elseif($indice>= 60 && $indice < 90) { $indice_color="primary" ; $indice_label="Bon" ; }elseif($indice>= 90 && $indice <= 100) { $indice_color="success" ; $indice_label="Excellent" ; } @endphp <div class="d-flex justify-content-between align-items-start">
-                                <span class="badge bg-label-{{ $indice_color }}">{{ $indice_label }}</span>
-                                <div class="d-flex justify-content-center">
-                                    <h1 class="mb-0 text-{{ $indice_color }}">{{ $indice }}</h1>
-                                    <sub class="mt-auto mb-2 h6 pricing-duration text-muted fw-normal">%</sub>
-                                </div>
-            </div>
-            <div class="flex-wrap pb-4 mt-3 d-flex justify-content-start border-bottom">
-                <div class="gap-2 mt-3 d-flex align-items-start">
-                    <span class="p-2 rounded badge bg-label-primary"><i class='ti ti-briefcase ti-sm'></i></span>
-                    <div>
-                        <p class="mb-0 fw-medium">568</p>
-                        <small>Requêtes traitées</small>
+            <div class="p-3 card-body rounded-3">
+                <div class="d-flex justify-content-between align-items-start">
+                    <span class="badge bg-label-{{ $indice_color }}">{{ $indice_label }}</span>
+                    <div class="d-flex justify-content-center">
+                        <h1 class="mb-0 text-{{ $indice_color }}">{{ $indice }}</h1>
+                        <sub class="mt-auto mb-2 h6 pricing-duration text-muted fw-normal">%</sub>
                     </div>
                 </div>
-            </div>
+                <div class="flex-wrap pb-4 mt-3 d-flex justify-content-start border-bottom">
+                    <div class="gap-2 mt-3 d-flex align-items-start">
+                        <span class="p-2 rounded badge bg-label-primary"><i class='ti ti-briefcase ti-sm'></i></span>
+                        <div>
+                            <p class="mb-0 fw-medium">568</p>
+                            <small>Requêtes traitées</small>
+                        </div>
+                    </div>
+                </div>
+
             <div class="flex-wrap pb-4 mt-3 d-flex justify-content-between border-bottom">
                 <div class="gap-2 mt-3 d-flex align-items-center">
                     <span class="p-2 rounded badge bg-label-success"><i class='ti ti-clock ti-sm'></i></span>
@@ -191,10 +210,6 @@
                         <h5 class="card-header">Changer mon mot de Passe</h5>
                         <div class="card-body">
                             <form id="formChangePassword" method="GET" onsubmit="return false">
-                                <div class="alert alert-danger" role="alert">
-                                    <h5 class="mb-2 alert-heading">Ensure that these requirements are met</h5>
-                                    <span>Minimum 8 characters long, uppercase & symbol</span>
-                                </div>
                                 <div class="mb-5 row form-password-toggle">
                                     <label class="form-label d-block text-start" for="current_password">Ancien Mot de passe</label>
                                     <div class="input-group input-group-merge">

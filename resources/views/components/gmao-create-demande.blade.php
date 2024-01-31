@@ -10,7 +10,7 @@
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="flex-grow-0 pt-0 mx-0 offcanvas-body h-100">
-        <form class="pt-0 add-new-demande" id="addNewDemandeForm" onsubmit="return false">
+        <form class="pt-0 add-new-demande" id="addNewDemandeForm dropzone-basic" onsubmit="return false">
             <div class="mb-3">
                 <label class="form-label" for="site">site</label>
                 <select id="site" name="site" class="select2 form-select form-select-lg" data-allow-clear="true" data-placeholder="--CHOISIR--">
@@ -20,32 +20,27 @@
                     <option value="coyah">coyah</option>
                 </select>
             </div>
-            <div class="mb-3">
-                <label class="form-label" for="equipement">Equipement</label>
-                <select id="equipement" name="equipement" class="select2 form-select form-select-lg" data-allow-clear="true" data-placeholder="--CHOISIR--">
-                    <option value="cuve">cuve</option>
-                    <option value="distributeur">distributeur</option>
-                    <option value="pompe">pompe</option>
-                </select>
-            </div>
-            <div class="mb-3 row">
-                <div class="mb-4 col-md-6 col-12">
-                    <label for="bs-datepicker-format" class="form-label">Date de déclaration</label>
-                    <input type="date" id="bs-datepicker-format" format="dd/mm/yyyy" placeholder="JJ/MM/AAAA" class="form-control" />
-                </div>
-                <div class="mb-4 col-md-6 col-12">
-                    <label for="bs-datepicker-format" class="form-label">Heure de déclaration</label>
-                    <input type="time" id="bs-datepicker-format" placeholder="JJ/MM/AAAA" class="form-control" />
-                </div>
 
-            </div>
-            <div class="mb-3">
-                <label for="description" class="form-label">Description</label>
-                <textarea class="form-control" id="description" name="description" rows="3" placeholder="decrivez la panne"></textarea>
+            <div action="null" class="mb-3 dropzone needsclick" id="dropzone-basic">
+                <div class="dz-message needsclick">
+                    Déplacez le fichier ici ou cliquez pour télécharger.
+                </div>
+                <div class="fallback">
+                    <input name="file" type="file" />
+                </div>
             </div>
 
-            <button type="submit" class="btn btn-success me-sm-3 me-1 data-submit">ENREGISTRER</button>
-            <button type="reset" class="btn btn-label-danger" data-bs-dismiss="offcanvas">Annuler</button>
+            <div class="w-100 justify-content-between d-inline-flex">
+                <button type="reset" class="btn btn-label-danger" data-bs-dismiss="offcanvas">Annuler</button>
+                <button type="submit" class="btn btn-success me-sm-3 me-1 data-submit">ENREGISTRER</button>
+            </div>
+
         </form>
+
+
+
+
+
     </div>
 </div>
+
