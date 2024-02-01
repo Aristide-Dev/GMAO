@@ -163,6 +163,7 @@
     <script src="/storage/assets/vendor/libs/swiper/swiper.js"></script>
     <script src="/storage/assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
     <script src="/storage/assets/vendor/libs/flatpickr/flatpickr.js"></script>
+    <script src="/storage/assets/vendor/libs/autosize/autosize.js"></script>
 
 
     <!-- Main JS -->
@@ -174,6 +175,12 @@
     <script src="/storage/assets/js/forms-selects.js"></script>
     <script src="/storage/assets/js/charts-apex.js"></script>
     <script src="/storage/assets/js/forms-file-upload.js"></script>
+    <script src="/storage/assets/js/forms-extras.js"></script>
+    <script src="/storage/assets/js/cards-statistics.js"></script>
+
+    @if(isset($custum_scripts))
+    {!! $custum_scripts !!}
+    @endif
 
     @livewireScripts
 </body>

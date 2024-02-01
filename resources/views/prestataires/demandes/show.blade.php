@@ -15,8 +15,8 @@
                     <img data-url="/storage/assets/img/logo.png" src="/storage/assets/img/logo.png" alt="image">
                     <div id="accordionTwo" class="pt-5 shadow-xl accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                         <div class="justify-between gap-2 accordion-body d-flex">
-                            <x-gmao-create-rapport-constat></x-gmao-create-rapport-constat>
-                            <x-gmao-create-rapport-remplacement></x-gmao-create-rapport-remplacement>
+                            <x-gmao.create-rapport-constat></x-gmao.create-rapport-constat>
+                            <x-gmao.create-rapport-remplacement></x-gmao.create-rapport-remplacement>
                         </div>
                     </div>
                 </div>
@@ -36,15 +36,15 @@
                 </div>
                 <div class="card-body">
                     {{-- Demande d'Intervention (DI) --}}
-                    <x-gmao-demande></x-gmao-demande>
+                    <x-gmao.demande></x-gmao.demande>
                     {{-- Demande d'Intervention (DI) --}}
 
                     {{-- Bon De Travail (BT) --}}
-                    <x-gmao-bt></x-gmao-bt>
+                    <x-gmao.bt></x-gmao.bt>
                     {{-- Bon De Travail (BT) --}}
 
                     {{-- Rapport --}}
-                    <x-gmao-ri></x-gmao-ri>
+                    <x-gmao.ri></x-gmao.ri>
                     {{-- Rapport --}}
                 </div>
             </div>
@@ -53,7 +53,7 @@
 
 
         {{-- Activity Timeline --}}
-        <x-gmao-historique-interventions></x-gmao-historique-interventions>
+        <x-gmao.historique-interventions></x-gmao.historique-interventions>
         {{-- Activity Timeline --}}
 
     </div>

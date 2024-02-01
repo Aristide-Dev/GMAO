@@ -5,7 +5,7 @@
 
 
 
-    <x-gmao-user-details/>
+    <x-gmao.user-details/>
 
 </x-gmao-layout>
 

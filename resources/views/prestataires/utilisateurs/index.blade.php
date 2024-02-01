@@ -18,7 +18,7 @@
     @endphp
 
 
-    <x-gmao-create-user/>
+    <x-gmao.create-user/>
 
     <div class="mt-3 col-12">
         <!-- Hoverable Table rows -->

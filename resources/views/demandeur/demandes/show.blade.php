@@ -17,15 +17,15 @@
                 </div>
                 <div class="card-body">
                     {{-- Demande d'Intervention (DI) --}}
-                    <x-gmao-demande></x-gmao-demande>
+                    <x-gmao.demande></x-gmao.demande>
                     {{-- Demande d'Intervention (DI) --}}
 
                     {{-- Bon De Travail (BT) --}}
-                    <x-gmao-bt></x-gmao-bt>
+                    <x-gmao.bt></x-gmao.bt>
                     {{-- Bon De Travail (BT) --}}
 
                     {{-- Rapport --}}
-                    <x-gmao-ri></x-gmao-ri>
+                    <x-gmao.ri></x-gmao.ri>
                     {{-- Rapport --}}
                 </div>
             </div>
@@ -34,7 +34,7 @@
 
 
         {{-- Activity Timeline --}}
-        <x-gmao-historique-interventions></x-gmao-historique-interventions>
+        <x-gmao.historique-interventions></x-gmao.historique-interventions>
         {{-- Activity Timeline --}}
 
     </div>

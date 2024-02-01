@@ -5,7 +5,7 @@
 
 
     <div class="row">
-        @include('demandeur.sites.partials.type_equipement')
+        <x-gmao.type-equipements-list/>
     </div>
 
     <div class="p-3 row">

@@ -47,6 +47,10 @@ Route::prefix('demandeur')->name('demandeur.')->group(function() {
     Route::get('/sites/{id}', function () {
         return view('demandeur.sites.show');
     })->name('sites.show');
+
+    Route::get('/sites/{id}/{type_equipement}', function () {
+        return view('demandeur.sites.type_equipement');
+    })->name('sites.type_equipement');
 });
 
 
@@ -96,6 +100,10 @@ Route::prefix('admin')->name('admin.')->group(function() {
         return view('admin.sites.show');
     })->name('sites.show');
 
+    Route::get('/sites/{id}/{type_equipement}', function () {
+        return view('admin.sites.equipements');
+    })->name('sites.type_equipement');
+
     Route::get('/prestataires', function () {
         return view('admin.prestataires.index');
     })->name('prestataires.index');
@@ -124,7 +132,11 @@ Route::prefix('admin')->name('admin.')->group(function() {
         return view('admin.pieces.index');
     })->name('pieces.index');
 
-    Route::get('/pieces/{id}', function () {
-        return view('admin.pieces.show');
-    })->name('pieces.show');
+    Route::get('/equipements', function () {
+        return view('admin.equipements.index');
+    })->name('equipements.index');
+
+    Route::get('/equipements/{id}', function () {
+        return view('admin.equipements.show');
+    })->name('equipements.show');
 });
