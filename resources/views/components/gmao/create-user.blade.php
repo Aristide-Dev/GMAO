@@ -6,46 +6,40 @@
     </div>
     <div class="flex-grow-0 pt-0 mx-0 offcanvas-body h-100">
         <form class="pt-0 add-new-demande" id="addNewDemandeForm" onsubmit="return false">
-            <div class="mb-3>
+            <div class="mb-3">
                 <label for="bs-datepicker-format" class="form-label">Prenom</label>
                 <input type="text" id="bs-datepicker-format" placeholder="" class="form-control"/>
             </div>
-            <div class="mb-3>
+            <div class="mb-3">
                 <label for="bs-datepicker-format" class="form-label">Nom</label>
                 <input type="text" id="bs-datepicker-format" placeholder="" class="form-control"/>
             </div>
-            <div class="mb-3>
+            <div class="mb-3">
                 <label for="bs-datepicker-format" class="form-label">Email</label>
                 <input type="email" id="bs-datepicker-format" placeholder="" class="form-control"/>
             </div>
-            <div class="mb-3>
+            <div class="mb-3">
                 <label for="bs-datepicker-format" class="form-label">Telephone</label>
                 <input type="text" id="bs-datepicker-format" placeholder="" class="form-control"/>
             </div>
-            <div class="mb-3>
-                <label for="bs-datepicker-format" class="form-label">Domaine D'expertige</label>
-                <input type="text" id="bs-datepicker-format" placeholder="" class="form-control"/>
-            </div>
-            <div class="mb-3>
+            <div class="mb-3">
                 <label for="bs-datepicker-format" class="form-label">Compétence</label>
                 <input type="text" id="bs-datepicker-format" placeholder="" class="form-control"/>
             </div>
-            <div class="mb-3>
-                <label for="bs-datepicker-format" class="form-label">Photo profile</label>
-                <input type="file" id="bs-datepicker-format" placeholder="" class="form-control"/>
-            </div>
             <div class="mb-3">
-                <label class="form-label" for="site">site</label>
-                <select id="site" name="site" class="select2 form-select form-select-lg" data-allow-clear="true" data-placeholder="--CHOISIR--">
-                    <option value="matam">actif</option>
-                    <option value="coyah">desactivé</option>
+                <label class="form-label" for="role">role</label>
+                <select id="role" name="site" class="select2 form-select form-select-lg" data-allow-clear="true" data-placeholder="-- CHOISIR --">
+                    <option value="">-- CHOISIR --</option>
+                    <option value="demandeur">Demandeur</option>
+                    <option value="agent-maintenance">agent maintenance</option>
+                    <option value="admin">Admin</option>
                 </select>
             </div>
-            <div class="mb-3>
+            <div class="mb-3">
                 <label for="bs-datepicker-format" class="form-label">Mot de passe</label>
                 <input type="password" id="bs-datepicker-format" placeholder="" class="form-control"/>
             </div>
-            <div class="mb-3>
+            <div class="mb-3">
                 <label for="bs-datepicker-format" class="form-label">Confirmé le mot de passe</label>
                 <input type="password" id="bs-datepicker-format" placeholder="" class="form-control"/>
             </div>
