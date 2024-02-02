@@ -49,7 +49,7 @@ Route::prefix('demandeur')->name('demandeur.')->group(function() {
     })->name('sites.show');
 
     Route::get('/sites/{id}/{type_equipement}', function () {
-        return view('demandeur.sites.type_equipement');
+        return view('demandeur.sites.equipements');
     })->name('sites.type_equipement');
 });
 
