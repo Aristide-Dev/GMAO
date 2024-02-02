@@ -8,6 +8,9 @@
         <!-- Hoverable Table rows -->
         <div class="card">
             <h5 class="card-header">Liste des sites</h5>
+            <div class="mx-3 col-md-4">
+                <x-gmao.create-site/>
+            </div>
             <div class="table-responsive text-nowrap">
                 <table class="table table-hover">
                     <caption class="ms-4">Liste des sites</caption>

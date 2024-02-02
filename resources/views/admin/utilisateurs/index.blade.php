@@ -1,7 +1,7 @@
 <x-gmao-layout>
     <x-slot name="title">{{ __('Utilisateur') }}</x-slot>
     <x-slot name="title_desc">{{ __('Utilisateur') }}</x-slot>
-    <x-slot name="sidebar">prestataire</x-slot>
+    <x-slot name="sidebar">admin</x-slot>
 
 
     @php
@@ -17,7 +17,7 @@
     ];
     $roles = [
         [
-            'role' => 'prestataires',
+            'role' => 'admin',
             'color' => 'primary',
         ],
         [
@@ -29,6 +29,7 @@
             'color' => '',
         ],
     ];
+
     @endphp
 
 
@@ -80,7 +81,7 @@
                                     <span class="fw-bold">Diallo</span>
                                 </td>
                                 <td class="text-left">
-                                    <a href="{{ route('prestataires.utilisateurs.show', rand()) }}">yassine@gmail.com</a>
+                                    <a href="{{ route('admin.utilisateurs.show', rand()) }}">yassine@gmail.com</a>
                                 </td>
                                 <td>
                                     <span class="fw-bold">623176862</span>

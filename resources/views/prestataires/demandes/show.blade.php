@@ -12,7 +12,7 @@
                             NOUVEAU RAPPORT
                         </button>
                     </h2>
-                    <img data-url="/storage/assets/img/logo.png" src="/storage/assets/img/logo.png" alt="image">
+                    {{-- <img data-url="/storage/assets/img/logo.png" src="/storage/assets/img/logo.png" alt="image" width="50"> --}}
                     <div id="accordionTwo" class="pt-5 shadow-xl accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                         <div class="justify-between gap-2 accordion-body d-flex">
                             <x-gmao.create-rapport-constat></x-gmao.create-rapport-constat>

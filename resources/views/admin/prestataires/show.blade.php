@@ -4,6 +4,44 @@
     <x-slot name="sidebar">admin</x-slot>
 
     @php
+    $statuts = [
+        [
+            'statut' => 'en attente de validation',
+            'color' => 'warning',
+            'signe' => '',
+            'other-color' => '',
+            'value' => '',
+        ],
+        [
+            'statut' => 'transmise au prestataire',
+            'color' => 'primary',
+            'signe' => '',
+            'other-color' => '',
+            'value' => "",
+        ],
+        [
+            'statut' => 'annulée',
+            'color' => 'danger',
+            'signe' => '',
+            'other-color' => 'danger',
+            'value' => '',
+        ],
+        [
+            'statut' => 'rejettée',
+            'color' => 'danger',
+            'signe' => '-',
+            'other-color' => 'danger',
+            'value' => number_format(rand(500000,15000000), 2, '.', " "),
+        ],
+        [
+            'statut' => 'terminé',
+            'color' => 'success',
+            'signe' => '+',
+            'other-color' => 'success',
+            'value' => number_format(rand(500000,15000000), 2, '.', " "),
+        ],
+    ];
+
     $colors =
     [
     "primary",
@@ -13,61 +51,61 @@
     ]
     @endphp
 
-    <div class="mx-1 p-2 border bg-light shadow-lg">
+    <div class="p-2 mx-1 border shadow-lg bg-light">
         <h3>Indice de performance</h3>
-        <div class="row d-flex justify-between m-0 p-0">
+        <div class="justify-between p-0 m-0 row d-flex">
 
-            <div class="col-md-4 p-3 bg-white rounded">
-                <div class="d-flex gap-1 align-items-center d-flex">
-                    <div class="badge rounded bg-label-danger p-1"><i class="ti ti-chart-pie-2 ti-sm"></i></div>
+            <div class="p-3 bg-white rounded col-md-4">
+                <div class="gap-1 d-flex align-items-center">
+                    <div class="p-1 rounded badge bg-label-danger"><i class="ti ti-chart-pie-2 ti-sm"></i></div>
                     <h6 class="mb-0">Ce Mois-Ci</h6> -
                     <p class="mb-0 badge bg-dark d-end">Fev 2024</p>
                 </div>
-                <h4 class="my-2 pt-1">20%</h4>
+                <h4 class="pt-1 my-2">20%</h4>
                 <div class="d-flex justify-content-between align-items-center">
-                    <div class="progress w-75 border" style="height:4px">
+                    <div class="border progress w-75" style="height:4px">
                         <div class="progress-bar bg-danger" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
-                    <span class="float-end badge bg-danger mt-0">Mauvais</span>
+                    <span class="mt-0 float-end badge bg-danger">Mauvais</span>
                 </div>
             </div>
 
-            <div class="col-md-4 p-3 bg-white border rounded">
-                <div class="d-flex gap-1 align-items-center">
-                    <div class="badge rounded bg-label-warning p-1"><i class="ti ti-chart-pie-2 ti-sm"></i></div>
+            <div class="p-3 bg-white border rounded col-md-4">
+                <div class="gap-1 d-flex align-items-center">
+                    <div class="p-1 rounded badge bg-label-warning"><i class="ti ti-chart-pie-2 ti-sm"></i></div>
                     <h6 class="mb-0">Cette Année</h6> -
                     <p class="mb-0 badge bg-dark d-end">2024</p>
                 </div>
-                <h4 class="my-2 pt-1">35%</h4>
+                <h4 class="pt-1 my-2">35%</h4>
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="progress w-75" style="height:4px">
                         <div class="progress-bar bg-warning" role="progressbar" style="width: 35%" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
-                    <span class="float-end badge bg-warning mt-0">Moyen</span>
+                    <span class="mt-0 float-end badge bg-warning">Moyen</span>
                 </div>
             </div>
 
-            <div class="col-md-4 p-3 bg-white border rounded">
-                <div class="d-flex gap-1 align-items-center">
-                    <div class="badge rounded bg-label-primary p-1"><i class="ti ti-chart-pie-2 ti-sm"></i></div>
+            <div class="p-3 bg-white border rounded col-md-4">
+                <div class="gap-1 d-flex align-items-center">
+                    <div class="p-1 rounded badge bg-label-primary"><i class="ti ti-chart-pie-2 ti-sm"></i></div>
                     <h6 class="mb-0">Général</h6> -
                     <p class="mb-0 badge bg-dark d-end">2023 - 2024</p>
                 </div>
-                <h4 class="my-2 pt-1">80%</h4>
+                <h4 class="pt-1 my-2">80%</h4>
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="progress w-75" style="height:4px">
                         <div class="progress-bar bg-primary" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
-                    <span class="float-end badge bg-primary mt-0">Bon</span>
+                    <span class="mt-0 float-end badge bg-primary">Bon</span>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="row mt-5">
-        <div class="col-12 col-md-6 mb-4 mb-md-2">
+    <div class="mt-5 row">
+        <div class="mb-4 col-12 col-md-6 mb-md-2">
             <p class="text-light fw-medium">Liste des agents du prestataire</p>
-            <div class="accordion mt-3" id="prestataireAgentListAccordion">
+            <div class="mt-3 accordion" id="prestataireAgentListAccordion">
                 <div class="card accordion-item">
                     <h2 class="accordion-header" id="prestataireAgentListheadingThree">
                         <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#prestataireAgentListaccordionThree" aria-expanded="false" aria-controls="prestataireAgentListaccordionThree">
@@ -75,14 +113,14 @@
                         </button>
                     </h2>
                     <div id="prestataireAgentListaccordionThree" class="accordion-collapse collapse" aria-labelledby="prestataireAgentListheadingThree" data-bs-parent="#prestataireAgentListAccordion">
-                        <div class="accordion-body overflow-hidden">
-                            <div class="table-responsive w-auto">
+                        <div class="overflow-hidden accordion-body">
+                            <div class="w-auto table-responsive">
                                 <table class="table table-borderless border-top">
                                     <thead class="border-bottom">
                                         <tr>
                                             <th>Agent</th>
-                                            <th class="text-left py-0 px-1">Interventions</th>
-                                            <th class="text-left py-0 px-1">Performences</th>
+                                            <th class="px-1 py-0 text-left">Interventions</th>
+                                            <th class="px-1 py-0 text-left">Performences</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -90,7 +128,9 @@
                                             <td>
                                                 <div class="d-flex align-items-center mt-lg-3">
                                                     <div class="avatar me-2 avatar-sm">
-                                                        <img src="/storage/assets/img/avatars/1.png" alt="Avatar" class="rounded-circle" />
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="h-auto rounded-circle">
+                                                            <path fill="#B197FC" d="M399 384.2C376.9 345.8 335.4 320 288 320H224c-47.4 0-88.9 25.8-111 64.2c35.2 39.2 86.2 63.8 143 63.8s107.8-24.7 143-63.8zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm256 16a72 72 0 1 0 0-144 72 72 0 1 0 0 144z"/>
+                                                        </svg>
                                                     </div>
                                                     <div class="d-flex flex-column">
                                                         <h6 class="mb-0">{{ fake()->name }}</h6>
@@ -117,9 +157,9 @@
         </div>
 
 
-        <div class="col-12 col-md-6 mb-4 mb-md-2">
+        <div class="mb-4 col-12 col-md-6 mb-md-2">
             <p class="text-light fw-medium">Rescentes intervetions du prestataire</p>
-            <div class="accordion mt-3" id="prestataireLastOperationsAccordion">
+            <div class="mt-3 accordion" id="prestataireLastOperationsAccordion">
                 <div class="card accordion-item">
                     <h2 class="accordion-header" id="prestataireLastOperationsheadingThree">
                         <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#prestataireLastOperationsaccordionThree" aria-expanded="false" aria-controls="prestataireLastOperationsaccordionThree">
@@ -127,7 +167,7 @@
                         </button>
                     </h2>
                     <div id="prestataireLastOperationsaccordionThree" class="accordion-collapse collapse" aria-labelledby="prestataireLastOperationsheadingThree" data-bs-parent="#prestataireLastOperationsAccordion">
-                        <div class="accordion-body overflow-hidden">
+                        <div class="overflow-hidden accordion-body">
                             <div class="table-responsive">
                                 <table class="table table-borderless border-top">
                                     <thead class="border-bottom">
@@ -135,120 +175,39 @@
                                             <th>CARD</th>
                                             <th>DATE</th>
                                             <th>STATUS</th>
-                                            <th>TREND</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
+                                        @for ($i = 0; $i < 20; $i++) <tr>
                                             <td>
-                                                <div class="d-flex justify-content-start align-items-center">
-                                                    <div class="me-3">
-                                                        <img src="../../assets/img/icons/payments/visa-img.png" alt="Visa" height="30">
-                                                    </div>
+                                                <a href="{{ route('admin.demandes.show', rand()) }}" class="justify-content-start align-items-center">
+                                                    <p class="m-0 ">
+                                                        DI0000{{ rand(1,200) }}
+                                                    </p>
                                                     <div class="d-flex flex-column">
-                                                        <p class="mb-0 fw-medium">*4230</p><small class="text-muted">Credit</small>
+                                                        <small class="text-muted">BT0000{{ rand(1,200) }}</small>
+                                                        <small class="text-muted">RI0000{{ rand(1,200) }}</small>
                                                     </div>
-                                                </div>
+                                                </a>
                                             </td>
                                             <td>
                                                 <div class="d-flex flex-column">
-                                                    <p class="mb-0 fw-medium">Sent</p>
-                                                    <small class="text-muted text-nowrap">17 Mar 2022</small>
-                                                </div>
-                                            </td>
-                                            <td><span class="badge bg-label-success">Verified</span></td>
-                                            <td>
-                                                <p class="mb-0 fw-medium">+$1,678</p>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex justify-content-start align-items-center">
-                                                    <div class="me-3">
-                                                        <img src="../../assets/img/icons/payments/master-card-img.png" alt="Visa" height="30">
-                                                    </div>
-                                                    <div class="d-flex flex-column">
-                                                        <p class="mb-0 fw-medium">*5578</p><small class="text-muted">Credit</small>
-                                                    </div>
+                                                    <p class="mb-0 fw-medium text-nowrap">17 Mar 2022</p>
                                                 </div>
                                             </td>
                                             <td>
-                                                <div class="d-flex flex-column">
-                                                    <p class="mb-0 fw-medium">Sent</p>
-                                                    <small class="text-muted text-nowrap">12 Feb 2022</small>
-                                                </div>
+                                                @php
+                                                $st = $statuts[rand(0,4)];
+                                                @endphp
+                                                <span class="me-1 text-nowrap">
+                                                    <span class="badge bg-label-{{ $st['color'] }}">{{ $st['statut'] }}</span>
+                                                    <small class="mb-0 fw-medium text-{{ $st['other-color'] }}  text-nowrap">
+                                                        {{ $st['signe'] }}{{ $st['value'] }}
+                                                    </small>
+                                                </span>
                                             </td>
-                                            <td><span class="badge bg-label-danger">Rejected</span></td>
-                                            <td>
-                                                <p class="mb-0 fw-medium">-$839</p>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex justify-content-start align-items-center">
-                                                    <div class="me-3">
-                                                        <img src="../../assets/img/icons/payments/american-express-img.png" alt="Visa" height="30">
-                                                    </div>
-                                                    <div class="d-flex flex-column">
-                                                        <p class="mb-0 fw-medium">*4567</p><small class="text-muted">ATM</small>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="d-flex flex-column">
-                                                    <p class="mb-0 fw-medium">Sent</p>
-                                                    <small class="text-muted text-nowrap">28 Feb 2022</small>
-                                                </div>
-                                            </td>
-                                            <td><span class="badge bg-label-success">Verified</span></td>
-                                            <td>
-                                                <p class="mb-0 fw-medium">+$435</p>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex justify-content-start align-items-center">
-                                                    <div class="me-3">
-                                                        <img src="../../assets/img/icons/payments/visa-img.png" alt="Visa" height="30">
-                                                    </div>
-                                                    <div class="d-flex flex-column">
-                                                        <p class="mb-0 fw-medium">*5699</p><small class="text-muted">Credit</small>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="d-flex flex-column">
-                                                    <p class="mb-0 fw-medium">Sent</p>
-                                                    <small class="text-muted text-nowrap">8 Jan 2022</small>
-                                                </div>
-                                            </td>
-                                            <td><span class="badge bg-label-secondary">Pending</span></td>
-                                            <td>
-                                                <p class="mb-0 fw-medium">+$2,345</p>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex justify-content-start align-items-center">
-                                                    <div class="me-3">
-                                                        <img src="../../assets/img/icons/payments/visa-img.png" alt="Visa" height="30">
-                                                    </div>
-                                                    <div class="d-flex flex-column">
-                                                        <p class="mb-0 fw-medium">*5699</p><small class="text-muted">Credit</small>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="d-flex flex-column">
-                                                    <p class="mb-0 fw-medium">Sent</p>
-                                                    <small class="text-muted text-nowrap">8 Jan 2022</small>
-                                                </div>
-                                            </td>
-                                            <td><span class="badge bg-label-danger">Rejected</span></td>
-                                            <td>
-                                                <p class="mb-0 fw-medium">-$234</p>
-                                            </td>
-                                        </tr>
+                                            </tr>
+                                            @endfor
                                     </tbody>
                                 </table>
                             </div>

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title> {{ $title ? $title." | " : '' }} {{ config('app.name', 'G-MAINTENANCE') }}</title>
+    <title> {!! $title ? $title." | " : '' !!} {{ config('app.name', 'G-MAINTENANCE') }}</title>
 
     <!-- Fonts -->
     {{-- <link rel="preconnect" href="https://fonts.bunny.net">
@@ -68,7 +68,7 @@
                 <div class="app-brand demo">
                     <a href="/" class="app-brand-link">
                         <span class="app-brand-logo">
-                            <img src="/storage/assets/img/logo.png" alt="logo" width="35%" />
+                            {{-- <img src="/storage/assets/img/logo.png" alt="logo" width="35%" /> --}}
                         </span>
                     </a>
                 </div>

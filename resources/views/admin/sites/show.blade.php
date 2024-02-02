@@ -4,6 +4,12 @@
     <x-slot name="sidebar">admin</x-slot>
 
 
+    <div class="mb-3 row">
+        <div class="col-md-4">
+            <x-gmao.add-equipement/>
+        </div>
+    </div>
+    
     <div class="row">
         <x-gmao.type-equipements-list action='admin'/>
     </div>
