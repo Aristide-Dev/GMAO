@@ -1,6 +1,6 @@
-<button class="add-new btn btn-primary waves-effect waves-light" data-bs-toggle="offcanvas" data-bs-target="#offcanvasAddEquipementToSite" align="right">
+<button class="mb-2 btn btn-primary text-wrap add-new-role btn-sm" data-bs-toggle="offcanvas" data-bs-target="#offcanvasAddEquipementToSite" align="right">
     <i class="ti ti-plus me-0 me-sm-1 ti-xs"></i>
-    <span>NOUVEL EQUIPEMENT</span>
+    <span>AJOUTER EQUIPEMENT</span>
 </button>
 <!-- Offcanvas to add new equipement to site -->
 <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasAddEquipementToSite" aria-labelledby="offcanvasAddEquipementToSiteLabel">
