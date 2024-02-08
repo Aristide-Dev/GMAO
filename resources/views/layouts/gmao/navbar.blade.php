@@ -235,8 +235,8 @@
                                     </div>
                                 </div>
                                 <div class="flex-grow-1">
-                                    <span class="fw-medium d-block">John Doe</span>
-                                    <small class="text-muted">Admin</small>
+                                    <span class="fw-medium d-block">{{ Auth::user()?->first_name }} {{ Auth::user()?->last_name }}</span>
+                                    <small class="text-muted">{{ Auth::user()?->getroletext() }}</small>
                                 </div>
                             </div>
                         </a>
