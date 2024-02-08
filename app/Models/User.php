@@ -26,12 +26,12 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'first_name', 
-        'last_name', 
-        'name', 
-        'first_login', 
-        'email', 
-        'telephone', 
+        'first_name',
+        'last_name',
+        'name',
+        'first_login',
+        'email',
+        'telephone',
         'password',
         'role',
     ];
@@ -66,4 +66,37 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+
+    public function getRoleText()
+    {
+        $role = $this->role;
+        if($role == 'super_admin')
+        {
+            return "Super Admin";
+        }
+        elseif($role == 'admin')
+        {
+            return "admin";
+        }
+        elseif($role == 'maintenance')
+        {
+            return "Service Maintenance";
+        }
+        elseif($role == 'demandeur')
+        {
+            return "Demandeur";
+        }
+        elseif($role == 'prestataire_admin')
+        {
+            return "Gerant";
+        }
+        elseif($role == 'agent')
+        {
+            return "Agent";
+        }
+        else{
+            return "inconnu";
+        }
+    }
 }
