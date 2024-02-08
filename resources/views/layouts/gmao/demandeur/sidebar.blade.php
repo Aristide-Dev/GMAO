@@ -1,3 +1,12 @@
+@if (Auth::user())
+    @php
+        Auth::user()->abordIfNotAuthorized("demandeur");
+    @endphp
+@else
+    @php
+        abort(403, 'Unauthorized action.');
+    @endphp
+@endif
 <ul class="py-1 menu-inner">
     <!-- Dashboards -->
     <x-gmao.nav-link :active="request()->routeIs('demandeur.dashboard')">
