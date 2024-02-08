@@ -45,17 +45,128 @@ class JetstreamServiceProvider extends ServiceProvider
     {
         Jetstream::defaultApiTokenPermissions(['read']);
 
-        Jetstream::role('admin', 'Administrator', [
-            'create',
-            'read',
-            'update',
-            'delete',
+
+        Jetstream::role('admin', 'Administrateur', [
+            'demande:create',
+            'demande:list',
+            'demande:read',
+            'demande:update',
+            'demande:delete',
+
+            'bt:create',
+            'bt:list',
+            'bt:read',
+            'bt:update',
+            'bt:delete',
+
+            'injection-piece:create',
+            'injection-piece:list',
+            'injection-piece:read',
+            'injection-piece:update',
+            'injection-piece:delete',
+
+            'demande-cloture:create',
+            'demande-cloture:list',
+            'demande-cloture:read',
+            'demande-cloture:update',
+            'demande-cloture:delete',
+
+            'site:create',
+            'site:list',
+            'site:read',
+            'site:update',
+            'site:delete',
+            'site:add-equipement',
+
+            'prestataire:create',
+            'prestataire:list',
+            'prestataire:read',
+            'prestataire:update',
+            'prestataire:delete',
+
+            'user:create',
+            'user:read',
+            'user:update',
+            'user:update-password',
+            'user:reset-password',
+            'user:delete',
+        ])->description('Administrator users can perform many action.');
+
+        Jetstream::role('maintenance', 'Service Maintenace', [
+
+            'demande:create',
+            'demande:list',
+            'demande:read',
+            'demande:update',
+            'demande:delete',
+
+            'bt:create',
+            'bt:list',
+            'bt:read',
+            'bt:update',
+            'bt:delete',
+
+            'injection-piece:create',
+            'injection-piece:list',
+            'injection-piece:read',
+            'injection-piece:update',
+            'injection-piece:delete',
+
+            'demande-cloture:create',
+            'demande-cloture:list',
+            'demande-cloture:read',
+            'demande-cloture:update',
+            'demande-cloture:delete',
+
+            'site:create',
+            'site:list',
+            'site:read',
+            'site:update',
+            'site:delete',
+            'site:add-equipement',
+
+            'prestataire:create',
+            'prestataire:list',
+            'prestataire:read',
+            'prestataire:update',
+            'prestataire:delete',
+
+            'user:create',
+            'user:read',
         ])->description('Administrator users can perform any action.');
 
-        Jetstream::role('editor', 'Editor', [
-            'read',
-            'create',
-            'update',
-        ])->description('Editor users have the ability to read, create, and update.');
+        Jetstream::role('demandeur', 'Demandeur', [
+            'demande:create',
+            'demande:list',
+            'demande:read',
+            'demande:update',
+            'demande:delete',
+            'site:read',
+            'site:list',
+        ])->description("Determine les autorisations par defaut d'un demandeur");
+
+        Jetstream::role('prestataire-admin', 'Administrateur - Prestataire', [
+            'demande:list',
+            'demande:read',
+            'demande:rapport-constat',
+            'demande:rapport-injection',
+            'demande:cloture',
+            'agent:create',
+            'agent:read',
+            'agent:update',
+            'agent:update-password',
+            'agent:reset-password',
+            'agent:reset-password',
+            'agent:delete',
+        ])->description("Determine les autorisations par defaut de l'admin d'un prestataire");
+
+        Jetstream::role('agent', 'Agent', [
+            'demande:list',
+            'demande:read',
+            'demande:rapport-constat',
+            'demande:rapport-injection',
+            'demande:cloture',
+            'agent:read',
+        ])->description("Determine les autorisations par defaut des agents d'un prestataire");
     }
 }

@@ -41,6 +41,9 @@
     <link rel="stylesheet" href="/storage/assets/vendor/libs/dropzone/dropzone.css" />
 
 
+    @if(isset($custum_styles))
+    {!! $custum_styles !!}
+    @endif
     <!-- Page CSS -->
     <link rel="stylesheet" href="/storage/assets/vendor/css/pages/cards-advance.css" />
 
@@ -49,6 +52,7 @@
 
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="/storage/assets/js/config.js"></script>
+
 
 
     <!-- Scripts -->

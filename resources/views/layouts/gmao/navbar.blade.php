@@ -210,9 +210,13 @@
             <li class="nav-item navbar-dropdown dropdown-user dropdown">
                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
+                        @if (!empty(Auth::user()->profile_photo_path) && file_exists(Auth::user()->profile_photo_path))
+                            <img src="/storage/{{ Auth::user()->profile_photo_path }}" class="h-full rounded-pill" alt="photo">
+                        @else
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="h-auto">
                             <path fill="#B197FC" d="M399 384.2C376.9 345.8 335.4 320 288 320H224c-47.4 0-88.9 25.8-111 64.2c35.2 39.2 86.2 63.8 143 63.8s107.8-24.7 143-63.8zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm256 16a72 72 0 1 0 0-144 72 72 0 1 0 0 144z"/>
                         </svg>
+                        @endif
                     </div>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
@@ -221,9 +225,13 @@
                             <div class="d-flex">
                                 <div class="flex-shrink-0 me-3">
                                     <div class="avatar avatar-online">
+                                        @if (!empty(Auth::user()->profile_photo_path) && file_exists(Auth::user()->profile_photo_path))
+                                            <img src="/storage/{{ Auth::user()->profile_photo_path }}" class="h-full rounded-pill" alt="photo">
+                                        @else
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="h-auto">
                                             <path fill="#B197FC" d="M399 384.2C376.9 345.8 335.4 320 288 320H224c-47.4 0-88.9 25.8-111 64.2c35.2 39.2 86.2 63.8 143 63.8s107.8-24.7 143-63.8zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm256 16a72 72 0 1 0 0-144 72 72 0 1 0 0 144z"/>
                                         </svg>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="flex-grow-1">
@@ -268,6 +276,7 @@
                     </li>
                     <li>
                         <a class="dropdown-item" href="pages-pricing.html">
+                            
                             <i class="ti ti-currency-dollar me-2 ti-sm"></i>
                             <span class="align-middle">Pricing</span>
                         </a>

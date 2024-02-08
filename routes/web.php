@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\AppController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,9 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get("/init", [AppController::class,'init'])->name('app.init');
+
 Route::get('/', function () {
     return view('welcome');
 });
+
 
 Route::middleware([
     'auth:sanctum',
@@ -107,6 +110,10 @@ Route::prefix('admin')->name('admin.')->group(function() {
     Route::get('/prestataires', function () {
         return view('admin.prestataires.index');
     })->name('prestataires.index');
+
+    Route::get('/prestataires/create', function () {
+        return view('admin.prestataires.create');
+    })->name('prestataires.create');
 
     Route::get('/prestataires/{id}', function () {
         return view('admin.prestataires.show');

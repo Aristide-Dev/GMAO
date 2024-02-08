@@ -36,7 +36,7 @@
         <div class="overflow-hidden card">
             <div class="border-b-2 card-header row">
                 <div class="mb-3 col-12">
-                    <x-gmao.create-prestataire action="admin"></x-gmao.create-prestataire>
+                    <a href="{{ route('admin.prestataires.create') }}" class="btn btn-primary">Nouveau Prestataire</a>
                 </div>
                 <div class="col-12">
                     <h5>Liste des prestataires</h5>
