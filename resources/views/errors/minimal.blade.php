@@ -30,38 +30,12 @@
                     </div>
                 </div>
 
-                @php
-                    $error_redirect_url = '/';
-                    $error_page_role = "";
-                @endphp
-
-                @if (Auth::user() ==! null)
-                    @php
-                        $error_page_role = Auth::user()->role;
-                        
-                        if ($error_page_role == "super_admin" || $error_page_role == "admin" || $error_page_role == "maintenance")
-                        {
-                            $error_redirect_url = route('admin.dashboard');
-                        }
-                        
-                        if ($error_page_role == "demandeur")
-                        {
-                            $error_redirect_url = route('demandeur.dashboard');
-                        }
-                        
-                        if ($error_page_role == "prestataire_admin" || $error_page_role == "agent")
-                        {
-                            $error_redirect_url = route('prestataires.dashboard');
-                        }
-                    @endphp
-                @endif
-
 
                 
 
                 <p class="mt-10 ml-4 text-gray-200 text-md">
                     Revenir sur la page d'accueil
-                    <a href="{{ $error_redirect_url }}" class="font-medium text-blue-600 underline dark:text-blue-500 hover:no-underline">Cliquez ici <i class="fa fa-solid fa-house-user fa-2xl" style="color: #808080;"></i></a>
+                    <a href="{{ route('dashboard') }}" class="font-medium text-blue-600 underline dark:text-blue-500 hover:no-underline">Cliquez ici <i class="fa fa-solid fa-house-user fa-2xl" style="color: #808080;"></i></a>
             </div>
         </div>
     </body>
