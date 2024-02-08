@@ -20,6 +20,8 @@ class User extends Authenticatable
     use Notifiable;
     use TwoFactorAuthenticatable;
 
+    private $roles_list = ['super_admin','admin','maintenance','demandeur','prestataire_admin','agent'];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -97,6 +99,34 @@ class User extends Authenticatable
         }
         else{
             return "inconnu";
+        }
+    }
+
+    public function abordIfNotAuthorized($role)
+    {
+        if(empty($this->role))
+        {
+            abort(403, 'Unauthorized action. We need your Role');
+            exit();
+        }
+        if (!in_array($this->role, $this->roles_list)) {
+            abort(403, 'Unauthorized action.');
+            exit();
+        }
+
+        if (is_array($role)) {
+            if (!in_array($this->role, $role)) {
+                abort(403, 'Unauthorized action.');
+                exit();
+            }
+        } elseif (is_string($role)) {
+            if ($this->role = !$role) {
+                abort(403, 'Unauthorized action.');
+                exit();
+            }
+        }else{
+            abort(403, 'Unauthorized action.');
+            exit();
         }
     }
 }
