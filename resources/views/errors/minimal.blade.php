@@ -29,13 +29,15 @@
                         @yield('message')
                     </div>
                 </div>
-
-
                 
 
                 <p class="mt-10 ml-4 text-gray-200 text-md">
                     Revenir sur la page d'accueil
-                    <a href="{{ route('dashboard') }}" class="font-medium text-blue-600 underline dark:text-blue-500 hover:no-underline">Cliquez ici <i class="fa fa-solid fa-house-user fa-2xl" style="color: #808080;"></i></a>
+                    <a href="{{ route('dashboard') }}" class="font-medium text-blue-600 underline dark:text-blue-500 hover:no-underline">
+                        Cliquez ici 
+                        <i class="fa fa-solid fa-house-user fa-2xl" style="color: #808080;"></i>
+                    </a>
+                </p>
             </div>
         </div>
     </body>
