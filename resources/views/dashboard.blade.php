@@ -1,4 +1,4 @@
-@if(Auth::user())
+{{-- @if(Auth::user())
 @php
 $gmao_dash_role = Auth::user()->role;
 @endphp
@@ -24,4 +24,4 @@ $gmao_dash_role = Auth::user()->role;
 <?php exit; ?>
 @endif
 
-@endif
+@endif --}}
