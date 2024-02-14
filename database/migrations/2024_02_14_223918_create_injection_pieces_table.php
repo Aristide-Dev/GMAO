@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->index("piece_id");
             $table->foreign('piece_id')->references('id')->on('pieces')->onDelete('cascade');
+            $table->index("bon_travail_id");
+            $table->foreign('bon_travail_id')->references('id')->on('bon_travails')->onDelete('cascade');
             $table->integer("quantite");
             $table->boolean("take_in_stock")->default(true);
             $table->integer("stock_price");
