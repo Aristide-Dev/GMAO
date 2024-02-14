@@ -1,6 +1,6 @@
 @if (Auth::user())
     @php
-        Auth::user()->abordIfNotAuthorized({["agent", "prestataire_admin"]});
+        Auth::user()->abordIfNotAuthorized(["agent", "prestataire_admin"]);
     @endphp
 @else
     @php
