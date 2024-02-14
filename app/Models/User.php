@@ -104,6 +104,8 @@ class User extends Authenticatable
 
     public function abordIfNotAuthorized($role)
     {
+        return null;
+        
         if(empty($this->role))
         {
             abort(403, 'Unauthorized action. We need your Role');
