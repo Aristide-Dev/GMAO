@@ -19,6 +19,11 @@ return new class extends Migration
             $table->index("prestataire_id");
             $table->index("user_id"); // pour savoir quel utilisateur a fait le BT
             $table->string('status');
+
+            
+            $table->foreign('zone_id')->references('id')->on('zones')->onDelete('cascade');
+            $table->foreign('prestataire_id')->references('id')->on('prestataires')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
