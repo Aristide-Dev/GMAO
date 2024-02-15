@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('injection_pieces', function (Blueprint $table) {
             $table->id();
-            $table->index("piece_id");
+            $table->integer("piece_id");
             $table->foreign('piece_id')->references('id')->on('pieces')->onDelete('cascade');
-            $table->index("bon_travail_id");
+            $table->integer("bon_travail_id");
             $table->foreign('bon_travail_id')->references('id')->on('bon_travails')->onDelete('cascade');
             $table->integer("quantite");
             $table->boolean("take_in_stock")->default(true);

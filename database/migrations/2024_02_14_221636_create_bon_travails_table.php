@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('bon_travails', function (Blueprint $table) {
             $table->id();
             $table->text("requete");
-            $table->index("zone_id");
-            $table->index("equipement_id");
-            $table->index("prestataire_id");
-            $table->index("user_id"); // pour savoir quel utilisateur a fait le BT
+            $table->integer("zone_id");
+            $table->integer("equipement_id");
+            $table->integer("prestataire_id");
+            $table->integer("user_id"); // pour savoir quel utilisateur a fait le BT
             $table->string('status');
 
             

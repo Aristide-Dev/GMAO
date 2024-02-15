@@ -20,7 +20,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->timestamp('telephone_verified_at')->nullable();
             $table->string('adresse')->nullable();
-            $table->index('prestataire_admin_id')->nullable();
+            $table->integer('prestataire_admin_id')->nullable();
             $table->foreign('prestataire_admin_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
