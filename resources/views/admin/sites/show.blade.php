@@ -3,6 +3,11 @@
     <x-slot name="title_desc">{{ __('Informations sur le Site') }}</x-slot>
     <x-slot name="sidebar">admin</x-slot>
 
+    <h2 class="fw-bold">{{ $site->name }}</h1>
+        @php
+            // dd($site->equipements)
+        @endphp
+        
     <div class="row">
         <div class="mb-4 col-md-4 h-100">
             <div class="h-auto card">
@@ -14,14 +19,14 @@
                     </div>
                     <div class="col-sm-7">
                         <div class="card-body text-start ps-sm-0">
-                            <x-gmao.add-equipement/>
+                            <x-gmao.add-equipement :site="$site"/>
                             <p class="mt-1 mb-0">Ajouter un equipement si il n'existe pas encore</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <x-gmao.type-equipements-list action='admin' />
+        <x-gmao.type-equipements-list action='admin' :site="$site"/>
 
     </div>
 

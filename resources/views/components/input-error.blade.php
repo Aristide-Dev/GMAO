@@ -1,5 +1,9 @@
-@props(['for'])
+@props(['for', 'bag'])
 
-@error($for)
-    <p {{ $attributes->merge(['class' => 'text-sm text-red-600']) }}>{{ $message }}</p>
+@php
+    $errorBag = $bag ?? 'default';
+@endphp
+
+@error($for, $errorBag)
+    <small {{ $attributes->merge(['class' => "text-red-600 text-danger"]) }}>{{ $message }}..!</small>
 @enderror

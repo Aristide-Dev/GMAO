@@ -4,15 +4,39 @@ namespace App\Http\Controllers;
 
 use App\Models\Site;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SiteController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        // dd(Auth::user());
+
+        if(Auth::user())
+        {
+            $auth_user = Auth::user();
+            $role = $auth_user->role ?? null;
+            if($role == "super_admin" || $role == "admin" || $role == "maintenance")
+            {
+                $view = 'admin';
+                // acctions à faire ................
+            }elseif($role == "demandeur")
+            {
+                $view = 'demandeur';
+            }else{
+                abort(403);
+                exit();
+            }
+            $view.='.sites.index';
+            $sites = Site::all();
+            return view($view, compact('sites'));
+        }
+        abort(403);
+        exit();
     }
 
     /**

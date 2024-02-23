@@ -1,4 +1,10 @@
-@props(['type_equipement'=> ""])
+@props(['equipement'])
+
+@if (!isset($equipement))
+    @php
+        throw new InvalidArgumentException('Le composant (equipement) nécessite une prop "equipement"');
+    @endphp
+@endif
 
 @php
 $selected_icon = "";
@@ -27,7 +33,7 @@ break;
 }
 
 
-switch ($type_equipement) {
+switch ($equipement->categorie) {
 case 'distributeur':
 $selected_icon = '<i class="fa-solid fa-gas-pump fa-lg" style="color: #74C0FC;"></i>';
 break;
@@ -68,11 +74,11 @@ break;
                 <div class="p-2 rounded badge me-3 bg-label-secondary">{!! $selected_icon !!}</div>
                 <div class="gap-2 d-flex justify-content-between w-100 align-items-center">
                     <div class="me-2">
-                        <h6 class="mb-0">{{ $type_equipement }} {{ rand(1,5) }}</h6>
+                        <h6 class="mb-0">{{ $equipement->name }}</h6>
                     </div>
                 </div>
             </div>
-            <div id="projectStatusChart"></div>
+            {{-- <div id="projectStatusChart"></div> --}}
             <div class="mb-3 d-flex justify-content-between">
                 <h6 class="mb-0">Etat</h6>
                 <div class="d-flex">
@@ -82,33 +88,33 @@ break;
             <div class="pb-1 mb-3 d-flex justify-content-between">
                 <p class="mb-0">Forfait Contrat</p>
                 <div class="d-flex">
-                    <p class="mb-0 me-3 fw-bolder">{{ number_format(rand(10000,900000), 2, "."," ") }} F</p>
+                    <p class="mb-0 me-3 fw-bolder">{{ number_format($equipement->forfait_contrat, 2, "."," ") }} F</p>
                 </div>
             </div>
-            <div class="border rounded p-2 mb-3 block bg-label-light">
-                <h6 class="text-center block w-100 my-3 badge bg-danger">Nombre de Pannes</h6>
-                <div class="row d-flex justify-content-between m-0 p-0">
+            <div class="block p-2 mb-3 border rounded bg-label-light">
+                <h6 class="block my-3 text-center w-100 badge bg-danger">Nombre de Pannes</h6>
+                <div class="p-0 m-0 row d-flex justify-content-between">
                     <div class="col-4">
-                        <div class="d-flex gap-1 align-items-center">
-                            <div class="badge rounded bg-label-secondary p-2">
+                        <div class="gap-1 d-flex align-items-center">
+                            <div class="p-2 rounded badge bg-label-secondary">
                                 <i class="fa-solid fa-screwdriver-wrench fa-lg" style="color: #808080;"></i>
                             </div>
                             <small class="mb-0 fw-bold text-dark">Jan 2024</small>
                         </div>
-                        <small class="my-2 pt-1 text-dark">{{ rand(1,5) }}</small>
+                        <small class="pt-1 my-2 text-dark">{{ rand(1,5) }}</small>
                         <div class="progress w-100" style="height:10px">
                             <div class="progress-bar" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100">65%</div>
                         </div>
                     </div>
 
                     <div class="col-4">
-                        <div class="d-flex gap-1 align-items-center">
-                            <div class="badge rounded bg-label-secondary p-2">
+                        <div class="gap-1 d-flex align-items-center">
+                            <div class="p-2 rounded badge bg-label-secondary">
                                 <i class="fa-solid fa-screwdriver-wrench fa-lg" style="color: #808080;"></i>
                             </div>
                             <small class="mb-0 fw-bold text-dark">Cette Année</small>
                         </div>
-                        <small class="my-2 pt-1 text-dark">{{ rand(5,23) }}</small>
+                        <small class="pt-1 my-2 text-dark">{{ rand(5,23) }}</small>
                         <div class="progress w-100" style="height:10px">
                             <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
                         </div>
@@ -116,13 +122,13 @@ break;
 
 
                     <div class="col-4">
-                        <div class="d-flex gap-1 align-items-center">
-                            <div class="badge rounded bg-label-secondary p-2">
+                        <div class="gap-1 d-flex align-items-center">
+                            <div class="p-2 rounded badge bg-label-secondary">
                                 <i class="fa-solid fa-screwdriver-wrench fa-lg" style="color: #808080;"></i>
                             </div>
                             <small class="mb-0 fw-bold text-dark">General</small>
                         </div>
-                        <small class="my-2 pt-1 text-dark">{{ rand(30,50) }}</small>
+                        <small class="pt-1 my-2 text-dark">{{ rand(30,50) }}</small>
                         <div class="progress w-100" style="height:10px">
                             <div class="progress-bar bg-danger" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100">65%</div>
                         </div>
@@ -133,37 +139,37 @@ break;
                 <hr>
 
 
-                <h6 class="text-center block w-100 my-3 badge bg-success">Depenses</h6>
-                <div class="row d-flex justify-content-between m-0 p-0">
+                <h6 class="block my-3 text-center w-100 badge bg-success">Depenses</h6>
+                <div class="p-0 m-0 row d-flex justify-content-between">
                     <div class="col-4">
-                        <div class="d-flex gap-1 align-items-center">
-                            <div class="badge rounded bg-label-secondary p-2">
+                        <div class="gap-1 d-flex align-items-center">
+                            <div class="p-2 rounded badge bg-label-secondary">
                                 <i class="fa-solid fa-sack-dollar fa-lg" style="color: #804000;"></i>
                             </div>
                             <small class="mb-0 fw-bold text-dark">Jan 2024</small>
                         </div>
-                        <small class="my-2 pt-1 badge bg-label-dark w-100 fw-bolder">{{ number_format(rand(50000,5000000), 2, ",", '  ') }} GNF</small>
+                        <small class="pt-1 my-2 badge bg-label-dark w-100 fw-bolder">{{ number_format(rand(50000,5000000), 2, ",", '  ') }} GNF</small>
                     </div>
 
                     <div class="col-4">
-                        <div class="d-flex gap-1 align-items-center">
-                            <div class="badge rounded bg-label-secondary p-2">
+                        <div class="gap-1 d-flex align-items-center">
+                            <div class="p-2 rounded badge bg-label-secondary">
                                 <i class="fa-solid fa-sack-dollar fa-lg" style="color: #804000;"></i>
                             </div>
                             <small class="mb-0 fw-bold text-dark">Cette Année</small>
                         </div>
-                        <small class="my-2 pt-1 badge bg-label-dark w-100 fw-bolder">{{ number_format(rand(50000,5000000), 2, ",", '  ') }} GNF</small>
+                        <small class="pt-1 my-2 badge bg-label-dark w-100 fw-bolder">{{ number_format(rand(50000,5000000), 2, ",", '  ') }} GNF</small>
                     </div>
 
 
                     <div class="col-4">
-                        <div class="d-flex gap-1 align-items-center">
-                            <div class="badge rounded bg-label-secondary p-2">
+                        <div class="gap-1 d-flex align-items-center">
+                            <div class="p-2 rounded badge bg-label-secondary">
                                 <i class="fa-solid fa-sack-dollar fa-lg" style="color: #804000;"></i>
                             </div>
                             <small class="mb-0 fw-bold text-dark">General</small>
                         </div>
-                        <small class="my-2 pt-1 badge bg-label-dark w-100 fw-bolder">{{ number_format(rand(50000,5000000), 2, ",", '  ') }} GNF</small>
+                        <small class="pt-1 my-2 badge bg-label-dark w-100 fw-bolder">{{ number_format(rand(50000,5000000), 2, ",", '  ') }} GNF</small>
                     </div>
 
                 </div>

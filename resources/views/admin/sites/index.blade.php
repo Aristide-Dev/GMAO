@@ -24,44 +24,38 @@
                         </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
-                        @php
-                        $registres = ['contrat','réseau', 'autre'];
-                        $statuts = [
-                            [
-                                'statut' => 'actif',
-                                'color' => 'success',
-                            ],
-                            [
-                                'statut' => 'désactivé',
-                                'color' => 'danger',
-                            ],
-                        ];
-                        @endphp
-
-                        @for ($i = 0; $i < 30; $i++)
+                        @foreach($sites as $key => $site)
                         <tr>
                             <td>
-                                {{ $i+1 }}
+                                {{ $key+1 }}
                             </td>
                             <td>
-                                <a href="{{ route('admin.sites.show', rand()) }}">St {{ fake()->name }}</a>
+                                <a href="{{ route('admin.sites.show', $site) }}">{{ $site->name }}</a>
                             </td>
                             <td>
-                                {{ $registres[rand(0,2)] }}
+                                {{ $site->registre }}
                             </td>
                             <td>
                                 <span class="fw-bold">
-                                    {{ number_format(rand(50000,15000000), 2, '.', ' ') }} GNF
+                                    {{ number_format($site->calculateTotalForfaitContrat(), 2, '.', ' ') }} GNF
                                 </span>
                             </td>
                             <td>
-                                @php
-                                    $st = $statuts[rand(0,1)];
-                                @endphp
-                                <span class="badge bg-label-{{ $st['color'] }} me-1">{{ $st['statut'] }}</span>
+                                @switch($site->actif)
+                                    @case(1)
+                                        <span class="badge bg-label-success me-1">actif</span>
+                                        @break
+                                    @case(0)
+                                        <span class="badge bg-label-danger me-1">désactivé</span>
+                                        @break
+                                    @default
+                                    <span class="badge bg-label-secondary me-1">N/A</span>
+                                    @break
+
+                                @endswitch
                             </td>
                         </tr>
-                        @endfor
+                        @endforeach
                     </tbody>
                     <tfoot>
                         <tr>
@@ -72,8 +66,13 @@
                             <th>Status</th>
                         </tr>
                     </tfoot>
+
                 </table>
             </div>
+            <nav aria-label="Page navigation" class="mx-3 d-flex">
+                {{ $sites->links() }}
+            </nav>
+
         </div>
         <!--/ Hoverable Table rows -->
     </div>

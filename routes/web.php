@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AppController;
+use App\Http\Controllers\Admin\SiteController as AdminSiteController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,6 +29,19 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+});
+
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->prefix('admin')->name('admin.')->group(function () {
+    Route::resource('/sites', AdminSiteController::class);
+    Route::post('/sites/{site}/equipement/store', [AdminSiteController::class, 'add_equipement'])
+        ->name('sites.equipement.store');
+    Route::get('/sites/{site}/{categorie_equipement}', [AdminSiteController::class, 'show_categorie_equipement'])
+        ->name('sites.equipement.categorie');
 });
 
 Route::prefix('demandeur')->name('demandeur.')->group(function() {
@@ -95,9 +109,9 @@ Route::prefix('admin')->name('admin.')->group(function() {
         return view('admin.demandes.show');
     })->name('demandes.show');
 
-    Route::get('/sites', function () {
-        return view('admin.sites.index');
-    })->name('sites.index');
+    // Route::get('/sites', function () {
+    //     return view('admin.sites.index');
+    // })->name('sites.index');
 
     Route::get('/sites/{id}', function () {
         return view('admin.sites.show');
