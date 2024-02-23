@@ -1,6 +1,6 @@
 <x-gmao-layout>
-    <x-slot name="title">{{ __('Utilisateur') }}</x-slot>
-    <x-slot name="title_desc">{{ __('Utilisateur') }}</x-slot>
+    <x-slot name="title">{{ __('Utilisateurs') }}</x-slot>
+    <x-slot name="title_desc">{{ __('Utilisateurs') }}</x-slot>
     <x-slot name="sidebar">admin</x-slot>
 
 
@@ -15,25 +15,11 @@
             'color' => 'danger',
         ],
     ];
-    $roles = [
-        [
-            'role' => 'admin',
-            'color' => 'primary',
-        ],
-        [
-            'role' => 'agent maintenance',
-            'color' => 'info',
-        ],
-        [
-            'role' => 'demandeur',
-            'color' => '',
-        ],
-    ];
 
     @endphp
 
 
-    <x-gmao.create-user/>
+    
 
     <div class="mt-3 col-12">
         <!-- Hoverable Table rows -->
@@ -45,11 +31,7 @@
                 <div class="col-6">
                 </div>
                 <div class="mb-3 col-3 right">
-                    <button class="add-new btn btn-primary waves-effect waves-light" data-bs-toggle="offcanvas" data-bs-target="#offcanvasAddDemande" align="right">
-                        <i class="ti ti-plus me-0 me-sm-1 ti-xs"></i>
-                        <span class="d-none d-sm-inline-block">Nouvelle Utilisateur</span>
-                        <span class="d-md-none">Ajouter</span>
-                    </button>
+                    <x-gmao.create-user/>
                 </div>
             </div>
 
@@ -59,60 +41,63 @@
                     <thead class="table-light">
                         <tr>
                             <th>N°</th>
-                            <th>Prenom</th>
-                            <th>Nom</th>
+                            <th>Prenom & Nom</th>
                             <th>Email</th>
                             <th>Telephone</th>
                             <th class="text-left">Role</th>
                             <th>Status</th>
-                            <th class="p-2">action</th>
                         </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
-                        @for ($i = 0; $i < 30; $i++)
-                            <tr>
-                                <td>
-                                    {{ $i+1 }}
-                                </td>
-                                <td>
-                                    <span class="fw-bold">Yassine</span>
-                                </td>
-                                <td>
-                                    <span class="fw-bold">Diallo</span>
-                                </td>
-                                <td class="text-left">
-                                    <a href="{{ route('admin.utilisateurs.show', rand()) }}">yassine@gmail.com</a>
-                                </td>
-                                <td>
-                                    <span class="fw-bold">623176862</span>
-                                </td>
-                                <td>
-                                    <span class="fw-bold text-{{ $roles[rand(0,2)]['color'] }}">{{ $roles[rand(0,2)]['role'] }}</span>
-                                </td>
-                                <td>
-                                    @php
-                                        $st = $statuts[rand(0,1)];
-                                    @endphp
-                                    <span class="badge bg-label-{{ $st['color'] }} me-1">{{ $st['statut'] }}</span>
-                                </td>
-                                <td class="text-left">
-                                    <a href="http://" class="btn btn-danger"><i class="fa fa-trash"></i></a>
-                                    <a href="http://" class="btn btn-info"><i class="fa fa-edit"></i></a>
-                                </td>
-                            </tr>
-                        @endfor
+                        @forelse ($utilisateurs as $key => $utilisateur)
+                        <tr>
+                            <td>
+                                <a href="{{ route('admin.utilisateurs.show', $utilisateur) }}">{{ $key+1 }}</a>
+                            </td>
+                            <td>
+                                <a class="fw-bold"href="{{ route('admin.utilisateurs.show', $utilisateur) }}">{{ $utilisateur->first_name }} {{ $utilisateur->last_name }}</</a>
+                            </td>
+                            <td class="text-left">
+                                {{ $utilisateur->email }}
+                            </td>
+                            <td>
+                                <span class="fw-bold">{{ $utilisateur->telephone }}</span>
+                            </td>
+                            <td>
+                                @switch($utilisateur->role)
+                                    @case('admin')
+                                        <span class="fw-bold text-primary">Admin</span>
+                                        @break
+                                    @case('maintenance')
+                                        <span class="fw-bold text-info">Agent Maintenance</span>
+                                        @break
+                                    @case('demandeur')
+                                        <span class="fw-bold text-secondary">Demandeur</span>
+                                        @break
+                                    @default
+                                    <span class="fw-bold text-secondary">{{ $utilisateur?->role }}</span>
+                                    @break
+                                @endswitch
+                            </td>
+                            <td>
+                                @php
+                                    $st = $statuts[rand(0,1)];
+                                @endphp
+                                <span class="badge bg-label-{{ $st['color'] }} me-1">{{ $st['statut'] }}</span>
+                            </td>
+                        </tr>
+                        @empty
+                            <h3 class="mt-5 text-center">Aucun utilisateur trouvé</h3>
+                        @endforelse
                     </tbody>
                     <tfoot class="table-light">
                         <tr>
                             <th>N°</th>
-                            <th>Prenom</th>
-                            <th>Nom</th>
+                            <th>Prenom & Nom</th>
                             <th>Email</th>
                             <th>Telephone</th>
                             <th class="text-left">Domaine d'expertise</th>
-                            <th class="text-left">Compétences</th>
                             <th>Status</th>
-                            <th class="p-2">action</th>
                         </tr>
                     </tfoot>
                 </table>

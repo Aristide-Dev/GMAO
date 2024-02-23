@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AppController;
 use App\Http\Controllers\Admin\SiteController as AdminSiteController;
+use App\Http\Controllers\Admin\UtilisateurController as AdminUtilisateurController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,7 +15,7 @@ use App\Http\Controllers\Admin\SiteController as AdminSiteController;
 |
 */
 
-Route::get("/init", [AppController::class,'init'])->name('app.init');
+Route::get("/init", [AppController::class, 'init'])->name('app.init');
 
 Route::get('/', function () {
     return view('welcome');
@@ -38,13 +39,17 @@ Route::middleware([
     'verified',
 ])->prefix('admin')->name('admin.')->group(function () {
     Route::resource('/sites', AdminSiteController::class);
+
     Route::post('/sites/{site}/equipement/store', [AdminSiteController::class, 'add_equipement'])
         ->name('sites.equipement.store');
+
     Route::get('/sites/{site}/{categorie_equipement}', [AdminSiteController::class, 'show_categorie_equipement'])
         ->name('sites.equipement.categorie');
+
+    Route::resource('/utilisateurs', AdminUtilisateurController::class);
 });
 
-Route::prefix('demandeur')->name('demandeur.')->group(function() {
+Route::prefix('demandeur')->name('demandeur.')->group(function () {
     Route::get('/dashboard', function () {
         return view('demandeur.dashboard');
     })->name('dashboard');
@@ -72,7 +77,7 @@ Route::prefix('demandeur')->name('demandeur.')->group(function() {
 
 
 
-Route::prefix('prestataires')->name('prestataires.')->group(function() {
+Route::prefix('prestataires')->name('prestataires.')->group(function () {
     Route::get('/dashboard', function () {
         return view('prestataires.dashboard');
     })->name('dashboard');
@@ -96,7 +101,7 @@ Route::prefix('prestataires')->name('prestataires.')->group(function() {
 
 
 
-Route::prefix('admin')->name('admin.')->group(function() {
+Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', function () {
         return view('admin.dashboard');
     })->name('dashboard');
@@ -133,13 +138,13 @@ Route::prefix('admin')->name('admin.')->group(function() {
         return view('admin.prestataires.show');
     })->name('prestataires.show');
 
-    Route::get('/utilisateurs', function () {
-        return view('admin.utilisateurs.index');
-    })->name('utilisateurs.index');
+    // Route::get('/utilisateurs', function () {
+    //     return view('admin.utilisateurs.index');
+    // })->name('utilisateurs.index');
 
-    Route::get('/utilisateurs/{id}', function () {
-        return view('admin.utilisateurs.show');
-    })->name('utilisateurs.show');
+    // Route::get('/utilisateurs/{id}', function () {
+    //     return view('admin.utilisateurs.show');
+    // })->name('utilisateurs.show');
 
     Route::get('/stock', function () {
         return view('admin.stock.index');
