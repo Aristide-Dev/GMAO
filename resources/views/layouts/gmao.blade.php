@@ -54,9 +54,9 @@
     <script src="/storage/assets/js/config.js"></script>
 
 
-
     <!-- Scripts -->
     @vite(['resources/js/app.js'])
+    <script src="/storage/assets/vendor/libs/jquery/jquery.js"></script>
 
     <!-- Styles -->
     @livewireStyles
@@ -77,27 +77,27 @@
                     </a>
                 </div>
                 @if(!empty($sidebar))
-                    @switch($sidebar)
-                        @case($sidebar == "demandeur")
-                        @include('layouts.gmao.demandeur.sidebar')
-                        @break
+                @switch($sidebar)
+                @case($sidebar == "demandeur")
+                @include('layouts.gmao.demandeur.sidebar')
+                @break
 
-                        @case($sidebar == "prestataire")
-                        @include('layouts.gmao.prestataire.sidebar')
-                        @break
+                @case($sidebar == "prestataire")
+                @include('layouts.gmao.prestataire.sidebar')
+                @break
 
-                        @case($sidebar == "admin")
-                        @include('layouts.gmao.admin.sidebar')
-                        @break
+                @case($sidebar == "admin")
+                @include('layouts.gmao.admin.sidebar')
+                @break
 
-                        @case(2)
-                        @break
-                        @default
-                        @include('layouts.gmao.sidebar')
-                        @break
-                    @endswitch
+                @case(2)
+                @break
+                @default
+                @include('layouts.gmao.sidebar')
+                @break
+                @endswitch
                 @else
-                    @include('layouts.gmao.sidebar')
+                @include('layouts.gmao.sidebar')
                 @endif
 
 
@@ -113,11 +113,13 @@
                 @include('layouts.gmao.navbar')
                 <!-- / Navbar -->
 
-
+                
                 <!-- Content wrapper -->
                 <div class="content-wrapper">
                     <!-- Content -->
+                    
                     <div class="container-xxl flex-grow-1 container-p-y">
+                        @include('layouts.alert_message')
                         {{ $slot }}
                     </div>
                     <!-- / Content -->
@@ -148,7 +150,6 @@
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
 
-    <script src="/storage/assets/vendor/libs/jquery/jquery.js"></script>
     <script src="/storage/assets/vendor/libs/popper/popper.js"></script>
     <script src="/storage/assets/vendor/js/bootstrap.js"></script>
     <script src="/storage/assets/vendor/libs/node-waves/node-waves.js"></script>
@@ -181,6 +182,7 @@
     <script src="/storage/assets/js/forms-file-upload.js"></script>
     <script src="/storage/assets/js/forms-extras.js"></script>
     <script src="/storage/assets/js/cards-statistics.js"></script>
+
 
     @if(isset($custum_scripts))
     {!! $custum_scripts !!}

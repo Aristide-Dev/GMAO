@@ -1,4 +1,4 @@
-@props(['action'=> '', 'type_equipement'=> '', 'site'])
+@props(['action'=> '', 'categorie_equipement'=> '', 'site'])
 
 @if (!isset($site))
     @php
@@ -9,18 +9,18 @@
     $routeName = '';
     switch ($action) {
         case 'admin':
-            $routeName = 'admin.sites.type_equipement';
+            $routeName = 'admin.sites.equipement.categorie';
             break;
         case 'demandeur':
         default:
-            $routeName = 'demandeur.sites.type_equipement';
+            $routeName = 'demandeur.sites.equipement.categorie';
             break;
     }
 
 
 @endphp
 
-<a href="{{ route($routeName, ['id' => $site, 'type_equipement' => 'distributeur']) }}" class="mb-4 col-md-4">
+<a href="{{ route($routeName, ['site' => $site, 'categorie_equipement' => 'distributeur']) }}" class="mb-4 col-md-4">
     <div class="card card-border-shadow-primary">
         <div class="card-body">
             <div class="pb-1 mb-2 d-flex align-items-center">
@@ -51,7 +51,7 @@
     </div>
 </a>
 
-<a href="{{ route($routeName, ['id' => $site, 'type_equipement' => 'stockage-et-tuyauterie']) }}" class="mb-4 col-md-4">
+<a href="{{ route($routeName, ['site' => $site, 'categorie_equipement' => 'stockage-et-tuyauterie']) }}" class="mb-4 col-md-4">
     <div class="card card-border-shadow-warning">
         <div class="card-body">
             <div class="pb-1 mb-2 d-flex align-items-center">
@@ -82,7 +82,7 @@
     </div>
 </a>
 
-<a href="{{ route($routeName, ['id' => $site, 'type_equipement' => 'forage']) }}" class="mb-4 col-md-4">
+<a href="{{ route($routeName, ['site' => $site, 'categorie_equipement' => 'forage']) }}" class="mb-4 col-md-4">
     <div class="card card-border-shadow-danger">
         <div class="card-body">
             <div class="pb-1 mb-2 d-flex align-items-center">
@@ -113,7 +113,7 @@
     </div>
 </a>
 
-<a href="{{ route($routeName, ['id' => $site, 'type_equipement' => 'servicing']) }}" class="mb-4 col-md-4">
+<a href="{{ route($routeName, ['site' => $site, 'categorie_equipement' => 'servicing']) }}" class="mb-4 col-md-4">
     <div class="card card-border-shadow-info">
         <div class="card-body">
             <div class="pb-1 mb-2 d-flex align-items-center">
@@ -144,7 +144,7 @@
     </div>
 </a>
 
-<a href="{{ route($routeName, ['id' => $site, 'type_equipement' => 'branding']) }}" class="mb-4 col-md-4">
+<a href="{{ route($routeName, ['site' => $site, 'categorie_equipement' => 'branding']) }}" class="mb-4 col-md-4">
     <div class="card card-border-shadow-dark">
         <div class="card-body">
             <div class="pb-1 mb-2 d-flex align-items-center">
@@ -175,7 +175,7 @@
     </div>
 </a>
 
-<a href="{{ route($routeName, ['id' => $site, 'type_equipement' => 'groupe-electrogene']) }}" class="mb-4 col-md-4">
+<a href="{{ route($routeName, ['site' => $site, 'categorie_equipement' => 'groupe-electrogene']) }}" class="mb-4 col-md-4">
     <div class="card card-border-shadow-success">
         <div class="card-body">
             <div class="pb-1 mb-2 d-flex align-items-center">
@@ -206,7 +206,7 @@
     </div>
 </a>
 
-<a href="{{ route($routeName, ['id' => $site, 'type_equipement' => 'electricite']) }}" class="mb-4 col-md-4">
+<a href="{{ route($routeName, ['site' => $site, 'categorie_equipement' => 'electricite']) }}" class="mb-4 col-md-4">
     <div class="card card-border-shadow-danger">
         <div class="card-body">
             <div class="pb-1 mb-2 d-flex align-items-center">
@@ -237,7 +237,7 @@
     </div>
 </a>
 
-<a href="{{ route($routeName, ['id' => $site, 'type_equipement' => 'equipement-incendie']) }}" class="mb-4 col-md-4">
+<a href="{{ route($routeName, ['site' => $site, 'categorie_equipement' => 'equipement-incendie']) }}" class="mb-4 col-md-4">
     <div class="card card-border-shadow-secondary">
         <div class="card-body">
             <div class="pb-1 mb-2 d-flex align-items-center">

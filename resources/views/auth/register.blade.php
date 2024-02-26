@@ -36,7 +36,7 @@
             
             <div class="mt-4">
                 <x-label for="role" value="{{ __('role') }}" />
-                <select name="role" id="role" class="block w-full mt-1 text-center border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                <select required name="role" id="role" class="block w-full mt-1 text-center border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                     <option value="">-- CHOISIR --</option>
                     <option value="super_admin">Super Admin</option>
                     <option value="admin">admin</option>

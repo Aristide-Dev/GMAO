@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('demande_interventions', function (Blueprint $table) {
             $table->id();
+            $table->string('di_reference');
             $table->integer('site_id');
             $table->foreign('site_id')->references('id')->on('sites')->onDelete('cascade');
             $table->integer('demandeur_id');

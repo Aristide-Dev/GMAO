@@ -104,8 +104,7 @@ class User extends Authenticatable
 
     public function abordIfNotAuthorized($role)
     {
-        return null;
-
+        // dd($role,$this->role);
         if(empty($this->role))
         {
             abort(403, 'Unauthorized action. We need your Role');
@@ -122,7 +121,7 @@ class User extends Authenticatable
                 exit();
             }
         } elseif (is_string($role)) {
-            if ($this->role = !$role) {
+            if ($this->role ==! $role) {
                 abort(403, 'Unauthorized action.');
                 exit();
             }

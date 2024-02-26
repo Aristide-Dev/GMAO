@@ -3,7 +3,12 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AppController;
 use App\Http\Controllers\Admin\SiteController as AdminSiteController;
+use App\Http\Controllers\Admin\DemandeInterventionController as AdminDemandeInterventionController;
 use App\Http\Controllers\Admin\UtilisateurController as AdminUtilisateurController;
+
+
+use App\Http\Controllers\Demandeur\SiteController as DemandeurSiteController;
+use App\Http\Controllers\Demandeur\DemandeInterventionController as DemandeurDemandeInterventionController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,12 +37,22 @@ Route::middleware([
     })->name('dashboard');
 });
 
-
+/**
+ * **************************************************************************************************
+ * **************************************************************************************************
+ * **************************************************************************************************
+ *      ADMIN ROUTES
+ */
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
 ])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('admin.dashboard');
+    })->name('dashboard');
+
+    Route::resource('/demandes', AdminDemandeInterventionController::class);
     Route::resource('/sites', AdminSiteController::class);
 
     Route::post('/sites/{site}/equipement/store', [AdminSiteController::class, 'add_equipement'])
@@ -49,31 +64,63 @@ Route::middleware([
     Route::resource('/utilisateurs', AdminUtilisateurController::class);
 });
 
-Route::prefix('demandeur')->name('demandeur.')->group(function () {
+
+
+/**
+ * **************************************************************************************************
+ * **************************************************************************************************
+ * **************************************************************************************************
+ *      DEMANDEUR ROUTES
+ */
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->prefix('demandeur')->name('demandeur.')->group(function () {
+
     Route::get('/dashboard', function () {
         return view('demandeur.dashboard');
     })->name('dashboard');
 
-    Route::get('/demandes', function () {
-        return view('demandeur.demandes.index');
-    })->name('demandes.index');
+    Route::resource('/demandes', DemandeurDemandeInterventionController::class);
+    Route::resource('/sites', DemandeurSiteController::class);
 
-    Route::get('/demandes/{id}', function () {
-        return view('demandeur.demandes.show');
-    })->name('demandes.show');
+    Route::post('/sites/{site}/equipement/store', [DemandeurSiteController::class, 'add_equipement'])
+        ->name('sites.equipement.store');
 
-    Route::get('/sites', function () {
-        return view('demandeur.sites.index');
-    })->name('sites.index');
-
-    Route::get('/sites/{id}', function () {
-        return view('demandeur.sites.show');
-    })->name('sites.show');
+    Route::get('/sites/{site}/{categorie_equipement}', [DemandeurSiteController::class, 'show_categorie_equipement'])
+        ->name('sites.equipement.categorie');
 
     Route::get('/sites/{id}/{type_equipement}', function () {
         return view('demandeur.sites.equipements');
     })->name('sites.type_equipement');
 });
+
+// Route::prefix('demandeur')->name('demandeur.')->group(function () {
+//     Route::get('/dashboard', function () {
+//         return view('demandeur.dashboard');
+//     })->name('dashboard');
+
+//     Route::get('/demandes', function () {
+//         return view('demandeur.demandes.index');
+//     })->name('demandes.index');
+
+//     Route::get('/demandes/{id}', function () {
+//         return view('demandeur.demandes.show');
+//     })->name('demandes.show');
+
+//     Route::get('/sites', function () {
+//         return view('demandeur.sites.index');
+//     })->name('sites.index');
+
+//     Route::get('/sites/{id}', function () {
+//         return view('demandeur.sites.show');
+//     })->name('sites.show');
+
+//     Route::get('/sites/{id}/{type_equipement}', function () {
+//         return view('demandeur.sites.equipements');
+//     })->name('sites.type_equipement');
+// });
 
 
 
@@ -106,13 +153,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
         return view('admin.dashboard');
     })->name('dashboard');
 
-    Route::get('/demandes', function () {
-        return view('admin.demandes.index');
-    })->name('demandes.index');
+    // Route::get('/demandes', function () {
+    //     return view('admin.demandes.index');
+    // })->name('demandes.index');
 
-    Route::get('/demandes/{id}', function () {
-        return view('admin.demandes.show');
-    })->name('demandes.show');
+    // Route::get('/demandes/{id}', function () {
+    //     return view('admin.demandes.show');
+    // })->name('demandes.show');
 
     // Route::get('/sites', function () {
     //     return view('admin.sites.index');

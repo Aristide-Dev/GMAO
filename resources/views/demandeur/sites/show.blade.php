@@ -5,7 +5,7 @@
 
 
     <div class="row">
-        <x-gmao.type-equipements-list/>
+        <x-gmao.type-equipements-list action='demandeur' :site="$site"/>
     </div>
 
     <div class="p-3 row">

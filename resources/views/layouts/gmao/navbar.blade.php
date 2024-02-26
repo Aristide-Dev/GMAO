@@ -236,7 +236,8 @@
                                 </div>
                                 <div class="flex-grow-1">
                                     <span class="fw-medium d-block">{{ Auth::user()?->first_name }} {{ Auth::user()?->last_name }}</span>
-                                    <small class="text-muted">{{ Auth::user()?->getroletext() }}</small>
+                                    <small class="text-muted">{{ Auth::user()->getroletext() }}</small>
+                                    
                                 </div>
                             </div>
                         </a>
@@ -257,38 +258,18 @@
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="pages-account-settings-billing.html">
-                            <span class="align-middle d-flex align-items-center">
-                                <i class="flex-shrink-0 ti ti-credit-card me-2 ti-sm"></i>
-                                <span class="align-middle flex-grow-1">Billing</span>
-                                <span class="flex-shrink-0 badge badge-center rounded-pill bg-label-danger w-px-20 h-px-20">2</span>
-                            </span>
-                        </a>
-                    </li>
-                    <li>
                         <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="pages-faq.html">
-                            <i class="ti ti-help me-2 ti-sm"></i>
-                            <span class="align-middle">FAQ</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="pages-pricing.html">
-                            
-                            <i class="ti ti-currency-dollar me-2 ti-sm"></i>
-                            <span class="align-middle">Pricing</span>
-                        </a>
-                    </li>
-                    <li>
-                        <div class="dropdown-divider"></div>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="auth-login-cover.html">
-                            <i class="ti ti-logout me-2 ti-sm"></i>
-                            <span class="align-middle">Log Out</span>
-                        </a>
+                        <form method="POST" action="{{ route('logout') }}" x-data>
+                            @csrf
+
+                            <a class="dropdown-item" href="{{ route('logout') }}" @click.prevent="$root.submit();">
+                                <i class="ti ti-logout me-2 ti-sm"></i>
+                                <span class="align-middle">{{ __('Log Out') }}</span>
+                            </a>
+                        </form>
+                        
                     </li>
                 </ul>
             </li>
