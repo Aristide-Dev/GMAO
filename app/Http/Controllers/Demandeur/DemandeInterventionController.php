@@ -9,7 +9,7 @@ use App\Models\DemandeIntervention;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use Intervention\Image\Laravel\Facades\Image;
+use Illuminate\Http\File;
 
 class DemandeInterventionController extends Controller
 {
@@ -51,31 +51,21 @@ class DemandeInterventionController extends Controller
             return redirect()->back()->with('error', 'Action non autorisée');
         }
 
-        $image = $request->file('photo_demande_intervention');
-
-        if ($image) {
-            $imagePath = $image->store("demandes", "public");
-        } else {
-            $imagePath = null;
-        }
-
         $di_reference = $this->generateDIReference();
         $break_stepp = 0;
         // dd($di_reference,DemandeIntervention::where("di_reference",$di_reference)->first());
 
-        while(DemandeIntervention::where("di_reference",$di_reference)->first())
-        {
-            if($break_stepp >= 10)
-            {
-                if($imagePath ==! null)
-                {
-                    Storage::disk('public')->delete($imagePath);
-                }
+        while (DemandeIntervention::where("di_reference", $di_reference)->first()) {
+            if ($break_stepp >= 10) {
                 return redirect()->back()->with('error', 'Trop de tentative! Recommencer svp.');
             }
             $di_reference = $this->generateDIReference();
             $break_stepp += 1;
         }
+
+        $image = $request->file('photo_demande_intervention');
+
+        $imagePath = $this->saveImageWithUniqueName($image, $di_reference, 'demandes');
 
         DemandeIntervention::create([
             'di_reference' => $di_reference,
@@ -133,7 +123,7 @@ class DemandeInterventionController extends Controller
             // Extraire le numéro d'identification de la référence
             $lastReference = $lastDemandeIntervention->di_reference;
             $lastId = (int)substr($lastReference, 2); // Extrait les chiffres après "DI"
-            
+
             // Incrémenter l'ID pour le prochain enregistrement
             $nextId = $lastId + 1;
         }
@@ -145,9 +135,33 @@ class DemandeInterventionController extends Controller
         return 'DI' . $formattedId;
     }
 
-    private function compressAndStoreImage($image)
-    {
-        // Créer une instance Intervention Image à partir de l'image téléchargée
-        $interventionImage = Image::make($image);
-    }
+
+    /**
+ * Méthode saveImageWithUniqueName
+ *
+ * @param string $image [Chemin vers l'image]
+ * @param string $imageName [Nom de l'image]
+ * @param string $destinationFolder [Répertoire de destination dans le stockage Laravel]
+ *
+ * @return String $imageName
+ */
+private function saveImageWithUniqueName($image, $imageName, $destinationFolder) {
+    // Récupérer l'extension de l'image
+    // $imageExtension = pathinfo($imageName, PATHINFO_EXTENSION);
+    $imageExtension = "jpg";
+
+    // Générer un nom de fichier unique
+    $uniqueFileName = $imageName . '_' . time();
+
+    // dd($uniqueFileName. '.' . $imageExtension);
+
+    // Répertoire de stockage dans le stockage Laravel
+    $storageDirectory = 'public/' . $destinationFolder;
+
+    // Utiliser Storage::putFileAs pour compresser et stocker l'image avec un nom spécifique
+    $fuldirectory = Storage::putFileAs($storageDirectory, new File($image), $uniqueFileName . '.' . $imageExtension);
+
+    // Retourner le nom du fichier généré
+    return $fuldirectory;
+}
 }

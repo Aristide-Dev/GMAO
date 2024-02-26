@@ -1,0 +1,50 @@
+   /* Style de la modale */
+   
+   .modal {
+       display: none;
+       /* Cachez la modale par défaut */
+       position: fixe;
+       /* Position fixe pour couvrir toute la page */
+       z-index: 10000;
+       /* Positionne la modale au-dessus du reste du contenu */
+       padding-top: 100px;
+       /* Espace au-dessus de la modale */
+       left: 0;
+       /* top: 0; */
+       width: 100%;
+       /* Largeur de la modale */
+       height: 100vh;
+       /* Hauteur de la modale */
+       overflow: auto;
+       /* Ajoutez un défilement si nécessaire */
+       background-color: rgb(0, 0, 0);
+       /* Couleur de fond de la modale */
+       background-color: rgba(0, 0, 0, 0.9);
+       /* Couleur de fond avec transparence */
+   }
+   /* Style de l'image dans la modale */
+   
+   .modal-content {
+       margin: auto;
+       display: block;
+       width: 80%;
+       max-width: 700px;
+   }
+   /* Style de la fermeture (X) de la modale */
+   
+   .close {
+       position: absolute;
+       top: 15px;
+       right: 35px;
+       color: #f1f1f1;
+       font-size: 40px;
+       font-weight: bold;
+       transition: 0.3s;
+   }
+   
+   .close:hover,
+   .close:focus {
+       color: #bbb;
+       text-decoration: none;
+       cursor: pointer;
+   }
