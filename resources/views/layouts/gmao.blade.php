@@ -17,17 +17,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;ampdisplay=swap" rel="stylesheet">
 
     <!-- Icons -->
-    <link rel="stylesheet" href="/storage/assets/vendor/fonts/fontawesome.css" />
+    {{-- <link rel="stylesheet" href="/storage/assets/vendor/fonts/fontawesome.css" />
     <link rel="stylesheet" href="/storage/assets/vendor/fonts/tabler-icons.css" />
-    <link rel="stylesheet" href="/storage/assets/vendor/fonts/flag-icons.css" />
+    <link rel="stylesheet" href="/storage/assets/vendor/fonts/flag-icons.css" /> --}}
+    
+
 
     <!-- Core CSS -->
-    <link rel="stylesheet" href="/storage/assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
+    {{-- <link rel="stylesheet" href="/storage/assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
     <link rel="stylesheet" href="/storage/assets/vendor/css/rtl/theme-default.css" class="template-customizer-theme-css" />
-    <link rel="stylesheet" href="/storage/assets/css/demo.css" />
+    <link rel="stylesheet" href="/storage/assets/css/demo.css" /> --}}
+
 
     <!-- Vendors CSS -->
-    <link rel="stylesheet" href="/storage/assets/vendor/libs/node-waves/node-waves.css" />
+    {{-- <link rel="stylesheet" href="/storage/assets/vendor/libs/node-waves/node-waves.css" />
     <link rel="stylesheet" href="/storage/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
     <link rel="stylesheet" href="/storage/assets/vendor/libs/typeahead-js/typeahead.css" />
     <link rel="stylesheet" href="/storage/assets/vendor/libs/bootstrap-select/bootstrap-select.css" />
@@ -38,25 +41,53 @@
     <link rel="stylesheet" href="/storage/assets/vendor/libs/datatables-checkboxes-jquery/datatables.checkboxes.css">
     <link rel="stylesheet" href="/storage/assets/vendor/libs/select2/select2.css" />
     <link rel="stylesheet" href="/storage/assets/vendor/libs/flatpickr/flatpickr.css" />
-    <link rel="stylesheet" href="/storage/assets/vendor/libs/dropzone/dropzone.css" />
+    <link rel="stylesheet" href="/storage/assets/vendor/libs/dropzone/dropzone.css" /> --}}
+
+    @vite([
+        // Icons
+        'resources/assets/vendor/fonts/fontawesome.css',
+        'resources/assets/vendor/fonts/tabler-icons.css',
+        'resources/assets/vendor/fonts/flag-icons.css',
+        // Core CSS
+        'resources/assets/vendor/css/rtl/core.css',
+        'resources/assets/vendor/css/rtl/theme-default.css',
+        'resources/assets/css/demo.css',
+        // Vendors CSS
+        'resources/assets/vendor/libs/node-waves/node-waves.css',
+        'resources/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css',
+        'resources/assets/vendor/libs/typeahead-js/typeahead.css',
+        'resources/assets/vendor/libs/bootstrap-select/bootstrap-select.css',
+        'resources/assets/vendor/libs/apex-charts/apex-charts.css',
+        'resources/assets/vendor/libs/swiper/swiper.css',
+        'resources/assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css',
+        'resources/assets/vendor/libs/datatables-checkboxes-jquery/datatables.checkboxes.css',
+        'resources/assets/vendor/libs/select2/select2.css',
+        'resources/assets/vendor/libs/flatpickr/flatpickr.css',
+        'resources/assets/vendor/libs/dropzone/dropzone.css',
+    ])
 
 
     @if(isset($custum_styles))
     {!! $custum_styles !!}
     @endif
     <!-- Page CSS -->
-    <link rel="stylesheet" href="/storage/assets/vendor/css/pages/cards-advance.css" />
+    {{-- <link rel="stylesheet" href="/storage/assets/vendor/css/pages/cards-advance.css" /> --}}
 
     <!-- Helpers -->
-    <script src="/storage/assets/vendor/js/helpers.js"></script>
+    {{-- <script src="storage/assets/vendor/js/helpers.js"></script> --}}
 
-    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-    <script src="/storage/assets/js/config.js"></script>
+    {{-- <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  --> --}}
+    {{-- <script src=""></script> --}}
 
+    
+    @vite([
+        'resources/assets/vendor/css/pages/cards-advance.css',
+        'resources/assets/vendor/js/helpers.js',
+        'resources/assets/js/config.js',
+        'resources/assets/vendor/libs/jquery/jquery.js',
+        'resources/js/app.js',
+    ])
 
-    <!-- Scripts -->
-    @vite(['resources/js/app.js'])
-    <script src="/storage/assets/vendor/libs/jquery/jquery.js"></script>
 
     <!-- Styles -->
     @livewireStyles
@@ -150,7 +181,7 @@
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
 
-    <script src="/storage/assets/vendor/libs/popper/popper.js"></script>
+    {{-- <script src="/storage/assets/vendor/libs/popper/popper.js"></script>
     <script src="/storage/assets/vendor/js/bootstrap.js"></script>
     <script src="/storage/assets/vendor/libs/node-waves/node-waves.js"></script>
     <script src="/storage/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
@@ -158,30 +189,60 @@
     <script src="/storage/assets/vendor/libs/i18n/i18n.js"></script>
     <script src="/storage/assets/vendor/libs/typeahead-js/typeahead.js"></script>
     <script src="/storage/assets/vendor/js/menu.js"></script>
-    <script src="/storage/assets/vendor/libs/dropzone/dropzone.js"></script>
+    <script src="/storage/assets/vendor/libs/dropzone/dropzone.js"></script> --}}
 
     <!-- endbuild -->
 
     <!-- Vendors JS -->
-    <script src="/storage/assets/vendor/libs/select2/select2.js"></script>
+    {{-- <script src="/storage/assets/vendor/libs/select2/select2.js"></script>
     <script src="/storage/assets/vendor/libs/apex-charts/apexcharts.js"></script>
     <script src="/storage/assets/vendor/libs/swiper/swiper.js"></script>
     <script src="/storage/assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
     <script src="/storage/assets/vendor/libs/flatpickr/flatpickr.js"></script>
-    <script src="/storage/assets/vendor/libs/autosize/autosize.js"></script>
+    <script src="/storage/assets/vendor/libs/autosize/autosize.js"></script> --}}
 
 
     <!-- Main JS -->
-    <script src="/storage/assets/js/main.js"></script>
+    {{-- <script src="/storage/assets/js/main.js"></script> --}}
 
 
     <!-- Page JS -->
-    <script src="/storage/assets/js/dashboards-analytics.js"></script>
+    {{-- <script src="/storage/assets/js/dashboards-analytics.js"></script>
     <script src="/storage/assets/js/forms-selects.js"></script>
     <script src="/storage/assets/js/charts-apex.js"></script>
     <script src="/storage/assets/js/forms-file-upload.js"></script>
     <script src="/storage/assets/js/forms-extras.js"></script>
-    <script src="/storage/assets/js/cards-statistics.js"></script>
+    <script src="/storage/assets/js/cards-statistics.js"></script> --}}
+
+    
+    @vite([
+        // <!-- Core JS -->
+        'resources/assets/vendor/libs/popper/popper.js',
+        'resources/assets/vendor/js/bootstrap.js',
+        'resources/assets/vendor/libs/node-waves/node-waves.js',
+        'resources/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js',
+        'resources/assets/vendor/libs/hammer/hammer.js',
+        'resources/assets/vendor/libs/i18n/i18n.js',
+        'resources/assets/vendor/libs//typeahead-js/typeahead.js',
+        'resources/assets/vendor/js/menu.js',
+        'resources/assets/vendor/libs/dropzone/dropzone.js',
+        // <!-- Vendors JS -->
+        'resources/assets/vendor/libs/select2/select2.js',
+        'resources/assets/vendor/libs/apex-charts/apexcharts.js',
+        'resources/assets/vendor/libs/swiper/swiper.js',
+        'resources/assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js',
+        'resources/assets/vendor/libs/flatpickr/flatpickr.js',
+        'resources/assets/vendor/libs/autosize/autosize.js',
+        // <!-- Main JS -->
+        'resources/assets/js/main.js',
+        // <!-- Page JS -->
+        'resources/assets/js/dashboards-analytics.js',
+        'resources/assets/js/forms-selects.js',
+        'resources/assets/js/charts-apex.js',
+        'resources/assets/js/forms-file-upload.js',
+        'resources/assets/js/forms-extras.js',
+        'resources/assets/js/cards-statistics.js',
+    ])
 
 
     @if(isset($custum_scripts))

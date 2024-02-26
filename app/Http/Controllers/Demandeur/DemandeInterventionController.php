@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Demandeur;
 
-use App\Http\Controllers\Controller;
-use App\Models\DemandeIntervention;
 use App\Models\Site;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
+use App\Models\DemandeIntervention;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Laravel\Facades\Image;
 
 class DemandeInterventionController extends Controller
 {
@@ -142,5 +143,11 @@ class DemandeInterventionController extends Controller
 
         // Retourner la référence complète
         return 'DI' . $formattedId;
+    }
+
+    private function compressAndStoreImage($image)
+    {
+        // Créer une instance Intervention Image à partir de l'image téléchargée
+        $interventionImage = Image::make($image);
     }
 }
