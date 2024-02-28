@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\DemandeInterventionController as AdminDemandeInte
 use App\Http\Controllers\Admin\UtilisateurController as AdminUtilisateurController;
 use App\Http\Controllers\Admin\PrestataireController as AdminPrestataireController;
 use App\Http\Controllers\Admin\ZoneController as AdminZoneController;
+use App\Http\Controllers\Admin\BonTravailController as AdminBonTravailController;
 
 
 use App\Http\Controllers\Demandeur\SiteController as DemandeurSiteController;
@@ -66,6 +67,7 @@ Route::middleware([
     Route::resource('/utilisateurs', AdminUtilisateurController::class);
     Route::resource('/prestataires', AdminPrestataireController::class);
     Route::resource('/zones', AdminZoneController::class);
+    Route::resource('/bon-travail', AdminBonTravailController::class);
 });
 
 

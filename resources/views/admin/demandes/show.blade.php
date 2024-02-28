@@ -5,7 +5,11 @@
 
     <div class="justify-between mx-1 row">
         <div class="my-3 col-md-4">
-            <x-gmao.create-bt></x-gmao.create-bt>
+            <x-gmao.create-bt 
+                :zones="$zones" 
+                :equipements="$demande->site->equipements" 
+                :prestataires="$prestataires"
+            />
         </div>
         <div class="my-3 col-md-4">
             <x-gmao.injection-piece></x-gmao.injection-piece>

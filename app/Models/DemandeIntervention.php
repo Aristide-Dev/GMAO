@@ -30,6 +30,11 @@ class DemandeIntervention extends Model
     {
         return $this->belongsTo(Site::class);
     }
+    
+    public function bon_travail()
+    {
+        return $this->belongsTo(BonTravail::class);
+    }
 
     public function demandeur()
     {
