@@ -32,17 +32,7 @@ class SiteController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validateWithBag('create_site',[
-            'name' => ['required', 'string', 'max:55'],
-            'registre' => ['required', 'string', 'max:30'],
-        ]);
-
-        Site::create([
-            'name' => $request->name,
-            'registre' => $request->registre,
-        ]);
-
-        return redirect(route("demandeur.sites.index"))->with('success', 'Nouveau site ajouté avec succès!');
+        
     }
 
     /**

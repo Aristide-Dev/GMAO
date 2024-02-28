@@ -14,7 +14,7 @@ class PrestataireController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.prestataires.index');
     }
 
     /**
@@ -22,7 +22,7 @@ class PrestataireController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.prestataires.create');
     }
 
     /**
@@ -30,7 +30,23 @@ class PrestataireController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validateWithBag('create_site',[
+            'name' => ['required', 'string', 'max:100'],
+            'slug' => ['required', 'string', 'max:20'],
+            'email' => ['required', 'email', 'string', 'max:100'],
+            'telephone' => ['required', 'string', 'max:20'],
+            'adresse' => ['required', 'string', 'max:100'],
+        ]);
+
+        $prestataire = Prestataire::create([
+            'name' => $request->name,
+            'slug' => $request->slug,
+            'email' => $request->email,
+            'telephone' => $request->telephone,
+            'adresse' => $request->adresse,
+        ]);
+
+        return redirect(route("admin.prestataires.show", $prestataire))->with('success', 'Nouveau prestataire ajouté avec succès!');
     }
 
     /**
@@ -38,7 +54,7 @@ class PrestataireController extends Controller
      */
     public function show(Prestataire $prestataire)
     {
-        //
+        return view('admin.prestataires.show', compact('prestataire'));
     }
 
     /**
@@ -46,7 +62,7 @@ class PrestataireController extends Controller
      */
     public function edit(Prestataire $prestataire)
     {
-        //
+        return view('admin.prestataires.edit', compact('prestataire'));
     }
 
     /**
@@ -63,5 +79,10 @@ class PrestataireController extends Controller
     public function destroy(Prestataire $prestataire)
     {
         //
+    }
+
+    public function storeAdmin(Request $request, Prestataire $prestataire)
+    {
+        
     }
 }

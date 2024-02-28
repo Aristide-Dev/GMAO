@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('zones', function (Blueprint $table) {
             $table->id();
             $table->string("name");
-            $table->enum("priorite", [1,2,3,4,5,6]);
+            $table->enum("priorite", [1,2,3,4,5,6]); // 1 == faible // 2 == moyen // 3 == prioritaire
             $table->integer("delais");
             $table->timestamps();
         });

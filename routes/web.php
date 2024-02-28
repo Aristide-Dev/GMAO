@@ -5,6 +5,8 @@ use App\Http\Controllers\AppController;
 use App\Http\Controllers\Admin\SiteController as AdminSiteController;
 use App\Http\Controllers\Admin\DemandeInterventionController as AdminDemandeInterventionController;
 use App\Http\Controllers\Admin\UtilisateurController as AdminUtilisateurController;
+use App\Http\Controllers\Admin\PrestataireController as AdminPrestataireController;
+use App\Http\Controllers\Admin\ZoneController as AdminZoneController;
 
 
 use App\Http\Controllers\Demandeur\SiteController as DemandeurSiteController;
@@ -62,6 +64,8 @@ Route::middleware([
         ->name('sites.equipement.categorie');
 
     Route::resource('/utilisateurs', AdminUtilisateurController::class);
+    Route::resource('/prestataires', AdminPrestataireController::class);
+    Route::resource('/zones', AdminZoneController::class);
 });
 
 
@@ -177,13 +181,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
         return view('admin.prestataires.index');
     })->name('prestataires.index');
 
-    Route::get('/prestataires/create', function () {
-        return view('admin.prestataires.create');
-    })->name('prestataires.create');
+    // Route::get('/prestataires/create', function () {
+    //     return view('admin.prestataires.create');
+    // })->name('prestataires.create');
 
-    Route::get('/prestataires/{id}', function () {
-        return view('admin.prestataires.show');
-    })->name('prestataires.show');
+    // Route::get('/prestataires/{id}', function () {
+    //     return view('admin.prestataires.show');
+    // })->name('prestataires.show');
 
     // Route::get('/utilisateurs', function () {
     //     return view('admin.utilisateurs.index');

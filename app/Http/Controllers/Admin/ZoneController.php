@@ -13,7 +13,8 @@ class ZoneController extends Controller
      */
     public function index()
     {
-        //
+        $zones = Zone::paginate(30);
+        return view("admin.zones.index", compact('zones'));
     }
 
     /**
@@ -29,7 +30,19 @@ class ZoneController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validateWithBag('create_zone',[
+            'name' => ['required', 'string', 'max:55'],
+            'priorite' => ['required', 'numeric', 'in:1,2,3'],
+            'delais' => ['required', 'numeric', 'min:1', 'max:100'],
+        ]);
+
+        Zone::create([
+            'name' => $request->name,
+            'priorite' => $request->priorite,
+            'delais' => $request->delais,
+        ]);
+
+        return redirect(route("admin.zones.index"))->with('success', 'Nouvelle zone ajoutée avec succès!');
     }
 
     /**

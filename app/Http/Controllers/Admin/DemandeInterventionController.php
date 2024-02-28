@@ -4,11 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\DemandeIntervention;
+use App\Models\Prestataire;
 use App\Models\Site;
 use App\Models\User;
+use App\Models\Zone;
 use Illuminate\Http\Request;
-use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\File;
 
 class DemandeInterventionController extends Controller
 {
@@ -17,12 +20,9 @@ class DemandeInterventionController extends Controller
      */
     public function index()
     {
-        // $demandeur_id = Auth::user()->id;
-        // $sites = Site::all();
-        // $demandes = Site::where("demandeur_id",$demandeur_id)->paginate(10);
         $sites = Site::all();
-        $demandes = Site::paginate(10);
-        $demandeurs = User::where("role","demandeur")->get();
+        $demandes = DemandeIntervention::paginate(10);
+        $demandeurs = User::where("role", "demandeur")->get();
         return view('admin.demandes.index', compact('sites', 'demandes', 'demandeurs'));
     }
 
@@ -42,39 +42,35 @@ class DemandeInterventionController extends Controller
         // dd($request);
         $request->validateWithBag('create_demande_intervention', [
             'site' => 'required|exists:sites,id',
+            'demandeur' => 'required|exists:users,id',
             'photo_demande_intervention' => 'required|image|extensions:jpeg,jpg,png|max:2000',
         ]);
 
-        $demandeur = Auth::user();
-        if ($demandeur->role !== 'super_admin' && $demandeur->role !== 'admin' && $demandeur->role !== 'maintenance') {
+        $auth_user = Auth::user();
+        if ($auth_user->role !== 'super_admin' && $auth_user->role !== 'admin' && $auth_user->role !== 'maintenance') {
             return redirect()->back()->with('error', 'Action non autorisée');
-        }
-
-        $image = $request->file('photo_demande_intervention');
-
-        if ($image) {
-            $imagePath = $image->store("demandes", "public");
-        } else {
-            $imagePath = null;
         }
 
         $di_reference = $this->generateDIReference();
         $break_stepp = 0;
+        // dd($di_reference,DemandeIntervention::where("di_reference",$di_reference)->first());
 
-        while(DemandeIntervention::where("di_reference",$di_reference)->get())
-        {
-            if($break_stepp >= 10)
-            {
+        while (DemandeIntervention::where("di_reference", $di_reference)->first()) {
+            if ($break_stepp >= 10) {
                 return redirect()->back()->with('error', 'Trop de tentative! Recommencer svp.');
             }
             $di_reference = $this->generateDIReference();
             $break_stepp += 1;
         }
 
+        $image = $request->file('photo_demande_intervention');
+
+        $imagePath = $this->saveImageWithUniqueName($image, $di_reference, 'demandes');
+
         DemandeIntervention::create([
             'di_reference' => $di_reference,
             'site_id' => $request->site,
-            'demandeur_id' => $demandeur->id,
+            'demandeur_id' => $request->demandeur,
             'demande_file' => $imagePath,
             'status' => "en attente de validation",
         ]);
@@ -85,15 +81,17 @@ class DemandeInterventionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(DemandeIntervention $demandeIntervention)
+    public function show(DemandeIntervention $demande)
     {
-        //
+        $zones = Zone::all();
+        $prestataires = Prestataire::all();
+        return view('admin.demandes.show', compact('demande','zones','prestataires'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(DemandeIntervention $demandeIntervention)
+    public function edit(DemandeIntervention $demande)
     {
         //
     }
@@ -101,7 +99,7 @@ class DemandeInterventionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, DemandeIntervention $demandeIntervention)
+    public function update(Request $request, DemandeIntervention $demande)
     {
         //
     }
@@ -109,7 +107,7 @@ class DemandeInterventionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(DemandeIntervention $demandeIntervention)
+    public function destroy(DemandeIntervention $demande)
     {
         //
     }
@@ -118,15 +116,16 @@ class DemandeInterventionController extends Controller
     {
         // Récupérer le dernier enregistrement
         $lastDemandeIntervention = DemandeIntervention::latest()->first();
+        $nextId = 0;
 
         // Si aucun enregistrement n'existe, commencez à partir de 1
         if (!$lastDemandeIntervention) {
             $nextId = 1;
         } else {
             // Extraire le numéro d'identification de la référence
-            $lastReference = $lastDemandeIntervention->reference;
+            $lastReference = $lastDemandeIntervention->di_reference;
             $lastId = (int)substr($lastReference, 2); // Extrait les chiffres après "DI"
-            
+
             // Incrémenter l'ID pour le prochain enregistrement
             $nextId = $lastId + 1;
         }
@@ -136,5 +135,36 @@ class DemandeInterventionController extends Controller
 
         // Retourner la référence complète
         return 'DI' . $formattedId;
+    }
+
+
+    /**
+     * Méthode saveImageWithUniqueName
+     *
+     * @param string $image [Chemin vers l'image]
+     * @param string $imageName [Nom de l'image]
+     * @param string $destinationFolder [Répertoire de destination dans le stockage Laravel]
+     *
+     * @return String $imageName
+     */
+    private function saveImageWithUniqueName($image, $imageName, $destinationFolder)
+    {
+        // Récupérer l'extension de l'image
+        // $imageExtension = pathinfo($imageName, PATHINFO_EXTENSION);
+        $imageExtension = "jpg";
+
+        // Générer un nom de fichier unique
+        $uniqueFileName = $imageName . '_' . time();
+
+        // dd($uniqueFileName. '.' . $imageExtension);
+
+        // Répertoire de stockage dans le stockage Laravel
+        $storageDirectory = 'public/' . $destinationFolder;
+
+        // Utiliser Storage::putFileAs pour compresser et stocker l'image avec un nom spécifique
+        $fuldirectory = Storage::putFileAs($storageDirectory, new File($image), $uniqueFileName . '.' . $imageExtension);
+
+        // Retourner le nom du fichier généré
+        return $fuldirectory;
     }
 }

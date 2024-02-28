@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact" data-template="vertical-menu-template">
+<html lang="fr" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact" data-template="vertical-menu-template">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
@@ -20,7 +20,7 @@
     {{-- <link rel="stylesheet" href="/storage/assets/vendor/fonts/fontawesome.css" />
     <link rel="stylesheet" href="/storage/assets/vendor/fonts/tabler-icons.css" />
     <link rel="stylesheet" href="/storage/assets/vendor/fonts/flag-icons.css" /> --}}
-    
+
 
 
     <!-- Core CSS -->
@@ -79,7 +79,7 @@
     {{-- <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  --> --}}
     {{-- <script src=""></script> --}}
 
-    
+
     @vite([
         'resources/assets/vendor/css/pages/cards-advance.css',
         'resources/assets/vendor/js/helpers.js',
@@ -144,11 +144,11 @@
                 @include('layouts.gmao.navbar')
                 <!-- / Navbar -->
 
-                
+
                 <!-- Content wrapper -->
                 <div class="content-wrapper">
                     <!-- Content -->
-                    
+
                     <div class="container-xxl flex-grow-1 container-p-y">
                         @include('layouts.alert_message')
                         {{ $slot }}
@@ -214,7 +214,7 @@
     <script src="/storage/assets/js/forms-extras.js"></script>
     <script src="/storage/assets/js/cards-statistics.js"></script> --}}
 
-    
+
     @vite([
         // <!-- Core JS -->
         'resources/assets/vendor/libs/popper/popper.js',

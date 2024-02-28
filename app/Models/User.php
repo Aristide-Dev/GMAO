@@ -36,6 +36,7 @@ class User extends Authenticatable
         'telephone',
         'password',
         'role',
+        'prestataire_own',
     ];
 
     /**
@@ -129,5 +130,10 @@ class User extends Authenticatable
             abort(403, 'Unauthorized action.');
             exit();
         }
+    }
+
+    public function prestataire()
+    {
+        return $this->hasOne(Prestataire::class);
     }
 }

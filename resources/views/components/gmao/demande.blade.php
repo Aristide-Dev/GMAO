@@ -1,3 +1,28 @@
+@props(['demande'])
+
+<x-slot name="custum_styles">
+
+    @vite(['resources/css/file_viewer.css'])
+</x-slot>
+
+<script src="/storage/js/file_viewer.js">
+    
+</script>
+
+@if (!isset($demande))
+    @php
+        throw new InvalidArgumentException('Le composant (demande) nécessite une prop "demande"');
+    @endphp
+@endif
+
+<!-- La modale -->
+<div id="myShowDemandeModal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="img01">
+    <div id="caption"></div>
+</div>
+
+
 <div class="p-3 m-0 mb-3 border rounded shadow-sm">
     <div class="p-3 mb-3 text-center text-uppercase fw-bold w-100 badge bg-primary bg-label-primary">
         Demande d'Intervention <i class="fa-solid fa-circle-check fa-2xl" style="color: #63E6BE;"></i>
@@ -10,10 +35,10 @@
                 <div class="d-flex w-100 justify-content-between">
                     <h6 class="mb-1 text-primary fw-bold">
                         <i class="fa-solid fa-ellipsis ti-sm" style="color: #FFD43B;"></i>
-                         D.I
+                        D.I
                     </h6>
                 </div>
-                <small class="mb-1 w-30">DI3030381</small>
+                <small class="mb-1 w-30">{{ $demande->di_reference }}</small>
             </div>
         </div>
     </div>
@@ -26,48 +51,30 @@
                 <div class="d-flex w-100 justify-content-between">
                     <h6 class="mb-1 text-primary fw-bold">
                         <i class="fa-solid fa-ellipsis ti-sm" style="color: #FFD43B;"></i>
-                         Demandeur
+                        Demandeur
                     </h6>
                 </div>
-                <small class="mb-1 w-30">{{ fake()->firstname }} {{ fake()->lastname }}</small>
+                <small class="mb-1 w-50">{{ $demande->demandeur->first_name }} {{ $demande->demandeur->last_name }}</small>
             </div>
         </div>
     </div>
     {{-- Demandeur --}}
 
-    {{-- Site & Type Equipepement --}}
+    {{-- site --}}
     <div class="col-12">
-        <div class="shadow-xs border-top border-top-3 list-group list-group-item-action">
-            <div class="row">
-                <div class="col-6">
-                    <div class="mt-1 border-0 border-end list-group-item">
-                        <div class="d-block w-100 justify-content-between">
-                            <p class="mb-1 text-left text-primary fw-bold">
-                                <i class="fa-solid fa-ellipsis ti-sm" style="color: #C0C0C0;"></i>
-                                Site
-                            </p>
-                            <p class="mb-1 text-left">ST-Dubreka</p>
-                        </div>
-                    </div>
+        <div class="shadow-xs border-top border-top-3 list-group">
+            <div class="border-0 list-group-item list-group-item-action d-flex align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h6 class="mb-1 text-primary fw-bold">
+                        <i class="fa-solid fa-ellipsis ti-sm text-warning"></i>
+                        Site
+                    </h6>
                 </div>
-
-                <div class="col-6">
-                    <div class="border-0 list-group-item">
-                        <div class="w-100 justify-content-end">
-                            <p class="mb-1 text-end text-primary fw-bold">
-                                <i class="fa-solid fa-ellipsis ti-sm" style="color: #C0C0C0;"></i>
-                                Type Equipement
-                            </p>
-                            <p class="mb-1 text-end">Distributeur</p>
-                        </div>
-                    </div>
-                </div>
-
+                <small class="mb-1 w-30">{{ $demande->site->name }}</small>
             </div>
-
         </div>
     </div>
-    {{-- Site & Type Equipepement --}}
+    {{-- site --}}
 
     {{-- Date & Heure de déclaration --}}
     <div class="col-12">
@@ -76,28 +83,28 @@
                 <div class="d-flex w-100 justify-content-between">
                     <h6 class="mb-1 text-primary fw-bold">
                         <i class="fa-solid fa-ellipsis ti-sm" style="color: #FFD43B;"></i>
-                         Date et heure de déclaration
+                        Date et heure de déclaration
                     </h6>
                 </div>
-                <small class="mb-1 w-30">25 fev 2024 <span class="fw-bold">à 15h30</span> </small>
+                <small class="mb-1 w-30">{{ $demande->created_at->formatLocalized('%e %B %Y à %Hh %M') }}</small>
             </div>
         </div>
     </div>
     {{-- Date & Heure de déclaration --}}
 
-    {{-- Description --}}
+    {{-- Document --}}
     <div class="col-12">
         <div class="shadow-xs border-top border-top-3 list-group">
             <div class="border-0 list-group-item list-group-item-action d-flex align-items-start">
                 <div class="d-flex w-100 justify-content-between">
                     <h6 class="mb-1 text-primary fw-bold">
                         <i class="fa-solid fa-ellipsis ti-sm" style="color: #FFD43B;"></i>
-                         Description
+                        Document
                     </h6>
                 </div>
-                <small class="mb-1 w-30">{{ fake()->paragraph }}</small>
+                <img src="{{ $demande->document() }}" alt="document" class="mb-1 rounded w-50" id="doc_image_url_in_show_demande" onclick="displayImageInModal('doc_image_url_in_show_demande', 'myShowDemandeModal')" width="100">
             </div>
         </div>
     </div>
-    {{-- Description --}}
+    {{-- Document --}}
 </div>

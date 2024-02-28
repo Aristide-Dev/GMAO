@@ -8,4 +8,27 @@ use Illuminate\Database\Eloquent\Model;
 class Prestataire extends Model
 {
     use HasFactory;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'name',
+        'slug',
+        'email',
+        'telephone',
+        'adresse',
+    ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'telephone_verified_at' => 'datetime',
+    ];
 }

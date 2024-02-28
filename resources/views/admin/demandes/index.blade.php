@@ -2,28 +2,22 @@
     <x-slot name="title">{{ __('Demandes') }}</x-slot>
     <x-slot name="title_desc">{{ __('Demandes') }}</x-slot>
     <x-slot name="sidebar">admin</x-slot>
+    <x-slot name="custum_styles">
 
-    @php
-    $statuts = [
-        [
-            'statut' => 'en attente de validation',
-            'color' => 'warning',
-        ],
-        [
-            'statut' => 'transmise au prestataire',
-            'color' => 'primary',
-        ],
-        [
-            'statut' => 'annulée',
-            'color' => 'danger',
-        ],
-        [
-            'statut' => 'rejettée',
-            'color' => 'danger',
-        ],
-    ];
-    @endphp
+        @vite(['resources/css/file_viewer.css'])
+    </x-slot>
 
+    <script src="/storage/js/file_viewer.js">
+        
+    </script>
+
+
+<!-- La modale -->
+<div id="myModal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="img01">
+    <div id="caption"></div>
+  </div>
 
 
 
@@ -47,77 +41,97 @@
                             <th>N°</th>
                             <th>D.I</th>
                             <th class="text-left">Site</th>
-                            <th class="text-left">Equipement</th>
-                            <th class="py-2">Description</th>
+                            <th class="text-left">Document</th>
+                            <th class="text-left">Demandeur</th>
                             <th>Status</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
-                        @for ($i = 0; $i < 30; $i++)
-                            <tr>
-                                <td>
-                                    {{ $i+1 }}
-                                </td>
-                                <td>
-                                    <span class="fw-bold">DI0000{{ rand(1,200) }}</span>
-                                </td>
-                                <td class="text-left">
-                                    <a href="{{ route('admin.demandes.show', rand()) }}">St {{ fake()->name }}</a>
-                                </td>
-                                <td class="text-left">{{ fake()->name }}</td>
-                                <td class="py-2">
-                                    {{ Illuminate\Support\Str::limit(fake()->paragraph, 20, $end = ' ...') }}
-                                </td>
-                                <td>
-                                    @php
-                                        $st = $statuts[rand(0,3)];
-                                    @endphp
-                                    <span class="badge bg-label-{{ $st['color'] }} me-1">{{ $st['statut'] }}</span>
-                                </td>
-                            </tr>
-                        @endfor
+                        
+                        @forelse ($demandes as $key => $demande)
+                        <tr>
+                            <td>
+                                {{ $key+1 }}
+                            </td>
+                            <td>
+                                <span class="fw-bold">{{ $demande->di_reference }}</span>
+                            </td>
+                            <td class="text-left">
+                                <a class="fw-bold" href="{{ route('admin.sites.show', $demande->site->id) }}">{{ $demande->site->name }}</a>
+                            </td>
+                            <td class="text-left">
+                                <div class="avatar avatar-md me-2">
+                                    <img src="{{ $demande->document() }}" alt="document" class="rounded-circle" id="doc_image_url{{ $key+1 }}" onclick="displayImageInModal('doc_image_url{{ $key+1 }}')">
+                                </div>
+                            </td>
+                            <td class="justify-center align-items-center">
+                                <ul class="list-unstyled m-0 d-flex justify-center text-center align-center avatar-group my-3">
+                                    <li data-bs-toggle="tooltip" class="d-block" data-popup="tooltip-custom" data-bs-placement="right" title="{{ $demande->demandeur->first_name }} {{ $demande->demandeur->last_name }}" class="avatar pull-up">
+                                      <img class="rounded-circle w-25" src="/storage/assets/img/avatars/5.png" alt="photo">
+                                      <p class="fw-bold">{{ $demande->demandeur->first_name }} {{ $demande->demandeur->last_name }}</p>
+                                    </li>
+                                  </ul>
+                            </td>
+                            <td>
+                                <span class="badge bg-{{ $demande->statutColor() }} me-1">{{ $demande->status }}</span>
+                            </td>
+                            <td>
+                                <a href="{{ route('admin.demandes.show', $demande) }}" class="btn btn-primary">Suivis</a>
+                            </td>
+                        </tr>
+                        @empty
+                        <tr>
+                            <td colspan="6">
+                                <h3 class="text-center">Aucune demande</h3>
+                            </td>
+                        </tr>
+                        @endforelse
                     </tbody>
                     <tfoot class="table-light">
                         <tr>
                             <th>N°</th>
                             <th>D.I</th>
                             <th class="text-left">Site</th>
-                            <th class="text-left">Equipement</th>
-                            <th class="p-2">Description</th>
+                            <th class="text-left">Document</th>
+                            <th class="text-left">Demandeur</th>
                             <th>Status</th>
+                            <th>Action</th>
                         </tr>
                     </tfoot>
                 </table>
             </div>
 
 
-            @for ($i = 0; $i < 30; $i++)
+            @forelse ($demandes as $key => $demande)
             <div class="p-2 m-2 mb-4 border rounded-lg shadow card d-sm-block d-md-none d-lg-none d-xl-none">
                 <div class="card-body">
                     <div class="card-title header-elements">
-                        <h5 class="m-0 me-2">DI0000{{ rand(1,200) }}</h5>
+                        <h5 class="m-0 me-2">{{ $demande->di_reference }}</h5>
                         <div class="card-title-elements ms-auto">
                             <button type="button" class="btn btn-icon btn-sm btn-danger">
                                 <span class="tf-icon ti-xs ti ti-brand-shopee"></span>
                             </button>
                         </div>
                     </div>
-                    <h6 class="card-title"><span class="h5">site</span>: <span class="text-muted">{{ fake()->name }}</span></h6>
-                    <div class="mb-3 card-subtitle text-muted"><span class="h6">Equipement: </span>{{ fake()->name }}</div>
+                    <h6 class="card-title">
+                        <a href="{{ route('admin.sites.show', $demande->site->id) }}">
+                            <span class="h5">site</span>: <span class="text-muted">{{ $demande->site->name }}</span>
+                        </a>
+                    </h6>
+
                     <div class="mb-3 card-subtitle">
-                        @php
-                        $st = $statuts[rand(0,3)];
-                        @endphp
-                        <span class="badge bg-label-{{ $st['color'] }} me-1">{{ $st['statut'] }}</span>
+                        <span class="badge bg-label-{{ $demande->statutColor() }} me-1">{{ $demande->status }}</span>
                     </div>
 
-                    <p class="card-text">
-                        Some quick example text to build on the card title and make up the bulk of the card's content.
-                    </p>
-                    <a href="{{ route('demandeur.demandes.show', rand(1,5)) }}" class="card-link btn btn-primary">Details</a>
+                    <img class="mx-auto my-4 rounded img-fluid d-flex" src="{{ $demande->document() }}" alt="Docuement" id="doc_image_id_for_mobile{{ $key+1 }}" onclick="displayImageInModal('doc_image_id_for_mobile{{ $key+1 }}')"/>
+
+                    <a href="{{ route('admin.demandes.show', $demande) }}" class="card-link btn btn-primary">Suivis</a>
                 </div>
             </div>
-            @endfor
+            @empty
+            <h3 class="text-center d-sm-block d-md-none d-lg-none d-xl-none">Aucune demande</h3>
+            @endforelse
 
 
         <!--/ Hoverable Table rows -->

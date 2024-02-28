@@ -3,39 +3,18 @@
     <x-slot name="title_desc">{{ __('Demandes') }}</x-slot>
     <x-slot name="sidebar">demandeur</x-slot>
     <x-slot name="custum_styles">
-        
+
         @vite(['resources/css/file_viewer.css'])
     </x-slot>
 
-    @php
-    $statuts = [
-    [
-    'statut' => 'en attente de validation',
-    'color' => 'warning',
-    ],
-    [
-    'statut' => 'transmise au prestataire',
-    'color' => 'primary',
-    ],
-    [
-    'statut' => 'annulée',
-    'color' => 'danger',
-    ],
-    [
-    'statut' => 'rejettée',
-    'color' => 'danger',
-    ],
-    ];
-    @endphp
 
+    <!-- La modale -->
+    <div id="myModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="img01">
+        <div id="caption"></div>
+    </div>
 
-<!-- La modale -->
-<div id="myModal" class="modal">
-    <span class="close">&times;</span>
-    <img class="modal-content" id="img01">
-    <div id="caption"></div>
-  </div>
-  
 
 
 
@@ -62,6 +41,7 @@
                             <th class="text-left">Site</th>
                             <th class="text-left">Document</th>
                             <th>Status</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
@@ -82,10 +62,10 @@
                                 </div>
                             </td>
                             <td>
-                                @php
-                                $st = $statuts[rand(0,3)];
-                                @endphp
-                                <span class="badge bg-label-{{ $st['color'] }} me-1">{{ $st['statut'] }}</span>
+                                <span class="badge bg-{{ $demande->statutColor() }} me-1">{{ $demande->status }}</span>
+                            </td>
+                            <td>
+                                <a href="{{ route('demandeur.demandes.show', $demande) }}" class="btn btn-primary">Suivis</a>
                             </td>
                         </tr>
                         @empty
@@ -103,6 +83,7 @@
                             <th class="text-left">Site</th>
                             <th class="text-left">Document</th>
                             <th>Status</th>
+                            <th>Action</th>
                         </tr>
                     </tfoot>
                 </table>
@@ -125,62 +106,26 @@
                             <span class="h5">site</span>: <span class="text-muted">{{ $demande->site->name }}</span>
                         </a>
                     </h6>
-                    
+
                     <div class="mb-3 card-subtitle">
-                        @php
-                        $st = $statuts[rand(0,3)];
-                        @endphp
-                        <span class="badge bg-label-{{ $st['color'] }} me-1">{{ $st['statut'] }}</span>
+                        <span class="badge bg-label-{{ $demande->statutColor() }} me-1">{{ $demande->status }}</span>
                     </div>
 
-                    <img class="mx-auto my-4 rounded img-fluid d-flex" src="{{ $demande->document() }}" alt="Docuement" id="doc_image_id_for_mobile{{ $key+1 }}" onclick="displayImageInModal('doc_image_id_for_mobile{{ $key+1 }}')"/>
-                    
-                    <a href="{{ route('demandeur.demandes.show', rand(1,5)) }}" class="card-link btn btn-primary">Details</a>
+                    <img class="mx-auto my-4 rounded img-fluid d-flex" src="{{ $demande->document() }}" alt="Docuement" id="doc_image_id_for_mobile{{ $key+1 }}" onclick="displayImageInModal('doc_image_id_for_mobile{{ $key+1 }}')" />
+
+                    <a href="{{ route('demandeur.demandes.show', $demande) }}" class="card-link btn btn-primary">Suivis</a>
                 </div>
             </div>
             @empty
-            <h3 class="text-center">Aucune demande</h3>
+            <h3 class="text-center d-sm-block d-md-none d-lg-none d-xl-none">Aucune demande</h3>
             @endforelse
 
 
 
-        <!--/ Hoverable Table rows -->
-    </div>
-
-    <script>
-       // Obtenez l'élément de fermeture (X)
-var span = document.getElementsByClassName("close")[0];
-
-// Lorsque l'utilisateur clique sur (X), fermez la modale
-span.onclick = function() {
-  modal.style.display = "none";
-}
-
-// Fonction générique pour afficher une image en grand
-
-// Fonction générique pour afficher une image en grand
-function displayImageInModal(imageId) {
-    var modal = document.getElementById("myModal"); // Déplacer la déclaration de modal ici
-    var img = document.getElementById(imageId);
-    var modalImg = document.getElementById("img01");
-
-    // Ajoutez un événement de clic à l'image
-    img.onclick = function(){
-        modal.style.display = "block"; // Afficher la modale
-        modalImg.src = this.src; // Mettre à jour l'image de la modale avec l'image cliquée
-    }
-
-    // Obtenez l'élément de fermeture (X)
-    var span = document.getElementsByClassName("close")[0];
-
-    // Lorsque l'utilisateur clique sur (X), fermez la modale
-    span.onclick = function() {
-        modal.style.display = "none";
-    }
-}
-
-
-
-    </script>
+            <!--/ Hoverable Table rows -->
+        </div>
+        <script src="">
+            @include('../../../js/file_viewer.js')
+        </script>
 </x-gmao-layout>
 

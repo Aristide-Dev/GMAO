@@ -56,6 +56,14 @@
         </a>
     </x-gmao.nav-link>
 
+    {{-- Zones --}}
+    <x-gmao.nav-link :active="request()->routeIs('admin.zones.*')">
+        <a href="{{ route('admin.zones.index') }}" class="menu-link">
+            <i class="menu-icon fa-solid fa-map-location-dot"></i>
+            <div data-i18n="Zones & Priorités">Zones & Priorités</div>
+        </a>
+    </x-gmao.nav-link>
+
     {{-- pieces --}}
     {{-- <x-gmao.nav-link :active="request()->routeIs('admin.pieces.*')">
         <a href="{{ route('admin.pieces.index') }}" class="menu-link">

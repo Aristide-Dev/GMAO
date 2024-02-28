@@ -7,14 +7,14 @@
         @php
             // dd($site->equipements)
         @endphp
-        
+
     <div class="row">
         <div class="mb-4 col-md-4 h-100">
             <div class="h-auto card">
                 <div class="row h-100">
                     <div class="col-sm-5">
                         <div class="mt-3 d-flex align-items-end h-100 justify-content-center mt-sm-0">
-                            <img src="/storage/assets/img/illustrations/add-new-roles.png" class="img-fluid mt-sm-4 mt-md-0" alt="add-new-roles" width="83">
+                            <img src="/storage/svg/station_service.svg" class="img-fluid mt-sm-4 mt-md-0" alt="add-new-roles" width="200" height="500">
                         </div>
                     </div>
                     <div class="col-sm-7">

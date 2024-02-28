@@ -1,6 +1,11 @@
 <x-gmao-layout>
     <x-slot name="title">{{ __('Prestataires') }}</x-slot>
-    <x-slot name="title_desc">{{ __('Prestataires') }}</x-slot>
+    <x-slot name="title_desc">
+        <div class="d-block justify-center mx-3">
+            <p class="m-0 p-0">{{ $prestataire->name }}</p>
+            <small class="m-0 p-0">{{ $prestataire->slug }}</small>
+        </div>
+    </x-slot>
     <x-slot name="sidebar">admin</x-slot>
 
     @php

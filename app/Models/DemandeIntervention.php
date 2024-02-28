@@ -40,4 +40,28 @@ class DemandeIntervention extends Model
     {
         return Storage::url($this->demande_file);
     }
+
+    public function statutColor()
+    {
+        $statut = $this->status;
+        if($statut == "en attente de validation")
+        {
+            return "warning";
+        }
+
+        if($statut == "transmis au prestataire")
+        {
+            return "primary";
+        }
+
+        if($statut == "annulé")
+        {
+            return "danger";
+        }
+        if($statut == "rejettée")
+        {
+            return "danger";
+        }
+        return "secondary";
+    }
 }

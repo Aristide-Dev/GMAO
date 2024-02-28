@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Demandeur;
 
 use App\Models\Site;
 use Illuminate\Http\Request;
-use Illuminate\Http\UploadedFile;
 use App\Models\DemandeIntervention;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -18,11 +17,9 @@ class DemandeInterventionController extends Controller
      */
     public function index()
     {
-        // $demandeur_id = Auth::user()->id;
-        // $sites = Site::all();
-        // $demandes = DemandeIntervention::where("demandeur_id",$demandeur_id)->paginate(10);
+        $demandeur_id = Auth::user()->id;
         $sites = Site::all();
-        $demandes = DemandeIntervention::paginate(10);
+        $demandes = DemandeIntervention::where("demandeur_id", $demandeur_id)->paginate(10);
         // dd($demandes);
         return view('demandeur.demandes.index', compact('sites', 'demandes'));
     }
@@ -137,31 +134,32 @@ class DemandeInterventionController extends Controller
 
 
     /**
- * Méthode saveImageWithUniqueName
- *
- * @param string $image [Chemin vers l'image]
- * @param string $imageName [Nom de l'image]
- * @param string $destinationFolder [Répertoire de destination dans le stockage Laravel]
- *
- * @return String $imageName
- */
-private function saveImageWithUniqueName($image, $imageName, $destinationFolder) {
-    // Récupérer l'extension de l'image
-    // $imageExtension = pathinfo($imageName, PATHINFO_EXTENSION);
-    $imageExtension = "jpg";
+     * Méthode saveImageWithUniqueName
+     *
+     * @param string $image [Chemin vers l'image]
+     * @param string $imageName [Nom de l'image]
+     * @param string $destinationFolder [Répertoire de destination dans le stockage Laravel]
+     *
+     * @return String $imageName
+     */
+    private function saveImageWithUniqueName($image, $imageName, $destinationFolder)
+    {
+        // Récupérer l'extension de l'image
+        // $imageExtension = pathinfo($imageName, PATHINFO_EXTENSION);
+        $imageExtension = "jpg";
 
-    // Générer un nom de fichier unique
-    $uniqueFileName = $imageName . '_' . time();
+        // Générer un nom de fichier unique
+        $uniqueFileName = $imageName . '_' . time();
 
-    // dd($uniqueFileName. '.' . $imageExtension);
+        // dd($uniqueFileName. '.' . $imageExtension);
 
-    // Répertoire de stockage dans le stockage Laravel
-    $storageDirectory = 'public/' . $destinationFolder;
+        // Répertoire de stockage dans le stockage Laravel
+        $storageDirectory = 'public/' . $destinationFolder;
 
-    // Utiliser Storage::putFileAs pour compresser et stocker l'image avec un nom spécifique
-    $fuldirectory = Storage::putFileAs($storageDirectory, new File($image), $uniqueFileName . '.' . $imageExtension);
+        // Utiliser Storage::putFileAs pour compresser et stocker l'image avec un nom spécifique
+        $fuldirectory = Storage::putFileAs($storageDirectory, new File($image), $uniqueFileName . '.' . $imageExtension);
 
-    // Retourner le nom du fichier généré
-    return $fuldirectory;
-}
+        // Retourner le nom du fichier généré
+        return $fuldirectory;
+    }
 }

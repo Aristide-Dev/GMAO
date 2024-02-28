@@ -3,7 +3,7 @@
 use Illuminate\Support\Str;
 
 return [
-
+    'locale' => 'fr',
     /*
     |--------------------------------------------------------------------------
     | Default Session Driver
