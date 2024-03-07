@@ -8,7 +8,7 @@
     </x-slot>
 
     <script src="/storage/js/file_viewer.js">
-        
+
     </script>
 
 
@@ -48,7 +48,7 @@
                         </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
-                        
+
                         @forelse ($demandes as $key => $demande)
                         <tr>
                             <td>
@@ -66,7 +66,7 @@
                                 </div>
                             </td>
                             <td class="justify-center align-items-center">
-                                <ul class="list-unstyled m-0 d-flex justify-center text-center align-center avatar-group my-3">
+                                <ul class="justify-center m-0 my-3 text-center list-unstyled d-flex align-center avatar-group">
                                     <li data-bs-toggle="tooltip" class="d-block" data-popup="tooltip-custom" data-bs-placement="right" title="{{ $demande->demandeur->first_name }} {{ $demande->demandeur->last_name }}" class="avatar pull-up">
                                       <img class="rounded-circle w-25" src="/storage/assets/img/avatars/5.png" alt="photo">
                                       <p class="fw-bold">{{ $demande->demandeur->first_name }} {{ $demande->demandeur->last_name }}</p>
@@ -101,6 +101,9 @@
                     </tfoot>
                 </table>
             </div>
+            <nav aria-label="Page navigation" class="mx-3 d-flex">
+                {{ $demandes->links() }}
+            </nav>
 
 
             @forelse ($demandes as $key => $demande)

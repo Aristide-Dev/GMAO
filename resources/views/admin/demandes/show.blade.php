@@ -5,9 +5,9 @@
 
     <div class="justify-between mx-1 row">
         <div class="my-3 col-md-4">
-            <x-gmao.create-bt 
-                :zones="$zones" 
-                :equipements="$demande->site->equipements" 
+            <x-gmao.create-bt
+                :zones="$zones"
+                :demande="$demande"
                 :prestataires="$prestataires"
             />
         </div>
@@ -30,8 +30,20 @@
                 </div>
                 <div class="card-body">
                     {{-- Demande d'Intervention (DI) --}}
-                    <x-gmao.demande :demande="$demande"/>
+                    <x-gmao.demande :demande="$demande" />
                     {{-- Demande d'Intervention (DI) --}}
+
+                    {{-- Bon De Travail (BT) --}}
+                    @if (!empty($demande->bon_travails->last()))
+                        <x-gmao.bt :bonTravail="$demande->bon_travails->last()" />
+                    @endif
+                    {{-- Bon De Travail (BT) --}}
+
+                    {{-- Rapport --}}
+                    @if ($demande->bon_travails->last())
+                        <x-gmao.ri/>
+                    @endif
+                    {{-- Rapport --}}
                 </div>
             </div>
         </div>

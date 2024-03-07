@@ -31,4 +31,23 @@ class Prestataire extends Model
         'email_verified_at' => 'datetime',
         'telephone_verified_at' => 'datetime',
     ];
+
+    public function admin()
+    {
+        return User::where('id', $this->prestataire_admin_id)->first();
+    }
+
+    public function agents()
+    {
+        return User::where('prestataire_own', $this->id)
+                    ->where('id', '<>', $this->prestataire_admin_id)
+                    ->get();
+    }
+
+    public function bon_travails()
+    {
+        return $this->hasMany(BonTravail::class);
+    }
+
+    
 }

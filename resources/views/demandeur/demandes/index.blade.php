@@ -5,7 +5,10 @@
     <x-slot name="custum_styles">
 
         @vite(['resources/css/file_viewer.css'])
+    <script src="/storage/js/file_viewer.js">
+
     </x-slot>
+
 
 
     <!-- La modale -->
@@ -124,8 +127,5 @@
 
             <!--/ Hoverable Table rows -->
         </div>
-        <script src="">
-            @include('../../../js/file_viewer.js')
-        </script>
 </x-gmao-layout>
 

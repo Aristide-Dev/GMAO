@@ -20,9 +20,9 @@ class Zone extends Model
         'delais',
     ];
 
-    public function prioriteColor()
+    public function prioriteColor($priorite=null)
     {
-        $priorite = $this->priorite;
+        $priorite = $priorite ?? $this->priorite;
         if($priorite == 1)
         {
             return "success";
@@ -40,9 +40,9 @@ class Zone extends Model
         return "secondary";
     }
 
-    public function prioriteText()
+    public function prioriteText($priorite=null)
     {
-        $priorite = $this->priorite;
+        $priorite = $priorite ?? $this->priorite;
         if($priorite == 1)
         {
             return "Faible";

@@ -1,4 +1,4 @@
-@props(['zones', 'equipements', 'prestataires'])
+@props(['zones', 'demande', 'prestataires'])
 @php
     $show = '';
     $create_bt_id ="create-bt-offcanvas";
@@ -23,8 +23,13 @@
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="flex-grow-0 pt-0 mx-0 offcanvas-body h-100">
-        <form class="pt-0 add-new-bontravail" id="addNewbontravailForm" method="POST" action="{{route('admin.bon-travail.store')}}">
+        <form class="pt-0 add-new-bontravail" id="addNewbontravailForm" method="POST" action="{{ route('admin.bon-travail.store') }}">
             @csrf
+            <div class="mb-3">
+                <input type="hidden" name="di_reference" value="{{ $demande->di_reference }}"/>
+                <x-input-error bag="create_bon_travail" for="di_reference" class="mt-2" />
+            </div>
+
             <div class="mb-3">
                 <label class="h6" for="autosize-demo">Requête</label>
                 <textarea id="autosize-demo" name="requete" rows="3" class="form-control" placeholder="decrivez la panne"></textarea>
@@ -48,7 +53,7 @@
                 <select id="equipement" name="equipement" class="select2 form-select form-select-lg" data-allow-clear="true"
                     data-placeholder="--CHOISIR--">
                     <option value="">--CHOISIR--</option>
-                    @foreach ($equipements as $equipement)
+                    @foreach ($demande->site->equipements as $equipement)
                         <option value="{{ $equipement->id }}">{{ $equipement->name }} - {{ $equipement->numero_serie }} </option>
                     @endforeach
                 </select>

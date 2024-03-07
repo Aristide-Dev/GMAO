@@ -83,6 +83,7 @@ class DemandeInterventionController extends Controller
      */
     public function show(DemandeIntervention $demande)
     {
+        // dd($demande->bon_travails,$demande->bon_travails->last());
         $zones = Zone::all();
         $prestataires = Prestataire::all();
         return view('admin.demandes.show', compact('demande','zones','prestataires'));

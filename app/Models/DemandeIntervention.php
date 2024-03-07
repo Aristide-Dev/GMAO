@@ -31,9 +31,9 @@ class DemandeIntervention extends Model
         return $this->belongsTo(Site::class);
     }
     
-    public function bon_travail()
+    public function bon_travails()
     {
-        return $this->belongsTo(BonTravail::class);
+        return $this->hasMany(BonTravail::class, 'di_reference', 'di_reference');
     }
 
     public function demandeur()
@@ -43,7 +43,17 @@ class DemandeIntervention extends Model
 
     public function document()
     {
-        return Storage::url($this->demande_file);
+        // Vérifiez d'abord si la demande a un fichier associé
+        if ($this->demande_file) {
+            // Générez l'URL complète du fichier en utilisant Storage::url()
+            try {
+                return Storage::url($this->demande_file);
+            } catch (\Throwable $th) {
+                return null;
+            }
+        }
+        // Retournez null si aucun fichier n'est associé à la demande
+        return null;
     }
 
     public function statutColor()

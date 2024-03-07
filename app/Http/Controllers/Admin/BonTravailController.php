@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\BonTravail;
 use App\Models\DemandeIntervention;
+use App\Models\Zone;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class BonTravailController extends Controller
 {
@@ -31,9 +33,7 @@ class BonTravailController extends Controller
      */
     public function store(Request $request)
     {
-        
-        // dd($request);
-        $request->validateWithBag('create_demande_intervention', [
+        $request->validateWithBag('create_bon_travail', [
             'requete' => 'required|string|max:255',
             'zone' => 'required|exists:zones,id',
             'equipement' => 'required|exists:equipements,id',
@@ -46,8 +46,10 @@ class BonTravailController extends Controller
             return redirect()->back()->with('error', 'Action non autorisée');
         }
 
-        $demande = DemandeIntervention::findOrFail('di_reference', $request->di_reference);
-
+        $zone = Zone::where('id', $request->zone)->first();
+        $demande = DemandeIntervention::where('di_reference', $request->di_reference)->first();
+        $date_echeance = $this->generateDateEcheane($demande->created_at,$zone->delais);
+        // dd($demande);
         $bt_reference = $this->generateBTReference();
         $break_stepp = 0;
         // dd($bt_reference,BonTravail::where("bt_reference",$bt_reference)->first());
@@ -61,15 +63,20 @@ class BonTravailController extends Controller
         }
 
         BonTravail::create([
+            'requete' => $request->requete,
             'bt_reference' => $bt_reference,
             'di_reference' => $request->di_reference,
-            'zone_id' => $request->zone,
+            'zone_name' => $zone->name,
+            'zone_priorite' => $zone->priorite,
+            'zone_delais' => $zone->delais,
             'equipement_id' => $request->equipement,
             'prestataire_id' => $request->prestataire,
+            'user_id' => $auth_user->id,
+            'date_echeance' => $date_echeance,
             'status' => "en attente de validation",
         ]);
 
-        return redirect()->back()->with('success', 'Nouvelle demande créée avec succès!');
+        return redirect()->back()->with('success', 'Nouveau bon de travail créé avec succès!');
     }
 
     /**
@@ -127,5 +134,32 @@ class BonTravailController extends Controller
 
         // Retourner la référence complète
         return 'BT' . $formattedId;
+    }
+
+    public function generateDateEcheane($dateStart, $limitTime)
+    {
+        // Heure de travail = 8h-17h => 9h
+        $dateStart = Carbon::parse($dateStart)->setTime(8, 0, 0);
+
+        if ($dateStart->isSunday()) {
+            $dateStart->addDay(); // Ajouter un jour si c'est dimanche
+        }
+
+        while ($limitTime > 0) {
+            $heureJourEnCours = $dateStart->hour;
+            $reste = $heureJourEnCours + $limitTime - 17;
+            if ($reste > 0) {
+                $limitTime = abs($reste);
+                $dateStart->addDay()->setHour(8); // Passer au jour suivant et définir l'heure de début
+            } else {
+                $reste = $limitTime;
+                $limitTime = 0;
+                if ($heureJourEnCours < 8) {
+                    $dateStart->setHour(8); // Si l'heure est avant 8h, définir l'heure de début à 8h
+                }
+                $dateStart->addHours($reste); // Ajouter le reste du temps
+            }
+        }
+        return $dateStart;
     }
 }

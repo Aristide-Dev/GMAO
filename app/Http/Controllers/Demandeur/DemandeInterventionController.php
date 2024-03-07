@@ -78,15 +78,15 @@ class DemandeInterventionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(DemandeIntervention $demandeIntervention)
+    public function show(DemandeIntervention $demande)
     {
-        //
+        return view('demandeur.demandes.show', compact('demande'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(DemandeIntervention $demandeIntervention)
+    public function edit(DemandeIntervention $demande)
     {
         //
     }
@@ -94,7 +94,7 @@ class DemandeInterventionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, DemandeIntervention $demandeIntervention)
+    public function update(Request $request, DemandeIntervention $demande)
     {
         //
     }
@@ -102,7 +102,7 @@ class DemandeInterventionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(DemandeIntervention $demandeIntervention)
+    public function destroy(DemandeIntervention $demande)
     {
         //
     }

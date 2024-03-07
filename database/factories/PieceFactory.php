@@ -17,7 +17,10 @@ class PieceFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'piece' => $this->faker->word,
+            'price' => $this->faker->randomNumber(2),
+            'quantite' => $this->faker->numberBetween(0, 100),
+            'stock_min' => $this->faker->numberBetween(0, 50),
         ];
     }
 }

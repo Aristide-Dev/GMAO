@@ -16,7 +16,7 @@ class SiteController extends Controller
      */
     public function index()
     {
-        $sites = Site::paginate(2);
+        $sites = Site::paginate(30);
         return view("admin.sites.index", compact('sites'));
     }
 

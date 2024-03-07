@@ -17,7 +17,7 @@
                 </div>
                 <div class="card-body">
                     {{-- Demande d'Intervention (DI) --}}
-                    <x-gmao.demande></x-gmao.demande>
+                    <x-gmao.demande :demande="$demande"/>
                     {{-- Demande d'Intervention (DI) --}}
 
                     {{-- Bon De Travail (BT) --}}

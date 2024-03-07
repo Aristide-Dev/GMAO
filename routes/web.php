@@ -56,6 +56,7 @@ Route::middleware([
     })->name('dashboard');
 
     Route::resource('/demandes', AdminDemandeInterventionController::class);
+
     Route::resource('/sites', AdminSiteController::class);
 
     Route::post('/sites/{site}/equipement/store', [AdminSiteController::class, 'add_equipement'])
@@ -65,7 +66,11 @@ Route::middleware([
         ->name('sites.equipement.categorie');
 
     Route::resource('/utilisateurs', AdminUtilisateurController::class);
+
     Route::resource('/prestataires', AdminPrestataireController::class);
+    Route::post('/prestataires/{prestataire}/create-admin', [AdminPrestataireController::class, 'create_admin'])->name('prestataires.create_admin');
+    Route::post('/prestataires/{prestataire}/create-agent', [AdminPrestataireController::class, 'create_agent'])->name('prestataires.create_agent');
+
     Route::resource('/zones', AdminZoneController::class);
     Route::resource('/bon-travail', AdminBonTravailController::class);
 });
