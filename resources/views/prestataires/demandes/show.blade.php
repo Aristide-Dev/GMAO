@@ -36,15 +36,19 @@
                 </div>
                 <div class="card-body">
                     {{-- Demande d'Intervention (DI) --}}
-                    <x-gmao.demande></x-gmao.demande>
+                    <x-gmao.demande :demande="$demande" />
                     {{-- Demande d'Intervention (DI) --}}
 
                     {{-- Bon De Travail (BT) --}}
-                    <x-gmao.bt></x-gmao.bt>
+                    @if (!empty($demande->bon_travails->last()))
+                        <x-gmao.bt :bonTravail="$demande->bon_travails->last()" />
+                    @endif
                     {{-- Bon De Travail (BT) --}}
 
                     {{-- Rapport --}}
-                    <x-gmao.ri></x-gmao.ri>
+                    @if ($demande->bon_travails->last())
+                        <x-gmao.ri/>
+                    @endif
                     {{-- Rapport --}}
                 </div>
             </div>

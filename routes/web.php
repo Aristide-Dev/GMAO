@@ -12,6 +12,10 @@ use App\Http\Controllers\Admin\BonTravailController as AdminBonTravailController
 
 use App\Http\Controllers\Demandeur\SiteController as DemandeurSiteController;
 use App\Http\Controllers\Demandeur\DemandeInterventionController as DemandeurDemandeInterventionController;
+
+
+
+use App\Http\Controllers\Prestataire\DemandeInterventionController as PrestataireDemandeInterventionController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -107,6 +111,39 @@ Route::middleware([
     })->name('sites.type_equipement');
 });
 
+
+
+/**
+ * **************************************************************************************************
+ * **************************************************************************************************
+ * **************************************************************************************************
+ *      PRESTATAIRE ROUTES
+ */
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->prefix('prestataires')->name('prestataires.')->group(function () {
+
+    Route::get('/dashboard', function () {
+        return view('prestataires.dashboard');
+    })->name('dashboard');
+
+    Route::resource('/demandes', PrestataireDemandeInterventionController::class);
+
+    Route::resource('/sites', DemandeurSiteController::class);
+
+    Route::post('/sites/{site}/equipement/store', [DemandeurSiteController::class, 'add_equipement'])
+        ->name('sites.equipement.store');
+
+    Route::get('/sites/{site}/{categorie_equipement}', [DemandeurSiteController::class, 'show_categorie_equipement'])
+        ->name('sites.equipement.categorie');
+
+    Route::get('/sites/{id}/{type_equipement}', function () {
+        return view('demandeur.sites.equipements');
+    })->name('sites.type_equipement');
+});
+
 // Route::prefix('demandeur')->name('demandeur.')->group(function () {
 //     Route::get('/dashboard', function () {
 //         return view('demandeur.dashboard');
@@ -140,13 +177,13 @@ Route::prefix('prestataires')->name('prestataires.')->group(function () {
         return view('prestataires.dashboard');
     })->name('dashboard');
 
-    Route::get('/demandes', function () {
-        return view('prestataires.demandes.index');
-    })->name('demandes.index');
+    // Route::get('/demandes', function () {
+    //     return view('prestataires.demandes.index');
+    // })->name('demandes.index');
 
-    Route::get('/demandes/{id}', function () {
-        return view('prestataires.demandes.show');
-    })->name('demandes.show');
+    // Route::get('/demandes/{id}', function () {
+    //     return view('prestataires.demandes.show');
+    // })->name('demandes.show');
 
     Route::get('/utilisateurs', function () {
         return view('prestataires.utilisateurs.index');

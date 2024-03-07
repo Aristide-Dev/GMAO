@@ -43,38 +43,37 @@
                             <th>D.I</th>
                             <th class="text-left">Site</th>
                             <th class="text-left">Equipement</th>
-                            <th class="py-2">Description</th>
                             <th>Status</th>
                             <th>action</th>
                         </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
-                        @for ($i = 0; $i < 30; $i++)
-                            <tr>
-                                <td>
-                                    {{ $i+1 }}
-                                </td>
-                                <td>
-                                    <span class="fw-bold">DI0000{{ rand(1,200) }}</span>
-                                </td>
-                                <td class="text-left">
-                                    <a href="{{ route('prestataires.demandes.show', rand()) }}">St {{ fake()->name }}</a>
-                                </td>
-                                <td class="text-left">{{ fake()->name }}</td>
-                                <td class="py-2">
-                                    {{ Illuminate\Support\Str::limit(fake()->paragraph, 30, $end = ' ...') }}
-                                </td>
-                                <td>
-                                    @php
-                                        $st = $statuts[rand(0,3)];
-                                    @endphp
-                                    <span class="badge bg-label-{{ $st['color'] }} me-1">{{ $st['statut'] }}</span>
-                                </td>
-                                <td>
-                                    ..........
-                                </td>
-                            </tr>
-                        @endfor
+                        @forelse ($bon_travails as $key => $bon_travail)
+                        <tr>
+                            <td>
+                                {{ $key+1 }}
+                            </td>
+                            <td>
+                                <span class="fw-bold">{{ $bon_travail->di_reference }}</span>
+                            </td>
+                            <td class="text-left">
+                                <a href="{{ route('prestataires.sites.show', $bon_travail->demande->site->id) }}">{{ $bon_travail->demande->site->name }}</a>
+                            </td>
+                            <td class="text-left">
+                                <div class="avatar avatar-md me-2">
+                                    <img src="{{ $bon_travail->demande->document() }}" alt="document" class="rounded-circle" id="doc_image_url{{ $key+1 }}" onclick="displayImageInModal('doc_image_url{{ $key+1 }}')">
+                                </div>
+                            </td>
+                            <td>
+                                <span class="badge bg-{{ $bon_travail->demande->statutColor() }} me-1">{{ $bon_travail->demande->status }}</span>
+                            </td>
+                            <td>
+                                <a href="{{ route('prestataires.demandes.show', $bon_travail->demande) }}" class="btn btn-primary">Suivis</a>
+                            </td>
+                        </tr>
+                        @empty
+                            <h3 class="text-center">Aucun</h3>
+                        @endforelse
                     </tbody>
                     <tfoot class="table-light">
                         <tr>
@@ -82,8 +81,8 @@
                             <th>D.I</th>
                             <th class="text-left">Site</th>
                             <th class="text-left">Equipement</th>
-                            <th class="p-2">Description</th>
                             <th>Status</th>
+                            <th>action</th>
                         </tr>
                     </tfoot>
                 </table>
@@ -113,7 +112,7 @@
                     <p class="card-text">
                         Some quick example text to build on the card title and make up the bulk of the card's content.
                     </p>
-                    <a href="{{ route('demandeur.demandes.show', rand(1,5)) }}" class="card-link btn btn-primary">Details</a>
+                    <a href="{{ route('prestataires.demandes.show', rand(1,5)) }}" class="card-link btn btn-primary">Details</a>
                 </div>
             </div>
             @endfor

@@ -1,6 +1,6 @@
 <x-gmao-layout>
-    <x-slot name="title">{{ __('Tableau de Board') }}</x-slot>
-    <x-slot name="title_desc">{{ __('Tableau de Board') }}</x-slot>
+    <x-slot name="title">{{ __('Dashboard') }}</x-slot>
+    <x-slot name="title_desc">{{ __('Dashboard') }}</x-slot>
     <x-slot name="sidebar">demandeur</x-slot>
     <x-slot name="header">
         <h2 class="text-xl font-semibold leading-tight text-gray-800">
