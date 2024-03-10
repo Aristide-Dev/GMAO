@@ -85,5 +85,34 @@ class BonTravail extends Model
         }
         return "secondary";
     }
+    
+
+    public function statutIcon($taille="2xl")
+    {
+        $statut = $this->status;
+        if($statut == "injection de piece")
+        {
+            return '<i class="fa-solid fa-circle-check fa-'.$taille.'" style="color: #FFD43B;"></i>';
+        }
+
+        if($statut == 'en cours')
+        {
+            return '<i class="fa-solid fa-circle-check fa-'.$taille.'" style="color: #74C0FC;"></i>';
+        }
+
+        if($statut == 'annulé')
+        {
+            return '<i class="fa-solid fa-circle-check fa-'.$taille.'" style="color: #FF0000;"></i>';
+        }
+        if($statut == 'rejettée')
+        {
+            return '<i class="fa-solid fa-circle-check fa-'.$taille.'" style="color: #FF0000;"></i>';
+        }
+        if($statut == 'terminé')
+        {
+            return '<i class="fa-solid fa-circle-check fa-'.$taille.'" style="color: #63E6BE;"></i>';
+        }
+        return '<i class="fa-solid fa-circle-check fa-'.$taille.'" style="color: #FFD43B;"></i>';
+    }
 
 }

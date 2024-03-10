@@ -17,7 +17,8 @@ class PrestataireController extends Controller
      */
     public function index()
     {
-        return view('admin.prestataires.index');
+        $prestataires = Prestataire::paginate(20);
+        return view('admin.prestataires.index', compact('prestataires'));
     }
 
     /**
@@ -86,7 +87,7 @@ class PrestataireController extends Controller
 
     public function create_admin(Request $request, Prestataire $prestataire)
     {
-        
+
         $request->validateWithBag('create_presta_admin',[
             'first_name' => ['required', 'string', 'max:150'],
             'last_name' => ['required', 'string', 'max:150'],
@@ -105,7 +106,7 @@ class PrestataireController extends Controller
             'prestataire_own' => $prestataire->id, // Correction : Utiliser $prestataire->id
             'password' => Hash::make($request->password),
         ]);
-        
+
         $prestataire->prestataire_admin_id = $PrestaAdmin->id; // Correction : Utiliser $PrestaAdmin->id
         $prestataire->save();
 

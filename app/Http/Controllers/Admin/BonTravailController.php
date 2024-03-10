@@ -73,8 +73,10 @@ class BonTravailController extends Controller
             'prestataire_id' => $request->prestataire,
             'user_id' => $auth_user->id,
             'date_echeance' => $date_echeance,
-            'status' => "en attente de validation",
+            'status' => "en cours",
         ]);
+        $demande->status = "en cours";
+        $demande->save();
 
         return redirect()->back()->with('success', 'Nouveau bon de travail créé avec succès!');
     }

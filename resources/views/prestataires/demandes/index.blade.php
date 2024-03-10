@@ -57,7 +57,7 @@
                                 <span class="fw-bold">{{ $bon_travail->di_reference }}</span>
                             </td>
                             <td class="text-left">
-                                <a href="{{ route('prestataires.sites.show', $bon_travail->demande->site->id) }}">{{ $bon_travail->demande->site->name }}</a>
+                                <p >{{ $bon_travail->demande->site->name }}</p>
                             </td>
                             <td class="text-left">
                                 <div class="avatar avatar-md me-2">

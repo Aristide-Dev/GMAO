@@ -20,7 +20,7 @@ class DemandeInterventionController extends Controller
     {
         $agent = Auth::user();
         $prestataire = $agent->prestataire;
-        $bon_travails = $prestataire->bon_travails;
+        $bon_travails = $prestataire->bon_travails ?? [];
         return view('prestataires.demandes.index', compact('bon_travails'));
     }
 

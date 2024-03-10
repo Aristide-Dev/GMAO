@@ -16,6 +16,8 @@ use App\Http\Controllers\Demandeur\DemandeInterventionController as DemandeurDem
 
 
 use App\Http\Controllers\Prestataire\DemandeInterventionController as PrestataireDemandeInterventionController;
+use App\Http\Controllers\Prestataire\RapportConstatController as PrestataireRapportConstatController;
+use App\Http\Controllers\Prestataire\RapportRemplacementPieceController as PrestataireRapportRemplacementPieceController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -131,17 +133,12 @@ Route::middleware([
 
     Route::resource('/demandes', PrestataireDemandeInterventionController::class);
 
-    Route::resource('/sites', DemandeurSiteController::class);
+    Route::post('/demandes/{demande}/{bonTravail}/rapport-constat', [PrestataireRapportConstatController::class, 'store'])
+        ->name('demandes.rapport_constat.store');
 
-    Route::post('/sites/{site}/equipement/store', [DemandeurSiteController::class, 'add_equipement'])
-        ->name('sites.equipement.store');
+        Route::post('/demandes/{demande}/{bonTravail}/rapport-remplacement', [PrestataireRapportRemplacementPieceController::class, 'store'])
+            ->name('demandes.rapport_remplacement.store');
 
-    Route::get('/sites/{site}/{categorie_equipement}', [DemandeurSiteController::class, 'show_categorie_equipement'])
-        ->name('sites.equipement.categorie');
-
-    Route::get('/sites/{id}/{type_equipement}', function () {
-        return view('demandeur.sites.equipements');
-    })->name('sites.type_equipement');
 });
 
 // Route::prefix('demandeur')->name('demandeur.')->group(function () {
@@ -197,9 +194,9 @@ Route::prefix('prestataires')->name('prestataires.')->group(function () {
 
 
 Route::prefix('admin')->name('admin.')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('dashboard');
+    // Route::get('/dashboard', function () {
+    //     return view('admin.dashboard');
+    // })->name('dashboard');
 
     // Route::get('/demandes', function () {
     //     return view('admin.demandes.index');
@@ -213,17 +210,17 @@ Route::prefix('admin')->name('admin.')->group(function () {
     //     return view('admin.sites.index');
     // })->name('sites.index');
 
-    Route::get('/sites/{id}', function () {
-        return view('admin.sites.show');
-    })->name('sites.show');
+    // Route::get('/sites/{id}', function () {
+    //     return view('admin.sites.show');
+    // })->name('sites.show');
 
-    Route::get('/sites/{id}/{type_equipement}', function () {
-        return view('admin.sites.equipements');
-    })->name('sites.type_equipement');
+    // Route::get('/sites/{id}/{type_equipement}', function () {
+    //     return view('admin.sites.equipements');
+    // })->name('sites.type_equipement');
 
-    Route::get('/prestataires', function () {
-        return view('admin.prestataires.index');
-    })->name('prestataires.index');
+    // Route::get('/prestataires', function () {
+    //     return view('admin.prestataires.index');
+    // })->name('prestataires.index');
 
     // Route::get('/prestataires/create', function () {
     //     return view('admin.prestataires.create');
@@ -249,15 +246,15 @@ Route::prefix('admin')->name('admin.')->group(function () {
         return view('admin.stock.show');
     })->name('stock.show');
 
-    Route::get('/pieces', function () {
-        return view('admin.pieces.index');
-    })->name('pieces.index');
+    // Route::get('/pieces', function () {
+    //     return view('admin.pieces.index');
+    // })->name('pieces.index');
 
-    Route::get('/equipements', function () {
-        return view('admin.equipements.index');
-    })->name('equipements.index');
+    // Route::get('/equipements', function () {
+    //     return view('admin.equipements.index');
+    // })->name('equipements.index');
 
-    Route::get('/equipements/{id}', function () {
-        return view('admin.equipements.show');
-    })->name('equipements.show');
+    // Route::get('/equipements/{id}', function () {
+    //     return view('admin.equipements.show');
+    // })->name('equipements.show');
 });

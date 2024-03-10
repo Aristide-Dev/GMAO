@@ -3,10 +3,9 @@
 <div class="p-3 m-0 mb-3 border rounded shadow-sm">
     <div class="p-3 mb-3 text-center text-uppercase fw-bold w-100 badge bg-primary bg-label-primary">
         Bon de Travail
-        <i class="fa-solid fa-circle-check fa-2xl" style="color: #63E6BE;"></i>
-        <i class="fa-solid fa-circle-check fa-2xl" style="color: #FFD43B;"></i>
-        <i class="fa-solid fa-circle-check fa-2xl" style="color: #FF0000;"></i>
-        <i class="fa-solid fa-circle-check fa-2xl" style="color: #74C0FC;"></i>
+        @php
+            echo $bonTravail->statutIcon('xl');
+        @endphp
     </div>
 
     {{-- BT --}}
@@ -101,10 +100,20 @@
                          Delais - Zone et Qualification
                     </h6>
                 </div>
-                <div class="mb-1 w-30">
-                    <p class="m-0 text-lowercase d-flex h6">Zone: <span class="px-1 text-black text-uppercase fw-bold">{{ $bonTravail?->zone_name ?? '' }}</span></p>
-                    <p class="m-0 text-lowercase d-flex">urgence: <span class="mx-1 badge bg-{{ $bonTravail?->prioriteColor() }}">{{ $bonTravail?->prioriteText() }}</span></p>
-                    <p class="m-0 text-lowercase d-flex h6">Durée: <span class="px-1 text-black text-uppercase fw-bold">{{ $bonTravail?->zone_delais ?? '' }}H</span></p>
+                <div class="mb-1 w-75">
+                    
+                    <p class="m-0 text-lowercase d-flex h6 float-start">
+                        Zone: <small class="px-1 mt-1 text-lg text-black text-uppercase fw-bold">{{ $bonTravail?->zone_name ?? '' }}</small>
+                    </p>
+                    <br>
+                    
+                    <p class="m-0 text-lowercase d-flex h6 float-start">
+                        Durée: <span class="px-1 text-black text-uppercase fw-bold">{{ $bonTravail?->zone_delais ?? '' }}H</span>
+                    </p><br>
+                    <p class="m-0 text-lowercase d-flex h6 float-start">
+                        urgence: <span class="mx-2 px-1 badge bg-{{ $bonTravail ? $bonTravail?->prioriteColor() : ''  }}">{{ $bonTravail ? $bonTravail?->prioriteText() : ''  }}</span>
+                    </p>
+                    <br>
                 </div>
             </div>
         </div>
@@ -121,7 +130,7 @@
                         Date Echance
                     </h6>
                 </div>
-                <small class="mb-1 w-30">{{ $bonTravail->date_echeance ? \Carbon\Carbon::parse($bonTravail->date_echeance)->formatLocalized('%e %B %Y à %Hh %M') : '' }}</small>
+                <small class="mb-1 w-30">{{ $bonTravail ? \Carbon\Carbon::parse($bonTravail->date_echeance)->formatLocalized('%e %B %Y à %Hh %M') : '' }}</small>
             </div>
         </div>
     </div>

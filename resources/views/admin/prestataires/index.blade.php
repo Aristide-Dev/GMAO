@@ -49,39 +49,43 @@
                     <thead class="table-light">
                         <tr>
                             <th>N°</th>
-                            <th>Entreprise</th>
+                            <th>Nom</th>
                             <th class="text-left">Email</th>
                             <th class="text-left">Telephone</th>
                             <th class="text-left">Indice de performance</th>
                         </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
-                        @for ($i = 0; $i < 30; $i++)
-                            <tr>
-                                <td>
-                                    {{ $i+1 }}
-                                </td>
-                                <td>
-                                    <span class="fw-bold">{{ fake()->name }}</span>
-                                </td>
-                                <td class="text-start">
-                                    <a href="{{ route('admin.prestataires.show', rand()) }}">{{ fake()->email }}</a>
-                                </td>
-                                <td class="text-start">{{ fake()->phoneNumber }}</td>
-                                <td class="text-start">
-                                    @php
-                                        $st = $indices_performance[rand(0,3)];
-                                    @endphp
-                                    <small class="fw-bolder">{{ $st['value'] }}% -->
-                                    <span class="badge bg-{{ $st['color'] }} me-1">{{ $st['statut'] }}</span> </small>
-                                </td>
-                            </tr>
-                        @endfor
+                        @forelse ($prestataires as $key => $prestataire)
+                        <tr>
+                            <td>
+                                {{ $key+1 }}
+                            </td>
+                            <td>
+                                <a href="{{ route('admin.prestataires.show', $prestataire) }}" class="text-black">
+                                    {{ $prestataire->name }}  (<span class="fw-bolder">{{ $prestataire->slug }}</span>)
+                                </a>
+                            </td>
+                            <td class="text-start">
+                                <a href="{{ route('admin.prestataires.show', $prestataire) }}" class="text-black">{{ $prestataire->email }}</a>
+                            </td>
+                            <td class="text-start">{{ $prestataire->telephone }}</td>
+                            <td class="text-start">
+                                @php
+                                    $st = $indices_performance[rand(0,3)];
+                                @endphp
+                                <small class="fw-bolder">{{ $st['value'] }}% -->
+                                <span class="badge bg-{{ $st['color'] }} me-1">{{ $st['statut'] }}</span> </small>
+                            </td>
+                        </tr>
+                        @empty
+                            <h3 class="text-center">Vide</h3>
+                        @endforelse
                     </tbody>
                     <tfoot class="table-light">
                         <tr>
                             <th>N°</th>
-                            <th>Entreprise</th>
+                            <th>Nom</th>
                             <th class="text-left">Email</th>
                             <th class="text-left">Telephone</th>
                             <th class="text-left">Indice de performance</th>

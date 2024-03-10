@@ -25,7 +25,9 @@
 
 <div class="p-3 m-0 mb-3 border rounded shadow-sm">
     <div class="p-3 mb-3 text-center text-uppercase fw-bold w-100 badge bg-primary bg-label-primary">
-        Demande d'Intervention <i class="fa-solid fa-circle-check fa-2xl" style="color: #63E6BE;"></i>
+        Demande d'Intervention @php
+        echo $demande->statutIcon('xl');
+    @endphp
     </div>
 
     {{-- Demande d'intervention (D.I) --}}
@@ -34,7 +36,9 @@
             <div class="border-0 list-group-item list-group-item-action d-flex align-items-start">
                 <div class="d-flex w-100 justify-content-between">
                     <h6 class="mb-1 text-primary fw-bold">
-                        <i class="fa-solid fa-ellipsis ti-sm" style="color: #FFD43B;"></i>
+                        @php
+                            echo $demande->statutIcon('xl');
+                        @endphp
                         D.I
                     </h6>
                 </div>

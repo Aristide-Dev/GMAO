@@ -20,6 +20,7 @@ class Prestataire extends Model
         'email',
         'telephone',
         'adresse',
+        'commentaire',
     ];
 
     /**
@@ -49,5 +50,5 @@ class Prestataire extends Model
         return $this->hasMany(BonTravail::class);
     }
 
-    
+
 }

@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('bon_travails', function (Blueprint $table) {
             $table->id();
-            $table->string("bt_reference");
+            $table->string("bt_reference")->index()->unique();
             $table->text("requete");
-            $table->string("di_reference");
+            $table->string("di_reference")->index();
             $table->string("zone_name");
             $table->enum("zone_priorite", [1,2,3,4,5,6]); // 1 == faible // 2 == moyen // 3 == prioritaire
             $table->integer("zone_delais");
