@@ -16,18 +16,18 @@ class RapportRemplacementPiece extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'bt_reference',
+        'ri_reference',
         'rapport_remplacement_piece_file',
     ];
 
 
 
-    public function bon_travail()
+    public function rapport_intervention()
     {
-        return $this->belongsTo(BonTravail::class, 'bt_reference', 'bt_reference');
+        return $this->belongsTo(RapportIntervention::class, 'ri_reference', 'ri_reference');
     }
 
-    
+
 
     public function document()
     {

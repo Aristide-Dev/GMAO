@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\hasOne;
 
 class BonTravail extends Model
 {
@@ -28,19 +30,25 @@ class BonTravail extends Model
         'date_echeance',
     ];
 
-    public function demande()
+    public function demande() :BelongsTo
     {
         return $this->belongsTo(DemandeIntervention::class, 'di_reference', 'di_reference');
     }
 
-    public function equipement()
+    public function rapportsIntervention() :hasOne
+    {
+        // return RapportIntervention::where('bt_reference', $this->bt_reference)->get();
+        return $this->hasOne(RapportIntervention::class, 'bt_reference', 'bt_reference');
+    }
+
+    public function equipement() :BelongsTo
     {
         return $this->belongsTo(Equipement::class);
     }
 
-    public function prestataire()
+    public function prestataire() :BelongsTo
     {
-        return $this->belongsTo(Prestataire::class);
+        return $this->BelongsTo(Prestataire::class);
     }
 
     public function prioriteText()
@@ -63,7 +71,7 @@ class BonTravail extends Model
         }
         return "inconu";
     }
-    
+
 
     public function prioriteColor()
     {
@@ -85,7 +93,7 @@ class BonTravail extends Model
         }
         return "secondary";
     }
-    
+
 
     public function statutIcon($taille="2xl")
     {

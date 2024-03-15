@@ -134,6 +134,6 @@ class User extends Authenticatable
 
     public function prestataire()
     {
-        return $this->belongsTo(Prestataire::class, 'prestataire_own');
+        return $this->belongsTo(Prestataire::class, 'prestataire_own','id');
     }
 }

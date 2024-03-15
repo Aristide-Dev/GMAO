@@ -1,7 +1,13 @@
+@props(['rapport_intervention' => ''])
+
+
 <div class="p-3 m-0 mb-3 border rounded shadow-sm">
     <div class="p-3 mb-3 text-center text-uppercase fw-bold w-100 badge bg-primary bg-label-primary">
-        Rapport
-        <i class="fa-solid fa-circle-check fa-2xl" style="color: #74C0FC;"></i>
+        Rapport d'intervention
+        @php
+        echo $rapport_intervention->statutIcon('xl');
+        @endphp
+        (<span class="text-sm text-dark fw-medium">{{ $rapport_intervention->status }}</span>)
     </div>
 
     {{-- Numero Rapport (RI) --}}
@@ -10,14 +16,50 @@
             <div class="border-0 list-group-item list-group-item-action d-flex align-items-start">
                 <div class="d-flex w-100 justify-content-between">
                     <h6 class="mb-1 text-primary fw-bold">
-                        <i class="fa-solid fa-ellipsis ti-sm" style="color: #C0C0C0;"></i>
-                         RI                                        </h6>
+                        @php
+                        echo $rapport_intervention->statutIcon('xl');
+                        @endphp
+                        RI </h6>
                 </div>
-                <small class="mb-1 w-30">RI3030381</small>
+                <small class="mb-1 w-30">{{ $rapport_intervention->ri_reference }}</small>
             </div>
         </div>
     </div>
     {{-- Numero Rapport (RI) --}}
+
+    {{-- Document --}}
+    @if($rapport_intervention->rapport_constat)
+    <div class="col-12">
+        <h5 class="text-primary fw-bold text-center mb-3">
+            <i class="fa-solid fa-ellipsis ti-sm" style="color: #FFD43B;"></i>
+            rapport de constat (<small>du prestataire</small>)
+        </h5>
+        <div class="shadow-xs border-top border-top-3 list-group">
+            <div class="border-0 list-group-item list-group-item-action d-flex align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h6 class="mb-1 text-primary fw-bold">
+                        <i class="fa-solid fa-ellipsis ti-sm" style="color: #FFD43B;"></i>
+                        Document
+                    </h6>
+                </div>
+                <img src="{{ $rapport_intervention->rapport_constat->document() }}" alt="document" class="mb-1 rounded w-50" id="doc_image_url_in_show_rapport_intervention" onclick="displayImageInModal('doc_image_url_in_show_rapport_intervention', 'myShowDemandeModal')" width="100">
+            </div>
+
+            @if ($rapport_intervention->rapport_constat->commentaire)
+            <div class="border-0 list-group-item list-group-item-action d-flex align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h6 class="mb-1 text-primary fw-bold">
+                        <i class="fa-solid fa-ellipsis ti-sm" style="color: #FFD43B;"></i>
+                        Description (commentaire)
+                    </h6>
+                    <p class="mx-3 px-2 text-dark">{{ $rapport_intervention->rapport_constat->commentaire }}</p>
+                </div>
+            </div>
+            @endif
+        </div>
+    </div>
+    @endif
+    {{-- Document --}}
 
     {{-- Temps prise en charge & KPIs --}}
     <div class="my-2 col-12">
@@ -30,7 +72,7 @@
                                 <i class="fa-solid fa-ellipsis ti-sm" style="color: #C0C0C0;"></i>
                                 Temps de prise en charge
                             </p>
-                            <p class="mb-1 text-left fw-bold">2jours 4heures et 7min</p>
+                            <p class="mb-1 text-left fw-bold">{{ $rapport_intervention->temps_prise_en_charge ?? '---' }}</p>
                         </div>
                     </div>
                 </div>
@@ -42,7 +84,7 @@
                                 <i class="fa-solid fa-ellipsis ti-sm" style="color: #C0C0C0;"></i>
                                 KPI
                             </p>
-                            <p class="mb-1 text-end">Hors délais</p>
+                            <p class="mb-1 text-end">{{ $rapport_intervention->kpi ?? '---' }}</p>
                         </div>
                     </div>
                 </div>
@@ -65,7 +107,7 @@
                                 <i class="fa-solid fa-ellipsis ti-sm" style="color: #C0C0C0;"></i>
                                 Numero Devis
                             </p>
-                            <p class="mb-1 text-left">DVi-556465465</p>
+                            <p class="mb-1 text-left">{{ $rapport_intervention->numero_devis ?? '---' }}</p>
                         </div>
                     </div>
                 </div>
@@ -77,7 +119,7 @@
                                 <i class="fa-solid fa-ellipsis ti-sm" style="color: #C0C0C0;"></i>
                                 Bon de Commande
                             </p>
-                            <p class="mb-1 text-end">BC-021216</p>
+                            <p class="mb-1 text-end">{{ $rapport_intervention->bon_commande ?? '---' }}</p>
                         </div>
                     </div>
                 </div>
@@ -88,3 +130,4 @@
     </div>
     {{-- Numero Devis & Bon de Commande --}}
 </div>
+

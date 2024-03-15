@@ -16,17 +16,14 @@ class RapportConstat extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'bt_reference',
+        'ri_reference',
         'rapport_constat_file',
-        'status',
         'commentaire',
     ];
-
-
-
-    public function bon_travail()
+    
+    public function rapport_intervention()
     {
-        return $this->belongsTo(BonTravail::class, 'bt_reference', 'bt_reference');
+        return $this->belongsTo(RapportIntervention::class, 'ri_reference', 'ri_reference');
     }
 
     public function document()
@@ -42,34 +39,5 @@ class RapportConstat extends Model
         }
         // Retournez null si aucun fichier n'est associé à la demande
         return null;
-    }
-    
-
-    public function statutIcon($taille="2xl")
-    {
-        $statut = $this->status;
-        if($statut == "injection de piece")
-        {
-            return '<i class="fa-solid fa-circle-check fa-'.$taille.'" style="color: #FFD43B;"></i>';
-        }
-
-        if($statut == 'en attente')
-        {
-            return '<i class="fa-solid fa-circle-check fa-'.$taille.'" style="color: #74C0FC;"></i>';
-        }
-
-        if($statut == 'annulé')
-        {
-            return '<i class="fa-solid fa-circle-check fa-'.$taille.'" style="color: #FF0000;"></i>';
-        }
-        if($statut == 'rejettée')
-        {
-            return '<i class="fa-solid fa-circle-check fa-'.$taille.'" style="color: #FF0000;"></i>';
-        }
-        if($statut == 'terminé')
-        {
-            return '<i class="fa-solid fa-circle-check fa-'.$taille.'" style="color: #63E6BE;"></i>';
-        }
-        return '<i class="fa-solid fa-circle-check fa-'.$taille.'" style="color: #FFD43B;"></i>';
     }
 }

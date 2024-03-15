@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('rapport_remplacement_pieces', function (Blueprint $table) {
+        Schema::create('rapport_interventions', function (Blueprint $table) {
             $table->id();
-            $table->string("ri_reference");
-            $table->string('rapport_remplacement_piece_file')->nullable();
+            $table->string("ri_reference")->index()->unique();
+            $table->string("bt_reference")->index();
             $table->timestamps();
 
-            $table->foreign('ri_reference')->references('ri_reference')->on('rapport_interventions')->onDelete('cascade');
+            $table->foreign('bt_reference')->references('bt_reference')->on('bon_travails')->onDelete('cascade');
         });
     }
 
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('rapport_remplacement_pieces');
+        Schema::dropIfExists('rapport_interventions');
     }
 };

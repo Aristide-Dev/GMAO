@@ -6,28 +6,22 @@
 </x-slot>
 
 <script src="/storage/js/file_viewer.js">
-    
+
 </script>
 
 @if (!isset($demande))
-    @php
-        throw new InvalidArgumentException('Le composant (demande) nécessite une prop "demande"');
-    @endphp
+@php
+throw new InvalidArgumentException('Le composant (demande) nécessite une prop "demande"');
+@endphp
 @endif
-
-<!-- La modale -->
-<div id="myShowDemandeModal" class="modal">
-    <span class="close">&times;</span>
-    <img class="modal-content" id="img01">
-    <div id="caption"></div>
-</div>
 
 
 <div class="p-3 m-0 mb-3 border rounded shadow-sm">
     <div class="p-3 mb-3 text-center text-uppercase fw-bold w-100 badge bg-primary bg-label-primary">
         Demande d'Intervention @php
         echo $demande->statutIcon('xl');
-    @endphp
+        @endphp
+        (<span class="text-sm text-dark fw-medium">{{ $demande->status }}</span>)
     </div>
 
     {{-- Demande d'intervention (D.I) --}}
@@ -37,7 +31,7 @@
                 <div class="d-flex w-100 justify-content-between">
                     <h6 class="mb-1 text-primary fw-bold">
                         @php
-                            echo $demande->statutIcon('xl');
+                        echo $demande->statutIcon('xl');
                         @endphp
                         D.I
                     </h6>
@@ -112,3 +106,4 @@
     </div>
     {{-- Document --}}
 </div>
+

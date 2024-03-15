@@ -6,6 +6,7 @@
         @php
             echo $bonTravail->statutIcon('xl');
         @endphp
+        (<span class="text-sm text-dark fw-medium">{{ $bonTravail->status }}</span>)
     </div>
 
     {{-- BT --}}

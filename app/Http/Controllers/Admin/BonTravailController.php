@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\BonTravail;
 use App\Models\DemandeIntervention;
+use App\Models\RapportIntervention;
 use App\Models\Zone;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -62,7 +63,19 @@ class BonTravailController extends Controller
             $break_stepp += 1;
         }
 
-        BonTravail::create([
+        $break_stepp = 0;
+        $ri_reference = $this->generateRIReference();
+        while (RapportIntervention::where("ri_reference", $ri_reference)->first()) {
+            if ($break_stepp >= 50) {
+                return redirect()->back()->with('error', 'Trop de tentative! Recommencer svp.');
+            }
+            $ri_reference = $this->generateRIReference();
+            $break_stepp += 1;
+        }
+
+        $status = "en cours";
+
+        $bon_travail = BonTravail::create([
             'requete' => $request->requete,
             'bt_reference' => $bt_reference,
             'di_reference' => $request->di_reference,
@@ -73,9 +86,16 @@ class BonTravailController extends Controller
             'prestataire_id' => $request->prestataire,
             'user_id' => $auth_user->id,
             'date_echeance' => $date_echeance,
-            'status' => "en cours",
+            'status' => $status,
         ]);
-        $demande->status = "en cours";
+
+        $rapport_intervention = RapportIntervention::create([
+            'ri_reference' => $ri_reference,
+            'bt_reference' => $bon_travail->bt_reference,
+            'status' => $status,
+        ]);
+
+        $demande->status = $status;
         $demande->save();
 
         return redirect()->back()->with('success', 'Nouveau bon de travail créé avec succès!');
@@ -136,6 +156,31 @@ class BonTravailController extends Controller
 
         // Retourner la référence complète
         return 'BT' . $formattedId;
+    }
+
+    private function generateRIReference()
+    {
+        // Récupérer le dernier enregistrement
+        $lastRapportIntercnetion = RapportIntervention::latest()->first();
+        $nextId = 0;
+
+        // Si aucun enregistrement n'existe, commencez à partir de 1
+        if (!$lastRapportIntercnetion) {
+            $nextId = 1;
+        } else {
+            // Extraire le numéro d'identification de la référence
+            $lastReference = $lastRapportIntercnetion->ri_reference;
+            $lastId = (int)substr($lastReference, 2); // Extrait les chiffres après "RI"
+
+            // Incrémenter l'ID pour le prochain enregistrement
+            $nextId = $lastId + 1;
+        }
+
+        // Formater le numéro d'identification pour qu'il ait toujours 7 chiffres
+        $formattedId = str_pad($nextId, 7, '0', STR_PAD_LEFT);
+
+        // Retourner la référence complète
+        return 'RI' . $formattedId;
     }
 
     public function generateDateEcheane($dateStart, $limitTime)

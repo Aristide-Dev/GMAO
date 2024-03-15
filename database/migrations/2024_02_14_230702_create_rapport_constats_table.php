@@ -13,12 +13,11 @@ return new class extends Migration
     {
         Schema::create('rapport_constats', function (Blueprint $table) {
             $table->id();
-            $table->string("bt_reference");
+            $table->string("ri_reference");
             $table->string('rapport_constat_file')->nullable();
-            $table->string('status');
             $table->timestamps();
 
-            $table->foreign('bt_reference')->references('bt_reference')->on('bon_travails')->onDelete('cascade');
+            $table->foreign('ri_reference')->references('ri_reference')->on('rapport_interventions')->onDelete('cascade');
         });
     }
 

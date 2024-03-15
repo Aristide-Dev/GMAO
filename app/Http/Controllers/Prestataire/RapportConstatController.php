@@ -40,37 +40,33 @@ class RapportConstatController extends Controller
 
         $image = $request->file('rapport_constat_file');
         $imagePath = $this->saveImageWithUniqueName($image, $demande->di_reference, 'rapport_constat');
+        // Récupérer le rapport d'intervention associé au bon de travail
+        $rapportIntervention = $bonTravail->rapportsIntervention;
 
         RapportConstat::create([
-            'bt_reference' => $bonTravail->bt_reference,
+            'ri_reference' => "$rapportIntervention->ri_reference",
             'rapport_constat_file' => $imagePath,
-            'status' => $request->status,
             'commentaire' => $request->commentaire ?? "",
         ]);
 
-        $bt_s = BonTravail::where('bt_reference', $demande->di_reference)->get();
-        if($bt_s)
+        if($request->status == 'terminé')
         {
-            if($request->status == 'terminé')
-            {
-                $bonTravail->status = 'terminé';
-                $bonTravail->save();
+            $demande->status = 'terminé';
+            $demande->save();
+        }elseif($request->status == 'annulé')
+        {
+            $demande->status = 'annulé';
+            $demande->save();
+        }
+        
+        $bonTravail->status = $request->status;
+        $bonTravail->save();
+        
 
-                $demande->status = 'terminé';
-                $demande->save();
-            }elseif($request->status == 'en attente')
-            {
-                $bonTravail->status = 'en attente';
-                $bonTravail->save();
-            }elseif($request->status == 'annulé')
-            {
-                $bonTravail->status = 'annulé';
-                $bonTravail->save();
-
-                $demande->status = 'annulé';
-                $demande->save();
-            }
-
+        // Modifier le statut du rapport d'intervention
+        if ($rapportIntervention) {
+            $rapportIntervention->status = $request->status;
+            $rapportIntervention->save();
         }
         return redirect()->back()->with('success', 'Nouveau Rapport créée avec succès!');
     }
