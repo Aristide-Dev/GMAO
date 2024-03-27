@@ -74,8 +74,21 @@
     <div class="flex-grow-0 pt-0 mx-0 offcanvas-body h-100">
         <form class="pt-0 add-new-demande" id="addNewDemandeForm" enctype="multipart/form-data"  action="{{ route('prestataires.demandes.rapport_constat.store', ['demande' => $demande,'bonTravail' => $bonTravail]) }}" method="POST"">
             @csrf
+            
+            <div class="mb-3">
+                <label for="date_intervention" class="form-label">date_intervention</label>
+                <input type="date" id="date_intervention" name="date_intervention" class="form-control"/>
+                <x-input-error bag="create_rapport_constat" for="date_intervention" class="mt-2" />
+            </div>
+            
+            <div class="mb-3">
+                <label for="heure_intervention" class="form-label">heure_intervention</label>
+                <input type="time" id="heure_intervention" name="heure_intervention" class="form-control"/>
+                <x-input-error bag="create_rapport_constat" for="heure_intervention" class="mt-2" />
+            </div>
+            
             <div class="mb-4">
-                <div id="gmao_file_loder_rapport_constat _contennaire" class="shadow">
+                <div id="gmao_file_loder_rapport_constat_contennaire" class="shadow">
                     <label class="m-0 text-white h6 text-uppercase" for="file-input">RAPPORT</label>
                     <label class="gmao_file_loder" style="background-color: #ffffff">
                         <div class="gmao_file_loder-inner">
@@ -193,5 +206,5 @@
 
     }
 
-    gmao_file_loder('gmao_file_loder_rapport_constat _contennaire', 'preview', ['jpg', 'jpeg', 'png'])
+    gmao_file_loder('gmao_file_loder_rapport_constat_contennaire', 'preview', ['jpg', 'jpeg', 'png'])
 </script>

@@ -14,7 +14,8 @@ class PieceController extends Controller
      */
     public function index()
     {
-        //
+        $pieces = Piece::paginate(30);
+        return view("admin.stock.index", compact('pieces'));
     }
 
     /**
@@ -30,7 +31,21 @@ class PieceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validateWithBag('create_piece',[
+            'piece' => ['required', 'string', 'max:55'],
+            'prix' => ['required', 'numeric', 'min:0'],
+            'quantite' => ['required', 'numeric', 'min:0'],
+            'stock_min' => ['required', 'numeric', 'min:0'],
+        ]);
+
+        Piece::create([
+            'piece' => $request->piece,
+            'price' => $request->prix,
+            'quantite' => $request->quantite,
+            'stock_min' => $request->stock_min,
+        ]);
+
+        return redirect(route("admin.pieces.index"))->with('success', 'Nouvelle piece ajoutée avec succès!');
     }
 
     /**

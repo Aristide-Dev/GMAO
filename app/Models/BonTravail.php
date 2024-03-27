@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Enums\StatusEnum;
+use App\Enums\ZonePrioriteEnum;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\hasOne;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class BonTravail extends Model
 {
@@ -53,74 +55,36 @@ class BonTravail extends Model
 
     public function prioriteText()
     {
-        $priorite = $this->zone_priorite;
-
-        if($priorite == 1)
-        {
-            return "Faible";
-        }
-
-        if($priorite == 2)
-        {
-            return "Moyen";
-        }
-
-        if($priorite == 3)
-        {
-            return "Prioritaire";
-        }
-        return "inconu";
+        return ZonePrioriteEnum::getText($this->zone_priorite);
     }
 
 
     public function prioriteColor()
     {
-        $priorite = $this->zone_priorite;
-
-        if($priorite == 1)
-        {
-            return "success";
-        }
-
-        if($priorite == 2)
-        {
-            return "warning";
-        }
-
-        if($priorite == 3)
-        {
-            return "danger";
-        }
-        return "secondary";
+        return ZonePrioriteEnum::getColor($this->zone_priorite);
     }
 
 
-    public function statutIcon($taille="2xl")
+    public function statutIcon($taille = "2xl")
     {
-        $statut = $this->status;
-        if($statut == "injection de piece")
-        {
-            return '<i class="fa-solid fa-circle-check fa-'.$taille.'" style="color: #FFD43B;"></i>';
-        }
-
-        if($statut == 'en cours')
-        {
-            return '<i class="fa-solid fa-circle-check fa-'.$taille.'" style="color: #74C0FC;"></i>';
-        }
-
-        if($statut == 'annulé')
-        {
-            return '<i class="fa-solid fa-circle-check fa-'.$taille.'" style="color: #FF0000;"></i>';
-        }
-        if($statut == 'rejettée')
-        {
-            return '<i class="fa-solid fa-circle-check fa-'.$taille.'" style="color: #FF0000;"></i>';
-        }
-        if($statut == 'terminé')
-        {
-            return '<i class="fa-solid fa-circle-check fa-'.$taille.'" style="color: #63E6BE;"></i>';
-        }
-        return '<i class="fa-solid fa-circle-check fa-'.$taille.'" style="color: #FFD43B;"></i>';
+        $color = StatusEnum::getColor($this->status);
+        return '<i class="fa-solid fa-circle-check fa-'.$taille.'" style="color: '.$color.';"></i>';
     }
+
+    public function statutColor()
+    {
+        return StatusEnum::getColor($this->status);
+    }
+    
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        // 'status' => StatusEnum::class,
+        'telephone_verified_at' => 'datetime',
+    ];
 
 }

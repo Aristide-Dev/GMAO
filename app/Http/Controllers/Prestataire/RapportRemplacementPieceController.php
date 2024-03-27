@@ -4,7 +4,11 @@ namespace App\Http\Controllers\Prestataire;
 use App\Http\Controllers\Controller;
 
 use App\Models\RapportRemplacementPiece;
+use App\Models\BonTravail;
+use App\Models\DemandeIntervention;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\File;
 
 class RapportRemplacementPieceController extends Controller
 {
@@ -27,9 +31,37 @@ class RapportRemplacementPieceController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, DemandeIntervention $demande, BonTravail $bonTravail)
     {
-        //
+        $request->validateWithBag('create_rapport_remplacement_piece', [
+            'rapport_remplacement_piece_file' => 'required|image|extensions:jpeg,jpg,png|max:2000',
+            'commentaire' => 'nullable|string|max:250',
+        ]);
+
+        $image = $request->file('rapport_remplacement_piece_file');
+        $imagePath = $this->saveImageWithUniqueName($image, $demande->di_reference, 'rapport_remplacement_piece');
+        // Récupérer le rapport d'intervention associé au bon de travail
+        $rapportIntervention = $bonTravail->rapportsIntervention;
+
+        RapportRemplacementPiece::create([
+            'ri_reference' => "$rapportIntervention->ri_reference",
+            'rapport_remplacement_piece_file' => $imagePath,
+            'commentaire' => $request->commentaire ?? "",
+        ]);
+        
+        $bonTravail->status = "injection de piece";
+        $bonTravail->save();
+
+        $demande->status = 'en cours';
+        $demande->save();
+        
+
+        // Modifier le statut du rapport d'intervention
+        if ($rapportIntervention) {
+            $rapportIntervention->status = "injection de piece";
+            $rapportIntervention->save();
+        }
+        return redirect()->back()->with('success', 'Nouveau Rapport de remplacement de piece créé avec succès!');
     }
 
     /**
@@ -62,5 +94,35 @@ class RapportRemplacementPieceController extends Controller
     public function destroy(RapportRemplacementPiece $rapportRemplacementPiece)
     {
         //
+    }
+
+
+    /**
+     * Méthode saveImageWithUniqueName
+     *
+     * @param string $image [Chemin vers l'image]
+     * @param string $imageName [Nom de l'image]
+     * @param string $destinationFolder [Répertoire de destination dans le stockage Laravel]
+     *
+     * @return String $imageName
+     */
+    private function saveImageWithUniqueName($image, $imageName, $destinationFolder)
+    {
+        // Récupérer l'extension de l'image
+        // $imageExtension = pathinfo($imageName, PATHINFO_EXTENSION);
+        $imageExtension = "jpg";
+
+        // Générer un nom de fichier unique
+        $uniqueFileName = $imageName . '_' . time();
+
+
+        // Répertoire de stockage dans le stockage Laravel
+        $storageDirectory = 'public/' . $destinationFolder;
+
+        // Utiliser Storage::putFileAs pour compresser et stocker l'image avec un nom spécifique
+        $fuldirectory = Storage::putFileAs($storageDirectory, new File($image), $uniqueFileName . '.' . $imageExtension);
+
+        // Retourner le nom du fichier généré
+        return $fuldirectory;
     }
 }

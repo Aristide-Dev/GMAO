@@ -37,8 +37,8 @@
             </div>
 
             <div class="mb-3">
-                <label class="h6" for="zone">Zone - Priorité - Délais</label>
-                <select id="zone" name="zone" class="select2 form-select form-select-lg" data-allow-clear="true"
+                <label class="h6" for="create_bt_zone">Zone - Priorité - Délais</label>
+                <select id="create_bt_zone" name="zone" class="select2 form-select form-select-lg" data-allow-clear="true"
                     data-placeholder="--CHOISIR--">
                     <option value="">--CHOISIR--</option>
                     @foreach ($zones as $zone)
@@ -49,8 +49,8 @@
             </div>
 
             <div class="mb-3">
-                <label class="h6" for="equipement">equipement - Priorité - Délais</label>
-                <select id="equipement" name="equipement" class="select2 form-select form-select-lg" data-allow-clear="true"
+                <label class="h6" for="create_bt_equipement">equipement - Priorité - Délais</label>
+                <select id="create_bt_equipement" name="equipement" class="select2 form-select form-select-lg" data-allow-clear="true"
                     data-placeholder="--CHOISIR--">
                     <option value="">--CHOISIR--</option>
                     @foreach ($demande->site->equipements as $equipement)
@@ -61,8 +61,8 @@
             </div>
 
             <div class="mb-3">
-                <label class="h6" for="prestataire">prestataire</label>
-                <select id="prestataire" name="prestataire" class="select2 form-select form-select-lg" data-allow-clear="true"
+                <label class="h6" for="create_bt_prestataire">prestataire</label>
+                <select id="create_bt_prestataire" name="prestataire" class="select2 form-select form-select-lg" data-allow-clear="true"
                     data-placeholder="--CHOISIR--">
                     <option value="">--CHOISIR--</option>
                     @foreach ($prestataires as $prestataire)

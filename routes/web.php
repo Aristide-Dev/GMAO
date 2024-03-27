@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\UtilisateurController as AdminUtilisateurControll
 use App\Http\Controllers\Admin\PrestataireController as AdminPrestataireController;
 use App\Http\Controllers\Admin\ZoneController as AdminZoneController;
 use App\Http\Controllers\Admin\BonTravailController as AdminBonTravailController;
+use App\Http\Controllers\Admin\PieceController as AdminPieceController;
 
 
 use App\Http\Controllers\Demandeur\SiteController as DemandeurSiteController;
@@ -63,6 +64,12 @@ Route::middleware([
 
     Route::resource('/demandes', AdminDemandeInterventionController::class);
 
+    Route::post('/demandes/rapport-intervention/{rapportIntervention}/cloture', [AdminDemandeInterventionController::class, 'cloture'])
+        ->name('demandes.cloture');
+
+    Route::post('/demandes/injection-piece/rapport-intervention/{rapportIntervention}', [AdminDemandeInterventionController::class, 'injection'])
+        ->name('demandes.injection');
+
     Route::resource('/sites', AdminSiteController::class);
 
     Route::post('/sites/{site}/equipement/store', [AdminSiteController::class, 'add_equipement'])
@@ -78,6 +85,7 @@ Route::middleware([
     Route::post('/prestataires/{prestataire}/create-agent', [AdminPrestataireController::class, 'create_agent'])->name('prestataires.create_agent');
 
     Route::resource('/zones', AdminZoneController::class);
+    Route::resource('/pieces', AdminPieceController::class);
     Route::resource('/bon-travail', AdminBonTravailController::class);
 });
 
@@ -141,46 +149,12 @@ Route::middleware([
 
 });
 
-// Route::prefix('demandeur')->name('demandeur.')->group(function () {
-//     Route::get('/dashboard', function () {
-//         return view('demandeur.dashboard');
-//     })->name('dashboard');
-
-//     Route::get('/demandes', function () {
-//         return view('demandeur.demandes.index');
-//     })->name('demandes.index');
-
-//     Route::get('/demandes/{id}', function () {
-//         return view('demandeur.demandes.show');
-//     })->name('demandes.show');
-
-//     Route::get('/sites', function () {
-//         return view('demandeur.sites.index');
-//     })->name('sites.index');
-
-//     Route::get('/sites/{id}', function () {
-//         return view('demandeur.sites.show');
-//     })->name('sites.show');
-
-//     Route::get('/sites/{id}/{type_equipement}', function () {
-//         return view('demandeur.sites.equipements');
-//     })->name('sites.type_equipement');
-// });
-
 
 
 Route::prefix('prestataires')->name('prestataires.')->group(function () {
     Route::get('/dashboard', function () {
         return view('prestataires.dashboard');
     })->name('dashboard');
-
-    // Route::get('/demandes', function () {
-    //     return view('prestataires.demandes.index');
-    // })->name('demandes.index');
-
-    // Route::get('/demandes/{id}', function () {
-    //     return view('prestataires.demandes.show');
-    // })->name('demandes.show');
 
     Route::get('/utilisateurs', function () {
         return view('prestataires.utilisateurs.index');
@@ -237,14 +211,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
     // Route::get('/utilisateurs/{id}', function () {
     //     return view('admin.utilisateurs.show');
     // })->name('utilisateurs.show');
-
-    Route::get('/stock', function () {
-        return view('admin.stock.index');
-    })->name('stock.index');
-
-    Route::get('/stock/{id}', function () {
-        return view('admin.stock.show');
-    })->name('stock.show');
 
     // Route::get('/pieces', function () {
     //     return view('admin.pieces.index');

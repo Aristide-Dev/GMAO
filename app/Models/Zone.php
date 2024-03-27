@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Enums\ZonePrioriteEnum;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Zone extends Model
 {
@@ -19,44 +20,58 @@ class Zone extends Model
         'priorite',
         'delais',
     ];
-
-    public function prioriteColor($priorite=null)
+    
+    public function prioriteText()
     {
-        $priorite = $priorite ?? $this->priorite;
-        if($priorite == 1)
-        {
-            return "success";
-        }
-
-        if($priorite == 2)
-        {
-            return "warning";
-        }
-
-        if($priorite == 3)
-        {
-            return "danger";
-        }
-        return "secondary";
+        // return ZonePrioriteEnum::getText(ZonePrioriteEnum::FAIBLE);
+        return ZonePrioriteEnum::getText($this->priorite);
     }
 
-    public function prioriteText($priorite=null)
+
+    public function prioriteColor()
     {
-        $priorite = $priorite ?? $this->priorite;
-        if($priorite == 1)
-        {
-            return "Faible";
-        }
+        // return ZonePrioriteEnum::getColor(ZonePrioriteEnum::FAIBLE);
 
-        if($priorite == 2)
-        {
-            return "Moyen";
-        }
-
-        if($priorite == 3)
-        {
-            return "Prioritaire";
-        }
-        return "inconu";
+        return ZonePrioriteEnum::getColor($this->priorite);
     }
+
+    // public function prioriteColor($priorite=null)
+    // {
+    //     $priorite = $priorite ?? $this->priorite;
+    //     if($priorite == 1)
+    //     {
+    //         return "success";
+    //     }
+
+    //     if($priorite == 2)
+    //     {
+    //         return "warning";
+    //     }
+
+    //     if($priorite == 3)
+    //     {
+    //         return "danger";
+    //     }
+    //     return "secondary";
+    // }
+
+    // public function prioriteText($priorite=null)
+    // {
+    //     $priorite = $priorite ?? $this->priorite;
+    //     if($priorite == 1)
+    //     {
+    //         return "Faible";
+    //     }
+
+    //     if($priorite == 2)
+    //     {
+    //         return "Moyen";
+    //     }
+
+    //     if($priorite == 3)
+    //     {
+    //         return "Prioritaire";
+    //     }
+    //     return "inconu";
+    // }
 }

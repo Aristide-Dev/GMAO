@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\StatusEnum;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -30,7 +31,7 @@ class DemandeIntervention extends Model
     {
         return $this->belongsTo(Site::class);
     }
-    
+
     public function bon_travails()
     {
         return $this->hasMany(BonTravail::class, 'di_reference', 'di_reference');
@@ -56,59 +57,119 @@ class DemandeIntervention extends Model
         return null;
     }
 
+    
+
+
+    public function statutIcon($taille = "2xl")
+    {
+        $color = StatusEnum::getColor($this->status);
+        return '<i class="fa-solid fa-circle-check fa-'.$taille.'" style="color: '.$color.';"></i>';
+    }
+
     public function statutColor()
     {
-        $statut = $this->status;
-        if($statut == "injection de piece")
-        {
-            return "warning";
-        }
-
-        if($statut == "en cours")
-        {
-            return "primary";
-        }
-
-        if($statut == "annulé")
-        {
-            return "danger";
-        }
-        if($statut == "rejettée")
-        {
-            return "danger";
-        }
-        if($statut == "terminé")
-        {
-            return "success";
-        }
-        return "secondary";
+        return StatusEnum::getColor($this->status);
     }
 
-    public function statutIcon($taille="2xl")
-    {
-        $statut = $this->status;
-        if($statut == "injection de piece")
-        {
-            return '<i class="fa-solid fa-circle-check fa-'.$taille.'" style="color: #FFD43B;"></i>';
-        }
+    // public function statutColor()
+    // {
+    //     $statut = $this->status;
+    //     if($statut == "injection de piece")
+    //     {
+    //         return "warning";
+    //     }
 
-        if($statut == 'en cours')
-        {
-            return '<i class="fa-solid fa-circle-check fa-'.$taille.'" style="color: #74C0FC;"></i>';
-        }
+    //     if($statut == "en cours")
+    //     {
+    //         return "primary";
+    //     }
 
-        if($statut == 'annulé')
-        {
-            return '<i class="fa-solid fa-circle-check fa-'.$taille.'" style="color: #FF0000;"></i>';
-        }
-        if($statut == 'rejettée')
-        {
-            return '<i class="fa-solid fa-circle-check fa-'.$taille.'" style="color: #FF0000;"></i>';
-        }
-        if($statut == 'terminé')
-        {
-            return '<i class="fa-solid fa-circle-check fa-'.$taille.'" style="color: #63E6BE;"></i>';
-        }
-        return '<i class="fa-solid fa-circle-check fa-'.$taille.'" style="color: #FFD43B;"></i>';
-    }
+    //     if($statut == "annulé")
+    //     {
+    //         return "danger";
+    //     }
+    //     if($statut == "rejettée")
+    //     {
+    //         return "danger";
+    //     }
+    //     if($statut == "terminé")
+    //     {
+    //         return "success";
+    //     }
+    //     return "secondary";
+    // }
+
+    /**
+     * Description des status
+     * 1- EN ATTENTE
+     *      Lorsque la demande vient d'etre crée
+     * 2- ENCOURS
+     *      Si le dernier bon de travail associé existe et que le statut du BT soit different de 'terminé', 'rejetté', 'annulé'
+     * 3- ANNULEE, TERMINEE
+     *      Si l'admin l'a definis sur la demande
+     *      Si le statut du BT est egale à l'un des deux
+     */
+
+
+    /**
+     * BON DE TRAVAIL
+     * 1- EN ATTENTE
+     *      Si le rapport de constat est en attente
+     * 2- EN COURS
+     *      Si le prestataire n'a pas emis de rapport
+     *      Si l'orsqu'une piece est injectée par l'admin
+     * 3- ANNULEE, TERMINEE
+     *      Si l'admin l'a definis sur la demande
+     *      Si le statut du rapport de constat est egale à l'un des deux
+     * 4- REJETE
+     *      Si le prestataire l'a rejeté du
+     * 5- INJECTION PIECE
+     *      Dès que le rapport d'injection de piece est crée
+     *
+     */
+
+
+    /**
+     * RAPPORTS D'INTERVENTION
+     * 1- EN ATTENTE
+     *      Si le rapport de constat est en attente
+     * 2- EN COURS
+     *      Si le prestataire n'a pas emis de rapport
+     *      Si l'orsqu'une piece est injectée par l'admin
+     * 3- ANNULEE, TERMINEE
+     *      Si l'admin l'a definis sur la demande
+     *      Si le statut du rapport de constat est egale à l'un des deux
+     * 4- REJETE
+     *      Si le prestataire l'a rejeté du
+     * 5- INJECTION PIECE
+     *      Dès que le rapport d'injection de piece est crée
+     *
+     */
+    // public function statutIcon($taille="2xl")
+    // {
+    //     $statut = $this->status;
+    //     if($statut == "injection de piece")
+    //     {
+    //         return '<i class="fa-solid fa-circle-check fa-'.$taille.'" style="color: #FFD43B;"></i>';
+    //     }
+
+    //     if($statut == 'en cours')
+    //     {
+    //         return '<i class="fa-solid fa-circle-check fa-'.$taille.'" style="color: #74C0FC;"></i>';
+    //     }
+
+    //     if($statut == 'annulé')
+    //     {
+    //         return '<i class="fa-solid fa-circle-check fa-'.$taille.'" style="color: #FF0000;"></i>';
+    //     }
+    //     if($statut == 'rejettée')
+    //     {
+    //         return '<i class="fa-solid fa-circle-check fa-'.$taille.'" style="color: #FF0000;"></i>';
+    //     }
+    //     if($statut == 'terminé')
+    //     {
+    //         return '<i class="fa-solid fa-circle-check fa-'.$taille.'" style="color: #63E6BE;"></i>';
+    //     }
+    //     return '<i class="fa-solid fa-circle-check fa-'.$taille.'" style="color: #FFD43B;"></i>';
+    // }
 }

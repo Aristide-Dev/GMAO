@@ -32,10 +32,10 @@ class RapportRemplacementPiece extends Model
     public function document()
     {
         // Vérifiez d'abord si la demande a un fichier associé
-        if ($this->rapport_constat_file) {
+        if ($this->rapport_remplacement_piece_file) {
             // Générez l'URL complète du fichier en utilisant Storage::url()
             try {
-                return Storage::url($this->rapport_constat_file);
+                return Storage::url($this->rapport_remplacement_piece_file);
             } catch (\Throwable $th) {
                 return null;
             }

@@ -49,8 +49,8 @@
     </x-gmao.nav-link>
 
     {{-- stock --}}
-    <x-gmao.nav-link :active="request()->routeIs('admin.stock.*')">
-        <a href="{{ route('admin.stock.index') }}" class="menu-link">
+    <x-gmao.nav-link :active="request()->routeIs('admin.pieces.*')">
+        <a href="{{ route('admin.pieces.index') }}" class="menu-link">
             <i class="menu-icon fa-solid fa-box-open"></i>
             <div data-i18n="Stock">Stock</div>
         </a>

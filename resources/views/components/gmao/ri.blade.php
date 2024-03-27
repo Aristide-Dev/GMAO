@@ -2,11 +2,10 @@
 
 
 <div class="p-3 m-0 mb-3 border rounded shadow-sm">
-    <div class="p-3 mb-3 text-center text-uppercase fw-bold w-100 badge bg-primary bg-label-primary">
+    <div class="p-3 mb-3 text-center text-uppercase fw-bold w-100 badge"  style="background-color: {{ $rapport_intervention->statutColor() }}">
         Rapport d'intervention
-        @php
-        echo $rapport_intervention->statutIcon('xl');
-        @endphp
+        <br/>
+        <br/>
         (<span class="text-sm text-dark fw-medium">{{ $rapport_intervention->status }}</span>)
     </div>
 
@@ -27,39 +26,27 @@
     </div>
     {{-- Numero Rapport (RI) --}}
 
-    {{-- Document --}}
+    {{-- rapport_constat --}}
     @if($rapport_intervention->rapport_constat)
-    <div class="col-12">
-        <h5 class="text-primary fw-bold text-center mb-3">
-            <i class="fa-solid fa-ellipsis ti-sm" style="color: #FFD43B;"></i>
-            rapport de constat (<small>du prestataire</small>)
-        </h5>
-        <div class="shadow-xs border-top border-top-3 list-group">
-            <div class="border-0 list-group-item list-group-item-action d-flex align-items-start">
-                <div class="d-flex w-100 justify-content-between">
-                    <h6 class="mb-1 text-primary fw-bold">
-                        <i class="fa-solid fa-ellipsis ti-sm" style="color: #FFD43B;"></i>
-                        Document
-                    </h6>
-                </div>
-                <img src="{{ $rapport_intervention->rapport_constat->document() }}" alt="document" class="mb-1 rounded w-50" id="doc_image_url_in_show_rapport_intervention" onclick="displayImageInModal('doc_image_url_in_show_rapport_intervention', 'myShowDemandeModal')" width="100">
-            </div>
-
-            @if ($rapport_intervention->rapport_constat->commentaire)
-            <div class="border-0 list-group-item list-group-item-action d-flex align-items-start">
-                <div class="d-flex w-100 justify-content-between">
-                    <h6 class="mb-1 text-primary fw-bold">
-                        <i class="fa-solid fa-ellipsis ti-sm" style="color: #FFD43B;"></i>
-                        Description (commentaire)
-                    </h6>
-                    <p class="mx-3 px-2 text-dark">{{ $rapport_intervention->rapport_constat->commentaire }}</p>
-                </div>
-            </div>
-            @endif
-        </div>
-    </div>
+    <x-gmao.rapport-constat :rapport_constat="$rapport_intervention->rapport_constat" :status_color="$rapport_intervention->statutColor()"/>
     @endif
-    {{-- Document --}}
+    {{-- rapport_constat --}}
+
+    
+
+    {{-- rapport_remplacement_piece --}}
+    @if($rapport_intervention->rapport_remplacement_piece)
+    <x-gmao.rapport-remplacement-piece :rapport_remplacement_piece="$rapport_intervention->rapport_remplacement_piece" :status_color="$rapport_intervention->statutColor()"/>
+    @endif
+    {{-- rapport_remplacement_piece --}}
+
+    
+
+    {{-- rapport_remplacement_piece --}}
+    @if($rapport_intervention->injection_piece)
+    <x-gmao.rapport-injection-piece/>
+    @endif
+    {{-- rapport_remplacement_piece --}}
 
     {{-- Temps prise en charge & KPIs --}}
     <div class="my-2 col-12">

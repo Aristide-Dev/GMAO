@@ -16,12 +16,12 @@ throw new InvalidArgumentException('Le composant (demande) nécessite une prop "
 @endif
 
 
-<div class="p-3 m-0 mb-3 border rounded shadow-sm">
-    <div class="p-3 mb-3 text-center text-uppercase fw-bold w-100 badge bg-primary bg-label-primary">
-        Demande d'Intervention @php
-        echo $demande->statutIcon('xl');
-        @endphp
-        (<span class="text-sm text-dark fw-medium">{{ $demande->status }}</span>)
+<div class="p-3 m-0 mb-3 border rounded shadow-sm" style="background-color: #F3F4F6;">
+    <div class="p-3 mb-3 text-center text-uppercase fw-bold w-100 badge" style="background-color: {{ $demande->statutColor() }}">
+        Demande d'Intervention
+        <br/>
+        <br/>
+        ( <span class="text-sm text-white fw-medium">{{ $demande->status }}</span> )
     </div>
 
     {{-- Demande d'intervention (D.I) --}}
@@ -48,7 +48,7 @@ throw new InvalidArgumentException('Le composant (demande) nécessite une prop "
             <div class="border-0 list-group-item list-group-item-action d-flex align-items-start">
                 <div class="d-flex w-100 justify-content-between">
                     <h6 class="mb-1 text-primary fw-bold">
-                        <i class="fa-solid fa-ellipsis ti-sm" style="color: #FFD43B;"></i>
+                        <i class="fa-solid fa-ellipsis ti-sm" style="color: {{ $demande->statutColor() }};"></i>
                         Demandeur
                     </h6>
                 </div>
@@ -64,7 +64,7 @@ throw new InvalidArgumentException('Le composant (demande) nécessite une prop "
             <div class="border-0 list-group-item list-group-item-action d-flex align-items-start">
                 <div class="d-flex w-100 justify-content-between">
                     <h6 class="mb-1 text-primary fw-bold">
-                        <i class="fa-solid fa-ellipsis ti-sm text-warning"></i>
+                        <i class="fa-solid fa-ellipsis ti-sm" style="color: {{ $demande->statutColor() }};"></i>
                         Site
                     </h6>
                 </div>
@@ -80,7 +80,7 @@ throw new InvalidArgumentException('Le composant (demande) nécessite une prop "
             <div class="border-0 list-group-item list-group-item-action d-flex align-items-start">
                 <div class="d-flex w-100 justify-content-between">
                     <h6 class="mb-1 text-primary fw-bold">
-                        <i class="fa-solid fa-ellipsis ti-sm" style="color: #FFD43B;"></i>
+                        <i class="fa-solid fa-ellipsis ti-sm" style="color: {{ $demande->statutColor() }};"></i>
                         Date et heure de déclaration
                     </h6>
                 </div>
@@ -96,7 +96,7 @@ throw new InvalidArgumentException('Le composant (demande) nécessite une prop "
             <div class="border-0 list-group-item list-group-item-action d-flex align-items-start">
                 <div class="d-flex w-100 justify-content-between">
                     <h6 class="mb-1 text-primary fw-bold">
-                        <i class="fa-solid fa-ellipsis ti-sm" style="color: #FFD43B;"></i>
+                        <i class="fa-solid fa-ellipsis ti-sm" style="color: {{ $demande->statutColor() }};"></i>
                         Document
                     </h6>
                 </div>

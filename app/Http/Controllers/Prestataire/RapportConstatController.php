@@ -1,13 +1,14 @@
 <?php
 
 namespace App\Http\Controllers\Prestataire;
-use App\Http\Controllers\Controller;
+use Illuminate\Http\File;
 use App\Models\BonTravail;
+use Illuminate\Http\Request;
 use App\Models\RapportConstat;
 use App\Models\DemandeIntervention;
-use Illuminate\Http\Request;
+use App\Rules\DateInterventionRule;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Http\File;
 
 class RapportConstatController extends Controller
 {
@@ -30,13 +31,29 @@ class RapportConstatController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request,DemandeIntervention $demande, BonTravail $bonTravail)
+    public function store(Request $request, DemandeIntervention $demande, BonTravail $bonTravail)
     {
         $request->validateWithBag('create_rapport_constat', [
             'rapport_constat_file' => 'required|image|extensions:jpeg,jpg,png|max:2000',
             'status' => 'required|string|in:terminé,en attente,annulé',
+            'date_intervention' => [
+                'required',
+                'date',
+                new DateInterventionRule($demande->created_at)
+            ],
+            'heure_intervention' => [
+                'required',
+                'regex:/^(0[8-9]|1[0-7]):[0-5][0-9]$/',
+                function ($attribute, $value, $fail) use ($request) {
+                    $heure = intval(substr($value, 0, 2));
+                    if ($heure < 8 || $heure > 17) {
+                        $fail('L\'heure d\'intervention doit être comprise entre 08:00 et 17:59.');
+                    }
+                },
+            ],
             'commentaire' => 'nullable|string|max:250',
         ]);
+        
 
         $image = $request->file('rapport_constat_file');
         $imagePath = $this->saveImageWithUniqueName($image, $demande->di_reference, 'rapport_constat');
@@ -66,9 +83,10 @@ class RapportConstatController extends Controller
         // Modifier le statut du rapport d'intervention
         if ($rapportIntervention) {
             $rapportIntervention->status = $request->status;
+            $rapportIntervention->date_intervention = $request->date_intervention.' '.$request->heure_intervention;
             $rapportIntervention->save();
         }
-        return redirect()->back()->with('success', 'Nouveau Rapport créée avec succès!');
+        return redirect()->back()->with('success', 'Nouveau Rapport créé avec succès!');
     }
 
     /**

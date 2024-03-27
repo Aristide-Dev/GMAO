@@ -76,7 +76,7 @@
             @csrf
 
             <div class="mb-3">
-                <div id="gmao_file_loder_contennaire" class="shadow">
+                <div id="gmao_file_loder_contennaire_for_rr" class="shadow">
                     <label class="text-white h6" for="file-input">RAPPORT</label>
                     <label class="bg-white gmao_file_loder">
                         <div class="gmao_file_loder-inner">
@@ -84,7 +84,7 @@
                             <input id="file-input" name="rapport_remplacement_piece_file" type="file"
                                 accept=".jpeg,.jpg,.png" />
                         </div>
-                        <div id="preview" class="p-2 preview"></div>
+                        <div id="preview_for_rr" class="p-2 preview"></div>
                     </label>
                 </div>
                 <x-input-error bag="create_rapport_remplacement_piece" for="rapport_remplacement_piece_file" class="mt-2" />
@@ -102,3 +102,87 @@
         </form>
     </div>
 </div>
+
+<script>
+    function gmao_file_loder(dropzoneId, targetId, allowedTypes) {
+        var gmao_file_loder_dropzone_ = document.getElementById(dropzoneId);
+        var preview = document.getElementById(targetId);
+
+        gmao_file_loder_dropzone_.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            gmao_file_loder_dropzone_.classList.add('dragover');
+        });
+
+        gmao_file_loder_dropzone_.addEventListener('dragleave', function() {
+            gmao_file_loder_dropzone_.classList.remove('dragover');
+        });
+
+        gmao_file_loder_dropzone_.addEventListener('drop', function(e) {
+            e.preventDefault();
+            gmao_file_loder_dropzone_.classList.remove('dragover');
+            var files = e.dataTransfer.files;
+            handleFiles(files);
+        });
+
+        var input = gmao_file_loder_dropzone_.querySelector('input[type="file"]');
+        input.addEventListener('change', function() {
+            var files = this.files;
+            handleFiles(files);
+        });
+
+        function handleFiles(files) {
+            // Remove the initial text when files are added
+            document.querySelector('.gmao_file_loder-text').style.display = 'none';
+
+            preview.innerHTML = ''; // Clear previous previews
+            for (var i = 0; i < files.length; i++) {
+                var file = files[i];
+                var fileExtension = file.name.split('.').pop().toLowerCase(); // Get the file extension
+
+                if (allowedTypes.includes(fileExtension)) {
+                    var fileName = file.name; // Get the file name
+                    var fileNameWithExtension = fileName.substr(0, fileName.lastIndexOf('.')) ||
+                    fileName; // Get the file name with extension
+
+                    var fileDescription = document.createElement('span');
+                    fileDescription.textContent = fileNameWithExtension + ' (' + fileExtension + ')';
+                    fileDescription.style.display = 'block'; // Make the file description a block element
+                    fileDescription.style.marginTop = '5px'; // Add margin at the top
+
+                    if (fileExtension === 'jpeg' || fileExtension === 'jpg' || fileExtension === 'png') {
+                        var reader = new FileReader();
+                        reader.onload = function(e) {
+                            var img = new Image();
+                            img.classList.add('preview-image'); // Add class to the image
+                            img.src = e.target.result;
+                            img.width = 300;
+                            img.height = 150;
+                            preview.appendChild(img);
+                            preview.appendChild(fileDescription); // Append the file description
+                        };
+                        reader.readAsDataURL(file);
+                    } else {
+                        // Display a default icon for non-image files
+                        var icon = document.createElement('i');
+                        icon.className = 'fa-solid fa-file fa-sm';
+                        icon.style.color = '#97999b';
+                        preview.appendChild(icon);
+                        preview.appendChild(fileDescription); // Append the file description
+                    }
+                } else {
+                    // Display message for not allowed file types
+                    var message = document.createElement('span');
+                    message.textContent = 'Extension non autorisée: ' + fileExtension.toUpperCase();
+                    message.style.color = 'red'; // Set color to red for visibility
+                    preview.appendChild(message);
+                }
+            }
+        }
+
+
+
+
+    }
+
+    gmao_file_loder('gmao_file_loder_contennaire_for_rr', 'preview_for_rr', ['jpg', 'jpeg', 'png'])
+</script>

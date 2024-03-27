@@ -1,12 +1,11 @@
 @props(['bonTravail' => ''])
 
-<div class="p-3 m-0 mb-3 border rounded shadow-sm">
-    <div class="p-3 mb-3 text-center text-uppercase fw-bold w-100 badge bg-primary bg-label-primary">
+<div class="p-3 m-0 mb-3 border rounded shadow-sm" style="background-color: #F3F4F6;">
+    <div class="p-3 mb-3 text-center text-uppercase fw-bold w-100 badge" style="background-color: {{ $bonTravail->statutColor() }}">
         Bon de Travail
-        @php
-            echo $bonTravail->statutIcon('xl');
-        @endphp
-        (<span class="text-sm text-dark fw-medium">{{ $bonTravail->status }}</span>)
+        <br/>
+        <br/>
+        ( <span class="text-sm text-withe fw-medium">{{ $bonTravail->status }}</span> )
     </div>
 
     {{-- BT --}}
@@ -15,7 +14,7 @@
             <div class="border-0 list-group-item list-group-item-action d-flex align-items-start">
                 <div class="d-flex w-100 justify-content-between">
                     <h6 class="mb-1 text-primary fw-bold">
-                        <i class="fa-solid fa-ellipsis ti-sm" style="color: #C0C0C0;"></i>
+                        <i class="fa-solid fa-ellipsis ti-sm" style="color: {{ $bonTravail->statutColor() }}"></i>
                          B.T
                     </h6>
                 </div>
@@ -34,7 +33,7 @@
                     <div class="mt-1 border-0 border-end list-group-item">
                         <div class="d-block w-100 justify-content-between">
                             <p class="mb-1 text-left text-primary fw-bold">
-                                <i class="fa-solid fa-ellipsis ti-sm" style="color: #C0C0C0;"></i>
+                                <i class="fa-solid fa-ellipsis ti-sm" style="color: {{ $bonTravail->statutColor() }}"></i>
                                 Equipement
                             </p>
                             <p class="mb-1 text-left">{{ $bonTravail?->equipement->name ?? '' }}</p>
@@ -46,7 +45,7 @@
                     <div class="mt-1 border-0 border-end list-group-item">
                         <div class="w-100 justify-content-end">
                             <p class="mb-1 text-end text-primary fw-bold">
-                                <i class="fa-solid fa-ellipsis ti-sm" style="color: #C0C0C0;"></i>
+                                <i class="fa-solid fa-ellipsis ti-sm" style="color: {{ $bonTravail->statutColor() }}"></i>
                                 Marque
                             </p>
                             <p class="mb-1 text-end">CINO-TRUCK</p>
@@ -58,7 +57,7 @@
                     <div class="mt-1 border-0 border-end list-group-item">
                         <div class="w-100 justify-content-end">
                             <p class="mb-1 text-end text-primary fw-bold">
-                                <i class="fa-solid fa-ellipsis ti-sm" style="color: #C0C0C0;"></i>
+                                <i class="fa-solid fa-ellipsis ti-sm" style="color: {{ $bonTravail->statutColor() }}"></i>
                                 Numero de serie
                             </p>
                             <p class="mb-1 text-end">{{ $bonTravail?->equipement->numero_serie ?? '' }}</p>
@@ -78,7 +77,7 @@
             <div class="border-0 list-group-item list-group-item-action d-flex align-items-start">
                 <div class="d-flex w-100 justify-content-between justify-items-center">
                     <h6 class="mb-1 text-primary fw-bold">
-                        <i class="fa-solid fa-ellipsis ti-sm" style="color: #FFD43B;"></i>
+                        <i class="fa-solid fa-ellipsis ti-sm" style="color: {{ $bonTravail->statutColor() }};"></i>
                          Prestataire
                     </h6>
                 </div>
@@ -97,7 +96,7 @@
             <div class="border-0 list-group-item list-group-item-action d-flex align-items-start">
                 <div class="d-flex w-100 justify-content-between">
                     <h6 class="mb-1 text-primary fw-bold">
-                        <i class="fa-solid fa-ellipsis ti-sm" style="color: #FFD43B;"></i>
+                        <i class="fa-solid fa-ellipsis ti-sm" style="color: {{ $bonTravail->statutColor() }};"></i>
                          Delais - Zone et Qualification
                     </h6>
                 </div>
@@ -127,7 +126,7 @@
             <div class="border-0 list-group-item list-group-item-action d-flex align-items-start">
                 <div class="d-flex w-100 justify-content-between">
                     <h6 class="mb-1 text-primary fw-bold">
-                        <i class="fa-solid fa-ellipsis ti-sm" style="color: #FFD43B;"></i>
+                        <i class="fa-solid fa-ellipsis ti-sm" style="color: {{ $bonTravail->statutColor() }};"></i>
                         Date Echance
                     </h6>
                 </div>

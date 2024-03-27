@@ -13,15 +13,13 @@ return new class extends Migration
     {
         Schema::create('injection_pieces', function (Blueprint $table) {
             $table->id();
-            $table->integer("piece_id");
-            $table->foreign('piece_id')->references('id')->on('pieces')->onDelete('cascade');
-            $table->integer("bon_travail_id");
-            $table->foreign('bon_travail_id')->references('id')->on('bon_travails')->onDelete('cascade');
+            $table->foreignId("piece_id")->constrained('pieces', 'id')->onDelete('cascade');
+            $table->foreignId("ri_reference")->constrained("rapport_interventions",'ri_reference')->onDelete('cascade');
             $table->integer("quantite");
             $table->boolean("take_in_stock")->default(true);
             $table->integer("stock_price");
             $table->boolean("take_in_fournisseur")->nullable();
-            $table->boolean("fournisseur_name")->nullable();
+            $table->string("fournisseur_name")->nullable();
             $table->integer("fournisseur_price")->default(0);
             $table->string('injection_file')->nullable();
             $table->timestamps();
