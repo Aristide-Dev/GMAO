@@ -9,6 +9,7 @@ use App\Models\DemandeIntervention;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\File;
+use App\Enums\StatusEnum;
 
 class RapportRemplacementPieceController extends Controller
 {
@@ -49,18 +50,15 @@ class RapportRemplacementPieceController extends Controller
             'commentaire' => $request->commentaire ?? "",
         ]);
         
-        $bonTravail->status = "injection de piece";
+        $rapportIntervention->status = StatusEnum::INJECTION_PIECE;
+        $rapportIntervention->save();
+
+        $bonTravail->status = StatusEnum::INJECTION_PIECE;
         $bonTravail->save();
 
-        $demande->status = 'en cours';
+        $demande->status = StatusEnum::INJECTION_PIECE;
         $demande->save();
-        
 
-        // Modifier le statut du rapport d'intervention
-        if ($rapportIntervention) {
-            $rapportIntervention->status = "injection de piece";
-            $rapportIntervention->save();
-        }
         return redirect()->back()->with('success', 'Nouveau Rapport de remplacement de piece créé avec succès!');
     }
 

@@ -3,27 +3,6 @@
     <x-slot name="title_desc">{{ __('Demandes') }}</x-slot>
     <x-slot name="sidebar">prestataire</x-slot>
 
-    @php
-    $statuts = [
-        [
-            'statut' => 'en attente de validation',
-            'color' => 'warning',
-        ],
-        [
-            'statut' => 'transmise au prestataire',
-            'color' => 'primary',
-        ],
-        [
-            'statut' => 'annulée',
-            'color' => 'danger',
-        ],
-        [
-            'statut' => 'rejettée',
-            'color' => 'danger',
-        ],
-    ];
-    @endphp
-
 
     <div class="mt-3 col-12">
         <!-- Hoverable Table rows -->
@@ -33,6 +12,9 @@
                     <h5>Vos demandes d'interventions</h5>
                 </div>
             </div>
+
+            
+            {{-- <x-gmao.demande-list :demandes="$demandes" action="admin" /> --}}
 
             <div class="table-responsive text-nowrap d-none d-sm-none d-md-block">
                 <table class="table table-hover">

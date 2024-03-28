@@ -32,13 +32,13 @@
                                 {{ $key+1 }}
                             </td>
                             <td>
-                                <a href="{{ route('admin.pieces.edit', $piece) }}">{{ $piece->piece }}</a>
+                                <a class="{{ ($piece->stock_min == $piece->quantite) ? 'bg-label-danger':'text-dark' }}" href="{{ route('admin.pieces.edit', $piece) }}">{{ $piece->piece }}</a>
                             </td>
                             <td>
                                 {{ $piece->quantite }}
                             </td>
                             <td>
-                                {{ $piece->stock_min }}
+                                <span class="badge fw-bold w-100 {{ ($piece->stock_min == $piece->quantite) ? 'bg-label-danger':'text-dark' }}">{{ $piece->stock_min }}</span>
                             </td>
                             <td>
                                 <span class="fw-bold">

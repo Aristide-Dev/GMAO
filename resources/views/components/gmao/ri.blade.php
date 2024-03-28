@@ -32,7 +32,7 @@
     @endif
     {{-- rapport_constat --}}
 
-    
+
 
     {{-- rapport_remplacement_piece --}}
     @if($rapport_intervention->rapport_remplacement_piece)
@@ -40,11 +40,11 @@
     @endif
     {{-- rapport_remplacement_piece --}}
 
-    
+
 
     {{-- rapport_remplacement_piece --}}
     @if($rapport_intervention->injection_piece)
-    <x-gmao.rapport-injection-piece/>
+    <x-gmao.rapport-injection-piece :injection_piece="$rapport_intervention->injection_piece" :status_color="$rapport_intervention->statutColor()"/>
     @endif
     {{-- rapport_remplacement_piece --}}
 

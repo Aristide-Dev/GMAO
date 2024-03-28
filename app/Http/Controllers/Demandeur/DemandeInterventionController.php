@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\File;
+use App\Enums\StatusEnum;
 
 class DemandeInterventionController extends Controller
 {
@@ -69,7 +70,7 @@ class DemandeInterventionController extends Controller
             'site_id' => $request->site,
             'demandeur_id' => $demandeur->id,
             'demande_file' => $imagePath,
-            'status' => "en attente de validation",
+            'status' => StatusEnum::EN_ATTENTE,
         ])->save();
 
         return redirect()->back()->with('success', 'Nouvelle demande créée avec succès!');

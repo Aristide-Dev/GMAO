@@ -9,6 +9,7 @@ use App\Models\DemandeIntervention;
 use App\Rules\DateInterventionRule;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
+use App\Enums\StatusEnum;
 
 class RapportConstatController extends Controller
 {
@@ -66,13 +67,25 @@ class RapportConstatController extends Controller
             'commentaire' => $request->commentaire ?? "",
         ]);
 
-        if($request->status == 'terminé')
+        switch ($request->status) {
+            case 'terminé':
+                $request->status = StatusEnum::TERMINE;
+                break;
+            case 'en attente':
+                $request->status = StatusEnum::EN_ATTENTE;
+                break;
+            case 'annulé':
+                $request->status = StatusEnum::ANNULE;
+                break;
+            default:
+                break;
+        }
+
+        
+
+        if($request->status == StatusEnum::TERMINE)
         {
-            $demande->status = 'terminé';
-            $demande->save();
-        }elseif($request->status == 'annulé')
-        {
-            $demande->status = 'annulé';
+            $demande->status = $request->status;
             $demande->save();
         }
         

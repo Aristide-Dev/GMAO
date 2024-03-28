@@ -10,12 +10,24 @@
         <div id="caption"></div>
     </div>
     <div class="justify-between mx-1 row">
+        @if (
+                !$demande->bon_travails->last() || 
+                ($demande->bon_travails->last())->status == 'annulé' || 
+                ($demande->bon_travails->last())->status == 'rejeté'
+            )
         <div class="my-3 col-md-4">
             <x-gmao.create-bt :zones="$zones" :demande="$demande" :prestataires="$prestataires" />
         </div>
+        @endif
 
         {{-- Si il ya un bon de travail et qu'il existe un rapport d'intervention --}}
-        @if($demande->bon_travails->last() && ($demande->bon_travails->last())->rapportsIntervention)
+        @if(
+            $demande->bon_travails->last() && 
+            ($demande->bon_travails->last())->rapportsIntervention &&
+            ($demande->bon_travails->last())->status !== 'annulé' && 
+            ($demande->bon_travails->last())->status != 'rejeté' && 
+            ($demande->bon_travails->last())->status != 'terminé'
+        )
             <div class="my-3 col-md-4">
                 <x-gmao.injection-piece :pieces="$pieces" :rapport_intervention="($demande->bon_travails->last())->rapportsIntervention"/>
             </div>

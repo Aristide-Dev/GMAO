@@ -15,6 +15,7 @@ use App\Models\InjectionPiece;
 use App\Models\Piece;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use App\Enums\StatusEnum;
 use DateTime;
 
 class DemandeInterventionController extends Controller
@@ -76,7 +77,7 @@ class DemandeInterventionController extends Controller
             'site_id' => $request->site,
             'demandeur_id' => $request->demandeur,
             'demande_file' => $imagePath,
-            'status' => "en attente",
+            'status' => StatusEnum::EN_ATTENTE,
         ]);
 
         return redirect()->back()->with('success', 'Nouvelle demande créée avec succès!');
@@ -119,6 +120,24 @@ class DemandeInterventionController extends Controller
         //     'date echeance'=>$rapportIntervention->bon_travail->date_echeance
         // ];
         // dd($data, $priseEnChargeInfo);
+
+
+        
+
+        switch ($request->status) {
+            case 'terminé':
+                $request->status = StatusEnum::TERMINE;
+                break;
+            case 'en attente':
+                $request->status = StatusEnum::EN_ATTENTE;
+                break;
+            case 'annulé':
+                $request->status = StatusEnum::ANNULE;
+                break;
+            default:
+                break;
+        }
+
 
         // Mettre à jour le rapport d'intervention avec les informations fournies et calculées
         $rapportIntervention->update([
@@ -168,7 +187,7 @@ class DemandeInterventionController extends Controller
         if ($request->pris_dans_le_stock == 'on') {
             $validateData['take_in_fournisseur'] = null;
             $validateData['fournisseur_name'] = null;
-            $validateData['fournisseur_price'] = null;
+            $validateData['fournisseur_price'] = 0;
         } else {
             $request->validateWithBag('create_injection_piece', [
                 'nom_du_fournisseur' => 'required|string|max:255',

@@ -10,6 +10,7 @@ use App\Models\Zone;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use App\Enums\StatusEnum;
 
 class BonTravailController extends Controller
 {
@@ -73,7 +74,7 @@ class BonTravailController extends Controller
             $break_stepp += 1;
         }
 
-        $status = "en cours";
+        $status = StatusEnum::EN_ATTENTE;
 
         $bon_travail = BonTravail::create([
             'requete' => $request->requete,
@@ -95,7 +96,7 @@ class BonTravailController extends Controller
             'status' => $status,
         ]);
 
-        $demande->status = $status;
+        $demande->status = StatusEnum::EN_COURS;
         $demande->save();
 
         return redirect()->back()->with('success', 'Nouveau bon de travail créé avec succès!');
