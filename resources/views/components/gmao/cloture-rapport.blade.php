@@ -1,6 +1,6 @@
-@props(['rapport_intervention' => ''])
+@props(['rapport_intervention' => '', 'btn' => true])
 @php
-    $rapport_id ="cloture-rapport-offcanvas-".rand(333,500);
+    $rapport_id ="cloture-rapport-offcanvas";
     $show = '';
 @endphp
 
@@ -13,10 +13,12 @@
 @endif
 
 
+@if ($btn == true)
 <button class="add-new btn btn-success waves-effect waves-light" data-bs-toggle="offcanvas" data-bs-target="#{{ $rapport_id }}" align="right">
     <i class="ti ti-plus me-0 me-sm-1 ti-xs"></i>
     <span>CLOTURER LA REQUETE</span>
 </button>
+@endif
 <!-- Offcanvas to add new demande -->
 <div class="offcanvas offcanvas-end text-start {{ $show }}" tabindex="-1" id="{{ $rapport_id }}" aria-labelledby="{{ $rapport_id }}Label">
     <div class="offcanvas-header">
@@ -35,13 +37,13 @@
                 </select>
                 <x-input-error bag="create_cloture_rapport" for="status" class="mt-2" />
             </div>
-            
+
             <div class="mb-3">
                 <label for="bs-datepicker-format" class="form-label">numero_devis</label>
                 <input type="text" name="numero_devis" id="bs-datepicker-format" placeholder="" class="form-control" />
                 <x-input-error bag="create_cloture_rapport" for="numero_devis" class="mt-2" />
             </div>
-            
+
             <div class="mb-3">
                 <label for="bs-datepicker-format" class="form-label">bon_commande</label>
                 <input type="text" name="bon_commande" id="bs-datepicker-format" placeholder="" class="form-control" />

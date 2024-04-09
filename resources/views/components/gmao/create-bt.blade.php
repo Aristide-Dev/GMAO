@@ -1,4 +1,4 @@
-@props(['zones', 'demande', 'prestataires'])
+@props(['zones', 'demande', 'prestataires', 'btn'=> true, 'btn_color'=> 'primary'])
 @php
     $show = '';
     $create_bt_id ="create-bt-offcanvas";
@@ -12,10 +12,13 @@
     @endphp
 @endif
 
-<button class="add-new btn btn-primary waves-effect waves-light" data-bs-toggle="offcanvas" data-bs-target="#{{ $create_bt_id }}" align="right">
+@if ($btn == true)
+<button class="add-new btn btn-{{ $btn_color }} waves-effect waves-light" data-bs-toggle="offcanvas" data-bs-target="#{{ $create_bt_id }}" align="right">
     <i class="ti ti-plus me-0 me-sm-1 ti-xs"></i>
     <span>NOUVEAU BON DE TRAVAIL</span>
 </button>
+@endif
+
 <!-- Offcanvas to add new demande -->
 <div class="offcanvas offcanvas-end {{ $show }}" tabindex="-1" id="{{ $create_bt_id }}" aria-labelledby="{{ $create_bt_id }}Label">
     <div class="offcanvas-header">
@@ -71,7 +74,7 @@
                 </select>
                 <x-input-error bag="create_bon_travail" for="prestataire" class="mt-2" />
             </div>
-            
+
 
             <button type="submit" class="btn btn-success me-sm-3 me-1 data-submit">ENREGISTRER</button>
             <button type="reset" class="btn btn-label-danger" data-bs-dismiss="offcanvas">Annuler</button>

@@ -1,11 +1,19 @@
-@props(['action' => 'prestataires', "demandes"])
+@props(['action' => 'demandeur', "demandes"])
 @php
     $url ="";
-    if($action == 'admin')
-    {
-        $url = "admin";
-    }else{
-        $url = "prestataires";
+    switch ($action) {
+        case 'admin':
+            $url = "admin";
+            break;
+        case 'demandeur':
+            $url = "demandeur";
+            break;
+        case 'prestataires':
+            $url = "prestataires";
+            break;
+        default:
+            $url = "demandeur";
+            break;
     }
 @endphp
 
@@ -34,10 +42,10 @@
                     <span class="fw-bold">{{ $demande->di_reference }}</span>
                 </td>
                 <td class="text-left">
-                    @if ($url == 'admin')
-                        <a class="fw-bold" href="{{ route('admin.sites.show', $demande->site->id) }}">{{ $demande->site->name }}</a>
-                    @else
+                    @if ($url == 'prestataires')
                         <p class="fw-bold">{{ $demande->site->name }}</p>
+                    @else
+                        <a class="fw-bold" href="{{ route($url.'.sites.show', $demande->site->id) }}">{{ $demande->site->name }}</a>
                     @endif
                 </td>
                 <td class="text-left">
@@ -46,13 +54,13 @@
                     </div>
                 </td>
                 <td class="justify-center align-items-center">
-                    <ul class="justify-center m-0 my-3 text-center list-unstyled d-flex align-center avatar-group">
-                        <li data-bs-toggle="tooltip" class="d-block" data-popup="tooltip-custom" data-bs-placement="right" title="{{ $demande->demandeur->first_name }} {{ $demande->demandeur->last_name }}" class="avatar pull-up">
-                          <img class="rounded-circle w-25" src="/storage/assets/img/avatars/5.png" alt="photo">
-                          <p class="fw-bold">{{ $demande->demandeur->first_name }} {{ $demande->demandeur->last_name }}</p>
-                        </li>
-                      </ul>
+                    @if ($url == 'prestataires' || $url == 'demandeur')
+                        <p class="fw-bold">{{ $demande->demandeur->first_name }} {{ $demande->demandeur->last_name }}</p>
+                    @else
+                        <a href="{{ route('admin.utilisateurs.show',$demande->demandeur->id) }}" class="fw-bold">{{ $demande->demandeur->first_name }} {{ $demande->demandeur->last_name }}</a>
+                    @endif
                 </td>
+
                 <td class="text-center">
                     <span class="text-center badge me-1 w-100 text-uppercase" style="background-color: {{ $demande->statutColor() }}">{{ $demande->status }}</span>
                 </td>
@@ -98,15 +106,15 @@
             </div>
         </div>
         <h6 class="card-title">
-            
-            @if ($url == 'admin')
-            <a href="{{ route('admin.sites.show', $demande->site->id) }}">
-                <span class="h5">site</span>: <span class="text-muted">{{ $demande->site->name }}</span>
-            </a>
-            @else
+
+            @if ($url == 'prestataires')
                 <p class="fw-bold">{{ $demande->site->name }}</p>
+            @else
+                <a href="{{ route($url.'.sites.show', $demande->site->id) }}">
+                    <span class="h5">site</span>: <span class="text-muted">{{ $demande->site->name }}</span>
+                </a>
             @endif
-            
+
         </h6>
 
         <div class="mb-3 card-subtitle">

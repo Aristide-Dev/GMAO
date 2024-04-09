@@ -16,9 +16,14 @@ enum ZonePrioriteEnum: string  {
     public static function getText($urgence): string {
         // dd($urgence);
         return match ($urgence) {
-            self::FAIBLE == '3' => 'FAIBLE',
-            self::MOYEN == '2' => 'MOYEN',
-            self::PRIORITAIRE == '1' => 'PRIORITAIRE',
+            self::FAIBLE => 'FAIBLE',
+            self::MOYEN => 'MOYEN',
+            self::PRIORITAIRE => 'PRIORITAIRE',
+
+            '3' => 'FAIBLE',
+            '2' => 'MOYEN',
+            '1' => 'PRIORITAIRE',
+
             default => 'INCONNU',
         };
     }
@@ -26,9 +31,14 @@ enum ZonePrioriteEnum: string  {
     public static function getColor($urgence): string {
         // dd($urgence);
         return match ($urgence) {
-            self::FAIBLE || '3' => 'danger', // Rouge
-            self::MOYEN || '2' => 'warning', // Jaune
-            self::PRIORITAIRE || '1' => 'success', // Vert
+            self::FAIBLE => 'danger', // Rouge
+            self::MOYEN => 'warning', // Jaune
+            self::PRIORITAIRE => 'success', // Vert
+            
+            '3' => 'danger', // Rouge
+            '2' => 'warning', // Jaune
+            '1' => 'success', // Vert
+
             default => 'info', // Blue ciel par défaut
         };
     }

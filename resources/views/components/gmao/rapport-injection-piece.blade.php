@@ -9,21 +9,37 @@
 
     <div class="col-12">
         <div class="shadow-xs border-top border-top-3 list-group">
-            <div class="border-0 list-group-item list-group-item-action d-flex align-items-start">
-                <div class="d-block w-100 justify-content-start">
+            <div class="p-1 border-0 list-group-item list-group-item-action d-block align-items-start">
+                <div class="d-flex w-100 justify-content-between">
                     <h6 class="mb-1 text-primary fw-bold">
                         <i class="fa-solid fa-ellipsis ti-sm" style="color: {{ $status_color }};"></i>
                         Piece & Quantité
                     </h6>
-                    <small class="mb-1 w-30">{{ $injection_piece?$injection_piece?->piece->name:"" }} x{{ $injection_piece?$injection_piece?->quantite:"" }}</small>
+                    <small class="mb-1 w-30">{{ $injection_piece?$injection_piece?->piece->piece:"" }} <span class="p-2 shadow-sm rounded-pill fw-bolder bg-label-light text-dark">x{{ $injection_piece?$injection_piece?->quantite:"" }}</span> </small>
                 </div>
 
-                <div class="d-flex w-100 justify-content-between">
+                <div class="p-1 text-center d-flex w-100 justify-content-between bg-label-danger">
                     <h6 class="mb-1 text-primary fw-bold">
                         <i class="fa-solid fa-ellipsis ti-sm" style="color: {{ $status_color }};"></i>
-                        Details
+                        Prix dans le stock
                     </h6>
-                    <small class="mb-1 w-30">{{ $injection_piece?$injection_piece?->piece->name:"" }}</small>
+                    <small class="mb-1 w-30 fw-bold">{{ $injection_piece?$injection_piece?->stock_price:"" }} F</small>
+                </div>
+
+                <div class="p-1 text-center d-flex w-100 justify-content-between bg-label-danger">
+                    <h6 class="mb-1 text-primary fw-bold">
+                        <i class="fa-solid fa-ellipsis ti-sm" style="color: {{ $status_color }};"></i>
+                        Fournisseur
+                    </h6>
+                    <small class="mb-1 w-30 fw-bold">{{ $injection_piece?$injection_piece?->stock_price:"" }} F</small>
+                </div>
+
+                <div class="p-1 text-center d-flex w-100 justify-content-between bg-label-danger">
+                    <h6 class="mb-1 text-primary fw-bold">
+                        <i class="fa-solid fa-ellipsis ti-sm" style="color: {{ $status_color }};"></i>
+                        Prix du fournisseur
+                    </h6>
+                    <small class="mb-1 w-30 fw-bold">{{ $injection_piece?$injection_piece?->stock_price:"" }} F</small>
                 </div>
             </div>
         </div>

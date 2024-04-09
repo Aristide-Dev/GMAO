@@ -13,7 +13,7 @@
                 </div>
             </div>
 
-            
+
             {{-- <x-gmao.demande-list :demandes="$demandes" action="admin" /> --}}
 
             <div class="table-responsive text-nowrap d-none d-sm-none d-md-block">
@@ -24,7 +24,7 @@
                             <th>N°</th>
                             <th>D.I</th>
                             <th class="text-left">Site</th>
-                            <th class="text-left">Equipement</th>
+                            <th class="text-left">Document</th>
                             <th>Status</th>
                             <th>action</th>
                         </tr>
@@ -47,7 +47,7 @@
                                 </div>
                             </td>
                             <td>
-                                <span class="badge bg-{{ $bon_travail->demande->statutColor() }} me-1">{{ $bon_travail->demande->status }}</span>
+                                <span class="badge me-1 w-100" style="background-color: {{ $bon_travail->demande->statutColor() }}">{{ $bon_travail->demande->status }}</span>
                             </td>
                             <td>
                                 <a href="{{ route('prestataires.demandes.show', $bon_travail->demande) }}" class="btn btn-primary">Suivis</a>
@@ -62,7 +62,7 @@
                             <th>N°</th>
                             <th>D.I</th>
                             <th class="text-left">Site</th>
-                            <th class="text-left">Equipement</th>
+                            <th class="text-left">Document</th>
                             <th>Status</th>
                             <th>action</th>
                         </tr>
@@ -71,24 +71,21 @@
             </div>
 
 
-            @for ($i = 0; $i < 30; $i++)
+            @forelse ($bon_travails as $key => $bon_travail)
             <div class="p-2 m-2 mb-4 border rounded-lg shadow card d-sm-block d-md-none d-lg-none d-xl-none">
                 <div class="card-body">
                     <div class="card-title header-elements">
-                        <h5 class="m-0 me-2">DI0000{{ rand(1,200) }}</h5>
+                        <h5 class="m-0 me-2">{{ $bon_travail->di_reference }}</h5>
                         <div class="card-title-elements ms-auto">
                             <button type="button" class="btn btn-icon btn-sm btn-danger">
                                 <span class="tf-icon ti-xs ti ti-brand-shopee"></span>
                             </button>
                         </div>
                     </div>
-                    <h6 class="card-title"><span class="h5">site</span>: <span class="text-muted">{{ fake()->name }}</span></h6>
+                    <h6 class="card-title"><span class="h5">site</span>: <span class="text-muted">{{ $bon_travail->demande->site->name }}</span></h6>
                     <div class="mb-3 card-subtitle text-muted"><span class="h6">Equipement: </span>{{ fake()->name }}</div>
                     <div class="mb-3 card-subtitle">
-                        @php
-                        $st = $statuts[rand(0,3)];
-                        @endphp
-                        <span class="badge bg-label-{{ $st['color'] }} me-1">{{ $st['statut'] }}</span>
+                        <span class="badge me-1" style="background-color: {{ $bon_travail->demande->statutColor() }}">{{ $bon_travail->demande->status }}</span>
                     </div>
 
                     <p class="card-text">
@@ -97,7 +94,9 @@
                     <a href="{{ route('prestataires.demandes.show', rand(1,5)) }}" class="card-link btn btn-primary">Details</a>
                 </div>
             </div>
-            @endfor
+            @empty
+                <h3 class="text-center">Aucun</h3>
+            @endforelse
 
 
         <!--/ Hoverable Table rows -->
