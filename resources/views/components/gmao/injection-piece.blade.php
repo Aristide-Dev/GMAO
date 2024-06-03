@@ -1,6 +1,6 @@
-@props(['pieces','rapport_intervention'])
+@props(['pieces','rapport_intervention', 'btn'=> true])
 @php
-$rapport_id ="injection-piece-offcanvas-".rand(200,300);
+$rapport_id ="injection-piece-offcanvas";
 $show = "";
 @endphp
 
@@ -62,11 +62,12 @@ $show = "show";
 </style>
 
 
-
+@if ($btn == true)
 <button class="add-new btn btn-warning waves-effect waves-light" data-bs-toggle="offcanvas" data-bs-target="#{{ $rapport_id }}" align="right">
     <i class="ti ti-plus me-0 me-sm-1 ti-xs"></i>
     <span>INJECTION DE PIECE</span>
 </button>
+@endif
 <!-- Offcanvas to add new piece -->
 <div class="offcanvas offcanvas-end {{ $show }}" tabindex="-1" id="{{ $rapport_id }}" aria-labelledby="{{ $rapport_id }}Label">
     <div class="offcanvas-header">

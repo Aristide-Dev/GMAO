@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact" data-template="vertical-menu-template">
+<html lang="fr" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact " dir="ltr" data-theme="theme-default" data-assets-path="/storage/assets/" data-template="vertical-menu-template">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
@@ -14,7 +14,7 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com/">
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;ampdisplay=swap" rel="stylesheet">
+    {{-- <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;ampdisplay=swap" rel="stylesheet"> --}}
 
     <!-- Icons -->
     {{-- <link rel="stylesheet" href="/storage/assets/vendor/fonts/fontawesome.css" />
@@ -79,12 +79,13 @@
     {{-- <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  --> --}}
     {{-- <script src=""></script> --}}
 
+    <script src="../../assets/vendor/js/template-customizer.js"></script>
 
     @vite([
         'resources/assets/vendor/css/pages/cards-advance.css',
         'resources/assets/vendor/js/helpers.js',
+        'resources/assets/vendor/js/template-customizer.js',
         'resources/assets/js/config.js',
-        'resources/assets/vendor/libs/jquery/jquery.js',
         'resources/js/app.js',
     ])
 
@@ -217,6 +218,7 @@
 
     @vite([
         // <!-- Core JS -->
+        'resources/assets/vendor/libs/jquery/jquery.js',
         'resources/assets/vendor/libs/popper/popper.js',
         'resources/assets/vendor/js/bootstrap.js',
         'resources/assets/vendor/libs/node-waves/node-waves.js',
@@ -237,11 +239,6 @@
         'resources/assets/js/main.js',
         // <!-- Page JS -->
         'resources/assets/js/dashboards-analytics.js',
-        'resources/assets/js/forms-selects.js',
-        'resources/assets/js/charts-apex.js',
-        'resources/assets/js/forms-file-upload.js',
-        'resources/assets/js/forms-extras.js',
-        'resources/assets/js/cards-statistics.js',
     ])
 
 

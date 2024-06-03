@@ -43,7 +43,7 @@
 
 
     {{-- rapport_remplacement_piece --}}
-    @if($rapport_intervention->injection_piece)
+    @if(!empty($rapport_intervention->injection_piece))
     <x-gmao.rapport-injection-piece :injection_piece="$rapport_intervention->injection_piece" :status_color="$rapport_intervention->statutColor()"/>
     @endif
     {{-- rapport_remplacement_piece --}}

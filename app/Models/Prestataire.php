@@ -50,5 +50,22 @@ class Prestataire extends Model
         return $this->hasMany(BonTravail::class);
     }
 
+    /**
+     * Récupère toutes les demandes attribuées à ce prestataire via les bons de travail.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function demandesAttribuees()
+    {
+        return $this->hasManyThrough(
+            Demande::class, // Modèle de la demande
+            BonTravail::class, // Modèle du bon de travail
+            'prestataire_id', // Clé étrangère du prestataire dans le bon de travail
+            'di_reference', // Clé étrangère du bon de travail dans la demande
+            'id', // Clé primaire du prestataire
+            'di_reference' // Clé primaire du bon de travail
+        )->distinct();
+    }
+
 
 }

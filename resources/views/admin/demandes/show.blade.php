@@ -9,23 +9,37 @@
         <img class="modal-content" id="img01">
         <div id="caption"></div>
     </div>
+
+    <x-gmao.config.demandes-actions :demande="$demande"/>
+
+    <x-gmao.create-bt :zones="$zones" :demande="$demande" :prestataires="$prestataires" :btn="false"/>
+    @if($demande->bon_travails->last() && ($demande->bon_travails->last())?->rapportsIntervention)
+        <x-gmao.injection-piece :pieces="$pieces" :rapport_intervention="($demande->bon_travails->last())?->rapportsIntervention" :btn="false"/>
+        <x-gmao.cloture-rapport :rapport_intervention="($demande->bon_travails->last())?->rapportsIntervention" :btn="false"/>
+    @endif
+
+
+    <br/>
+
     <div class="justify-between mx-1 row">
-        @if (
-                !$demande->bon_travails->last() || 
-                ($demande->bon_travails->last())->status == 'annulé' || 
+
+
+        {{-- @if (
+                !$demande->bon_travails->last() ||
+                ($demande->bon_travails->last())->status == 'annulé' ||
                 ($demande->bon_travails->last())->status == 'rejeté'
             )
         <div class="my-3 col-md-4">
             <x-gmao.create-bt :zones="$zones" :demande="$demande" :prestataires="$prestataires" />
         </div>
-        @endif
+        @endif --}}
 
         {{-- Si il ya un bon de travail et qu'il existe un rapport d'intervention --}}
-        @if(
-            $demande->bon_travails->last() && 
+        {{-- @if(
+            $demande->bon_travails->last() &&
             ($demande->bon_travails->last())->rapportsIntervention &&
-            ($demande->bon_travails->last())->status !== 'annulé' && 
-            ($demande->bon_travails->last())->status != 'rejeté' && 
+            ($demande->bon_travails->last())->status != 'annulé' &&
+            ($demande->bon_travails->last())->status != 'rejeté' &&
             ($demande->bon_travails->last())->status != 'terminé'
         )
             <div class="my-3 col-md-4">
@@ -35,9 +49,10 @@
             <div class="my-3 col-md-4">
                 <x-gmao.cloture-rapport :rapport_intervention="($demande->bon_travails->last())->rapportsIntervention" />
             </div>
-        @endif
+        @endif --}}
     </div>
-    <div class="row">
+
+    <div class="mt-3 row">
         {{-- Details de la Requete --}}
         <div class="mb-4 col-lg-6 col-md-6">
             <div class="card h-100">
@@ -95,5 +110,5 @@
     </x-slot>
 
     <script src="/storage/js/file_viewer.js">
-        </x-gmao-layout>
+</x-gmao-layout>
 

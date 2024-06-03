@@ -21,6 +21,8 @@ class DemandeInterventionController extends Controller
         $agent = Auth::user();
         $prestataire = $agent->prestataire;
         $bon_travails = $prestataire->bon_travails ?? [];
+        $demandes = $prestataire->demandes;
+        // dd($demandes);
         return view('prestataires.demandes.index', compact('bon_travails'));
     }
 

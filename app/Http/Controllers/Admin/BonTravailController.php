@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\StatusEnum;
 use App\Http\Controllers\Controller;
+use App\Mail\CreateBTMail;
 use App\Models\BonTravail;
 use App\Models\DemandeIntervention;
+use App\Models\Prestataire;
 use App\Models\RapportIntervention;
 use App\Models\Zone;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Carbon\Carbon;
-use App\Enums\StatusEnum;
+use Illuminate\Support\Facades\Mail;
 
 class BonTravailController extends Controller
 {
@@ -50,6 +53,7 @@ class BonTravailController extends Controller
 
         $zone = Zone::where('id', $request->zone)->first();
         $demande = DemandeIntervention::where('di_reference', $request->di_reference)->first();
+        $prestataire = Prestataire::where('id', $request->prestataire)->first();
         $date_echeance = $this->generateDateEcheane($demande->created_at,$zone->delais);
         // dd($demande);
         $bt_reference = $this->generateBTReference();
@@ -84,7 +88,7 @@ class BonTravailController extends Controller
             'zone_priorite' => $zone->priorite,
             'zone_delais' => $zone->delais,
             'equipement_id' => $request->equipement,
-            'prestataire_id' => $request->prestataire,
+            'prestataire_id' => $prestataire->id,
             'user_id' => $auth_user->id,
             'date_echeance' => $date_echeance,
             'status' => $status,
@@ -99,13 +103,15 @@ class BonTravailController extends Controller
         $demande->status = StatusEnum::EN_COURS;
         $demande->save();
 
+        Mail::send(new CreateBTMail($bon_travail, $prestataire));
+
         return redirect()->back()->with('success', 'Nouveau bon de travail créé avec succès!');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(BonTravail $bonTravail)
+    public function show(\App\Models\BonTravail $bonTravail)
     {
         //
     }
