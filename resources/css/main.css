@@ -1,43 +1,43 @@
 /* Gray */
 
 .text-gray-50 {
-    background-color: #F9FAFB;
+    color: #F9FAFB;
 }
 
 .text-gray-100 {
-    background-color: #F3F4F6;
+    color: #F3F4F6;
 }
 
 .text-gray-200 {
-    background-color: #E5E7EB;
+    color: #E5E7EB;
 }
 
 .text-gray-300 {
-    background-color: #D1D5DB;
+    color: #D1D5DB;
 }
 
 .text-gray-400 {
-    background-color: #9CA3AF;
+    color: #9CA3AF;
 }
 
 .text-gray-500 {
-    background-color: #6B7280;
+    color: #6B7280;
 }
 
 .text-gray-600 {
-    background-color: #4B5563;
+    color: #4B5563;
 }
 
 .text-gray-700 {
-    background-color: #374151;
+    color: #374151;
 }
 
 .text-gray-800 {
-    background-color: #1F2937;
+    color: #1F2937;
 }
 
 .text-gray-900 {
-    background-color: #111827;
+    color: #111827;
 }
 
 

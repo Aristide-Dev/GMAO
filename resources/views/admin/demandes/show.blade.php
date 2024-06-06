@@ -2,6 +2,7 @@
     <x-slot name="title">{{ __('Details de la Demande') }}</x-slot>
     <x-slot name="title_desc">{{ __('Details de la Demande') }}</x-slot>
     <x-slot name="sidebar">admin</x-slot>
+    <x-breadcrumb :data="['Demandes'=> route('admin.demandes.index'), 'suivi' => '']"/>
 
 
     <div id="myShowDemandeModal" class="modal">

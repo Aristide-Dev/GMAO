@@ -6,6 +6,7 @@
 
         @vite(['resources/css/file_viewer.css'])
     </x-slot>
+    <x-breadcrumb :data="['Demandes'=> '']"/>
 
     <script src="/storage/js/file_viewer.js">
 

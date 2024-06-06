@@ -2,6 +2,7 @@
     <x-slot name="title">{{ __('ZONES & PRIORITES') }}</x-slot>
     <x-slot name="title_desc">{{ __('Administration des zones') }}</x-slot>
     <x-slot name="sidebar">admin</x-slot>
+    <x-breadcrumb :data="['Zones et Priorités'=> '']"/>
 
 
     <div class="mt-3 col-12">
@@ -35,7 +36,7 @@
                                 <div class="fw-bold p-1 rounded-pill text-center bg-label-{{ $zone->prioriteColor() }}">{{ $zone->prioriteText() }}</div>
                             </td>
                             <td>
-                                <span class="fw-bolder text-center">
+                                <span class="text-center fw-bolder">
                                     {{ $zone->delais }} H
                                 </span>
                             </td>

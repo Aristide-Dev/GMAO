@@ -2,6 +2,7 @@
     <x-slot name="title">{{ __('Sites') }}</x-slot>
     <x-slot name="title_desc">{{ __('Informations sur le Site') }}</x-slot>
     <x-slot name="sidebar">admin</x-slot>
+    <x-breadcrumb :data="['Sites'=> route('admin.sites.index'), ''.$site->name.'' => '']"/>
 
     <h2 class="fw-bold">{{ $site->name }}</h1>
         @php

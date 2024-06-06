@@ -87,6 +87,8 @@
         'resources/assets/vendor/js/template-customizer.js',
         'resources/assets/js/config.js',
         'resources/js/app.js',
+        'resources/css/app.css',
+        'resources/css/main.css',
     ])
 
 
@@ -104,7 +106,7 @@
                 <div class="app-brand demo">
                     <a href="/" class="app-brand-link">
                         <span class="app-brand-logo">
-                            {{-- <img src="/storage/assets/img/logo.png" alt="logo" width="35%" /> --}}
+                            <img src="/storage/assets/img/logo.png" alt="logo" width="35%" />
                         </span>
                     </a>
                 </div>

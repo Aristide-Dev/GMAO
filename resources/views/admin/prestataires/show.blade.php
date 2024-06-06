@@ -7,6 +7,7 @@
         </div>
     </x-slot>
     <x-slot name="sidebar">admin</x-slot>
+    <x-breadcrumb :data="['Prestataires'=> route('admin.prestataires.index'), 'Détails'=> '']"/>
 
     @php
     $statuts = [
@@ -140,7 +141,7 @@
                                         @php
                                             $admin = $prestataire->admin();
                                         @endphp
-                                        
+
                                         @if($admin)
                                         <tr>
                                             <td>
@@ -174,7 +175,7 @@
             </div>
         </div>
 
-        
+
         <div class="mb-4 col-12 col-md-6 mb-md-2">
             <p class="text-light fw-medium">Liste des agents du prestataire</p>
             <div class="mt-3 accordion" id="prestataireAgentListAccordion">
