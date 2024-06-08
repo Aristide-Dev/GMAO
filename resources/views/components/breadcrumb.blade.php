@@ -12,7 +12,7 @@
         @foreach ($data as $key => $item)
             @if(empty($item))
                 <li class="text-gray-200 breadcrumb-item active" aria-current="page">
-                    <span class="text-gray-400 fw-normal text-capitalize fst-italic fw-bold">{{ $key }}</span>
+                    <span class="text-gray-400 fw-normal text-capitalize fst-italic fw-bold animate-pulse">{{ $key }}</span>
                 </li>
             @else
                 <li class="fw-bolder breadcrumb-item">

@@ -2638,3 +2638,673 @@
 .rounded-bl-full {
     border-bottom-left-radius: 9999px;
 }
+
+
+/* Shadow Color Classes */
+
+.shadow-inherit {
+    --tw-shadow-color: inherit;
+}
+
+.shadow-current {
+    --tw-shadow-color: currentColor;
+}
+
+.shadow-transparent {
+    --tw-shadow-color: transparent;
+}
+
+.shadow-black {
+    --tw-shadow-color: #000;
+}
+
+.shadow-white {
+    --tw-shadow-color: #fff;
+}
+
+
+/* Slate */
+
+.shadow-slate-50 {
+    --tw-shadow-color: #f8fafc;
+}
+
+.shadow-slate-100 {
+    --tw-shadow-color: #f1f5f9;
+}
+
+
+/* ... */
+
+.shadow-slate-950 {
+    --tw-shadow-color: #020617;
+}
+
+
+/* Gray */
+
+.shadow-gray-50 {
+    --tw-shadow-color: #f9fafb;
+}
+
+.shadow-gray-100 {
+    --tw-shadow-color: #f3f4f6;
+}
+
+
+/* ... */
+
+.shadow-gray-950 {
+    --tw-shadow-color: #030712;
+}
+
+
+/* Zinc */
+
+.shadow-zinc-50 {
+    --tw-shadow-color: #fafafa;
+}
+
+.shadow-zinc-100 {
+    --tw-shadow-color: #f4f4f5;
+}
+
+
+/* ... */
+
+.shadow-zinc-950 {
+    --tw-shadow-color: #09090b;
+}
+
+
+/* Neutral */
+
+.shadow-neutral-50 {
+    --tw-shadow-color: #fafafa;
+}
+
+.shadow-neutral-100 {
+    --tw-shadow-color: #f5f5f5;
+}
+
+
+/* ... */
+
+.shadow-neutral-950 {
+    --tw-shadow-color: #0a0a0a;
+}
+
+
+/* Stone */
+
+.shadow-stone-50 {
+    --tw-shadow-color: #fafaf9;
+}
+
+.shadow-stone-100 {
+    --tw-shadow-color: #f5f5f4;
+}
+
+
+/* ... */
+
+.shadow-stone-950 {
+    --tw-shadow-color: #0c0a09;
+}
+
+
+/* Red */
+
+.shadow-red-50 {
+    --tw-shadow-color: #fef2f2;
+}
+
+.shadow-red-100 {
+    --tw-shadow-color: #fee2e2;
+}
+
+
+/* ... */
+
+.shadow-red-950 {
+    --tw-shadow-color: #450a0a;
+}
+
+
+/* Orange */
+
+.shadow-orange-50 {
+    --tw-shadow-color: #fff7ed;
+}
+
+.shadow-orange-100 {
+    --tw-shadow-color: #ffedd5;
+}
+
+
+/* ... */
+
+.shadow-orange-950 {
+    --tw-shadow-color: #431407;
+}
+
+
+/* Amber */
+
+.shadow-amber-50 {
+    --tw-shadow-color: #fffbeb;
+}
+
+.shadow-amber-100 {
+    --tw-shadow-color: #fef3c7;
+}
+
+
+/* ... */
+
+.shadow-amber-950 {
+    --tw-shadow-color: #451a03;
+}
+
+
+/* Yellow */
+
+.shadow-yellow-50 {
+    --tw-shadow-color: #fefce8;
+}
+
+.shadow-yellow-100 {
+    --tw-shadow-color: #fef9c3;
+}
+
+
+/* ... */
+
+.shadow-yellow-950 {
+    --tw-shadow-color: #422006;
+}
+
+
+/* Lime */
+
+.shadow-lime-50 {
+    --tw-shadow-color: #f7fee7;
+}
+
+.shadow-lime-100 {
+    --tw-shadow-color: #ecfccb;
+}
+
+
+/* ... */
+
+.shadow-lime-950 {
+    --tw-shadow-color: #1a2e05;
+}
+
+
+/* Green */
+
+.shadow-green-50 {
+    --tw-shadow-color: #f0fdf4;
+}
+
+.shadow-green-100 {
+    --tw-shadow-color: #dcfce7;
+}
+
+
+/* ... */
+
+.shadow-green-950 {
+    --tw-shadow-color: #052e16;
+}
+
+
+/* Emerald */
+
+.shadow-emerald-50 {
+    --tw-shadow-color: #ecfdf5;
+}
+
+.shadow-emerald-100 {
+    --tw-shadow-color: #d1fae5;
+}
+
+
+/* ... */
+
+.shadow-emerald-950 {
+    --tw-shadow-color: #022c22;
+}
+
+
+/* Teal */
+
+.shadow-teal-50 {
+    --tw-shadow-color: #f0fdfa;
+}
+
+.shadow-teal-100 {
+    --tw-shadow-color: #ccfbf1;
+}
+
+
+/* ... */
+
+.shadow-teal-950 {
+    --tw-shadow-color: #042f2e;
+}
+
+
+/* Cyan */
+
+.shadow-cyan-50 {
+    --tw-shadow-color: #ecfeff;
+}
+
+.shadow-cyan-100 {
+    --tw-shadow-color: #cffafe;
+}
+
+
+/* ... */
+
+.shadow-cyan-950 {
+    --tw-shadow-color: #083344;
+}
+
+
+/* Sky */
+
+.shadow-sky-50 {
+    --tw-shadow-color: #f0f9ff;
+}
+
+.shadow-sky-100 {
+    --tw-shadow-color: #e0f2fe;
+}
+
+
+/* ... */
+
+.shadow-sky-950 {
+    --tw-shadow-color: #082f49;
+}
+
+
+/* Blue */
+
+.shadow-blue-50 {
+    --tw-shadow-color: #eff6ff;
+}
+
+.shadow-blue-100 {
+    --tw-shadow-color: #dbeafe;
+}
+
+
+/* ... */
+
+.shadow-blue-950 {
+    --tw-shadow-color: #172554;
+}
+
+
+/* Indigo */
+
+.shadow-indigo-50 {
+    --tw-shadow-color: #eef2ff;
+}
+
+.shadow-indigo-100 {
+    --tw-shadow-color: #e0e7ff;
+}
+
+
+/* ... */
+
+.shadow-indigo-950 {
+    --tw-shadow-color: #1e1b4b;
+}
+
+
+/* Violet */
+
+.shadow-violet-50 {
+    --tw-shadow-color: #f5f3ff;
+}
+
+.shadow-violet-100 {
+    --tw-shadow-color: #ede9fe;
+}
+
+
+/* ... */
+
+.shadow-violet-950 {
+    --tw-shadow-color: #2e1065;
+}
+
+
+/* Purple */
+
+.shadow-purple-50 {
+    --tw-shadow-color: #faf5ff;
+}
+
+.shadow-purple-100 {
+    --tw-shadow-color: #f3e8ff;
+}
+
+
+/* ... */
+
+.shadow-purple-950 {
+    --tw-shadow-color: #3b0764;
+}
+
+
+/* Fuchsia */
+
+.shadow-fuchsia-50 {
+    --tw-shadow-color: #fdf4ff;
+}
+
+.shadow-fuchsia-100 {
+    --tw-shadow-color: #fae8ff;
+}
+
+
+/* ... */
+
+.shadow-fuchsia-950 {
+    --tw-shadow-color: #4a044e;
+}
+
+
+/* Pink */
+
+.shadow-pink-50 {
+    --tw-shadow-color: #fdf2f8;
+}
+
+.shadow-pink-100 {
+    --tw-shadow-color: #fce7f3;
+}
+
+
+/* ... */
+
+.shadow-pink-950 {
+    --tw-shadow-color: #500724;
+}
+
+
+/* Rose */
+
+.shadow-rose-50 {
+    --tw-shadow-color: #fff1f2;
+}
+
+.shadow-rose-100 {
+    --tw-shadow-color: #ffe4e6;
+}
+
+
+/* ... */
+
+.shadow-rose-950 {
+    --tw-shadow-color: #4c0519;
+}
+
+
+/* Apply Shadows */
+
+
+/* Example Usage */
+
+.shadow {
+    box-shadow: 0 0 10px var(--tw-shadow-color);
+}
+
+
+/* Animation Classes */
+
+.animate-none {
+    animation: none;
+}
+
+.animate-spin {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.animate-ping {
+    animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes ping {
+    75%,
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+.animate-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+    0%,
+    100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: .5;
+    }
+}
+
+.animate-bounce {
+    animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+    0%,
+    100% {
+        transform: translateY(-25%);
+        animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+    }
+    50% {
+        transform: translateY(0);
+        animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+    }
+}
+
+
+/* Transition Classes */
+
+.transition-none {
+    transition-property: none;
+}
+
+.transition-all {
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+}
+
+.transition {
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+}
+
+.transition-colors {
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+}
+
+.transition-opacity {
+    transition-property: opacity;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+}
+
+.transition-shadow {
+    transition-property: box-shadow;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+}
+
+.transition-transform {
+    transition-property: transform;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+}
+
+
+/* Transition Duration Classes */
+
+.duration-0 {
+    transition-duration: 0s;
+}
+
+.duration-75 {
+    transition-duration: 75ms;
+}
+
+.duration-100 {
+    transition-duration: 100ms;
+}
+
+.duration-150 {
+    transition-duration: 150ms;
+}
+
+.duration-200 {
+    transition-duration: 200ms;
+}
+
+.duration-300 {
+    transition-duration: 300ms;
+}
+
+.duration-500 {
+    transition-duration: 500ms;
+}
+
+.duration-700 {
+    transition-duration: 700ms;
+}
+
+.duration-1000 {
+    transition-duration: 1000ms;
+}
+
+
+/* Transition Timing Function Classes */
+
+.ease-linear {
+    transition-timing-function: linear;
+}
+
+.ease-in {
+    transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
+}
+
+.ease-out {
+    transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+}
+
+.ease-in-out {
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+
+/* Transition Delay Classes */
+
+.delay-0 {
+    transition-delay: 0s;
+}
+
+.delay-75 {
+    transition-delay: 75ms;
+}
+
+.delay-100 {
+    transition-delay: 100ms;
+}
+
+.delay-150 {
+    transition-delay: 150ms;
+}
+
+.delay-200 {
+    transition-delay: 200ms;
+}
+
+.delay-300 {
+    transition-delay: 300ms;
+}
+
+.delay-500 {
+    transition-delay: 500ms;
+}
+
+.delay-700 {
+    transition-delay: 700ms;
+}
+
+.delay-1000 {
+    transition-delay: 1000ms;
+}
+
+
+/* Font Weight Classes */
+
+.font-thin {
+    font-weight: 100;
+}
+
+.font-extralight {
+    font-weight: 200;
+}
+
+.font-light {
+    font-weight: 300;
+}
+
+.font-normal {
+    font-weight: 400;
+}
+
+.font-medium {
+    font-weight: 500;
+}
+
+.font-semibold {
+    font-weight: 600;
+}
+
+.font-bold {
+    font-weight: 700;
+}
+
+.font-extrabold {
+    font-weight: 800;
+}
+
+.font-black {
+    font-weight: 900;
+}
