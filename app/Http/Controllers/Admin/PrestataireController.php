@@ -17,8 +17,7 @@ class PrestataireController extends Controller
      */
     public function index()
     {
-        $prestataires = Prestataire::paginate(20);
-        return view('admin.prestataires.index', compact('prestataires'));
+        return view('admin.prestataires.index');
     }
 
     /**
