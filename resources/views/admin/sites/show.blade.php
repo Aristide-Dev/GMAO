@@ -11,19 +11,15 @@
 
     <div class="row">
         <div class="mb-4 col-md-4 h-100">
-            <div class="h-auto card">
-                <div class="row h-100">
-                    <div class="col-sm-5">
-                        <div class="mt-3 d-flex align-items-end h-100 justify-content-center mt-sm-0">
-                            <img src="/storage/svg/station_service.svg" class="img-fluid mt-sm-4 mt-md-0" alt="add-new-roles" width="200" height="500">
-                        </div>
-                    </div>
-                    <div class="col-sm-7">
-                        <div class="card-body text-start ps-sm-0">
+            <div class="h-100 card" style="background-image: url('{{ Storage::url("svg/station_service.svg") }}'); background-size:cover; background-position:center;">
+                <div class="mx-auto bg-gray-950/60 row h-100">
+                    <div class="mb-3 h-100 col-12">
+                        <div class="pb-3 mb-3 card-body text-start ps-sm-0">
                             <x-gmao.add-equipement :site="$site"/>
-                            <p class="mt-1 mb-0">Ajouter un equipement si il n'existe pas encore</p>
+                            <p class="mt-1 mb-0 font-bold text-white">Ajouter un equipement si il n'existe pas encore</p>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
