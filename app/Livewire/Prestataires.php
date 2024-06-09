@@ -14,7 +14,7 @@ class Prestataires extends Component
 
     public function render()
     {
-        sleep(1);
+        // sleep(1);
         return view('livewire.prestataires', [
             'prestataires' => Prestataire::where('name', 'like', '%'.$this->search.'%')
                                             ->orwhere('slug', 'like', '%'.$this->search.'%')

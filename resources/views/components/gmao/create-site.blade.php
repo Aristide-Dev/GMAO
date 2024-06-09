@@ -22,21 +22,21 @@
             @csrf
             <div class="mb-3">
                 <label for="name" class="form-label">Site</label>
-                <input type="text" id="name" name="name" placeholder="Nom du site" class="form-control"/>
+                <input type="text" id="name" name="name" placeholder="Nom du site" class="rounded form-control"/>
                 <x-input-error bag="create_site" for="name" class="mt-2" />
             </div>
             <div class="mb-3">
                 <label class="form-label" for="registre">registre</label>
-                <select id="registre" name="registre" class="form-select">
-                    <option value="">-- CHOISIR --</option>
+                <select id="registre" name="registre" class="select2 form-select form-select-sm" data-allow-clear="true">
+                    <option value="0">-- CHOISIR --</option>
                     <option value="contrat">CONTRAT</option>
                     <option value="b2b">B2B</option>
                     <option value="autre">AUTRE</option>
                 </select>
                 <x-input-error bag="create_site" for="registre" class="mt-2" />
             </div>
-            <button type="submit" class="btn btn-success me-sm-3 me-1 data-submit">ENREGISTRER</button>
-            <button type="reset" class="btn btn-label-danger" data-bs-dismiss="offcanvas">Annuler</button>
+            <button type="submit" class="text-white bg-green-500 hover:bg-green-600 btn">ENREGISTRER</button>
+            <button type="reset" class="text-white bg-red-500 btn hover:bg-red-600" data-bs-dismiss="offcanvas">Annuler</button>
         </form>
     </div>
 </div>

@@ -23,7 +23,7 @@ $indices_performance = [
     ],
 ];
 @endphp
-<div class="mb-4 shadow-2xl card">
+<div class="mb-4 shadow-3xl card">
     <!-- Formulaire de recherche -->
     <div lass="mb-4">
         <div class="flex mt-3 justify-content-center">
@@ -47,7 +47,18 @@ $indices_performance = [
         </div>
     </div>
     <div class="card-body">
-        <div class="mb-4 row gy-4" wire:loading.class="opacity-10">
+        <div class="mb-4 row gy-4" wire:loading.class="animate-pulse">
+            
+            <div class="flex justify-content-center col-12" wire:loading>
+                <div class="flex gap-0 p-3 bg-transparent rounded-lg justify-content-center animate-pulse">
+                    <div class="demo-inline-spacing display-1">
+                        <div class="spinner-border spinner-border-lg text-primary h1 display-1" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             @forelse ($prestataires as $key => $prestataire)
                 <div class="col-sm-6 col-lg-4">
                     <div class="border bg-gray-50 card">
@@ -83,7 +94,7 @@ $indices_performance = [
                     </div>
                 </div>
             @empty
-                <div class="flex justify-content-center col-12">
+                <div class="flex justify-content-center col-12" wire:loading.class="hidden">
                     <div class="flex gap-0 p-3 bg-gray-700 rounded-lg justify-content-center animate-pulse">
                         <span class="px-3 py-2 m-0 font-bold text-center text-white flex-0">Aucun Prestataire trouvé</span>
                     </div>

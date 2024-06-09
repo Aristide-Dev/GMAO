@@ -56,12 +56,12 @@
         'resources/assets/vendor/libs/node-waves/node-waves.css',
         'resources/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css',
         'resources/assets/vendor/libs/typeahead-js/typeahead.css',
-        'resources/assets/vendor/libs/bootstrap-select/bootstrap-select.css',
         'resources/assets/vendor/libs/apex-charts/apex-charts.css',
         'resources/assets/vendor/libs/swiper/swiper.css',
         'resources/assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css',
         'resources/assets/vendor/libs/datatables-checkboxes-jquery/datatables.checkboxes.css',
         'resources/assets/vendor/libs/select2/select2.css',
+        'resources/assets/vendor/libs/bootstrap-select/bootstrap-select.css',
         'resources/assets/vendor/libs/flatpickr/flatpickr.css',
         'resources/assets/vendor/libs/dropzone/dropzone.css',
     ])
@@ -241,6 +241,7 @@
         'resources/assets/js/main.js',
         // <!-- Page JS -->
         'resources/assets/js/dashboards-analytics.js',
+        'resources/assets/js/forms-selects.js',
     ])
 
 
