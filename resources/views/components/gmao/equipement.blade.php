@@ -173,14 +173,14 @@ break;
                 {{-- <img class="img-fluid w-50" src="{{ $bg_image }}"
                     alt="Card girl image" width="50"/> --}}
             </div>
-            <div class="flex justify-between gap-1">
+            <div class="flex justify-between gap-1 my-3">
                 <div class=">
                     <h3 class="mb-1 font-bold uppercase h4">{{ $equipement->name }}</h3>
                     <p class="mb-1 uppercase">Numero Serie: <span class="font-bold ">{{ $equipement->numero_serie }}<span></p>
                 </div>
-                <div class="items-center justify-center w-40 h-100">
-                    <div class="p-2 m-0 text-center bg-white border shadow-xl h-100 rounded-3xl">
-                        
+                <div class="items-center justify-center w-auto h-100">
+                    <div class="flex justify-center p-0 m-0 text-center h-100 rounded-3xl">
+                        {!! $equipement->qr_code !!}
                     </div>
                 </div>
             </div>
