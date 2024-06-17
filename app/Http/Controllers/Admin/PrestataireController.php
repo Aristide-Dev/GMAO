@@ -7,8 +7,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Prestataire;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rules\Password;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Password;
 
 class PrestataireController extends Controller
 {
@@ -33,11 +34,11 @@ class PrestataireController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validateWithBag('create_site',[
-            'name' => ['required', 'string', 'max:100'],
-            'slug' => ['required', 'string', 'max:20'],
-            'email' => ['required', 'email', 'string', 'max:100'],
-            'telephone' => ['required', 'string', 'max:20'],
+        $request->validateWithBag('create_prestataire',[
+            'name' => ['required', 'string', 'max:100', 'unique:prestataires'],
+            'slug' => ['required', 'string', 'max:20', 'unique:prestataires'],
+            'email' => ['required', 'email', 'string', 'max:100', 'unique:prestataires'],
+            'telephone' => ['required', 'string', 'max:20', 'unique:prestataires'],
             'adresse' => ['required', 'string', 'max:100'],
         ]);
 
@@ -73,7 +74,21 @@ class PrestataireController extends Controller
      */
     public function update(Request $request, Prestataire $prestataire)
     {
-        //
+        $request->validateWithBag('edit_prestataire',[
+            'name' => ['required', 'string', 'max:100', Rule::unique('prestataires')->ignore($prestataire->id)],
+            'slug' => ['required', 'string', 'max:20', Rule::unique('prestataires')->ignore($prestataire->id)],
+            'email' => ['required', 'email', 'string', 'max:100', Rule::unique('prestataires')->ignore($prestataire->id)],
+            'telephone' => ['required', 'string', 'max:20', Rule::unique('prestataires')->ignore($prestataire->id)],
+            'adresse' => ['required', 'string', 'max:100'],
+        ]);
+
+        $prestataire->name = $request->name;
+        $prestataire->slug = $request->slug;
+        $prestataire->email = $request->email;
+        $prestataire->telephone = $request->telephone;
+        $prestataire->adresse = $request->adresse;
+        $prestataire->save();
+        return redirect(route("admin.prestataires.show", $prestataire))->with('success', 'Informations editées avec success!');
     }
 
     /**

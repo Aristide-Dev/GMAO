@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\PrestataireController as AdminPrestataireControll
 use App\Http\Controllers\Admin\ZoneController as AdminZoneController;
 use App\Http\Controllers\Admin\BonTravailController as AdminBonTravailController;
 use App\Http\Controllers\Admin\PieceController as AdminPieceController;
+use App\Http\Controllers\Admin\EquipementController as AdminEquipementController;
 
 
 use App\Http\Controllers\Demandeur\SiteController as DemandeurSiteController;
@@ -76,7 +77,16 @@ Route::middleware([
         ->name('sites.equipement.store');
 
     Route::get('/sites/{site}/{categorie_equipement}', [AdminSiteController::class, 'show_categorie_equipement'])
-        ->name('sites.equipement.categorie');
+    ->name('sites.equipement.categorie');
+    
+    Route::get('/sites/{site}/equipement/{equipement}', [AdminEquipementController::class, 'edit'])
+        ->name('sites.equipement.edit');
+
+    Route::put('/sites/{site}/equipement/{equipement}', [AdminEquipementController::class, 'update'])
+        ->name('sites.equipement.update');
+        
+    Route::delete('/sites/{site}/equipement/{equipement}', [AdminEquipementController::class, 'destroy'])
+        ->name('sites.equipement.destroy');
 
     Route::resource('/utilisateurs', AdminUtilisateurController::class);
 

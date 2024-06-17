@@ -21,4 +21,9 @@ class Equipement extends Model
         'forfait_contrat',
         'site_id',
     ];
+
+    public function site()
+    {
+        return $this->belongsTo(Site::class);
+    }
 }

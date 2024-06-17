@@ -12,11 +12,11 @@
     <div class="row">
         <div class="mb-4 col-md-4 h-100">
             <div class="h-100 card" style="background-image: url('{{ Storage::url("svg/station_service.svg") }}'); background-size:cover; background-position:center;">
-                <div class="mx-auto bg-gray-950/60 row h-100">
-                    <div class="mb-3 h-100 col-12">
+                <div class="mx-auto rounded-lg bg-gray-950/60 row h-100">
+                    <div class="mb-3 rounded-lg h-100 col-12 ">
                         <div class="pb-3 mb-3 card-body text-start ps-sm-0">
                             <x-gmao.add-equipement :site="$site"/>
-                            <p class="mt-1 mb-0 font-bold text-white">Ajouter un equipement si il n'existe pas encore</p>
+                            <p class="mt-1 mb-0 font-bold text-white hover:text-red-500">Ajouter un equipement si il n'existe pas encore</p>
                         </div>
                     </div>
 

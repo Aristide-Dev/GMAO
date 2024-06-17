@@ -7,6 +7,7 @@ use App\Models\Equipement;
 use App\Models\Site;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class SiteController extends Controller
 {
@@ -34,7 +35,7 @@ class SiteController extends Controller
     public function store(Request $request)
     {
         $request->validateWithBag('create_site',[
-            'name' => ['required', 'string', 'max:55'],
+            'name' => ['required', 'string', 'max:55', 'unique:sites,name'],
             'registre' => ['required', 'string', 'max:30'],
         ]);
 
@@ -51,8 +52,7 @@ class SiteController extends Controller
      */
     public function show(Site $site)
     {
-        $sites = Site::all();
-        return view("admin.sites.show", compact('site','sites'));
+        return view("admin.sites.show", compact('site'));
     }
 
     /**
@@ -60,7 +60,7 @@ class SiteController extends Controller
      */
     public function edit(Site $site)
     {
-        //
+        return view("admin.sites.edit", compact('site'));
     }
 
     /**
@@ -68,7 +68,15 @@ class SiteController extends Controller
      */
     public function update(Request $request, Site $site)
     {
-        //
+        $request->validateWithBag('create_site',[
+            'name' => ['required', 'string', 'max:100', Rule::unique('sites')->ignore($site->id)],
+            'registre' => ['required', 'string', 'max:30'],
+        ]);
+
+        $site->name = $request->name;
+        $site->registre = $request->registre;
+        $site->save();
+        return redirect(route("admin.sites.show", $site))->with('success', 'Informations editées avec success!');
     }
 
     /**
@@ -86,8 +94,8 @@ class SiteController extends Controller
     {
         $request->validateWithBag('create_equipement',[
             'name' =>                   ['required', 'string', 'max:55'],
-            'categorie' =>              ['required', 'string', 'max:30'],
-            'numero_serie' =>           ['required', 'string', 'max:150'],
+            'categorie' =>              ['required', 'string', 'max:30', 'in:distributeur,stockage-et-tuyauterie,forage,servicing,branding,groupe-electrogene,electricite,equipement-incendie'],
+            'numero_serie' =>           ['required', 'string', 'max:150', 'unique:equipements,numero_serie'],
             'forfait_contrat' =>        ['required', 'integer', 'min:0'],
         ]);
 
@@ -105,27 +113,27 @@ class SiteController extends Controller
     public function show_categorie_equipement(Site $site, $categorie_equipement)
     {
         // Tableau des catégories disponibles
-        $categories_disponibles = 
+        $categories_disponibles =
         [
-            'distributeur', 
-            'stockage-et-tuyauterie', 
-            'forage', 
-            'servicing', 
-            'branding', 
-            'groupe-electrogene', 
-            'electricite', 
+            'distributeur',
+            'stockage-et-tuyauterie',
+            'forage',
+            'servicing',
+            'branding',
+            'groupe-electrogene',
+            'electricite',
             'equipement-incendie',
         ]; // Remplacez par vos catégories
-        
+
         // Vérifier si la catégorie spécifiée existe dans le tableau des catégories disponibles
         if (!in_array($categorie_equipement, $categories_disponibles)) {
             // Catégorie non valide, rediriger ou afficher un message d'erreur
             return redirect()->back()->with('error', 'Type d\'equipement invalide.');
         }
-        
+
         // Récupérer les équipements de la catégorie spécifiée pour le site donné
         $equipements = $site->equipements()->where('categorie', $categorie_equipement)->get();
-        
+
         // Retourner la vue avec les équipements
         return view('admin.sites.equipements', ['site' => $site,'type_equipement' => $categorie_equipement,'equipements' => $equipements]);
     }

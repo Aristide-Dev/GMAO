@@ -28,6 +28,7 @@
                     <th>Registre</th>
                     <th>Forfait Contrat</th>
                     <th>Status</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody class="table-border-bottom-0">
@@ -72,10 +73,14 @@
 
                         @endswitch
                     </td>
+                    <td>
+                        <a href="{{ route('admin.sites.show', $site) }}" class="btn btn-primary">Voir +</a>
+                        <a href="{{ route('admin.sites.edit', $site) }}" class="btn btn-warning">Editer</a>
+                    </td>
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="5">
+                    <td colspan="6">
                         
                     <div class="flex justify-content-center col-12" wire:loading.class="hidden">
                         <div class="flex gap-0 p-3 bg-gray-200 rounded-lg justify-content-center animate-pulse w-100">
@@ -93,6 +98,7 @@
                     <th>Registre</th>
                     <th>Forfait Contrat</th>
                     <th>Status</th>
+                    <th>Actions</th>
                 </tr>
             </tfoot>
 

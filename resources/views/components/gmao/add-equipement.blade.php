@@ -5,7 +5,7 @@
     @endphp
 @endif
 
-<button class="mb-2 btn btn-primary text-wrap add-new-role btn-sm" data-bs-toggle="offcanvas" data-bs-target="#offcanvasAddEquipementToSite" align="right">
+<button class="mb-2 text-gray-300 hover:text-white shadow-3xl shadow-red-500 btn bg-sky-600 hover:bg-sky-800 text-wrap add-new-role btn-sm" data-bs-toggle="offcanvas" data-bs-target="#offcanvasAddEquipementToSite" align="right">
     <i class="ti ti-plus me-0 me-sm-1 ti-xs"></i>
     <span>AJOUTER EQUIPEMENT</span>
 </button>
@@ -30,36 +30,36 @@
             @csrf
             <div class="mb-3">
                 <label for="name" class="form-label">Equipement</label>
-                <input type="text" id="name" name="name" placeholder="Nom de l'équipement" class="form-control"/>
+                <input type="text" id="name" name="name" placeholder="Nom de l'équipement" class="rounded form-control" value="{{ old('name') }}"/>
                 <x-input-error bag="create_equipement" for="name" class="mt-2" />
             </div>
             <div class="mb-3">
-                <label for="numero_serie" class="form-label">numero_serie</label>
-                <input type="text" id="numero_serie" name="numero_serie" placeholder="exemple:14528 ddezf rf9" class="form-control"/>
+                <label for="numero_serie" class="form-label">numero de serie</label>
+                <input type="text" id="numero_serie" name="numero_serie" placeholder="exemple:14528 ddezf rf9" class="rounded form-control" value="{{ old('numero_serie') }}"/>
                 <x-input-error bag="create_equipement" for="numero_serie" class="mt-2" />
             </div>
             <div class="mb-3">
                 <label class="form-label" for="categorie">Categorie</label>
                 <select id="categorie" name="categorie" class="select2 form-select form-select-lg" data-allow-clear="true" data-placeholder="-- CHOISIR --">
                     <option value="">-- CHOISIR --</option>
-                    <option value="distributeur">distributeur</option>
-                    <option value="stockage-et-tuyauterie">stockage-et-tuyauterie</option>
-                    <option value="forage">forage</option>
-                    <option value="servicing">servicing</option>
-                    <option value="branding">branding</option>
-                    <option value="groupe-electrogene">groupe-electrogene</option>
-                    <option value="electricite">electricite</option>
-                    <option value="equipement-incendie">equipement-incendie</option>
+                    <option value="distributeur" {{ old('categorie') == 'distributeur' ? 'selected' : '' }}>distributeur</option>
+                    <option value="stockage-et-tuyauterie" {{ old('categorie') == 'stockage-et-tuyauterie' ? 'selected' : '' }}>stockage et tuyauterie</option>
+                    <option value="forage" {{ old('categorie') == 'forage' ? 'selected' : '' }}>forage</option>
+                    <option value="servicing" {{ old('categorie') == 'servicing' ? 'selected' : '' }}>servicing</option>
+                    <option value="branding" {{ old('categorie') == 'branding' ? 'selected' : '' }}>branding</option>
+                    <option value="groupe-electrogene" {{ old('categorie') == 'groupe-electrogene' ? 'selected' : '' }}>groupe electrogene</option>
+                    <option value="electricite" {{ old('categorie') == 'electricite' ? 'selected' : '' }}>electricite</option>
+                    <option value="equipement-incendie" {{ old('categorie') == 'equipement-incendie' ? 'selected' : '' }}>equipement incendie</option>
                 </select>
                 <x-input-error bag="create_equipement" for="categorie" class="mt-2" />
             </div>
             <div class="mb-3">
                 <label for="forfait_contrat" class="form-label">Forfait Contrat</label>
-                <input type="number" id="forfait_contrat" name="forfait_contrat" placeholder="Forfait mensuel" class="form-control"/>
+                <input type="number" id="forfait_contrat" name="forfait_contrat" placeholder="Forfait mensuel" class="rounded form-control" value="{{ old('forfait_contrat') }}"/>
                 <x-input-error bag="create_equipement" for="forfait_contrat" class="mt-2" />
             </div>
-            <button type="submit" class="btn btn-success me-sm-3 me-1 data-submit">ENREGISTRER</button>
-            <button type="reset" class="btn btn-label-danger" data-bs-dismiss="offcanvas">Annuler</button>
+            <button type="reset" class="text-white bg-red-500 hover:bg-red-600 btn" data-bs-dismiss="offcanvas">Annuler</button>
+            <button type="submit" class="text-white bg-green-500 btn hover:bg-green-600 me-sm-3 me-1 data-submit">ENREGISTRER</button>
         </form>
     </div>
 </div>
