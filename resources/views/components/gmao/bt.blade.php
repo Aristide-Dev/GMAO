@@ -27,16 +27,36 @@
 
     {{-- Equipement, Marque & Numero de serie --}}
     <div class="col-12">
-        <div class="shadow-xs border-top border-top-3 list-group list-group-item-action">
+        <div class="border shadow-xs border-top-3 list-group list-group-item-action">
             <div class="row">
                 <div class="col-6">
-                    <div class="mt-1 border-0 border-end list-group-item">
+                    <div class="mt-1 border-0 list-group-item">
                         <div class="d-block w-100 justify-content-between">
                             <p class="mb-1 text-left text-primary fw-bold">
                                 <i class="fa-solid fa-ellipsis ti-sm" style="color: {{ $bonTravail->statutColor() }}"></i>
                                 Equipement
                             </p>
                             <p class="mb-1 text-left">{{ $bonTravail?->equipement->name ?? '' }}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-1 border-0 list-group-item">
+                        <div class="d-block -100 justify-content-between">
+                            <p class="mb-1 text-left text-primary fw-bold">
+                                <i class="fa-solid fa-ellipsis ti-sm" style="color: {{ $bonTravail->statutColor() }}"></i>
+                                Numero de serie
+                            </p>
+                            <p class="mb-1 text-left">{{ $bonTravail?->equipement->numero_serie ?? '' }}</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-1 border-0 list-group-item">
+                        <div class="d-block w-100 justify-content-between">
+                            <p class="mb-1 text-left text-primary fw-bold">
+                                <i class="fa-solid fa-ellipsis ti-sm" style="color: {{ $bonTravail->statutColor() }}"></i>
+                                Etat
+                            </p>
+                            <p class="mb-1 text-left">A l'arret</p>
                         </div>
                     </div>
                 </div>
@@ -54,15 +74,14 @@
                 </div> --}}
 
                 <div class="col-6">
-                    <div class="mt-1 border-0 border-end list-group-item">
-                        <div class="w-100 justify-content-end">
-                            <p class="mb-1 text-end text-primary fw-bold">
-                                <i class="fa-solid fa-ellipsis ti-sm" style="color: {{ $bonTravail->statutColor() }}"></i>
-                                Numero de serie
-                            </p>
-                            <p class="mb-1 text-end">{{ $bonTravail?->equipement->numero_serie ?? '' }}</p>
+                    <div class="mt-1 border-0 list-group-item">
+                    
+                    <div class="mt-1 border-0 list-group-item">
+                        <div class="flex items-center justify-center align-items-center w-100">
+                            {!! $bonTravail?->equipement->qr_code !!}
                         </div>
                     </div>
+                </div>
                 </div>
 
             </div>

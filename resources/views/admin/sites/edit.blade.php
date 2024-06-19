@@ -21,7 +21,7 @@
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Site</label>
                                     <input type="text" id="name" name="name" placeholder="Nom du site" class="rounded form-control" value="{{ $site->name }}"/>
-                                    <x-input-error bag="create_site" for="name" class="mt-2" />
+                                    <x-input-error bag="edit_site" for="name" class="mt-2" />
                                 </div>
                                 
                                 <div class="mb-3">
@@ -31,7 +31,7 @@
                                         <option value="b2b" {{ old('registre', $site->registre) == 'b2b' ? 'selected' : '' }}>B2B</option>
                                         <option value="autre" {{ old('registre', $site->registre) == 'autre' ? 'selected' : '' }}>AUTRE</option>
                                     </select>
-                                    <x-input-error bag="create_site" for="registre" class="mt-2" />
+                                    <x-input-error bag="edit_site" for="registre" class="mt-2" />
                                 </div>
                                 
                                 <button type="submit" class="text-white bg-green-500 hover:bg-green-600 btn">ENREGISTRER</button>

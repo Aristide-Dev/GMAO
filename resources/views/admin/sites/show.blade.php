@@ -3,11 +3,17 @@
     <x-slot name="title_desc">{{ __('Informations sur le Site') }}</x-slot>
     <x-slot name="sidebar">admin</x-slot>
     <x-breadcrumb :data="['Sites'=> route('admin.sites.index'), ''.$site->name.'' => '']"/>
-
-    <h2 class="fw-bold">{{ $site->name }}</h1>
         @php
             // dd($site->equipements)
         @endphp
+
+    <div class="mb-5 row">
+        <div class="col-md-12">
+            <livewire:equipement-search :site="$site">
+        </div>
+    </div>
+
+    <h1 class="text-3xl fw-bold">{{ $site->name }}</h1>
 
     <div class="row">
         <div class="mb-4 col-md-4 h-100">

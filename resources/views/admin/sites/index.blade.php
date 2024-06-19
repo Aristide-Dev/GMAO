@@ -7,7 +7,7 @@
 
     <div class="mt-3 col-12">
         <!-- Hoverable Table rows -->
-        <livewire:site-table />
+        <livewire:site-table :errors="$errors"/>
         <!--/ Hoverable Table rows -->
     </div>
 </x-gmao-layout>

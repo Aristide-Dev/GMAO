@@ -2,6 +2,7 @@
     <i class="ti ti-plus me-0 me-sm-1 ti-xs"></i>
     <span>NOUVEAU SITE</span>
 </button>
+
 @php
     $show = "";
 @endphp
@@ -14,7 +15,7 @@
 <!-- Offcanvas to create site -->
 <div class="offcanvas offcanvas-end {{ $show }}" tabindex="-1" id="offcanvasCreateSite" aria-labelledby="offcanvasCreateSiteLabel">
     <div class="offcanvas-header">
-        <h5 id="offcanvasCreateSiteLabel" class="offcanvas-title">Nouveau site</h5>
+        <h5 id="offcanvasCreateSiteLabel" class="offcanvas-title">Nouveau site - show: {{ $show }}</h5>
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="flex-grow-0 pt-0 mx-0 offcanvas-body h-100">

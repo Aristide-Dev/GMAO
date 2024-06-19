@@ -76,4 +76,34 @@ class Equipement extends Model
         );
     }
 
+    public function qrcode(int $size=50)
+    {
+
+        $logo_path = storage_path('app/public/assets/img/logo.png'); // Utilisez storage_path pour le chemin complet
+
+        // Vérifiez si le fichier logo existe
+        if (!file_exists($logo_path)) {
+            throw new \Exception("Le fichier logo n'existe pas à l'emplacement spécifié : " . $logo_path);
+        }
+
+        $data = [
+            'equipement' => $this->name,
+            'numero_serie' => $this->numero_serie,
+            'forfait_contrat' => $this->forfait_contrat,
+            'site' => strtoupper($this->site->name),
+        ];
+
+        $data = json_encode($data,JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES);
+        $from = [255, 0, 0];
+        $to = [0, 0, 255];
+
+        return QrCode::format('svg')
+                    ->size($size)
+                    ->margin(1)
+                    ->merge('/storage/app/public/assets/img/logo.png',.3)
+                    ->generate($data);
+    }
+
+
+
 }

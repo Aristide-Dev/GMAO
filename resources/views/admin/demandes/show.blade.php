@@ -59,7 +59,7 @@
             <div class="card h-100">
                 <div class="card-header d-flex justify-content-between">
                     <div class="mb-0 card-title">
-                        <h5 class="mb-0">DEMANDE ET BONS DE TRAVAIL</h5>
+                        <h5 class="mb-0">DEMANDE</h5>
                         {{-- <small class="text-muted">8.52k Social Visiters</small> --}}
                     </div>
                 </div>
@@ -67,7 +67,21 @@
                     {{-- Demande d'Intervention (DI) --}}
                     <x-gmao.demande :demande="$demande" />
                     {{-- Demande d'Intervention (DI) --}}
+                </div>
+            </div>
+        </div>
 
+        
+        {{-- Details de la Requete --}}
+        <div class="mb-4 col-lg-6 col-md-6">
+            <div class="card h-100">
+                <div class="card-header d-flex justify-content-between">
+                    <div class="mb-0 card-title">
+                        <h5 class="mb-0">BONS DE TRAVAIL</h5>
+                        {{-- <small class="text-muted">8.52k Social Visiters</small> --}}
+                    </div>
+                </div>
+                <div class="card-body">
                     {{-- Bon De Travail (BT) --}}
                     @if (!empty($demande->bon_travails->last()))
                     <x-gmao.bt :bonTravail="$demande->bon_travails->last()" />

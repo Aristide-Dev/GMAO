@@ -68,7 +68,7 @@ class SiteController extends Controller
      */
     public function update(Request $request, Site $site)
     {
-        $request->validateWithBag('create_site',[
+        $request->validateWithBag('edit_site',[
             'name' => ['required', 'string', 'max:100', Rule::unique('sites')->ignore($site->id)],
             'registre' => ['required', 'string', 'max:30'],
         ]);
@@ -98,6 +98,14 @@ class SiteController extends Controller
             'numero_serie' =>           ['required', 'string', 'max:150', 'unique:equipements,numero_serie'],
             'forfait_contrat' =>        ['required', 'integer', 'min:0'],
         ]);
+
+        $find_equipement = Equipement::where('name', '=', $request->name)
+                                        ->where('site_id', '=', $site->id)
+                                        ->first();
+        if($find_equipement)
+        {
+            return redirect()->back()->with('error', 'Cet equipement existe dejà: numero_serie: #'.$find_equipement->numero_serie);
+        }
 
         Equipement::create([
             'name' => $request->name,
