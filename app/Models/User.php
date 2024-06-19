@@ -37,6 +37,7 @@ class User extends Authenticatable
         'password',
         'role',
         'prestataire_own',
+        'status',
     ];
 
     /**

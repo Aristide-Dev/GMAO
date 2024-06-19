@@ -88,14 +88,32 @@ $statuts = [
                         @endswitch
                     </td>
                     <td>
-                        @php
-                            $st = $statuts[rand(0,1)];
-                        @endphp
-                        <span class="badge bg-label-{{ $st['color'] }} me-1">{{ $st['statut'] }}</span>
+                        @if ($utilisateur->status == true)
+                        <span class="text-white bg-green-500 badge me-1">actif</span>
+                        @else
+                        <span class="text-white bg-red-500 badge me-1">bloqué</span>
+                        @endif
                     </td>
                     <td>
-                        <a href="{{ route('admin.utilisateurs.show', $utilisateur) }}" class="btn btn-primary">Voir +</a>
-                        <a href="{{ route('admin.utilisateurs.edit', $utilisateur) }}" class="btn btn-warning">Bloquer / Debloquer</a>
+                        <div class="flex gap-2">
+                            <a href="{{ route('admin.utilisateurs.show', $utilisateur) }}" class="btn btn-primary">Voir +</a>
+                            @php
+                                $action_name = ($utilisateur->status === true) ? 'bloquer':'débloquer';
+                            @endphp
+                            <form 
+                                method="post" 
+                                action="{{ route('admin.utilisateurs.status', $utilisateur) }}"
+                                onsubmit="return confirm('Vous etes sur le point de {{ $action_name }} ce compte utilisateur! Voulez-vous continuer ?');"
+                            >
+                                @csrf
+                                @method('patch')
+                                @if ($utilisateur->status == true)
+                                    <button type="submit" class="text-white bg-red-500 btn hover:bg-red-600">bloquer</button>
+                                @else
+                                    <button type="submit" class="text-white bg-green-500 btn hover:bg-green-600">débloquer</button>
+                                @endif
+                            </form>
+                        </div>
                     </td>
                 </tr>
                 @empty

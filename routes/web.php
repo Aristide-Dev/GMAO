@@ -89,6 +89,7 @@ Route::middleware([
         ->name('sites.equipement.destroy');
 
     Route::resource('/utilisateurs', AdminUtilisateurController::class);
+    Route::patch('/utilisateurs/{utilisateur}/status', [AdminUtilisateurController::class, 'status'])->name('utilisateurs.status');
 
     Route::resource('/prestataires', AdminPrestataireController::class);
     Route::post('/prestataires/{prestataire}/create-admin', [AdminPrestataireController::class, 'create_admin'])->name('prestataires.create_admin');

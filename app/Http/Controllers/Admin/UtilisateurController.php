@@ -105,6 +105,24 @@ class UtilisateurController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     */
+    public function status(User $utilisateur)
+    {
+        $status_msg="";
+        if($utilisateur->status == true)
+        {
+            $utilisateur->status = false;
+            $status_msg="bloqué";
+        }else{
+            $utilisateur->status = true;
+            $status_msg="débloqué";
+        }
+        $utilisateur->save();
+        return redirect()->back()->with('success', 'Utilisateur '.$status_msg.' avec succès!');
+    }
+
+    /**
      * Get the validation rules used to validate passwords.
      *
      * @return array<int, \Illuminate\Contracts\Validation\Rule|array|string>
