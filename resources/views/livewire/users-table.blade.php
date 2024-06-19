@@ -95,8 +95,8 @@ $statuts = [
                         @endif
                     </td>
                     <td>
-                        <div class="flex gap-2">
-                            <a href="{{ route('admin.utilisateurs.show', $utilisateur) }}" class="btn btn-primary">Voir +</a>
+                        <div class="flex justify-between gap-1">
+                            <a href="{{ route('admin.utilisateurs.show', $utilisateur) }}" class="text-white bg-blue-500 btn hover:bg-blue-600">Voir +</a>
                             @php
                                 $action_name = ($utilisateur->status === true) ? 'bloquer':'débloquer';
                             @endphp

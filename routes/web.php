@@ -58,6 +58,7 @@ Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
+    'isnotblocked'
 ])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', function () {
         return view('admin.dashboard');
@@ -112,6 +113,7 @@ Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
+    'isnotblocked'
 ])->prefix('demandeur')->name('demandeur.')->group(function () {
 
     Route::get('/dashboard', function () {
@@ -144,6 +146,7 @@ Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
+    'isnotblocked'
 ])->prefix('prestataires')->name('prestataires.')->group(function () {
 
     Route::get('/dashboard', function () {
