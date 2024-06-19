@@ -6,9 +6,9 @@ enum ZonePrioriteEnum: string  {
     /**
      * Les types d'urgence statuts
      */
-    case FAIBLE = '3';
+    case FAIBLE = '1';
     case MOYEN = '2';
-    case PRIORITAIRE = '1';
+    case PRIORITAIRE = '3';
 
     /**
      * Associer les couleurs aux statuts
@@ -20,9 +20,9 @@ enum ZonePrioriteEnum: string  {
             self::MOYEN => 'MOYEN',
             self::PRIORITAIRE => 'PRIORITAIRE',
 
-            '3' => 'FAIBLE',
+            '1' => 'FAIBLE',
             '2' => 'MOYEN',
-            '1' => 'PRIORITAIRE',
+            '3' => 'PRIORITAIRE',
 
             default => 'INCONNU',
         };
@@ -34,10 +34,10 @@ enum ZonePrioriteEnum: string  {
             self::FAIBLE => 'danger', // Rouge
             self::MOYEN => 'warning', // Jaune
             self::PRIORITAIRE => 'success', // Vert
-            
-            '3' => 'danger', // Rouge
+
+            '1' => 'danger', // Rouge
             '2' => 'warning', // Jaune
-            '1' => 'success', // Vert
+            '3' => 'success', // Vert
 
             default => 'info', // Blue ciel par défaut
         };

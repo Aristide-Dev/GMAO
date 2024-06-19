@@ -66,7 +66,18 @@ class ZoneController extends Controller
      */
     public function update(Request $request, Zone $zone)
     {
-        //
+        $request->validate([
+            'name' => ['required', 'string', 'max:55'],
+            'priorite' => ['required', 'numeric', 'in:1,2,3'],
+            'delais' => ['required', 'numeric', 'min:1', 'max:100'],
+        ]);
+
+        $zone->name = $request->name;
+        $zone->priorite = $request->priorite;
+        $zone->delais = $request->delais;
+        $zone->save();
+
+        return redirect(route("admin.zones.index"))->with('success', 'Nouvelle zone ajoutée avec succès!');
     }
 
     /**
@@ -74,6 +85,8 @@ class ZoneController extends Controller
      */
     public function destroy(Zone $zone)
     {
-        //
+        $zone->delete();
+
+        return redirect(route("admin.zones.index"))->with('success', 'zone supprimé avec success!');
     }
 }

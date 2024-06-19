@@ -26,7 +26,7 @@
             @csrf
             <div class="mb-3">
                 <label class="h6" for="autosize-demo">Nom de la Zone</label>
-                <input type="text" id="autosize-demo" name="name" class="form-control" placeholder="Conakry" />
+                <input type="text" id="autosize-demo" name="name" class="rounded-lg form-control" placeholder="Conakry" />
                 <x-input-error bag="create_zone" for="name" class="mt-2" />
             </div>
             
@@ -52,13 +52,13 @@
 
             <div class="mb-3">
                 <label class="h6" for="autosize-demo">Délais</label>
-                <input type="number" id="autosize-demo" name="delais" class="form-control" placeholder="Exemple: 2h" />
+                <input type="number" id="autosize-demo" name="delais" class="rounded-lg form-control" placeholder="Exemple: 2h" />
                 <x-input-error bag="create_zone" for="delais" class="mt-2" />
             </div>
             
 
-            <button type="submit" class="btn btn-success me-sm-3 me-1 data-submit">ENREGISTRER</button>
-            <button type="reset" class="btn btn-label-danger" data-bs-dismiss="offcanvas">Annuler</button>
+            <button type="reset" class="text-white bg-red-500 hover:bg-red-600 btn" data-bs-dismiss="offcanvas">Annuler</button>
+            <button type="submit" class="text-white bg-green-500 hover:bg-green-600 btn me-sm-3 me-1 data-submit">ENREGISTRER</button>
         </form>
     </div>
 </div>

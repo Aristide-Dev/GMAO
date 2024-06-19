@@ -88,7 +88,7 @@
         'resources/assets/js/config.js',
         'resources/js/app.js',
         'resources/css/app.css',
-        'resources/css/main.css',
+        // 'resources/css/main.css',
     ])
 
 

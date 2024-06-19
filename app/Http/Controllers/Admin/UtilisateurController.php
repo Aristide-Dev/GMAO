@@ -5,8 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rules\Password;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Password;
 
 class UtilisateurController extends Controller
 {
@@ -68,15 +69,31 @@ class UtilisateurController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        $utilisateur = $user;
+        return view('admin.utilisateurs.edit', compact('utilisateur'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, User $utilisateur)
     {
-        //
+        $request->validateWithBag('edit_utilisateur',[
+            'first_name' => ['required', 'string', 'max:150'],
+            'last_name' => ['required', 'string', 'max:150'],
+            'name' => ['string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($utilisateur->id)],
+            'telephone' => ['required', 'string', 'max:255', Rule::unique('users')->ignore($utilisateur->id)],
+        ]);
+
+        $utilisateur->first_name = $request->first_name;
+        $utilisateur->last_name = $request->last_name;
+        $utilisateur->last_name = $request->last_name;
+        $utilisateur->email = $request->email;
+        $utilisateur->telephone = $request->telephone;
+        $utilisateur->save();
+
+        return redirect()->back()->with('success', 'Informations modifiées avec succès');
     }
 
     /**

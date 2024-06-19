@@ -103,6 +103,42 @@ class User extends Authenticatable
         }
     }
 
+
+    public function getRoleTextAttribute()
+    {
+        $role = $this->role;
+        if($role == 'super_admin')
+        {
+            return "Super Admin";
+        }
+        
+        if($role == 'admin')
+        {
+            return "admin";
+        }
+
+        if($role == 'maintenance')
+        {
+            return "Service Maintenance";
+        }
+
+        if($role == 'demandeur')
+        {
+            return "Demandeur";
+        }
+
+        if($role == 'prestataire_admin')
+        {
+            return "Gerant";
+        }
+
+        if($role == 'agent')
+        {
+            return "Agent";
+        }
+        return "inconnu";
+    }
+
     public function abordIfNotAuthorized($role)
     {
         // dd($role,$this->role);

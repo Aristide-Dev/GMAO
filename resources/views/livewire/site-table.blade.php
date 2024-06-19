@@ -15,8 +15,8 @@
             </div>
         </div>
     </div>
-    
-    
+
+
 
     <div class="table-responsive text-nowrap"  wire:loading.class="hidden">
         <table class="table table-hover">
@@ -32,8 +32,8 @@
                 </tr>
             </thead>
             <tbody class="table-border-bottom-0">
-                
-            
+
+
             <div class="flex justify-content-center col-12" wire:loading>
                 <div class="flex gap-0 p-3 bg-transparent rounded-lg justify-content-center animate-pulse">
                     <div class="demo-inline-spacing display-1">
@@ -81,7 +81,7 @@
                 @empty
                 <tr>
                     <td colspan="6">
-                        
+
                     <div class="flex justify-content-center col-12" wire:loading.class="hidden">
                         <div class="flex gap-0 p-3 bg-gray-200 rounded-lg justify-content-center animate-pulse w-100">
                             <span class="px-3 py-2 m-0 font-bold text-center text-black flex-0">Aucun site trouvé</span>
