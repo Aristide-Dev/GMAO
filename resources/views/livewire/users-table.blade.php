@@ -95,8 +95,8 @@ $statuts = [
                         @endif
                     </td>
                     <td>
-                        <div class="flex justify-between gap-1">
-                            <a href="{{ route('admin.utilisateurs.show', $utilisateur) }}" class="text-white bg-blue-500 btn hover:bg-blue-600">Voir +</a>
+                        <div class="flex justify-center gap-1">
+                            <a href="{{ route('admin.utilisateurs.show', $utilisateur) }}" class="text-white bg-blue-500 btn w-100 hover:bg-blue-600">Voir +</a>
                             @php
                                 $action_name = ($utilisateur->status === true) ? 'bloquer':'débloquer';
                             @endphp
@@ -122,7 +122,7 @@ $statuts = [
 
                     <div class="flex justify-content-center col-12" wire:loading.class="hidden">
                         <div class="flex gap-0 p-3 bg-gray-200 rounded-lg justify-content-center animate-pulse w-100">
-                            <span class="px-3 py-2 m-0 font-bold text-center text-black flex-0">Aucun utilisateur trouvé</span>
+                            <span class="px-3 py-2 m-0 text-xl font-bold text-center text-black flex-0 animate-pulse">Aucun utilisateur trouvé</span>
                         </div>
                     </div>
                     </td>

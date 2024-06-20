@@ -18,6 +18,17 @@
         </div>
     </div>
 
+    
+    <div class="flex justify-content-center col-12" wire:loading>
+        <div class="flex gap-0 p-3 bg-transparent rounded-lg justify-content-center animate-pulse">
+            <div class="demo-inline-spacing display-1">
+                <div class="spinner-border spinner-border-lg text-primary h1 display-1" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
     @if($equipements->count())
     <div class="my-3 row">
        @foreach ($equipements as $equipement)
@@ -56,7 +67,7 @@
     @endif
 
     @if ($equipements->count() <= 0 && !empty($search))
-        <h3 class="my-5 text-xl font-bold text-center animate-pulse">Aucune corespondance</h3>
+        <h3 wire:loading.class="opacity-0" class="my-5 text-xl font-bold text-center animate-pulse">Aucune corespondance</h3>
     @endif
 
 </div>

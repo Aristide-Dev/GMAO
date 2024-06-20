@@ -25,7 +25,7 @@
     <div class="mt-3 col-12">
         <!-- Hoverable Table rows -->
         <div class="overflow-hidden card">
-            <div class="border-b-2 card-header row">
+            <div class=card-header row">
                 <div class="mb-3 col-12">
                     <x-gmao.create-demande action="admin" :sites="$sites" :demandeurs="$demandeurs"/>
                 </div>
@@ -34,7 +34,8 @@
                 </div>
             </div>
 
-            <x-gmao.demande-list :demandes="$demandes" action="admin" />
+            {{-- <x-gmao.demande-list :demandes="$demandes" action="admin" /> --}}
+            <livewire:demandes-table action="admin" />
 
 
         <!--/ Hoverable Table rows -->
