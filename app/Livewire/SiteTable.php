@@ -17,6 +17,7 @@ class SiteTable extends Component
         return view('livewire.site-table', [
             'sites' => Site::where('name', 'like', '%'.$this->search.'%')
                                             ->orwhere('registre', 'like', '%'.$this->search.'%')
+                                            ->orderby('name', 'asc')
                                             ->paginate(20),
         ]);
     }

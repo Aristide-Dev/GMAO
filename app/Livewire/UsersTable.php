@@ -19,6 +19,7 @@ class UsersTable extends Component
                                             ->orwhere('last_name', 'like', '%'.$this->search.'%')
                                             ->orwhere('email', 'like', '%'.$this->search.'%')
                                             ->orwhere('telephone', 'like', '%'.$this->search.'%')
+                                            ->orderby('created_at', 'desc')
                                             ->paginate(20),
         ]);
     }

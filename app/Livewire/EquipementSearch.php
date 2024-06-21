@@ -34,10 +34,13 @@ class EquipementSearch extends Component
                         ->orWhere('numero_serie', 'like', '%'.$this->search.'%')
                         ->orWhere('forfait_contrat', 'like', '%'.$this->search.'%');
                 })
+                ->orderby('created_at', 'desc')
                 ->paginate(8);
         } else {
             // Create an empty paginator instance when search is empty
-            $equipements = Equipement::where('id', -1)->paginate(8);
+            $equipements = Equipement::where('id', -1)
+                                        ->orderby('created_at', 'desc')
+                                        ->paginate(8);
         }
 
         return view('livewire.equipement-search', [

@@ -26,7 +26,8 @@ class DemandesTable extends Component
 
         $demandes = DemandeIntervention::where('di_reference', 'like', '%' . $this->search . '%')
                                             ->orwhere('created_at', 'like', '%'.$this->search.'%')
-            ->paginate(10);
+                                            ->orderby('created_at', 'desc')
+                                            ->paginate(10);
 
         return view('livewire.demandes-table', [
             'url' => $url,

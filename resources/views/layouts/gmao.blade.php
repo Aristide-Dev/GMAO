@@ -61,9 +61,10 @@
         'resources/assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css',
         'resources/assets/vendor/libs/datatables-checkboxes-jquery/datatables.checkboxes.css',
         'resources/assets/vendor/libs/select2/select2.css',
-        'resources/assets/vendor/libs/bootstrap-select/bootstrap-select.css',
+        // 'resources/assets/vendor/libs/bootstrap-select/bootstrap-select.css',
         'resources/assets/vendor/libs/flatpickr/flatpickr.css',
         'resources/assets/vendor/libs/dropzone/dropzone.css',
+        'resources/assets/vendor/libs/animate-css/animate.css',
     ])
 
 
@@ -79,7 +80,7 @@
     {{-- <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  --> --}}
     {{-- <script src=""></script> --}}
 
-    <script src="../../assets/vendor/js/template-customizer.js"></script>
+    {{-- <script src="../../assets/vendor/js/template-customizer.js"></script> --}}
 
     @vite([
         'resources/assets/vendor/css/pages/cards-advance.css',
@@ -242,6 +243,7 @@
         // <!-- Page JS -->
         'resources/assets/js/dashboards-analytics.js',
         'resources/assets/js/forms-selects.js',
+        'resources/assets/js/ui-modals.js',
     ])
 
 

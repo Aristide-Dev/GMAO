@@ -137,8 +137,8 @@ throw new InvalidArgumentException('Le composant (add-demande) nécessite une pr
             <x-input-error bag="create_demande_intervention" for="photo_demande_intervention" class="mt-2" />
 
             <div class="mt-3 w-100 justify-content-between d-inline-flex">
-                <button type="reset" class="btn btn-label-danger" data-bs-dismiss="offcanvas">Annuler</button>
-                <button type="submit" class="btn btn-success me-sm-3 me-1 data-submit">ENREGISTRER</button>
+                <button type="reset" class="text-white bg-red-500 btn hover:bg-red-600" data-bs-dismiss="offcanvas">Annuler</button>
+                <button type="submit" class="text-white bg-green-500 btn hover:bg-green-600 me-sm-3 me-1 data-submit">ENREGISTRER</button>
             </div>
 
         </form>

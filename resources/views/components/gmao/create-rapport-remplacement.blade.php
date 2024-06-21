@@ -66,7 +66,7 @@
     <span>RAPPORT DE REMPLACEMENT</span>
 </button>
 <!-- Offcanvas to add new demande -->
-<div class="offcanvas offcanvas-end bg-warning {{ $show }}" tabindex="-1" id="{{ $rapport_id }}" aria-labelledby="{{ $rapport_id }}Label">
+<div class="offcanvas offcanvas-end bg-yellow-200 {{ $show }}" tabindex="-1" id="{{ $rapport_id }}" aria-labelledby="{{ $rapport_id }}Label">
     <div class="offcanvas-header">
         <h6 id="{{ $rapport_id }}Label" class="p-1 mx-2 text-black rounded text-uppercase bg-label-warning">Rapport de Remplacement</h6>
         <button type="button" class="text-white btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -77,7 +77,7 @@
 
             <div class="mb-3">
                 <div id="gmao_file_loder_contennaire_for_rr" class="shadow">
-                    <label class="text-white h6" for="file-input">RAPPORT</label>
+                    <label class="h6" for="file-input">RAPPORT</label>
                     <label class="bg-white gmao_file_loder">
                         <div class="gmao_file_loder-inner">
                             <span class="gmao_file_loder-text">Déposez le rapport ici ou cliquez pour le télécharger</span>
@@ -92,13 +92,13 @@
 
 
             <div class="mb-3">
-                <label class="text-white h6" for="autosize-demo">Ajouter un Commentaire ( <small class="text-mute text-light">pas obligatoire</small> )</label>
-                <textarea id="autosize-demo" name="commentaire" rows="3" class="form-control" placeholder="Commentaire"></textarea>
+                <label class="h6" for="autosize-demo">Ajouter un Commentaire ( <small class="text-red-500 text-mute">pas obligatoire</small> )</label>
+                <textarea id="autosize-demo" name="commentaire" rows="3" class="rounded-lg form-control" placeholder="Commentaire"></textarea>
                 <x-input-error bag="create_rapport_remplacement_piece" for="commentaire" class="mt-2" />
             </div>
 
-            <button type="submit" class="btn btn-success me-sm-3 me-1 data-submit">ENREGISTRER</button>
-            <button type="reset" class="btn btn-label-danger" data-bs-dismiss="offcanvas">Annuler</button>
+            <button type="reset" class="text-white bg-red-500 btn hover:bg-red-600" data-bs-dismiss="offcanvas">Annuler</button>
+            <button type="submit" class="text-white bg-green-500 btn hover:bg-green-600 me-sm-3 me-1 data-submit">ENREGISTRER</button>
         </form>
     </div>
 </div>

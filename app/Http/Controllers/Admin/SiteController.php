@@ -95,7 +95,7 @@ class SiteController extends Controller
         $request->validateWithBag('create_equipement',[
             'name' =>                   ['required', 'string', 'max:55'],
             'categorie' =>              ['required', 'string', 'max:30', 'in:distributeur,stockage-et-tuyauterie,forage,servicing,branding,groupe-electrogene,electricite,equipement-incendie'],
-            'numero_serie' =>           ['required', 'string', 'max:150', 'unique:equipements,numero_serie'],
+            'numero_serie' =>           ['required', 'string', 'max:150', 'unique:equipements'],
             'forfait_contrat' =>        ['required', 'integer', 'min:0'],
         ]);
 

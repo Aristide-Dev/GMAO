@@ -3,9 +3,10 @@
 namespace App\Models;
 
 use App\Enums\StatusEnum;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class DemandeIntervention extends Model
 {
@@ -69,6 +70,39 @@ class DemandeIntervention extends Model
     public function statutColor()
     {
         return StatusEnum::getColor($this->status);
+    }
+
+    public function canDeleteAttribute()
+    {
+        
+    }
+
+    public function isHistoryCable()
+    {
+        if(count($this->bon_travails) > 1)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Obtenir tous les anciens bons de travail sauf le plus récent.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function oldBonTravails()
+    {
+        // Get all associated BonTravail records ordered by creation date descending
+        $bonTravails = BonTravail::where('di_reference',$this->di_reference)->orderBy('created_at', 'desc')->get();
+
+        // Exclude the latest BonTravail record
+        if ($bonTravails->count() > 1) {
+            return $bonTravails->slice(1);
+        }
+
+        // If there's only one or none, return an empty collection
+        return collect([]);
     }
 
     // public function statutColor()

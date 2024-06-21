@@ -53,6 +53,11 @@ class BonTravail extends Model
         return $this->BelongsTo(Prestataire::class);
     }
 
+    public function user() :BelongsTo
+    {
+        return $this->BelongsTo(User::class);
+    }
+
     public function prioriteText()
     {
         return ZonePrioriteEnum::getText($this->zone_priorite);
@@ -75,7 +80,7 @@ class BonTravail extends Model
     {
         return StatusEnum::getColor($this->status);
     }
-    
+
 
     /**
      * The attributes that should be cast.
@@ -84,7 +89,7 @@ class BonTravail extends Model
      */
     protected $casts = [
         // 'status' => StatusEnum::class,
-        'telephone_verified_at' => 'datetime',
+        // 'telephone_verified_at' => 'datetime',
     ];
 
 }

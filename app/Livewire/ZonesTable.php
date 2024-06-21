@@ -35,7 +35,8 @@ class ZonesTable extends Component
         }
 
         // Execute the query and paginate the results
-        $zones = $query->paginate(20);
+        $zones = $query->orderby('name', 'asc')
+                        ->paginate(20);
 
         return view('livewire.zones-table', ['zones' => $zones]);
     }

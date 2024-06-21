@@ -2,21 +2,22 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\StatusEnum;
+use App\Http\Controllers\Controller;
+use App\Models\DemandeIntervention;
+use App\Models\InjectionPiece;
+use App\Models\Piece;
+use App\Models\Prestataire;
+use App\Models\RapportIntervention;
 use App\Models\Site;
 use App\Models\User;
 use App\Models\Zone;
+use DateTime;
 use Illuminate\Http\File;
-use App\Models\Prestataire;
 use Illuminate\Http\Request;
-use App\Models\DemandeIntervention;
-use App\Models\RapportIntervention;
-use App\Http\Controllers\Controller;
-use App\Models\InjectionPiece;
-use App\Models\Piece;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use App\Enums\StatusEnum;
-use DateTime;
+use Illuminate\Validation\Rule;
 
 class DemandeInterventionController extends Controller
 {
@@ -94,8 +95,8 @@ class DemandeInterventionController extends Controller
     {
         $request->validateWithBag('create_cloture_rapport', [
             'status' => 'required|string|max:255',
-            'numero_devis' => 'string|max:100|min:2',
-            'bon_commande' => 'string|max:100|min:2',
+            'numero_devis' => 'string|max:100|min:2|'.Rule::unique('rapport_interventions')->ignore($rapportIntervention->id),
+            'bon_commande' => 'string|max:100|min:2|'.Rule::unique('rapport_interventions')->ignore($rapportIntervention->id),
         ]);
 
         $auth_user = Auth::user();
@@ -128,13 +129,11 @@ class DemandeInterventionController extends Controller
             case 'terminé':
                 $request->status = StatusEnum::TERMINE;
                 break;
-            case 'en attente':
-                $request->status = StatusEnum::EN_ATTENTE;
-                break;
             case 'annulé':
                 $request->status = StatusEnum::ANNULE;
                 break;
             default:
+                $request->status = StatusEnum::ANNULE;
                 break;
         }
 
@@ -147,8 +146,13 @@ class DemandeInterventionController extends Controller
             'temps_prise_en_charge' => $priseEnChargeInfo['temps_prise_en_charge'],
             'kpi' => $priseEnChargeInfo['kpis'],
         ]);
-        $rapportIntervention->bon_travail->status = $request->status;
-        $rapportIntervention->bon_travail->save();
+
+        $bon_travail = $rapportIntervention->bon_travail;
+        $bon_travail->status = $request->status;
+        $bon_travail->save();
+
+        $bon_travail->demande->status = $request->status;
+        $bon_travail->demande->save();
 
         return redirect()->back()->with('success', 'Rapport d\'intervention clôturé avec succès!');
     }
@@ -162,7 +166,7 @@ class DemandeInterventionController extends Controller
      */
     public function injection(Request $request, RapportIntervention $rapportIntervention)
     {
-        // dd($request);
+        // dd($rapportIntervention);
         $request->validateWithBag('create_injection_piece', [
             'piece' => 'required|exists:pieces,id',
             'pris_dans_le_stock' => 'string',
@@ -179,15 +183,16 @@ class DemandeInterventionController extends Controller
             'stock_price' => $piece->price,
         ];
 
-        if($piece->quantite <= $request->quantite)
-        {
-            return redirect()->back()->with('error', 'Pas asser de quantite dans le stock. il reste '.$piece->quantite.' '.$piece->piece.' dans le stock');
-        }
+        $validateData['take_in_fournisseur'] = '';
+        $validateData['fournisseur_name'] = '';
+        $validateData['fournisseur_price'] = 0;
 
         if ($request->pris_dans_le_stock == 'on') {
-            $validateData['take_in_fournisseur'] = null;
-            $validateData['fournisseur_name'] = null;
-            $validateData['fournisseur_price'] = 0;
+
+            if($piece->quantite < $request->quantite)
+            {
+                return redirect()->back()->with('error', 'Pas asser de quantite dans le stock. il reste '.$piece->quantite.' '.$piece->piece.' dans le stock');
+            }
         } else {
             $request->validateWithBag('create_injection_piece', [
                 'nom_du_fournisseur' => 'required|string|max:255',
@@ -208,13 +213,37 @@ class DemandeInterventionController extends Controller
         $validateData['injection_file_file'] = $injectionFilePath;
 
         // Création de la nouvelle InjectionPiece
-        InjectionPiece::create($validateData);
+        // dd($validateData);
+        InjectionPiece::create([
+            'piece_id' =>$validateData['piece_id'],
+            'ri_reference' =>$validateData['ri_reference'],
+            'quantite' =>$validateData['quantite'],
+            'stock_price' =>$validateData['stock_price'],
+            'take_in_fournisseur' =>$validateData['take_in_fournisseur'],
+            'fournisseur_name' =>$validateData['fournisseur_name'],
+            'fournisseur_price' =>$validateData['fournisseur_price'],
+            'injection_file' =>$validateData['injection_file_file'],
+        ]);
 
-        $quantite = intval($request->quantite);
-        $quantite = abs($quantite);
+        if($piece->quantite < $request->quantite)
+        {
+            $quantite = intval($request->quantite);
+            $quantite = abs($quantite);
 
-        $piece->quantite -= $quantite;
+            $piece->quantite -= $quantite;
             $piece->save();
+        }
+
+        $rapportIntervention->status = StatusEnum::EN_COURS;
+        $rapportIntervention->save();
+
+        $bon_travail = $rapportIntervention->bon_travail;
+        $bon_travail = $rapportIntervention->bon_travail;
+        $bon_travail->status = StatusEnum::EN_COURS;
+        $bon_travail->save();
+
+        $bon_travail->demande->status = StatusEnum::EN_COURS;
+        $bon_travail->demande->save();
 
         return redirect()->back()->with('success', 'Nouvelle Pièce injectée avec succès!');
     }

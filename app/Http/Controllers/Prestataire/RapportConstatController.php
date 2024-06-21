@@ -71,13 +71,11 @@ class RapportConstatController extends Controller
             case 'terminé':
                 $request->status = StatusEnum::TERMINE;
                 break;
-            case 'en attente':
-                $request->status = StatusEnum::EN_ATTENTE;
-                break;
-            case 'annulé':
-                $request->status = StatusEnum::ANNULE;
+            case 'rejeté':
+                $request->status = StatusEnum::REJETE;
                 break;
             default:
+                $request->status = StatusEnum::REJETE;
                 break;
         }
 
@@ -85,21 +83,35 @@ class RapportConstatController extends Controller
 
         if($request->status == StatusEnum::TERMINE)
         {
-            $demande->status = $request->status;
-            $demande->save();
-        }
-        
-        $bonTravail->status = $request->status;
-        $bonTravail->save();
-        
+            // $demande->status = $request->status;
+            // $demande->save();
+            $bonTravail->status = StatusEnum::CLOTURE;
+            $bonTravail->save();
 
-        // Modifier le statut du rapport d'intervention
-        if ($rapportIntervention) {
-            $rapportIntervention->status = $request->status;
-            $rapportIntervention->date_intervention = $request->date_intervention.' '.$request->heure_intervention;
-            $rapportIntervention->save();
+            // Modifier le statut du rapport d'intervention
+            if ($rapportIntervention) {
+                $rapportIntervention->status = StatusEnum::EN_ATTENTE;
+                $rapportIntervention->date_intervention = $request->date_intervention.' '.$request->heure_intervention;
+                $rapportIntervention->save();
+            }
         }
-        return redirect()->back()->with('success', 'Nouveau Rapport créé avec succès!');
+
+        if($request->status == StatusEnum::REJETE)
+        {
+            // $demande->status = $request->status;
+            // $demande->save();
+            $bonTravail->status = $request->status;
+            $bonTravail->save();
+
+            // Modifier le statut du rapport d'intervention
+            if ($rapportIntervention) {
+                $rapportIntervention->status = $request->status;
+                $rapportIntervention->date_intervention = $request->date_intervention.' '.$request->heure_intervention;
+                $rapportIntervention->save();
+            }
+        }
+        
+        return redirect()->back()->with('success', 'Nouveau Rapport généré avec succès!');
     }
 
     /**

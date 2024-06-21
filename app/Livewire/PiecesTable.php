@@ -19,6 +19,7 @@ class PiecesTable extends Component
                                             ->orwhere('price', 'like', '%'.$this->search.'%')
                                             ->orwhere('quantite', 'like', '%'.$this->search.'%')
                                             ->orwhere('stock_min', 'like', '%'.$this->search.'%')
+                                            ->orderby('piece', 'asc')
                                             ->paginate(20),
         ]);
     }

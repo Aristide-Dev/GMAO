@@ -60,15 +60,15 @@ $indices_performance = [
             </div>
 
             @forelse ($prestataires as $key => $prestataire)
-                <div class="col-sm-6 col-lg-4">
-                    <div class="border bg-gray-50 card">
-                        <div class="d-flex align-items-end row">
+                <div class="col-sm-6 col-md-6 col-lg-4">
+                    <div class="border bg-gray-50 card text-wrap">
+                        <div class="overflow-scroll d-flex align-items-end row">
                             <div class="col-8">
                                 <div class="card-body text-nowrap">
                                     <h5 class="mb-0 card-title">
                                         {{ $prestataire->name }}
-                                        (<span class="fw-bolder">{{ $prestataire->slug }}</span>)
                                     </h5>
+                                    (<span class="fw-bolder">{{ $prestataire->slug }}</span>)
 
                                     @php
                                         $st = $indices_performance[rand(0,3)];

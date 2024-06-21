@@ -31,13 +31,13 @@
             <tbody class="table-border-bottom-0">
                 
                 @forelse($pieces as $key => $piece)
-                <tr  wire:loading.class="opacity-0">
+                <tr  wire:loading.class="opacity-0" class="{{ (intval($piece->stock_min) >= intval($piece->quantite)) ? 'bg-red-100 text-gray-100':'' }}">
                     <td>
                         {{ $key+1 }}
                     </td>
                     <td>
-                        <a class="{{ ($piece->stock_min == $piece->quantite) ? 'bg-label-danger':'text-dark' }}"
-                            href="{{ route('admin.pieces.edit', $piece) }}">{{ $piece->piece }}</a>
+                        <p class=""
+                            href="{{ route('admin.pieces.edit', $piece) }}">{{ $piece->piece }}</p>
                     </td>
                     <td>
                         {{ $piece->quantite }}

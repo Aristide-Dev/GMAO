@@ -66,9 +66,9 @@
     <span>RAPPORT DE CONSTAT</span>
 </button>
 <!-- Offcanvas to add new demande -->
-<div class="offcanvas offcanvas-end bg-secondary {{ $show }}" tabindex="-1" id="{{ $rapport_id }}" aria-labelledby="{{ $rapport_id }}Label">
+<div class="offcanvas offcanvas-end bg-gray-100 {{ $show }}" tabindex="-1" id="{{ $rapport_id }}" aria-labelledby="{{ $rapport_id }}Label">
     <div class="offcanvas-header">
-        <h6 id="{{ $rapport_id }}Label" class="p-2 mx-3 rounded bg-label-primary text-uppercase">Nouveau Rapport de Constast</h6>
+        <h6 id="{{ $rapport_id }}Label" class="p-2 mx-3 text-white bg-blue-300 rounded btn hover:bg-blue-400 text-uppercase">Nouveau Rapport de Constast</h6>
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="flex-grow-0 pt-0 mx-0 offcanvas-body h-100">
@@ -76,20 +76,20 @@
             @csrf
             
             <div class="mb-3">
-                <label for="date_intervention" class="form-label">date_intervention</label>
+                <label for="date_intervention" class="m-0 text-gray-500 h6 text-uppercase">date_intervention</label>
                 <input type="date" id="date_intervention" name="date_intervention" class="form-control"/>
                 <x-input-error bag="create_rapport_constat" for="date_intervention" class="mt-2" />
             </div>
             
             <div class="mb-3">
-                <label for="heure_intervention" class="form-label">heure_intervention</label>
+                <label for="heure_intervention" class="m-0 text-gray-500 h6 text-uppercase">heure_intervention</label>
                 <input type="time" id="heure_intervention" name="heure_intervention" class="form-control"/>
                 <x-input-error bag="create_rapport_constat" for="heure_intervention" class="mt-2" />
             </div>
             
             <div class="mb-4">
                 <div id="gmao_file_loder_rapport_constat_contennaire" class="shadow">
-                    <label class="m-0 text-white h6 text-uppercase" for="file-input">RAPPORT</label>
+                    <label class="m-0 text-gray-500 h6 text-uppercase" for="file-input">RAPPORT</label>
                     <label class="gmao_file_loder" style="background-color: #ffffff">
                         <div class="gmao_file_loder-inner">
                             <span class="gmao_file_loder-text">Déposez le rapport ici ou cliquez pour le télécharger</span>
@@ -103,23 +103,22 @@
             </div>
 
             <div class="mb-3">
-                <label class="m-0 text-white h6 text-uppercase" for="status">statut</label>
+                <label class="m-0 text-gray-500 h6 text-uppercase" for="status">statut</label>
                 <select id="status" name="status" class="select2 form-select form-select-lg" data-allow-clear="true" data-placeholder="--CHOISIR--">
                     <option value="terminé">terminé / (reparé)</option>
-                    <option value="en attente">en attente</option>
-                    <option value="annulé">annulé</option>
+                    <option value="rejeté">rejeté</option>
                 </select>
                 <x-input-error bag="create_rapport_constat" for="status" class="mt-2" />
             </div>
 
             <div class="mb-3">
-                <label class="m-0 text-white h6 text-uppercase" for="autosize-demo">Ajouter un Commentaire ( <small class="text-mute text-danger text-lowercase">pas obligatoire</small> )</label>
+                <label class="m-0 text-gray-500 h6 text-uppercase" for="autosize-demo">Ajouter un Commentaire ( <small class="text-mute text-danger text-lowercase">pas obligatoire</small> )</label>
                 <textarea id="autosize-demo" name="commentaire" rows="3" class="form-control" placeholder="Commentaire"></textarea>
                 <x-input-error bag="create_rapport_constat" for="commentaire" class="mt-2" />
             </div>
 
-            <button type="submit" class="btn btn-success me-sm-3 me-1 data-submit">ENREGISTRER</button>
-            <button type="reset" class="btn btn-label-danger" data-bs-dismiss="offcanvas">Annuler</button>
+            <button type="reset" class="text-white bg-red-500 btn hover:bg-red-600" data-bs-dismiss="offcanvas">Annuler</button>
+            <button type="submit" class="text-white bg-green-500 btn hover:bg-green-600 me-sm-3 me-1 data-submit">ENREGISTRER</button>
         </form>
     </div>
 </div>

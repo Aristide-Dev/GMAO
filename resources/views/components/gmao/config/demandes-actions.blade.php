@@ -28,6 +28,9 @@
         $btn_injection_piece_disabled = "disabled";
         $btn_cloture_disabled = "disabled";
     }
+    $btn_bt_disabled = "";
+    $btn_injection_piece_disabled = "";
+    $btn_cloture_disabled = "";
 
 @endphp
 

@@ -35,13 +35,13 @@
 
             <div class="mb-3">
                 <label class="h6" for="autosize-demo">Requête</label>
-                <textarea id="autosize-demo" name="requete" rows="3" class="form-control" placeholder="decrivez la panne"></textarea>
+                <textarea id="autosize-demo" name="requete" rows="3" class="rounded-lg form-control" placeholder="decrivez la panne"></textarea>
                 <x-input-error bag="create_bon_travail" for="requete" class="mt-2" />
             </div>
 
             <div class="mb-3">
                 <label class="h6" for="create_bt_zone">Zone - Priorité - Délais</label>
-                <select id="create_bt_zone" name="zone" class="select2 form-select form-select-lg" data-allow-clear="true"
+                <select id="create_bt_zone" name="zone" class="rounded-lg select2 form-select form-select-lg" data-allow-clear="true"
                     data-placeholder="--CHOISIR--">
                     <option value="">--CHOISIR--</option>
                     @foreach ($zones as $zone)
@@ -53,7 +53,7 @@
 
             <div class="mb-3">
                 <label class="h6" for="create_bt_equipement">equipement - Priorité - Délais</label>
-                <select id="create_bt_equipement" name="equipement" class="select2 form-select form-select-lg" data-allow-clear="true"
+                <select id="create_bt_equipement" name="equipement" class="rounded-lg select2 form-select form-select-lg" data-allow-clear="true"
                     data-placeholder="--CHOISIR--">
                     <option value="">--CHOISIR--</option>
                     @foreach ($demande->site->equipements as $equipement)
@@ -65,7 +65,7 @@
 
             <div class="mb-3">
                 <label class="h6" for="create_bt_prestataire">prestataire</label>
-                <select id="create_bt_prestataire" name="prestataire" class="select2 form-select form-select-lg" data-allow-clear="true"
+                <select id="create_bt_prestataire" name="prestataire" class="rounded-lg select2 form-select form-select-lg" data-allow-clear="true"
                     data-placeholder="--CHOISIR--">
                     <option value="">--CHOISIR--</option>
                     @foreach ($prestataires as $prestataire)
@@ -76,8 +76,8 @@
             </div>
 
 
-            <button type="submit" class="btn btn-success me-sm-3 me-1 data-submit">ENREGISTRER</button>
-            <button type="reset" class="btn btn-label-danger" data-bs-dismiss="offcanvas">Annuler</button>
+            <button type="reset" class="text-white bg-red-500 btn hover:bg-red-600" data-bs-dismiss="offcanvas">Annuler</button>
+            <button type="submit" class="text-white bg-green-500 btn hover:bg-green-600 me-sm-3 me-1 data-submit">ENREGISTRER</button>
         </form>
     </div>
 </div>

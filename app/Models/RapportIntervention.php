@@ -52,6 +52,11 @@ class RapportIntervention extends Model
     {
         return $this->hasOne(InjectionPiece::class, 'ri_reference', 'ri_reference');
     }
+    
+    public function injection_pieces()
+    {
+        return $this->hasMany(InjectionPiece::class, 'ri_reference', 'ri_reference');
+    }
 
 
 
@@ -65,6 +70,12 @@ class RapportIntervention extends Model
     public function statutColor()
     {
         return StatusEnum::getColor($this->status);
+    }
+
+    public function injection_pieces_amounts()
+    {
+        //je dois calculer le montant global des injections pieces
+        return 0;
     }
 
     /**

@@ -18,6 +18,7 @@ class Prestataires extends Component
         return view('livewire.prestataires', [
             'prestataires' => Prestataire::where('name', 'like', '%'.$this->search.'%')
                                             ->orwhere('slug', 'like', '%'.$this->search.'%')
+                                            ->orderby('name', 'asc')
                                             ->paginate(9),
         ]);
     }

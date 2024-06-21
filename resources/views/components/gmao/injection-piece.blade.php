@@ -91,13 +91,13 @@ $show = "show";
 
             <div class="mb-3">
                 <label for="prix_de_la_piece_dans_le_stock" class="m-0 form-label">prix_de_la_piece_dans_le_stock</label>
-                <input type="text" id="prix_de_la_piece_dans_le_stock" name="prix_de_la_piece_dans_le_stock" value="{{ old('prix_de_la_piece_dans_le_stock') }}" class="form-control" disabled />
+                <input type="text" id="prix_de_la_piece_dans_le_stock" name="prix_de_la_piece_dans_le_stock" value="{{ old('prix_de_la_piece_dans_le_stock') }}" class="rounded-lg form-control" disabled />
                 <x-input-error bag="create_injection_piece" for="prix_de_la_piece_dans_le_stock" class="mt-2" />
             </div>
 
             <div class="mb-3">
                 <label for="quantite" class="m-0 form-label">quantite</label>
-                <input type="number" id="quantite" name="quantite" value="{{ old('quantite',0) }}" class="form-control"/>
+                <input type="number" id="quantite" name="quantite" value="{{ old('quantite',0) }}" class="rounded-lg form-control"/>
                 <x-input-error bag="create_injection_piece" for="quantite" class="mt-2" />
             </div>
 
@@ -122,13 +122,13 @@ $show = "show";
             <div class="p-2 mb-3 bg-label-secondary" id="fournisseur_block">
                 <div class="mb-2" id="m-0 nom_du_fournisseur_block">
                     <label for="nom_du_fournisseur" class="form-label fw-bolder">nom_du_fournisseur</label>
-                    <input type="text" id="nom_du_fournisseur" name="nom_du_fournisseur" placeholder="Nom du Fournisseur" class="form-control" />
+                    <input type="text" id="nom_du_fournisseur" name="nom_du_fournisseur" placeholder="Nom du Fournisseur" class="rounded-lg form-control" />
                     <x-input-error bag="create_injection_piece" for="nom_du_fournisseur" class="mt-2"/>
                 </div>
 
                 <div class="mb-2" id="prix_du_fournissseur_block">
                     <label for="prix_du_fournissseur" class="m-0 form-label fw-bolder">prix_du_fournissseur</label>
-                    <input type="number" id="prix_du_fournissseur" name="prix_du_fournissseur" placeholder="Prix de la piece chez le fournisseur" class="form-control" />
+                    <input type="number" id="prix_du_fournissseur" name="prix_du_fournissseur" placeholder="Prix de la piece chez le fournisseur" class="rounded-lg form-control" />
                     <x-input-error bag="create_injection_piece" for="prix_du_fournissseur" class="mt-2"/>
                 </div>
             </div>
@@ -148,8 +148,8 @@ $show = "show";
             </div>
 
 
-            <button type="submit" class="btn btn-success me-sm-3 me-1 data-submit">ENREGISTRER</button>
-            <button type="reset" class="btn btn-label-danger" data-bs-dismiss="offcanvas">Annuler</button>
+            <button type="reset" class="text-white bg-red-500 btn hover:bg-red-600" data-bs-dismiss="offcanvas">Annuler</button>
+            <button type="submit" class="text-white bg-green-500 btn hover:bg-green-600 me-sm-3 me-1 data-submit">ENREGISTRER</button>
         </form>
     </div>
 </div>

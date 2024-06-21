@@ -103,7 +103,7 @@ class BonTravailController extends Controller
         $demande->status = StatusEnum::EN_COURS;
         $demande->save();
 
-        Mail::send(new CreateBTMail($bon_travail, $prestataire));
+        // Mail::send(new CreateBTMail($bon_travail, $prestataire));
 
         return redirect()->back()->with('success', 'Nouveau bon de travail créé avec succès!');
     }

@@ -35,18 +35,28 @@
 
 
     {{-- rapport_remplacement_piece --}}
-    @if($rapport_intervention->rapport_remplacement_piece)
-    <x-gmao.rapport-remplacement-piece :rapport_remplacement_piece="$rapport_intervention->rapport_remplacement_piece" :status_color="$rapport_intervention->statutColor()"/>
+    @if($rapport_intervention->rapport_remplacement_pieces)
+        <x-gmao.rapport-remplacement-piece :rapport_remplacement_piece="$rapport_intervention->rapport_remplacement_piece" :status_color="$rapport_intervention->statutColor()"/>
     @endif
     {{-- rapport_remplacement_piece --}}
 
 
 
-    {{-- rapport_remplacement_piece --}}
-    @if(!empty($rapport_intervention->injection_piece))
-    <x-gmao.rapport-injection-piece :injection_piece="$rapport_intervention->injection_piece" :status_color="$rapport_intervention->statutColor()"/>
+    {{-- rapport_injection_piece --}}
+    @if(!empty($rapport_intervention->injection_pieces))
+    @foreach ($rapport_intervention->injection_pieces as $injection_pieces)
+        <x-gmao.rapport-injection-piece :injection_piece="$injection_pieces" :status_color="$rapport_intervention->statutColor()"/>
+    @endforeach
+    @if (count($rapport_intervention->injection_pieces)> 1)
+    <div class="p-1 text-center bg-white rounded shadow-xl d-flex w-100 justify-content-between">
+        <h6 class="mb-1 text-gray-700 fw-bold">
+            TOTAUX
+        </h6>
+        <p class="mb-1 text-xl fw-bold">{{ number_format(intval($rapport_intervention->injection_pieces_amounts()),0,'',' ') }} F</p>
+    </div>
     @endif
-    {{-- rapport_remplacement_piece --}}
+    @endif
+    {{-- rapport_injection_piece --}}
 
     {{-- Temps prise en charge & KPIs --}}
     <div class="my-2 col-12">

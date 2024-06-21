@@ -18,11 +18,11 @@ class DateInterventionRule implements Rule
     public function passes($attribute, $value)
     {
         // Vérifie si la date_intervention est postérieure à $demande->created_at
-        return strtotime($value) >= strtotime($this->demandeCreatedAt);
+        return strtotime($value) <= strtotime($this->demandeCreatedAt);
     }
 
     public function message()
     {
-        return 'La date d\'intervention doit être postérieure à la date de création de la demande.';
+        return 'La date d\'intervention doit être superieur à la date de création de la demande. '.$this->demandeCreatedAt;
     }
 }
