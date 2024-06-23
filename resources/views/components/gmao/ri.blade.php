@@ -1,4 +1,4 @@
-@props(['rapport_intervention' => ''])
+@props(['rapport_intervention' => '','pieces' => ''])
 
 
 <div class="p-3 m-0 mb-3 border rounded shadow-sm">
@@ -44,9 +44,10 @@
 
     {{-- rapport_injection_piece --}}
     @if(!empty($rapport_intervention->injection_pieces))
-    @foreach ($rapport_intervention->injection_pieces as $injection_pieces)
-        <x-gmao.rapport-injection-piece :injection_piece="$injection_pieces" :status_color="$rapport_intervention->statutColor()"/>
-    @endforeach
+        @foreach ($rapport_intervention->injection_pieces as $injection_piece)
+            {{-- <x-gmao.rapport-injection-piece :injection_piece="$injection_piece" :status_color="$rapport_intervention->statutColor()"/> --}}
+                <livewire:injection-piece-card :injectionPiece="$injection_piece" :pieces="$pieces"/>
+        @endforeach
     @if (count($rapport_intervention->injection_pieces)> 1)
     <div class="p-1 text-center bg-white rounded shadow-xl d-flex w-100 justify-content-between">
         <h6 class="mb-1 text-gray-700 fw-bold">

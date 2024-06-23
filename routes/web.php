@@ -72,6 +72,9 @@ Route::middleware([
     Route::post('/demandes/injection-piece/rapport-intervention/{rapportIntervention}', [AdminDemandeInterventionController::class, 'injection'])
         ->name('demandes.injection');
 
+    Route::put('/rapportIntervention/injection-Piece/{injectionPiece}', [AdminDemandeInterventionController::class, 'injection_update'])
+        ->name('demandes.injection-update');
+
     Route::resource('/sites', AdminSiteController::class);
 
     Route::post('/sites/{site}/equipement/store', [AdminSiteController::class, 'add_equipement'])

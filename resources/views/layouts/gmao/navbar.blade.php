@@ -237,7 +237,7 @@
                                 <div class="flex-grow-1">
                                     <span class="fw-medium d-block">{{ Auth::user()?->first_name }} {{ Auth::user()?->last_name }}</span>
                                     <small class="text-muted">{{ Auth::user()->getroletext() }}</small>
-                                    
+
                                 </div>
                             </div>
                         </a>
@@ -269,7 +269,7 @@
                                 <span class="align-middle">{{ __('Log Out') }}</span>
                             </a>
                         </form>
-                        
+
                     </li>
                 </ul>
             </li>

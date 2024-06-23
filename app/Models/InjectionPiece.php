@@ -38,6 +38,28 @@ class InjectionPiece extends Model
     {
         return $this->belongsTo(RapportIntervention::class, 'ri_reference', 'ri_reference');
     }
+    
+    public function totalAmount()
+    {
+        $quantite = intval($this->quantite ?? 0);
+        
+        if ($this->take_in_fournisseur) {
+            $fournisseur_price = floatval($this->fournisseur_price ?? 0);
+            if ($fournisseur_price > 0) {
+                return $fournisseur_price * $quantite;
+            }
+        }
+    
+        if ($this->take_in_stock) {
+            $stock_price = floatval($this->stock_price ?? 0);
+            if ($stock_price > 0) {
+                return $stock_price * $quantite;
+            }
+        }
+    
+        return 0;
+    }
+    
 
 
     public function document()

@@ -183,7 +183,8 @@ class DemandeInterventionController extends Controller
             'stock_price' => $piece->price,
         ];
 
-        $validateData['take_in_fournisseur'] = '';
+        $validateData['take_in_stock'] = false;
+        $validateData['take_in_fournisseur'] = false;
         $validateData['fournisseur_name'] = '';
         $validateData['fournisseur_price'] = 0;
 
@@ -193,6 +194,7 @@ class DemandeInterventionController extends Controller
             {
                 return redirect()->back()->with('error', 'Pas asser de quantite dans le stock. il reste '.$piece->quantite.' '.$piece->piece.' dans le stock');
             }
+            $validateData['take_in_stock'] = true;
         } else {
             $request->validateWithBag('create_injection_piece', [
                 'nom_du_fournisseur' => 'required|string|max:255',
@@ -219,6 +221,101 @@ class DemandeInterventionController extends Controller
             'ri_reference' =>$validateData['ri_reference'],
             'quantite' =>$validateData['quantite'],
             'stock_price' =>$validateData['stock_price'],
+            'take_in_fournisseur' =>$validateData['take_in_fournisseur'],
+            'take_in_fournisseur' =>$validateData['take_in_fournisseur'],
+            'fournisseur_name' =>$validateData['fournisseur_name'],
+            'fournisseur_price' =>$validateData['fournisseur_price'],
+            'injection_file' =>$validateData['injection_file_file'],
+        ]);
+
+        if($piece->quantite < $request->quantite)
+        {
+            $quantite = intval($request->quantite);
+            $quantite = abs($quantite);
+
+            $piece->quantite -= $quantite;
+            $piece->save();
+        }
+
+        $rapportIntervention->status = StatusEnum::EN_COURS;
+        $rapportIntervention->save();
+
+        $bon_travail = $rapportIntervention->bon_travail;
+        $bon_travail = $rapportIntervention->bon_travail;
+        $bon_travail->status = StatusEnum::EN_COURS;
+        $bon_travail->save();
+
+        $bon_travail->demande->status = StatusEnum::EN_COURS;
+        $bon_travail->demande->save();
+
+        return redirect()->back()->with('success', 'Nouvelle Pièce injectée avec succès!');
+    }
+
+    /**
+     * Clôture de la demande d'intervention en mettant à jour le rapport d'intervention.
+     *
+     * @param Request $request Les données de la requête contenant les informations nécessaires à la clôture de la demande.
+     * @param RapportIntervention $rapportIntervention Le rapport d'intervention à mettre à jour.
+     * @return \Illuminate\Http\RedirectResponse La redirection vers la page précédente avec un message de succès ou d'erreur.
+     */
+    public function injection_update(Request $request, RapportIntervention $rapportIntervention)
+    {
+        // dd($rapportIntervention);
+        $request->validateWithBag('create_injection_piece', [
+            'piece' => 'required|exists:pieces,id',
+            'pris_dans_le_stock' => 'string',
+            'quantite' => 'required|numeric|min:1',
+            'injection_file_file' => 'required|image|mimes:jpeg,jpg,png|max:2000',
+        ]);
+
+        $piece = Piece::findOrFail($request->piece);
+
+        $validateData = [
+            'piece_id' => $request->piece,
+            'quantite' => $request->quantite,
+            'ri_reference' => $rapportIntervention->ri_reference,
+            'stock_price' => $piece->price,
+        ];
+
+        $validateData['take_in_stock'] = false;
+        $validateData['take_in_fournisseur'] = false;
+        $validateData['fournisseur_name'] = '';
+        $validateData['fournisseur_price'] = 0;
+
+        if ($request->pris_dans_le_stock == 'on') {
+
+            if($piece->quantite < $request->quantite)
+            {
+                return redirect()->back()->with('error', 'Pas asser de quantite dans le stock. il reste '.$piece->quantite.' '.$piece->piece.' dans le stock');
+            }
+            $validateData['take_in_stock'] = true;
+        } else {
+            $request->validateWithBag('create_injection_piece', [
+                'nom_du_fournisseur' => 'required|string|max:255',
+                'prix_du_fournissseur' => 'required|numeric|min:0',
+            ]);
+
+            $validateData['take_in_fournisseur'] = true;
+            $validateData['fournisseur_name'] = $request->nom_du_fournisseur;
+            $validateData['fournisseur_price'] = $request->prix_du_fournissseur;
+        }
+        // dd($validateData);
+
+        // Gestion du téléchargement et du stockage du fichier d'injection
+        $injectionFile = $request->file('injection_file_file');
+        $injectionFileName = $injectionFile->getClientOriginalName(); // Nom du fichier
+        $injectionFilePath = $injectionFile->storeAs('injection_files', $injectionFileName); // Stockage du fichier
+
+        $validateData['injection_file_file'] = $injectionFilePath;
+
+        // Création de la nouvelle InjectionPiece
+        // dd($validateData);
+        InjectionPiece::create([
+            'piece_id' =>$validateData['piece_id'],
+            'ri_reference' =>$validateData['ri_reference'],
+            'quantite' =>$validateData['quantite'],
+            'stock_price' =>$validateData['stock_price'],
+            'take_in_fournisseur' =>$validateData['take_in_fournisseur'],
             'take_in_fournisseur' =>$validateData['take_in_fournisseur'],
             'fournisseur_name' =>$validateData['fournisseur_name'],
             'fournisseur_price' =>$validateData['fournisseur_price'],
