@@ -3,10 +3,7 @@
         Liste des Zones et Priorités
         <p class="mb-0 font-normal text-muted">Total {{ $zones->total() }} zones</p>
     </h3>
-    <div class="flex px-3 mt-2 row justify-content-between align-items-center">
-        <div class="col-4">
-            <x-gmao.create-zone/>
-        </div>
+    <div class="flex px-3 mt-2 row justify-content-end align-items-center">
         <div class="flex col-8 justify-content-end">
             <div class="w-auto p-3 bg-gray-100 d-flex align-items-center justify-content-between rounded-2xl">
                 {{-- <label for="search" class="mx-1 font-bold">Rechercher</label> --}}
@@ -16,7 +13,7 @@
         </div>
     </div>
 
-    
+
     <div class="table-responsive text-nowrap" wire:loading.class="hidden">
         <table class="table table-hover">
             <caption class="ms-4">Liste des zones</caption>

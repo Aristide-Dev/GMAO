@@ -3,10 +3,7 @@
         Liste des pieces
         <p class="mb-0 font-normal text-muted">Total {{ $pieces->total() }} pieces</p>
     </h3>
-    <div class="flex mx-1 mt-2 row justify-content-between align-items-center">
-        <div class="col-4">
-            <x-gmao.create-piece />
-        </div>
+    <div class="flex mx-1 mt-2 row justify-content-end align-items-center">
         <div class="flex col-8 justify-content-end">
             <div class="w-auto p-3 bg-gray-100 d-flex align-items-center justify-content-between rounded-2xl">
                 {{-- <label for="search" class="mx-1 font-bold">Rechercher</label> --}}
@@ -29,7 +26,7 @@
                 </tr>
             </thead>
             <tbody class="table-border-bottom-0">
-                
+
                 @forelse($pieces as $key => $piece)
                 <tr  wire:loading.class="opacity-0" class="{{ (intval($piece->stock_min) >= intval($piece->quantite)) ? 'bg-red-100 text-gray-100':'' }}">
                     <td>
@@ -53,7 +50,7 @@
                         </span>
                     </td>
                     <td>
-                        
+
                         <div class="flex gap-2">
                             <livewire:edit-piece :piece="$piece" />
                             <form method="POST" action="{{route('admin.pieces.destroy', $piece)}}"

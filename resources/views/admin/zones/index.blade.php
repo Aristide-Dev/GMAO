@@ -6,6 +6,10 @@
 
 
     <div class="mt-3 col-12">
+
+        <div class="mb-4 col-4">
+            <x-gmao.create-zone/>
+        </div>
         <!-- Hoverable Table rows -->
         <livewire:zones-table />
         <!--/ Hoverable Table rows -->

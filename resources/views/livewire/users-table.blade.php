@@ -16,10 +16,7 @@ $statuts = [
         Liste des utilisateurs
         <p class="mb-0 font-normal text-muted">Total {{ $utilisateurs->total() }} utilisateurs</p>
     </h3>
-    <div class="flex mt-2 row justify-content-between align-items-center">
-        <div class="col-4">
-            <x-gmao.create-user/>
-        </div>
+    <div class="flex mt-2 row justify-content-end align-items-center">
         <div class="flex col-8 justify-content-end">
             <div class="w-auto p-3 bg-gray-100 d-flex align-items-center justify-content-between rounded-2xl">
                 {{-- <label for="search" class="mx-1 font-bold">Rechercher</label> --}}
@@ -100,8 +97,8 @@ $statuts = [
                             @php
                                 $action_name = ($utilisateur->status === true) ? 'bloquer':'débloquer';
                             @endphp
-                            <form 
-                                method="post" 
+                            <form
+                                method="post"
                                 action="{{ route('admin.utilisateurs.status', $utilisateur) }}"
                                 onsubmit="return confirm('Vous etes sur le point de {{ $action_name }} ce compte utilisateur! Voulez-vous continuer ?');"
                             >

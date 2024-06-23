@@ -6,6 +6,10 @@
 
 
     <div class="mt-3 col-12">
+        <div class="col-4 mb-4">
+            <x-gmao.create-site/>
+        </div>
+
         <!-- Hoverable Table rows -->
         <livewire:site-table :errors="$errors"/>
         <!--/ Hoverable Table rows -->
