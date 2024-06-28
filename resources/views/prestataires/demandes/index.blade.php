@@ -1,6 +1,11 @@
 <x-gmao-layout>
     <x-slot name="title">{{ __('Demandes') }}</x-slot>
-    <x-slot name="title_desc">{{ __('Demandes') }}</x-slot>
+    <x-slot name="title_desc">
+        <div class="text-xl">
+            {{ $prestataire->name }} - 
+            <span class="text-lg font-bold">{{ $prestataire->slug }}</span>
+        </div>
+    </x-slot>
     <x-slot name="sidebar">prestataire</x-slot>
 
 
@@ -22,7 +27,7 @@
                     <thead class="table-light">
                         <tr>
                             <th>N°</th>
-                            <th>D.I</th>
+                            <th>Bon de commande</th>
                             <th class="text-left">Site</th>
                             <th class="text-left">Document</th>
                             <th>Status</th>
@@ -36,7 +41,7 @@
                                 {{ $key+1 }}
                             </td>
                             <td>
-                                <span class="fw-bold">{{ $bon_travail->di_reference }}</span>
+                                <span class="fw-bold">{{ $bon_travail->bt_reference }}</span>
                             </td>
                             <td class="text-left">
                                 <p >{{ $bon_travail->demande->site->name }}</p>
@@ -60,7 +65,7 @@
                     <tfoot class="table-light">
                         <tr>
                             <th>N°</th>
-                            <th>D.I</th>
+                            <th>Bon de commande</th>
                             <th class="text-left">Site</th>
                             <th class="text-left">Document</th>
                             <th>Status</th>

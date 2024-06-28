@@ -157,6 +157,7 @@ Route::middleware([
     })->name('dashboard');
 
     Route::resource('/demandes', PrestataireDemandeInterventionController::class);
+    Route::resource('/demandes', PrestataireDemandeInterventionController::class);
 
     Route::post('/demandes/{demande}/{bonTravail}/rapport-constat', [PrestataireRapportConstatController::class, 'store'])
         ->name('demandes.rapport_constat.store');

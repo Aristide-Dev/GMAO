@@ -32,6 +32,7 @@
                     <option value="0">-- CHOISIR --</option>
                     <option value="contrat">CONTRAT</option>
                     <option value="b2b">B2B</option>
+                    <option value="dépot">DEPOT</option>
                     <option value="autre">AUTRE</option>
                 </select>
                 <x-input-error bag="create_site" for="registre" class="mt-2" />

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer("quantite");
             $table->boolean("take_in_stock")->default(true);
             $table->integer("stock_price");
-            $table->boolean("take_in_fournisseur")->nullable();
+            $table->boolean("take_in_fournisseur")->default(false)->nullable();
             $table->string("fournisseur_name")->nullable();
             $table->integer("fournisseur_price")->default(0);
             $table->string('injection_file')->nullable();

@@ -13,7 +13,7 @@
 
     <div class="row">
         @forelse ($equipements as $equipement)
-            <x-gmao.equipement :equipement="$equipement"/>
+            <x-gmao.equipement :equipement="$equipement" action="admin"/>
         @empty
             <h3 class="mt-5 text-center">Aucun equipement de ce type</h3>
         @endforelse

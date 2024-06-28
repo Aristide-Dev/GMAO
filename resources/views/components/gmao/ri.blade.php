@@ -1,4 +1,4 @@
-@props(['rapport_intervention' => '','pieces' => ''])
+@props(['rapport_intervention' => '','pieces' => '', 'action' => 'public'])
 
 
 <div class="p-3 m-0 mb-3 border rounded shadow-sm">
@@ -46,16 +46,17 @@
     @if(!empty($rapport_intervention->injection_pieces))
         @foreach ($rapport_intervention->injection_pieces as $injection_piece)
             {{-- <x-gmao.rapport-injection-piece :injection_piece="$injection_piece" :status_color="$rapport_intervention->statutColor()"/> --}}
-                <livewire:injection-piece-card :injectionPiece="$injection_piece" :pieces="$pieces"/>
+                <livewire:injection-piece-card :injectionPiece="$injection_piece" :pieces="$pieces" :action="$action"/>
         @endforeach
-    @if (count($rapport_intervention->injection_pieces)> 1)
-    <div class="p-1 text-center bg-white rounded shadow-xl d-flex w-100 justify-content-between">
-        <h6 class="mb-1 text-gray-700 fw-bold">
-            TOTAUX
-        </h6>
-        <p class="mb-1 text-xl fw-bold">{{ number_format(intval($rapport_intervention->injection_pieces_amounts()),0,'',' ') }} F</p>
-    </div>
-    @endif
+        
+        @if (count($rapport_intervention->injection_pieces)> 1)
+        <div class="p-1 text-center bg-white rounded shadow-xl d-flex w-100 justify-content-between">
+            <h6 class="mb-1 text-gray-700 fw-bold">
+                TOTAUX
+            </h6>
+            <p class="mb-1 text-xl fw-bold">{{ number_format(intval($rapport_intervention->injection_pieces_amounts()),0,'',' ') }} F</p>
+        </div>
+        @endif
     @endif
     {{-- rapport_injection_piece --}}
 

@@ -17,8 +17,7 @@ class SiteController extends Controller
      */
     public function index()
     {
-        $sites = Site::paginate(30);
-        return view("admin.sites.index", compact('sites'));
+        return view("admin.sites.index");
     }
 
     /**
@@ -36,7 +35,7 @@ class SiteController extends Controller
     {
         $request->validateWithBag('create_site',[
             'name' => ['required', 'string', 'max:55', 'unique:sites,name'],
-            'registre' => ['required', 'string', 'max:30'],
+            'registre' => ['required', 'string', 'max:30','in:contrat,b2b,dépot,autre'],
         ]);
 
         Site::create([

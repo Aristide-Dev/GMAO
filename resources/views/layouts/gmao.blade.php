@@ -252,6 +252,7 @@
     @endif
 
     @livewireScripts
+    @livewireChartsScripts
 </body>
 </html>
 

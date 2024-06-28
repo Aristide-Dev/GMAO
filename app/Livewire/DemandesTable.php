@@ -2,9 +2,10 @@
 
 namespace App\Livewire;
 
+use App\Models\DemandeIntervention;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
-use App\Models\DemandeIntervention;
 
 class DemandesTable extends Component
 {
@@ -23,11 +24,33 @@ class DemandesTable extends Component
     public function render()
     {
         $url = $this->determineUrl($this->action);
+        
+        $demandeur_id = Auth::user()->id;
+        
 
-        $demandes = DemandeIntervention::where('di_reference', 'like', '%' . $this->search . '%')
-                                            ->orwhere('created_at', 'like', '%'.$this->search.'%')
-                                            ->orderby('created_at', 'desc')
-                                            ->paginate(10);
+        if($this->action == 'demandeur')
+        {
+            $demandes = DemandeIntervention::where("demandeur_id", $demandeur_id)
+            ->where(function($query) {
+                $query->where('di_reference', 'like', '%' . $this->search . '%')
+                ->orwhere('created_at', 'like', '%'.$this->search.'%')
+                ->orderby('created_at', 'desc')
+                ->paginate(10);
+            })
+            ->orderby('created_at', 'desc')
+            ->paginate(8);
+        }elseif($this->action == 'admin')
+        {
+            $demandes = DemandeIntervention::where('di_reference', 'like', '%' . $this->search . '%')
+            ->orwhere('created_at', 'like', '%'.$this->search.'%')
+            ->orderby('created_at', 'desc')
+            ->paginate(10);
+        }
+
+        // $demandes = DemandeIntervention::where('di_reference', 'like', '%' . $this->search . '%')
+        //                                     ->orwhere('created_at', 'like', '%'.$this->search.'%')
+        //                                     ->orderby('created_at', 'desc')
+        //                                     ->paginate(10);
 
         return view('livewire.demandes-table', [
             'url' => $url,

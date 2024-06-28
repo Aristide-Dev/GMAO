@@ -1,4 +1,4 @@
-@props(['equipement','equipement'])
+@props(['equipement','equipement', 'action'=>  'demandeur'])
 
 @if (!isset($equipement))
     @php
@@ -283,6 +283,7 @@ break;
                 </div>
             </div>
 
+            @if($action == 'admin')
             <div class="flex mt-3 justify-content-between">
                 <a href="{{ route('admin.sites.equipement.edit',['site' => $equipement->site, 'equipement'=> $equipement]) }}" class="btn btn-warning"><i class="tf-icons ti ti-edit ti-sm me-1 animate-pulse"></i>
                     Editer</a>
@@ -294,6 +295,7 @@ break;
                     </button>
                 </form>
             </div>
+            @endif
         </div>
     </div>
 </div>

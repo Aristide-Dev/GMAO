@@ -18,11 +18,8 @@ class DemandeInterventionController extends Controller
      */
     public function index()
     {
-        $demandeur_id = Auth::user()->id;
-        $sites = Site::all();
-        $demandes = DemandeIntervention::where("demandeur_id", $demandeur_id)->paginate(10);
         // dd($demandes);
-        return view('demandeur.demandes.index', compact('sites', 'demandes'));
+        return view('demandeur.demandes.index');
     }
 
     /**

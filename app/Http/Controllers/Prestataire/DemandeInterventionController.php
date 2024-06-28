@@ -23,7 +23,7 @@ class DemandeInterventionController extends Controller
         $bon_travails = $prestataire->bon_travails ?? [];
         $demandes = $prestataire->demandes;
         // dd($demandes);
-        return view('prestataires.demandes.index', compact('bon_travails'));
+        return view('prestataires.demandes.index', compact('bon_travails', 'prestataire'));
     }
 
     /**

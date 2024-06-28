@@ -144,7 +144,7 @@
                 <div class="card-body">
                     {{-- Rapport --}}
                     @if ($demande->bon_travails->last() && ($demande->bon_travails->last())->rapportsIntervention)
-                    <x-gmao.ri :rapport_intervention="($demande->bon_travails->last())->rapportsIntervention" :pieces="$pieces"/>
+                    <x-gmao.ri :rapport_intervention="($demande->bon_travails->last())->rapportsIntervention" :pieces="$pieces" action="admin"/>
                     @endif
                     {{-- Rapport --}}
                 </div>

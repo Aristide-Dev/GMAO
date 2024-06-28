@@ -23,7 +23,7 @@
                     <th>N°</th>
                     <th>Site</th>
                     <th>Registre</th>
-                    <th>Forfait Contrat</th>
+                    <th>Forfait Contrat Mensuel</th>
                     <th>Status</th>
                     <th>Actions</th>
                 </tr>
@@ -49,7 +49,7 @@
                         <a href="{{ route('admin.sites.show', $site) }}">{{ $site->name }}</a>
                     </td>
                     <td>
-                        {{ $site->registre }}
+                        <p class="uppercase">{{ $site->registre }}</p>
                     </td>
                     <td>
                         <span class="fw-bold">
@@ -71,8 +71,10 @@
                         @endswitch
                     </td>
                     <td>
-                        <a href="{{ route('admin.sites.show', $site) }}" class="btn btn-primary">Voir +</a>
+                        <a href="{{ route($url.'.sites.show', $site) }}" class="btn btn-primary">Voir +</a>
+                        @if($action == 'admin')
                         <a href="{{ route('admin.sites.edit', $site) }}" class="btn btn-warning">Editer</a>
+                        @endif
                     </td>
                 </tr>
                 @empty
@@ -93,7 +95,7 @@
                     <th>N°</th>
                     <th>Site</th>
                     <th>Registre</th>
-                    <th>Forfait Contrat</th>
+                    <th>Forfait Contrat Mensuel</th>
                     <th>Status</th>
                     <th>Actions</th>
                 </tr>
