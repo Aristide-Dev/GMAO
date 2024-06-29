@@ -20,6 +20,11 @@ class Site extends Model
         return $this->hasMany(Equipement::class);
     }
 
+    public function demande_interventions()
+    {
+        return $this->hasMany(DemandeIntervention::class);
+    }
+
     public function equipementsByCategory($category)
     {
         return $this->hasMany(Equipement::class)->where('categorie', $category)->get();

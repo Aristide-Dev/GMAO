@@ -45,6 +45,11 @@ class Prestataire extends Model
                     ->get();
     }
 
+    public function users()
+    {
+        return $this->hasMany(User::class,'prestataire_own');
+    }
+
     public function bon_travails()
     {
         return $this->hasMany(BonTravail::class);

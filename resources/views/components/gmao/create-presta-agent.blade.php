@@ -25,32 +25,32 @@ $show = "";
             @csrf
             <div class="mb-3">
                 <label for="bs-datepicker-format" class="form-label">Prenom</label>
-                <input type="text" name="first_name" id="bs-datepicker-format" placeholder="" class="form-control" />
+                <input type="text" name="first_name" id="bs-datepicker-format" placeholder="" class="rounded-lg form-control" value="{{old('first_name')}}" />
                 <x-input-error bag="create_presta_agent" for="first_name" class="mt-2" />
             </div>
             <div class="mb-3">
                 <label for="bs-datepicker-format" class="form-label">Nom</label>
-                <input type="text" name="last_name" id="bs-datepicker-format" placeholder="" class="form-control" />
+                <input type="text" name="last_name" id="bs-datepicker-format" placeholder="" class="rounded-lg form-control" value="{{old('last_name')}}" />
                 <x-input-error bag="create_presta_agent" for="last_name" class="mt-2" />
             </div>
             <div class="mb-3">
                 <label for="bs-datepicker-format" class="form-label">Email</label>
-                <input type="email" name="email" id="bs-datepicker-format" placeholder="" class="form-control" />
+                <input type="email" name="email" id="bs-datepicker-format" placeholder="" class="rounded-lg form-control" value="{{old('email')}}" />
                 <x-input-error bag="create_presta_agent" for="email" class="mt-2" />
             </div>
             <div class="mb-3">
                 <label for="bs-datepicker-format" class="form-label">Telephone</label>
-                <input type="text" name="telephone" id="bs-datepicker-format" placeholder="" class="form-control" />
+                <input type="text" name="telephone" id="bs-datepicker-format" placeholder="" class="rounded-lg form-control" value="{{old('telephone')}}" />
                 <x-input-error bag="create_presta_agent" for="telephone" class="mt-2" />
             </div>
             <div class="mb-3">
                 <label for="bs-datepicker-format" class="form-label">Mot de passe</label>
-                <input type="password" name="password" for="password" id="bs-datepicker-format" placeholder="" class="form-control" />
+                <input type="password" name="password" for="password" id="bs-datepicker-format" placeholder="" class="rounded-lg form-control"/>
                 <x-input-error bag="create_presta_agent" for="password" class="mt-2" />
             </div>
             <div class="mb-3">
                 <label for="bs-datepicker-format" class="form-label">Confirmé le mot de passe</label>
-                <input type="password" name="password_confirmation" id="bs-datepicker-format" placeholder="" class="form-control" />
+                <input type="password" name="password_confirmation" id="bs-datepicker-format" placeholder="" class="rounded-lg form-control"/>
                 <x-input-error bag="create_presta_agent" for="password_confirmation" class="mt-2" />
             </div>
             <button type="submit" class="btn btn-success me-sm-3 me-1 data-submit">ENREGISTRER</button>

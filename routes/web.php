@@ -20,6 +20,7 @@ use App\Http\Controllers\Demandeur\DemandeInterventionController as DemandeurDem
 use App\Http\Controllers\Prestataire\DemandeInterventionController as PrestataireDemandeInterventionController;
 use App\Http\Controllers\Prestataire\RapportConstatController as PrestataireRapportConstatController;
 use App\Http\Controllers\Prestataire\RapportRemplacementPieceController as PrestataireRapportRemplacementPieceController;
+use App\Http\Controllers\Prestataire\UtilisateurController as PrestataireUtilisateurController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -157,7 +158,9 @@ Route::middleware([
     })->name('dashboard');
 
     Route::resource('/demandes', PrestataireDemandeInterventionController::class);
-    Route::resource('/demandes', PrestataireDemandeInterventionController::class);
+    Route::post('/utilisateurs', [PrestataireUtilisateurController::class, 'store'])->name('utilisateurs.store');
+    Route::get('/utilisateurs', [PrestataireUtilisateurController::class, 'index'])->name('utilisateurs.index');
+    Route::get('/utilisateurs/{utilisateur}', [PrestataireUtilisateurController::class, 'show'])->name('utilisateurs.show');
 
     Route::post('/demandes/{demande}/{bonTravail}/rapport-constat', [PrestataireRapportConstatController::class, 'store'])
         ->name('demandes.rapport_constat.store');
@@ -173,72 +176,5 @@ Route::prefix('prestataires')->name('prestataires.')->group(function () {
     Route::get('/dashboard', function () {
         return view('prestataires.dashboard');
     })->name('dashboard');
-
-    Route::get('/utilisateurs', function () {
-        return view('prestataires.utilisateurs.index');
-    })->name('utilisateurs.index');
-
-    Route::get('/utilisateurs/{id}', function () {
-        return view('prestataires.utilisateurs.show');
-    })->name('utilisateurs.show');
 });
 
-
-
-Route::prefix('admin')->name('admin.')->group(function () {
-    // Route::get('/dashboard', function () {
-    //     return view('admin.dashboard');
-    // })->name('dashboard');
-
-    // Route::get('/demandes', function () {
-    //     return view('admin.demandes.index');
-    // })->name('demandes.index');
-
-    // Route::get('/demandes/{id}', function () {
-    //     return view('admin.demandes.show');
-    // })->name('demandes.show');
-
-    // Route::get('/sites', function () {
-    //     return view('admin.sites.index');
-    // })->name('sites.index');
-
-    // Route::get('/sites/{id}', function () {
-    //     return view('admin.sites.show');
-    // })->name('sites.show');
-
-    // Route::get('/sites/{id}/{type_equipement}', function () {
-    //     return view('admin.sites.equipements');
-    // })->name('sites.type_equipement');
-
-    // Route::get('/prestataires', function () {
-    //     return view('admin.prestataires.index');
-    // })->name('prestataires.index');
-
-    // Route::get('/prestataires/create', function () {
-    //     return view('admin.prestataires.create');
-    // })->name('prestataires.create');
-
-    // Route::get('/prestataires/{id}', function () {
-    //     return view('admin.prestataires.show');
-    // })->name('prestataires.show');
-
-    // Route::get('/utilisateurs', function () {
-    //     return view('admin.utilisateurs.index');
-    // })->name('utilisateurs.index');
-
-    // Route::get('/utilisateurs/{id}', function () {
-    //     return view('admin.utilisateurs.show');
-    // })->name('utilisateurs.show');
-
-    // Route::get('/pieces', function () {
-    //     return view('admin.pieces.index');
-    // })->name('pieces.index');
-
-    // Route::get('/equipements', function () {
-    //     return view('admin.equipements.index');
-    // })->name('equipements.index');
-
-    // Route::get('/equipements/{id}', function () {
-    //     return view('admin.equipements.show');
-    // })->name('equipements.show');
-});

@@ -5,7 +5,7 @@
 
 
 
-    <x-gmao.user-details/>
+    <x-gmao.prestataire-user-details :utilisateur="$utilisateur" role="{{ (Auth::user()->role == 'prestataire_admin') ? 'gerant':'agent' }}"/>
 
 </x-gmao-layout>
 

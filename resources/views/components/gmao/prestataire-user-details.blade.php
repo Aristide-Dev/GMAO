@@ -1,4 +1,4 @@
-@props(['utilisateur'])
+@props(['utilisateur', 'role' => 'agent'])
 
 @php
     $details_active_class = "show active";
@@ -110,7 +110,7 @@
     </div>
     <!--/ User Sidebar -->
 
-
+    @if($role == 'gerant')
     <!-- User Content -->
     <div class="order-1 col-xl-8 col-lg-7 col-md-7">
         <div class="mb-3 text-center card">
@@ -341,3 +341,4 @@
         </div>
 
     </div>
+    @endif

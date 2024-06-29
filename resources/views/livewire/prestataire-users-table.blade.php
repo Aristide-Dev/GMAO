@@ -69,7 +69,7 @@ $statuts = [
                         <span class="fw-bold">{{ $utilisateur->telephone }}</span>
                     </td>
                     <td>
-                        <span class="text-gray-500 fw-normal">{{ $utilisateur->role_text }} @if($utilisateur->role == 'prestataire_admin') <span class="m-1 text-gray-700 bg-yellow-200 badge">{{ $utilisateur->prestataire->slug }}</span> @endif</span>
+                        <span class="fw-bold text-secondary">{{ $utilisateur?->role_text }}</span>
                     </td>
                     <td>
                         @if ($utilisateur->status == true)
@@ -80,7 +80,11 @@ $statuts = [
                     </td>
                     <td>
                         <div class="flex justify-center gap-1">
-                            <a href="{{ route('admin.utilisateurs.show', $utilisateur) }}" class="text-white bg-blue-500 btn w-100 hover:bg-blue-600">Voir +</a>
+                            @if ($action_name == 'gerant')
+                                <a href="{{ route('prestataires.utilisateurs.show', $utilisateur) }}" class="text-white bg-blue-500 btn w-100 hover:bg-blue-600">Voir +</a>
+                            @else
+                                --- 
+                            @endif
                         </div>
                     </td>
                 </tr>

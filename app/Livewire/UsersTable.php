@@ -14,13 +14,15 @@ class UsersTable extends Component
 
     public function render()
     {
-        return view('livewire.users-table', [
-            'utilisateurs' => User::where('first_name', 'like', '%'.$this->search.'%')
-                                            ->orwhere('last_name', 'like', '%'.$this->search.'%')
-                                            ->orwhere('email', 'like', '%'.$this->search.'%')
-                                            ->orwhere('telephone', 'like', '%'.$this->search.'%')
-                                            ->orderby('created_at', 'desc')
-                                            ->paginate(20),
-        ]);
+        $utilisateurs = User::where("role", '<>', 'agent')
+            ->where(function($query) {
+                $query->where('first_name', 'like', '%'.$this->search.'%')
+                        ->orwhere('last_name', 'like', '%'.$this->search.'%')
+                        ->orwhere('email', 'like', '%'.$this->search.'%')
+                        ->orwhere('telephone', 'like', '%'.$this->search.'%');
+            })
+            ->orderby('created_at', 'desc')
+            ->paginate(8);
+        return view('livewire.users-table', ['utilisateurs' =>$utilisateurs]);
     }
 }
