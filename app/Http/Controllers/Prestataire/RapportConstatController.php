@@ -36,7 +36,7 @@ class RapportConstatController extends Controller
     {
         $request->validateWithBag('create_rapport_constat', [
             'rapport_constat_file' => 'required|image|extensions:jpeg,jpg,png|max:2000',
-            'status' => 'required|string|in:terminé,en attente,annulé',
+            'status' => 'required|string|in:terminé,en attente,annulé,rejeté',
             'date_intervention' => [
                 'required',
                 'date',

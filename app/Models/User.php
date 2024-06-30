@@ -112,7 +112,7 @@ class User extends Authenticatable
         {
             return "Super Admin";
         }
-        
+
         if($role == 'admin')
         {
             return "admin";

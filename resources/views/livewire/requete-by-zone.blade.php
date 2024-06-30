@@ -26,16 +26,16 @@
                                         $total = 0;
                                         $total_per_cent = 0;
                                     @endphp
-                                    @foreach($requeteByTypes as $requete)
+                                    @foreach($requeteByZone as $zone)
                                     @php
-                                        $request_count = $requete['count'];
+                                        $request_count = $zone['count'];
                                         $total += $request_count;
                                         $percentage = ($request_count * 100) / $total_bt;
                                         $total_per_cent += $percentage;
                                     @endphp
 
                                     <tr>
-                                        <td class="text-sm font-bold text-gray-500 whitespace-nowrap">{{ $requete['categorie']}}</td>
+                                        <td class="text-sm font-bold text-gray-500 whitespace-nowrap">{{ $zone['name']}}</td>
                                         <td class="text-sm text-gray-800 whitespace-nowrap">{{ $request_count }}</td>
                                         <td class="text-sm text-gray-800 whitespace-nowrap">{{ number_format($percentage, 2) }}%</td>
                                     </tr>

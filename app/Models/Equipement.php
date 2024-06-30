@@ -29,6 +29,11 @@ class Equipement extends Model
         return $this->belongsTo(Site::class);
     }
 
+    public function bon_travails()
+    {
+        return $this->hasMany(BonTravail::class);
+    }
+
     public function getQrCodeAttribute()
     {
 

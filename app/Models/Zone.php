@@ -20,7 +20,12 @@ class Zone extends Model
         'priorite',
         'delais',
     ];
-    
+
+    public function bon_travails()
+    {
+        return $this->hasMany(BonTravail::class, 'zone_name', 'name');
+    }
+
     public function prioriteText()
     {
         // return ZonePrioriteEnum::getText(ZonePrioriteEnum::FAIBLE);

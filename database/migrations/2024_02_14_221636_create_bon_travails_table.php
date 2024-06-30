@@ -28,6 +28,7 @@ return new class extends Migration
 
             
             $table->foreign('di_reference')->references('di_reference')->on('demande_interventions')->onDelete('cascade');
+            $table->foreign('equipement_id')->references('id')->on('equipements')->onDelete('cascade');
             $table->foreign('prestataire_id')->references('id')->on('prestataires')->onDelete('cascade');
             $table->foreign('last_prestataire_id')->references('id')->on('prestataires')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

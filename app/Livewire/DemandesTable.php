@@ -24,9 +24,9 @@ class DemandesTable extends Component
     public function render()
     {
         $url = $this->determineUrl($this->action);
-        
+
         $demandeur_id = Auth::user()->id;
-        
+
 
         if($this->action == 'demandeur')
         {
@@ -38,7 +38,7 @@ class DemandesTable extends Component
                 ->paginate(10);
             })
             ->orderby('created_at', 'desc')
-            ->paginate(8);
+            ->paginate(10);
         }elseif($this->action == 'admin')
         {
             $demandes = DemandeIntervention::where('di_reference', 'like', '%' . $this->search . '%')

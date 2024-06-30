@@ -113,7 +113,7 @@
         <!--/ Statistics -->
     </div>
 
-    
+
     <div class="row">
         <div class="p-3 my-3 col-12">
             <livewire:evolution-requetes />
@@ -129,6 +129,12 @@
     <div class="row">
         <div class="p-3 my-3 shadow col-12">
             <livewire:requete-by-equipement-type />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="p-3 my-3 shadow col-12">
+            <livewire:requete-by-zone />
         </div>
     </div>
 </x-gmao-layout>

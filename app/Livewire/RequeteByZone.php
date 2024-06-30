@@ -4,13 +4,13 @@ namespace App\Livewire;
 
 use App\Enums\StatusEnum;
 use App\Models\BonTravail;
-use App\Models\Equipement;
+use App\Models\Zone;
 use Asantibanez\LivewireCharts\Facades\LivewireCharts;
 use Livewire\Component;
 
-class RequeteByEquipementType extends Component
+class RequeteByZone extends Component
 {
-    public $requeteByTypes = [];
+    public $requeteByZone = [];
     public $total_bt = 0;
     public $firstRun = true;
     public $showDataLabels = false;
@@ -47,26 +47,24 @@ class RequeteByEquipementType extends Component
         // Récupérer le nombre total de bons de travail
         $this->total_bt = BonTravail::count();
 
-        // Récupérer les requêtes groupées par type d'équipement
-        $this->requeteByTypes = Equipement::withCount('bon_travails')
-            ->groupBy('categorie')
+        // Récupérer les requêtes par zone
+        $this->requeteByZone = Zone::withCount('bon_travails')
+            ->orderBy('bon_travails_count', 'desc')
+            ->take(10)
             ->get()
-            ->map(function ($group, $categorie) {
+            ->map(function ($zone) {
                 return [
-                    'categorie' => $categorie,
-                    'count' => $group->sum('bon_travails_count'),
+                    'name' => $zone->name,
+                    'count' => $zone->bon_travails_count,
                 ];
             })
-            ->sortByDesc('count')
-            ->take(10)
-            ->values()
-            ->all();
+            ->toArray();
     }
 
     public function render()
     {
         $columnChartModel = LivewireCharts::columnChartModel()
-            ->setTitle('Bons de Travail par Type d\'Équipement')
+            ->setTitle('Bons de Travail par Zone')
             ->setAnimated($this->firstRun)
             ->withOnColumnClickEventName('onColumnClick')
             ->setLegendVisibility(false)
@@ -75,12 +73,12 @@ class RequeteByEquipementType extends Component
             ->setColumnWidth(70)
             ->withGrid();
 
-        foreach ($this->requeteByTypes as $type) {
-            $columnChartModel = $columnChartModel->addColumn($type['categorie'], $type['count'], StatusEnum::getEquipementCategorieColor($type['categorie']));
+        foreach ($this->requeteByZone as $zone) {
+            $columnChartModel = $columnChartModel->addColumn($zone['name'], $zone['count'], StatusEnum::getEquipementCategorieColor($zone['name']));
         }
 
-        return view('livewire.requete-by-equipement-type', [
-            'requeteByTypes' => $this->requeteByTypes,
+        return view('livewire.requete-by-zone', [
+            'requeteByZone' => $this->requeteByZone,
             'columnChartModel' => $columnChartModel,
         ]);
     }

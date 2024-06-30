@@ -78,7 +78,7 @@ class DemandeInterventionController extends Controller
             'site_id' => $request->site,
             'demandeur_id' => $request->demandeur,
             'demande_file' => $imagePath,
-            'status' => StatusEnum::EN_ATTENTE,
+            'status' => StatusEnum::PAS_TRAITE,
         ]);
 
         return redirect()->back()->with('success', 'Nouvelle demande créée avec succès!');
@@ -123,7 +123,7 @@ class DemandeInterventionController extends Controller
         // dd($data, $priseEnChargeInfo);
 
 
-        
+
 
         switch ($request->status) {
             case 'terminé':
@@ -455,9 +455,9 @@ class DemandeInterventionController extends Controller
         $kpis = '';
 
         // Vérifier si la date d'intervention est postérieure à la date de déclaration
-        if (strtotime($date_declaration) > strtotime($date_intervention)) {
-            return ['error' => 'La date d\'intervention ne peut pas être antérieure à la date de déclaration de cette demande.'];
-        }
+        // if (strtotime($date_declaration) > strtotime($date_intervention)) {
+        //     return ['error' => 'La date d\'intervention ne peut pas être antérieure à la date de déclaration de cette demande.'];
+        // }
 
         // Calculer la différence entre la date d'intervention et la date de déclaration
         $temps_prise_en_charge_seconds = strtotime($date_intervention) - strtotime($date_declaration);

@@ -29,26 +29,22 @@
                             {{-- <x-input id="name" type="text" class="block w-full mt-1" value="{{ $zone->name }}" /> --}}
                             {{-- <x-input-error bag="create_zone" for="name" class="mt-2" /> --}}
                         </div>
-
                         <div class="mb-3">
                             <label class="h6" for="edit_priorite-{{$modal_id}}">Type D'urgence - {{ $zone->priorite }}</label>
-                            <select id="edit_priorite-{{$modal_id}}" name="priorite" class="rounded-lg select2 form-select form-select-lg" data-allow-clear="false">
-                                {{-- <option value="">--- CHOISIR ---</option> --}}
-
-                                <option value="3" @selected(($zone->priorite === 3)?true:false)>
-                                    <span class="text-red fw-bolder">Prioritaire</span>
+                            <select id="edit_priorite-{{$modal_id}}" name="priorite" wire:model="zone.priorite" class="rounded-lg select2 form-select form-select-lg priority-select" data-allow-clear="false">
+                                <option value="3" @if($zone->priorite == 3) selected @endif>
+                                    Prioritaire
                                 </option>
-
-                                <option value="2" @selected(($zone->priorite === 2)?true:false)>
-                                    <span class="text-warning fw-bolder">Moyen</span>
+                                <option value="2" @if($zone->priorite == 2) selected @endif>
+                                    Moyen
                                 </option>
-
-                                <option value="1" @selected(($zone->priorite === 1)?true:false)>
-                                    <span class="text-success fw-bolder">Faible</span>
+                                <option value="1" @if($zone->priorite == 1) selected @endif>
+                                    Faible
                                 </option>
                             </select>
                             <x-input-error bag="create_zone" for="priorite" class="mt-2" />
                         </div>
+                        
 
                         <div class="mb-3">
                             <label class="h6" for="autosize-demo-{{$modal_id}}">Délais en Heure</label>
@@ -66,6 +62,5 @@
     </div>
     {{-- <!--/ Add New Credit Card Modal --> --}}
     {{-- <a href="{{ route('admin.zones.show', $zone) }}">vvvvvvvvvvvvvv</a> --}}
-
 </div>
 

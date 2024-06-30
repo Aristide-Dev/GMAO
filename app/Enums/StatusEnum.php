@@ -13,33 +13,54 @@ enum StatusEnum: string {
     case REJETE = 'rejeté';
     case CLOTURE = 'cloturé';
     case INJECTION_PIECE = 'injection de pièce';
+    case PAS_TRAITE = 'pas traité';
 
     /**
      * Associer les couleurs aux statuts
      */
     public static function getColor($status): string {
         return match ($status) {
-            self::EN_ATTENTE => '#F59E0B', // Orange
-            'en attente' => '#F59E0B', // Orange
+            self::EN_ATTENTE => '#A16207', // Orange
+            'en attente' => '#A16207', // Orange
 
-            self::EN_COURS => '#FCD34D', // Jaune
-            'en cours' => '#FCD34D', // Jaune
+            self::EN_COURS => '#FACC15', // Jaune
+            'en cours' => '#FACC15', // Jaune
 
-            self::ANNULE => '#FF0000', // Rouge
-            'annulé' => '#FF0000', // Rouge
+            self::ANNULE => '#991B1B', // Rouge
+            'annulé' => '#991B1B', // Rouge
 
-            self::TERMINE => '#34D399', // Vert
-            'terminé' => '#34D399', // Vert
+            self::TERMINE => '#166534', // Vert
+            'terminé' => '#166534', // Vert
 
-            self::CLOTURE => '#34D399', // Vert
-            'cloturé' => '#34D399', // Vert
+            self::CLOTURE => '#22C55E', // Vert
+            'cloturé' => '#22C55E', // Vert
 
-            self::REJETE => '#FCA5A5', // rouge-clair
-            'rejeté' => '#FCA5A5', // rouge-clair
+            self::REJETE => '#F87171', // rouge-clair
+            'rejeté' => '#F87171', // rouge-clair
 
             self::INJECTION_PIECE => '#800080', // Violet
             'injection de pièce' => '#800080', // Violet
 
+            self::PAS_TRAITE => '#93C5FD', // Violet
+            'pas traité' => '#93C5FD', // Violet
+
+            default => '#D1D5DB', // gris par défaut => bg-gray-300 (tailwind)
+        };
+    }
+
+    /**
+     * Associer les couleurs aux statuts
+     */
+    public static function getEquipementCategorieColor($categorie): string {
+        return match ($categorie) {
+            'distributeur' => '#3B82F6', // Rouge
+            'stockage-et-tuyauterie' => '#9CA3AF', // gray-400
+            'groupe-electrogene' => '#FACC15', // yellow-400
+            'forage' => '#9A3412', // orange-800
+            'servicing' => '#4B5563', // gray-600
+            'branding' => '#4ADE80', // green-400
+            'electricite' => '#EAB308', // yellow-500
+            'equipement-incendie' => '#EF4444', // red-500
             default => '#D1D5DB', // gris par défaut => bg-gray-300 (tailwind)
         };
     }
