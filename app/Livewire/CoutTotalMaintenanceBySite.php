@@ -3,15 +3,15 @@
 namespace App\Livewire;
 
 use App\Enums\StatusEnum;
-use App\Models\BonTravail;
-use App\Models\Zone;
+use App\Models\DemandeIntervention;
+use App\Models\Site;
 use Asantibanez\LivewireCharts\Facades\LivewireCharts;
 use Livewire\Component;
 
-class RequeteByZone extends Component
+class CoutTotalMaintenanceBySite extends Component
 {
-    public $requeteByZone = [];
-    public $total_bt = 0;
+    public $requeteBySite = [];
+    public $total_di = 0;
     public $firstRun = true;
     public $showDataLabels = false;
 
@@ -45,19 +45,17 @@ class RequeteByZone extends Component
     public function mount()
     {
         // Récupérer le nombre total de bons de travail
-        $this->total_bt = BonTravail::count();
+        $this->total_di = DemandeIntervention::count();
 
-
-        // Récupérer les requêtes par zone et supprimer les doublons
-        $this->requeteByZone = Zone::withCount('bon_travails')
+        // Récupérer les requêtes par site et supprimer les doublons
+        $this->requeteBySite = Site::withCount('demande_interventions')
             ->get()
-            ->unique('name')  // Suppression des doublons basés sur le nom de la zone
             ->groupBy('name')
             ->map(function ($group, $name) {
                 // dd($group->first());
                 return [
                     'name' => $name,
-                    'count' => $group->first()->bon_travails_count,
+                    'count' => $group->first()->demande_interventions_count,
                 ];
             })
             ->toArray();
@@ -75,12 +73,12 @@ class RequeteByZone extends Component
             ->setColumnWidth(20)
             ->withGrid();
 
-        foreach ($this->requeteByZone as $zone) {
-            $columnChartModel = $columnChartModel->addColumn($zone['name'], $zone['count'], StatusEnum::randomColor());
+        foreach ($this->requeteBySite as $site) {
+            $columnChartModel = $columnChartModel->addColumn($site['name'], $site['count'], StatusEnum::randomColor());
         }
 
-        return view('livewire.requete-by-zone', [
-            'requeteByZone' => $this->requeteByZone,
+        return view('livewire.cout-total-maintenance-by-site', [
+            'requeteBySite' => $this->requeteBySite,
             'columnChartModel' => $columnChartModel,
         ]);
     }

@@ -137,4 +137,10 @@
             <livewire:requete-by-zone />
         </div>
     </div>
+
+    <div class="row">
+        <div class="p-3 my-3 shadow col-12">
+            <livewire:cout-total-maintenance-by-site />
+        </div>
+    </div>
 </x-gmao-layout>

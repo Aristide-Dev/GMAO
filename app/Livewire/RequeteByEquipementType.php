@@ -44,13 +44,14 @@ class RequeteByEquipementType extends Component
 
     public function mount()
     {
-        // Récupérer le nombre total de bons de travail
+        // Récupérer le nombre total de demandes d'intervention
         $this->total_bt = BonTravail::count();
+
 
         // Récupérer les requêtes groupées par type d'équipement
         $this->requeteByTypes = Equipement::withCount('bon_travails')
-            ->groupBy('categorie')
             ->get()
+            ->groupBy('categorie')
             ->map(function ($group, $categorie) {
                 return [
                     'categorie' => $categorie,
@@ -65,20 +66,24 @@ class RequeteByEquipementType extends Component
 
     public function render()
     {
+
+
+        $equipement = Equipement::all();
+        $total_equipement = count($equipement);
+
         $columnChartModel = LivewireCharts::columnChartModel()
-            ->setTitle('Bons de Travail par Type d\'Équipement')
-            ->setAnimated($this->firstRun)
-            ->withOnColumnClickEventName('onColumnClick')
-            ->setLegendVisibility(false)
-            ->legendHorizontallyAlignedCenter()
-            ->setDataLabelsEnabled($this->showDataLabels)
-            ->setColumnWidth(70)
-            ->withGrid();
+        ->setTitle('Demandes par Type d\'Équipement')
+        ->setAnimated($this->firstRun)
+        ->withOnColumnClickEventName('onColumnClick')
+        ->setLegendVisibility(false)
+        ->legendHorizontallyAlignedCenter()
+        ->setDataLabelsEnabled($this->showDataLabels)
+        ->setColumnWidth(70)
+        ->withGrid();
 
-        foreach ($this->requeteByTypes as $type) {
-            $columnChartModel = $columnChartModel->addColumn($type['categorie'], $type['count'], StatusEnum::getEquipementCategorieColor($type['categorie']));
-        }
-
+    foreach ($this->requeteByTypes as $type) {
+        $columnChartModel = $columnChartModel->addColumn($type['categorie'], $type['count'], StatusEnum::randomColor());
+    }
         return view('livewire.requete-by-equipement-type', [
             'requeteByTypes' => $this->requeteByTypes,
             'columnChartModel' => $columnChartModel,

@@ -49,7 +49,7 @@ enum StatusEnum: string {
     }
 
     /**
-     * Associer les couleurs aux statuts
+     * Associer les couleurs aux types d'equipement
      */
     public static function getEquipementCategorieColor($categorie): string {
         return match ($categorie) {
@@ -63,5 +63,12 @@ enum StatusEnum: string {
             'equipement-incendie' => '#EF4444', // red-500
             default => '#D1D5DB', // gris par défaut => bg-gray-300 (tailwind)
         };
+    }
+
+    /**
+     * Retourne une couleur CSS aléatoire
+     */
+    public static function randomColor(): string {
+        return sprintf('#%06X', mt_rand(0, 0xFFFFFF));
     }
 }

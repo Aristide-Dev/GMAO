@@ -1,8 +1,8 @@
 <div>
     <div class="px-2 row">
-        <x-stat-header title="Nombre de requête par Zone" />
+        <x-stat-header title="Coût total de la maintenance par site" />
 
-        <div class="p-0 my-3 bg-white col-md-5">
+        <div class="p-0 my-3 bg-white col-md-4">
             <div class="flex flex-col rounded shadow-sm">
                 <div class="overflow-x-auto">
                     <div class="inline-block min-w-full p-0 align-middle">
@@ -26,16 +26,16 @@
                                         $total = 0;
                                         $total_per_cent = 0;
                                     @endphp
-                                    @foreach($requeteByZone as $zone)
+                                    @foreach($requeteBySite as $site)
                                     @php
-                                        $request_count = $zone['count'];
+                                        $request_count = $site['count'];
                                         $total += $request_count;
-                                        $percentage = ($request_count * 100) / $total_bt;
+                                        $percentage = ($request_count * 100) / $total_di;
                                         $total_per_cent += $percentage;
                                     @endphp
 
                                     <tr>
-                                        <td class="text-sm font-bold text-gray-500 whitespace-nowrap">{{ $zone['name']}}</td>
+                                        <td class="text-sm font-bold text-gray-500 whitespace-nowrap">{{ $site['name']}}</td>
                                         <td class="text-sm text-gray-800 whitespace-nowrap">{{ $request_count }}</td>
                                         <td class="text-sm text-gray-800 whitespace-nowrap">{{ number_format($percentage, 2) }}%</td>
                                     </tr>
@@ -57,7 +57,7 @@
 
 
 
-        <div class="col-md-7">
+        <div class="col-md-8">
             <div class="flex-1 p-4 bg-white border rounded shadow" style="height: 32rem;">
                 <livewire:livewire-column-chart
                     key="{{ $columnChartModel->reactiveKey() }}"
