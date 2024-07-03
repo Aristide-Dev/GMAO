@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Enums\StatusEnum;
 use App\Models\DemandeIntervention;
+use App\Models\Site;
 use Asantibanez\LivewireCharts\Facades\LivewireCharts;
 use Livewire\Component;
 
@@ -11,6 +12,29 @@ class EvolutionRequetes extends Component
 {
     public $firstRun = true;
     public $showDataLabels = false;
+    public $total_demande = 0;
+    public $status_list = [];
+    
+    public function mount()
+    {
+        // Récupérer le nombre total de demandes d'intervention
+        $this->total_demande = DemandeIntervention::count();
+
+        // Récupérer les requêtes groupées par type d'équipement
+        $this->status_list = DemandeIntervention::get()
+            ->groupBy('status')
+            ->map(function ($group, $status) {
+                return [
+                    'name' => $status,
+                    'count' => count($group),
+                    // 'color' => StatusEnum::getColor($status),
+                ];
+            })
+            ->sortByDesc('status')
+            ->take(10)
+            ->values()
+            ->all();
+    }
 
     protected $listeners = [
         'onPointClick' => 'handleOnPointClick',
@@ -42,6 +66,7 @@ class EvolutionRequetes extends Component
     public function render()
     {
         $demandes = DemandeIntervention::all();
+        
         $total = count($demandes);
 
         $columnChartModel = $demandes->groupBy('status')
@@ -60,7 +85,7 @@ class EvolutionRequetes extends Component
                 ->setDataLabelsEnabled($this->showDataLabels)
                 ->setColumnWidth(70)
                 ->withGrid()
-            );
+        );
 
         $pieChartModel = $demandes->groupBy('status')
             ->reduce(function ($pieChartModel, $data) use ($total) {
@@ -78,8 +103,8 @@ class EvolutionRequetes extends Component
                 ->legendHorizontallyAlignedCenter()
                 ->withoutDataLabels()
                 ->setDataLabelsEnabled($this->showDataLabels)
-            );
-
+        );
+        
         $this->firstRun = false;
 
         return view('livewire.evolution-requetes', compact('columnChartModel', 'pieChartModel'));

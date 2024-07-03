@@ -1,29 +1,29 @@
 @props(['utilisateur'])
 
 @php
-    $details_active_class = "show active";
-    $details_active_btn = "active";
-    
-    $password_active_class = "";
-    $password_active_btn = "active";
+$details_active_class = "show active";
+$details_active_btn = "active";
 
-    if($errors->edit_utilisateur->isNotEmpty())
-    {
-        $details_active_class = "show active";
-        $details_active_btn = "active";
-        
-        $password_active_class = "";
-        $password_active_btn = "";
-    }
-    
-    if($errors->rest_password_for_utilisateur->isNotEmpty())
-    {
-        $details_active_class = "";
-        $details_active_btn = "";
-        
-        $password_active_class = "show active";
-        $password_active_btn = "active";
-    }
+$password_active_class = "";
+$password_active_btn = "active";
+
+if($errors->edit_utilisateur->isNotEmpty())
+{
+$details_active_class = "show active";
+$details_active_btn = "active";
+
+$password_active_class = "";
+$password_active_btn = "";
+}
+
+if($errors->rest_password_for_utilisateur->isNotEmpty())
+{
+$details_active_class = "";
+$details_active_btn = "";
+
+$password_active_class = "show active";
+$password_active_btn = "active";
+}
 @endphp
 
 <div class="row">
@@ -56,57 +56,56 @@
         if($indice < 30 ) { $indice_color="danger" ; $indice_label="Mauvais" ; }elseif($indice>= 30 && $indice < 60) {
                 $indice_color="warning" ; $indice_label="Moyen" ; }elseif($indice>= 60 && $indice < 90) {
                     $indice_color="primary" ; $indice_label="Bon" ; }elseif($indice>= 90 && $indice <= 100) {
-                        $indice_color="success" ; $indice_label="Excellent" ; } 
-@endphp 
-        <!-- Plan Card -->
-        @if ($utilisateur->role == 'prestataire_admin' || $utilisateur->role == 'agent')
-        <div class="mb-4 card">
-            <div
-                class="bg-blue-800 border-bottom card-header d-flex justify-content-between rounded-3">
-                <h1 class="m-0 font-bold text-white uppercase card-title me-2">{{ $utilisateur->prestataire->name }}</h1>
-                <h5 class="m-0 text-gray-300 uppercase card-title ms-2">{{ $utilisateur->prestataire->slug }}</h5>
-            </div>
-            <div class="p-3 card-body rounded-3">
-                <div class="d-flex justify-content-between align-items-start">
-                    <span class="badge bg-label-{{ $indice_color }}">{{ $indice_label }}</span>
-                    <div class="d-flex justify-content-center">
-                        <h1 class="mb-0 text-{{ $indice_color }}">{{ $indice }}</h1>
-                        <sub class="mt-auto mb-2 h6 pricing-duration text-muted fw-normal">%</sub>
-                    </div>
-                </div>
-                <div class="flex-wrap pb-4 mt-3 d-flex justify-content-start border-bottom">
-                    <div class="gap-2 mt-3 d-flex align-items-start">
-                        <span class="p-2 rounded badge bg-label-primary"><i
-                                class='ti ti-briefcase ti-sm'></i></span>
-                        <div>
-                            <p class="mb-0 fw-medium">568</p>
-                            <small>Requêtes traitées</small>
-                        </div>
-                    </div>
-                </div>
+                        $indice_color="success" ; $indice_label="Excellent" ; } @endphp <!-- Plan Card -->
+                        @if ($utilisateur->role == 'prestataire_admin' || $utilisateur->role == 'agent')
+                        <div class="mb-4 card">
+                            <div class="bg-blue-800 border-bottom card-header d-flex justify-content-between rounded-3">
+                                <h1 class="m-0 font-bold text-white uppercase card-title me-2">{{
+                                    $utilisateur->prestataire->name }}</h1>
+                                <h5 class="m-0 text-gray-300 uppercase card-title ms-2">{{
+                                    $utilisateur->prestataire->slug }}</h5>
+                            </div>
+                            <div class="p-3 card-body rounded-3">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <span class="badge bg-label-{{ $indice_color }}">{{ $indice_label }}</span>
+                                    <div class="d-flex justify-content-center">
+                                        <h1 class="mb-0 text-{{ $indice_color }}">{{ $indice }}</h1>
+                                        <sub class="mt-auto mb-2 h6 pricing-duration text-muted fw-normal">%</sub>
+                                    </div>
+                                </div>
+                                <div class="flex-wrap pb-4 mt-3 d-flex justify-content-start border-bottom">
+                                    <div class="gap-2 mt-3 d-flex align-items-start">
+                                        <span class="p-2 rounded badge bg-label-primary"><i
+                                                class='ti ti-briefcase ti-sm'></i></span>
+                                        <div>
+                                            <p class="mb-0 fw-medium">568</p>
+                                            <small>Requêtes traitées</small>
+                                        </div>
+                                    </div>
+                                </div>
 
-                <div class="flex-wrap pb-4 mt-3 d-flex justify-content-between border-bottom">
-                    <div class="gap-2 mt-3 d-flex align-items-center">
-                        <span class="p-2 rounded badge bg-label-success"><i
-                                class='ti ti-clock ti-sm'></i></span>
-                        <div>
-                            <p class="mb-0 fw-medium">300</p>
-                            <small>Dans les delais</small>
+                                <div class="flex-wrap pb-4 mt-3 d-flex justify-content-between border-bottom">
+                                    <div class="gap-2 mt-3 d-flex align-items-center">
+                                        <span class="p-2 rounded badge bg-label-success"><i
+                                                class='ti ti-clock ti-sm'></i></span>
+                                        <div>
+                                            <p class="mb-0 fw-medium">300</p>
+                                            <small>Dans les delais</small>
+                                        </div>
+                                    </div>
+                                    <div class="gap-2 mt-3 d-flex align-items-center">
+                                        <span class="p-2 rounded badge bg-label-danger"><i
+                                                class='ti ti-clock ti-sm'></i></span>
+                                        <div>
+                                            <p class="mb-0 fw-medium">268</p>
+                                            <small>Hors Délais</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="gap-2 mt-3 d-flex align-items-center">
-                        <span class="p-2 rounded badge bg-label-danger"><i
-                                class='ti ti-clock ti-sm'></i></span>
-                        <div>
-                            <p class="mb-0 fw-medium">268</p>
-                            <small>Hors Délais</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        @endif
-        <!-- /Plan Card -->
+                        @endif
+                        <!-- /Plan Card -->
     </div>
     <!--/ User Sidebar -->
 
@@ -117,15 +116,17 @@
             <div class="card-header">
                 <ul class="nav nav-pills card-header-pills" role="tablist">
                     <li class="nav-item">
-                        <button type="button" class="border nav-link {{ $details_active_btn }}" role="tab" data-bs-toggle="tab"
-                            data-bs-target="#informations-personnellles-tabs"
+                        <button type="button" class="border nav-link {{ $details_active_btn }}" role="tab"
+                            data-bs-toggle="tab" data-bs-target="#informations-personnellles-tabs"
                             aria-controls="informations-personnellles-tabs" aria-selected="true">
                             <i class="tf-icons ti ti-user ti-md me-1"></i> Détails
                         </button>
                     </li>
                     <li class="mx-1 nav-item">
-                        <button type="button" class="border nav-link @if($errors->rest_password_for_utilisateur->isNotEmpty()) {{'active show'}} @endif" role="tab" data-bs-toggle="tab"
-                            data-bs-target="#securite-tabs" aria-controls="securite-tabs" aria-selected="false">
+                        <button type="button"
+                            class="border nav-link @if($errors->rest_password_for_utilisateur->isNotEmpty()) {{'active show'}} @endif"
+                            role="tab" data-bs-toggle="tab" data-bs-target="#securite-tabs"
+                            aria-controls="securite-tabs" aria-selected="false">
                             <i class="tf-icons ti ti-lock ti-md me-1"></i> Sécurité
                         </button>
                     </li>
@@ -133,7 +134,8 @@
             </div>
             <div class="card-body">
                 <div class="p-0 tab-content">
-                    <div class="tab-pane fade  {{ $details_active_class }}" id="informations-personnellles-tabs" role="tabpanel">
+                    <div class="tab-pane fade  {{ $details_active_class }}" id="informations-personnellles-tabs"
+                        role="tabpanel">
                         <!-- Basic with Icons -->
                         <div class="col-xxl">
                             <div class="mb-4 card">
@@ -200,8 +202,9 @@
                                                 <div class="input-group input-group-merge">
                                                     <span id="email" class="input-group-text"><i
                                                             class="ti ti-mail"></i></span>
-                                                    <input type="email" class="rounded-lg form-control" id="email" name="email"
-                                                        placeholder="Adresse Email" aria-label="Adresse Email"
+                                                    <input type="email" class="rounded-lg form-control" id="email"
+                                                        name="email" placeholder="Adresse Email"
+                                                        aria-label="Adresse Email"
                                                         aria-describedby="basic-icon-default-fullname2"
                                                         value="{{ $utilisateur->email }}" />
                                                 </div>
@@ -266,20 +269,21 @@
                             <h5 class="mt-2 mb-0 card-header">Autorisations et Statut</h5>
                             <div class="mt-0 card-body">
                                 @php
-                                    $action_name = ($utilisateur->status == true) ? 'bloquer cet utilisateur':'débloquer cet utilisateur';
+                                $action_name = ($utilisateur->status == true) ? 'bloquer cet utilisateur':'débloquer cet
+                                utilisateur';
                                 @endphp
-                                <form
-                                    method="post"
-                                    action="{{ route('admin.utilisateurs.status', $utilisateur) }}"
-                                    onsubmit="return confirm('Vous etes sur le point de {{ $action_name }}! Voulez-vous continuer ?');"
-                                >
+                                <form method="post" action="{{ route('admin.utilisateurs.status', $utilisateur) }}"
+                                    onsubmit="return confirm('Vous etes sur le point de {{ $action_name }}! Voulez-vous continuer ?');">
                                     @csrf
                                     @method('patch')
-                                    <button type="submit" class="text-white ucfirst bg-{{ ($utilisateur->status == true) ? 'red' : 'green' }}-500 btn hover:bg-{{ ($utilisateur->status == true) ? 'red' : 'green' }}-600">{{ ($utilisateur->status == true) ? 'bloquer' : 'débloquer' }} cet utilisateur</button>
+                                    <button type="submit"
+                                        class="text-white ucfirst bg-{{ ($utilisateur->status == true) ? 'red' : 'green' }}-500 btn hover:bg-{{ ($utilisateur->status == true) ? 'red' : 'green' }}-600">{{
+                                        ($utilisateur->status == true) ? 'bloquer' : 'débloquer' }} cet
+                                        utilisateur</button>
                                 </form>
                             </div>
 
-                            
+
                             {{-- <h5 class="card-header">Changer mon mot de Passe</h5>
                             <div class="card-body">
                                 <form id="formChangePassword" method="GET" onsubmit="return false">
@@ -317,8 +321,8 @@
                                             <label class="form-label d-block text-start"
                                                 for="confirm_password">Confirmer Mot de passe</label>
                                             <div class="input-group input-group-merge">
-                                                <input class="rounded-lg form-control" type="password" id="confirm_password"
-                                                    name="confirm_password"
+                                                <input class="rounded-lg form-control" type="password"
+                                                    id="confirm_password" name="confirm_password"
                                                     placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" />
                                                 <span class="cursor-pointer input-group-text"><i
                                                         class="ti ti-eye-off"></i></span>
@@ -334,6 +338,39 @@
                                 </form>
                             </div> --}}
                         </div>
+                        <!--/ Change Password -->
+                        
+                        <!-- Change Password -->
+                        <div class="mb-4 {{ ($utilisateur->status == true) ? '':'bg-red-100' }} card">
+                            <h5 class="mt-2 mb-0 card-header">Renitialiser le mot de passe</h5>
+
+                            <div class="px-3 row">
+                                @if (session('status'))
+                                <div class="mb-4 text-sm font-medium text-green-600">
+                                    {{ session('status') }}
+                                </div>
+                                @endif
+
+                                <x-validation-errors class="mb-4" />
+
+                                <form method="POST" action="{{ route('password.email') }}">
+                                    @csrf
+
+                                    <div class="block col-6">
+                                        <x-label for="email" value="{{ __('Email') }}" />
+                                        <x-input id="email" class="block w-full mt-1" type="email" name="email"
+                                            :value="$utilisateur->email" required autofocus autocomplete="username" />
+                                    </div>
+
+                                    <div class="flex items-center justify-end mt-4 col-6">
+                                        <button type="submit" class="text-white bg-green-500 btn hover:bg-green-600">
+                                            Envoyer {{ __('Email Password Reset Link') }}
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
                         <!--/ Change Password -->
                     </div>
                 </div>

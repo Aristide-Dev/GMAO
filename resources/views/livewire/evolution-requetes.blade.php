@@ -19,30 +19,32 @@
                                             Taux</th>
                                     </tr>
                                 </thead>
+                                
                                 <tbody class="divide-y divide-gray-200">
-                                    <tr>
-                                        <td class="text-sm font-bold text-green-500 whitespace-nowrap">Cloturé</td>
-                                        <td class="text-sm text-gray-800 whitespace-nowrap">52</td>
-                                        <td class="text-sm text-gray-800 whitespace-nowrap">91%</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td class="text-sm font-bold text-yellow-500 whitespace-nowrap">En cours</td>
-                                        <td class="text-sm text-gray-800 whitespace-nowrap">2</td>
-                                        <td class="text-sm text-gray-800 whitespace-nowrap">4%</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td class="text-sm font-bold text-red-500 whitespace-nowrap">Pas traité</td>
-                                        <td class="text-sm text-gray-800 whitespace-nowrap">3</td>
-                                        <td class="text-sm text-gray-800 whitespace-nowrap">5%</td>
-                                    </tr>
+                                    @php
+                                        $total = 0;
+                                        $total_per_cent = 0;
+                                    @endphp
+                                    @foreach($status_list as $status)
+                                        @php
+                                        // dd($status_list);
+                                            $status_count = $status['count'];
+                                            $total += $status_count;
+                                            $percentage = ($status_count * 100) / $total_demande;
+                                            $total_per_cent += $percentage;
+                                        @endphp
+                                        <tr>
+                                            <td class="text-sm font-bold text-gray-500 whitespace-nowrap">{{ $status['name'] }}</td>
+                                            <td class="text-sm text-gray-800 whitespace-nowrap">{{ $status_count }}</td>
+                                            <td class="text-sm text-gray-800 whitespace-nowrap">{{ number_format($percentage, 0) }}%</td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                                 <tfoot>
                                     <tr class="bg-blue-200">
                                         <td class="font-bold text-black text-md whitespace-nowrap">TOTAL</td>
-                                        <td class="font-bold text-gray-800 text-md whitespace-nowrap">57</td>
-                                        <td class="font-bold text-gray-800 text-md whitespace-nowrap">100%</td>
+                                        <td class="text-sm text-gray-800 whitespace-nowrap">{{ $total }}</td>
+                                        <td class="text-sm text-gray-800 whitespace-nowrap">{{ number_format($total_per_cent, 2) }}%</td>
                                     </tr>
                                 </tfoot>
                             </table>

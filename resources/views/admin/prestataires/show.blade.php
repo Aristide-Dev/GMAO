@@ -118,174 +118,123 @@
     </div>
 
     <div class="mt-5 row">
-        <div class="mb-4 col-12 col-md-6 mb-md-2">
-            <p class="text-light fw-medium">Administrateur</p>
-            <div class="mt-3 accordion" id="prestataireAdminListAccordion">
-                <div class="card accordion-item">
-                    <h2 class="accordion-header" id="prestataireAgentListheadingThree">
-                        <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#prestataireAdminListaccordionThree" aria-expanded="false" aria-controls="prestataireAdminListaccordionThree">
-                            Voir l'Administrateur
-                        </button>
-                    </h2>
-                    <div id="prestataireAdminListaccordionThree" class="accordion-collapse collapse" aria-labelledby="prestataireAgentListheadingThree" data-bs-parent="#prestataireAdminListAccordion">
-                        <div class="overflow-hidden accordion-body">
-                            <div class="w-auto table-responsive">
-                                <table class="table table-borderless border-top">
-                                    <thead class="border-bottom">
-                                        <tr>
-                                            <th>Nom & Prénoms</th>
-                                            <th class="px-1 py-0 text-left">Date D'ajout</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @php
-                                            $admin = $prestataire->admin();
-                                        @endphp
-
-                                        @if($admin)
-                                        <tr>
-                                            <td>
-                                                <a href="{{ route('admin.utilisateurs.show', $admin) }}" class="d-flex align-items-center mt-lg-3">
-                                                    <div class="avatar me-2 avatar-sm">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="h-auto rounded-circle">
-                                                            <path fill="#B197FC" d="M399 384.2C376.9 345.8 335.4 320 288 320H224c-47.4 0-88.9 25.8-111 64.2c35.2 39.2 86.2 63.8 143 63.8s107.8-24.7 143-63.8zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm256 16a72 72 0 1 0 0-144 72 72 0 1 0 0 144z" />
-                                                        </svg>
-                                                    </div>
-                                                    <div class="d-flex flex-column">
-                                                        <h6 class="mb-0">{{ $admin->last_name }} {{ $admin->first_name }}</h6>
-                                                        <small class="text-truncate text-muted">{{ $admin->email }}</small>
-                                                        <small class="text-truncate text-muted">{{ $admin->telephone }}</small>
-                                                    </div>
-                                                </a>
-                                            </td>
-                                            <td class="text-center">
-                                                <p class="mb-0 fw-medium">{{ $admin->created_at->formatLocalized('%e %B %Y à %Hh %M') }}</p>
-                                            </td>
-                                        </tr>
-                                        @else
-                                            Aucun
-                                        @endif
-
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="mb-4 col-12 col-md-6 mb-md-2">
-            <p class="text-light fw-medium">Liste des agents du prestataire</p>
-            <div class="mt-3 accordion" id="prestataireAgentListAccordion">
-                <div class="card accordion-item">
-                    <h2 class="accordion-header" id="prestataireAgentListheadingThree">
-                        <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#prestataireAgentListaccordionThree" aria-expanded="false" aria-controls="prestataireAgentListaccordionThree">
-                            Afficher la liste des agents
-                        </button>
-                    </h2>
-                    <div id="prestataireAgentListaccordionThree" class="accordion-collapse collapse" aria-labelledby="prestataireAgentListheadingThree" data-bs-parent="#prestataireAgentListAccordion">
-                        <div class="overflow-hidden accordion-body">
-                            <div class="w-auto table-responsive">
-                                <table class="table table-borderless border-top">
-                                    <thead class="border-bottom">
-                                        <tr>
-                                            <th>Agent</th>
-                                            <th class="px-1 py-0 text-left">Interventions</th>
-                                            <th class="px-1 py-0 text-left">Performences</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @forelse ($prestataire->agents() as $agent)
-                                        <tr>
-                                            <td>
-                                                <a href="{{ route('admin.utilisateurs.show', $agent) }}" class="d-flex align-items-center mt-lg-3">
-                                                    <div class="avatar me-2 avatar-sm">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="h-auto rounded-circle">
-                                                            <path fill="#B197FC" d="M399 384.2C376.9 345.8 335.4 320 288 320H224c-47.4 0-88.9 25.8-111 64.2c35.2 39.2 86.2 63.8 143 63.8s107.8-24.7 143-63.8zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm256 16a72 72 0 1 0 0-144 72 72 0 1 0 0 144z"/>
-                                                        </svg>
-                                                    </div>
-                                                    <div class="d-flex flex-column">
-                                                        <h6 class="mb-0">{{ $agent->first_name }} {{ $agent->last_name }}</h6>
-                                                        <small class="text-truncate text-muted">{{ $agent->email }}</small>
-                                                        <small class="text-truncate text-muted">{{ $agent->telephone }}</small>
-                                                    </div>
-                                                </a>
-                                            </td>
-                                            <td class="text-center">
-                                                <p class="mb-0 fw-medium">33</p>
-                                            </td>
-                                            <td class="text-center">
-                                                <p class="mb-0 fw-medium badge bg-{{ $colors[rand(0,3)] }}">{{ rand(0,100) }} %</p>
-                                            </td>
-                                            </tr>
-                                        @empty
-                                            <h3 class="text-center">Aucun</h3>
-                                        @endforelse
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="mt-4 mb-4 col-12 col-md-12 mb-md-2">
-            <p class="text-light fw-medium">Rescentes intervetions du prestataire</p>
-            <div class="bg-white table-responsive">
-                <table class="table table-borderless border-top">
-                    <thead class="border-bottom">
-                        <tr>
-                            <th>CARD</th>
-                            <th>DATE DE CREATION</th>
-                            <th>STATUS</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse ($prestataire->bon_travails as $bonTravail)
-                        <tr>
-                            <td>
-                                <a href="{{ route('admin.demandes.show', $bonTravail->demande) }}" class="justify-content-start align-items-center">
-                                    <p class="m-0 ">
-                                        {{ $bonTravail->di_reference }}
-                                    </p>
-                                    <div class="d-flex flex-column">
-                                        <small class="text-muted">{{ $bonTravail->bt_reference }}</small>
-                                        <small class="text-muted">RI0000{{ rand(1,200) }}</small>
+        <div class="card-body">
+            <div class="row">
+                <!-- User List Style -->
+                <div class="mb-4 col-12 col-lg-6 mb-xl-0">
+                    <small class="text-lg text-light fw-medium">Administrateur (gerant)</small>
+                    <div class="mt-3 demo-inline-spacing">
+                        <div class="list-group">
+                            <div class="bg-white cursor-pointer list-group-item list-group-item-action d-flex align-items-center">
+                                @if ($prestataire->admin())
+                                <div class="w-100">
+                                    <div class="d-flex justify-content-between">
+                                        <div class="user-info">
+                                            <h6 class="mb-1 font-bold">{{ $prestataire->admin()->first_name }} {{ $prestataire->admin()->last_name }}</h6>
+                                        </div>
+                                        <div class="add-btn">
+                                            <a href="{{ route('admin.utilisateurs.show', $prestataire->admin()) }}" class="btn btn-warning btn-sm">Voir +</a>
+                                        </div>
                                     </div>
-                                </a>
-                            </td>
-                            <td>
-                                <div class="d-flex flex-column">
-                                    <p class="mb-0 fw-medium text-nowrap">17 Mar 2022</p>
                                 </div>
-                            </td>
-                            <td>
-                                @php
-                                $st = $statuts[rand(0,4)];
-                                @endphp
-                                <span class="me-1 text-nowrap">
-                                    <span class="badge bg-label-{{ $st['color'] }}">{{ $st['statut'] }}</span>
-                                    <small class="mb-0 fw-medium text-{{ $st['other-color'] }}  text-nowrap">
-                                        {{ $st['signe'] }}{{ $st['value'] }}
-                                    </small>
-                                </span>
-                            </td>
-                            </tr>
-                        @empty
-                            <h3 class="text-center">Aucun</h3>
-                        @endforelse
-                    </tbody>
-                </table>
+                                @else
+                                    <h3>Aucun  gerant</h3>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--/ User List Style -->
+
+                <!-- User List Style -->
+                <div class="mb-4 col-12 col-lg-6 mb-xl-0">
+                    <small class="text-lg text-light fw-medium">Liste des agents du prestataire</small>
+                    <div class="mt-3 demo-inline-spacing">
+                        <div class="bg-white list-group">
+
+                            @forelse ($prestataire->agents() as $agent)
+                                <div class="cursor-pointer list-group-item list-group-item-action d-flex align-items-center">
+                                    <div class="w-100">
+                                        <div class="">
+                                            <div class="user-info">
+                                                <h6 class="mb-1 font-bold">{{ $agent->first_name }} {{ $agent->last_name }}</h6>
+                                            </div>
+                                            <div class="justify-start gap-3 d-flex">
+                                                <p class="text-mute">{{ $agent->email }}</p>
+                                                -
+                                                <p class="text-mute">{{ $agent->telephone }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @empty
+                                <div class="cursor-pointer list-group-item list-group-item-action d-flex align-items-center">
+                                    <h3 class="text-center">Aucun</h3>
+                                </div>
+                            @endforelse
+
+                        </div>
+                    </div>
+                </div>
+                <!--/ User List Style -->
             </div>
-            </div>
+
+
+            {{-- <div class="mt-5 row">
+
+
+                <div class="mt-4 mb-4 col-12 col-md-12 mb-md-2">
+                    <p class="text-light fw-medium">Rescentes intervetions du prestataire</p>
+                    <div class="bg-white table-responsive">
+                        <table class="table table-borderless border-top">
+                            <thead class="border-bottom">
+                                <tr>
+                                    <th>CARD</th>
+                                    <th>DATE DE CREATION</th>
+                                    <th>STATUS</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @forelse ($prestataire->bon_travails as $bonTravail)
+                                <tr>
+                                    <td>
+                                        <a href="{{ route('admin.demandes.show', $bonTravail->demande) }}" class="justify-content-start align-items-center">
+                                            <p class="m-0 ">
+                                                {{ $bonTravail->di_reference }}
+                                            </p>
+                                            <div class="d-flex flex-column">
+                                                <small class="text-muted">{{ $bonTravail->bt_reference }}</small>
+                                                <small class="text-muted">RI0000{{ rand(1,200) }}</small>
+                                            </div>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex flex-column">
+                                            <p class="mb-0 fw-medium text-nowrap">17 Mar 2022</p>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        @php
+                                        $st = $statuts[rand(0,4)];
+                                        @endphp
+                                        <span class="me-1 text-nowrap">
+                                            <span class="badge bg-label-{{ $st['color'] }}">{{ $st['statut'] }}</span>
+                                            <small class="mb-0 fw-medium text-{{ $st['other-color'] }}  text-nowrap">
+                                                {{ $st['signe'] }}{{ $st['value'] }}
+                                            </small>
+                                        </span>
+                                    </td>
+                                    </tr>
+                                @empty
+                                    <h3 class="text-center">Aucun</h3>
+                                @endforelse
+                            </tbody>
+                        </table>
+                    </div>
+                    </div>
+                </div>
+            </div> --}}
         </div>
     </div>
-
-
-
 </x-gmao-layout>
 

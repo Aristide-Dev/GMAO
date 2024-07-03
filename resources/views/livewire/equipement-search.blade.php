@@ -1,7 +1,7 @@
 <div>
     <div lass="mb-4">
         <div class="flex mt-3 justify-content-center">
-            <div class="p-3 my-2 bg-indigo-300 shadow-xl shadow-blue-400 d-flex align-items-center justify-content-between w-100 rounded-2xl form-password-toggle">
+            <div class="p-3 my-2 bg-blue-900 shadow-xl shadow-blue-400 d-flex align-items-center justify-content-between w-100 rounded-2xl form-password-toggle">
                 <label for="search" class="mx-1 font-bold text-white">Rechercher</label>
                 <div class="input-group input-group-merge rounded-e-2x">
                     <input wire:model.live="search" name="search" type="search" placeholder="Rechercher un equipement"
