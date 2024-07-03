@@ -15,6 +15,9 @@ class RequeteByEquipementType extends Component
     public $firstRun = true;
     public $showDataLabels = false;
 
+    public $year_filter;
+    public $month_filter;
+
     protected $listeners = [
         'onPointClick' => 'handleOnPointClick',
         'onSliceClick' => 'handleOnSliceClick',
@@ -41,15 +44,16 @@ class RequeteByEquipementType extends Component
     {
         // Logique ou action spécifique lors du clic sur un bloc
     }
+    
 
-    public function mount()
+    private function loadData()
     {
-        // Récupérer le nombre total de demandes d'intervention
-        $this->total_bt = BonTravail::count();
-
+        // Récupérer le nombre total de demandes d'intervention pour le mois et l'année sélectionnés
+        $this->total_bt = BonTravail::whereBetween('created_at', $this->between())->count();
 
         // Récupérer les requêtes groupées par type d'équipement
-        $this->requeteByTypes = Equipement::withCount('bon_travails')
+        $this->requeteByTypes = Equipement::whereBetween('created_at', $this->between())
+            ->withCount('bon_travails')
             ->get()
             ->groupBy('categorie')
             ->map(function ($group, $categorie) {
@@ -64,11 +68,38 @@ class RequeteByEquipementType extends Component
             ->all();
     }
 
+    private function between()
+    {
+        $startDate = date('Y-m-d', strtotime("$this->year_filter-$this->month_filter-01"));
+        $endDate = date('Y-m-d', strtotime("$this->year_filter-$this->month_filter-" . date('t', strtotime($startDate))));
+        return [$startDate, $endDate];
+    }
+    
+    public function mount()
+    {
+        // Initialiser les filtres avec l'année et le mois en cours
+        $this->year_filter = date('Y');
+        $this->month_filter = date('n');
+
+        // Charger les données initiales
+        $this->loadData();
+    }
+
+    public function updatedYearFilter()
+    {
+        $this->loadData();
+    }
+
+    public function updatedMonthFilter()
+    {
+        $this->loadData();
+    }
+
     public function render()
     {
 
 
-        $equipement = Equipement::all();
+        $equipement = Equipement::whereBetween('created_at', $this->between())->get();
         $total_equipement = count($equipement);
 
         $columnChartModel = LivewireCharts::columnChartModel()

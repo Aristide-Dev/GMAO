@@ -1,6 +1,31 @@
 <div>
     <div class="px-2 row">
-        <x-stat-header title="Coût total de la maintenance par site" />
+        <x-stat-header title="Coût total de la maintenance par site" >
+            <div class="row">
+                <div class="col-4">
+                    <label for="evolution_des_requetes_registre_filter">registre</label>
+                    <select name="evolution_des_requetes_registre_filter" id="evolution_des_requetes_registre_filter" class="form-control" wire:model.live="registre_filter">
+                        @foreach (['','b2b', 'contrat', 'depot', 'autre'] as $index => $registre)
+                            <option value="{{ $registre }}">{{ $registre ?? '*' }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-4">
+                    <select name="evolution_des_requetes_year_filter" id="evolution_des_requetes_year_filter" class="form-control" wire:model.live="year_filter">
+                        @for ($year = 2024; $year <= 2032; $year++)
+                            <option value="{{ $year }}">{{ $year }}</option>
+                        @endfor
+                    </select>
+                </div>
+                <div class="col-4">
+                    <select name="evolution_des_requetes_month_filter" id="evolution_des_requetes_month_filter" class="form-control" wire:model.live="month_filter">
+                        @foreach (['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'] as $index => $month)
+                            <option value="{{ $index + 1 }}" @if($index + 1 == date('n')) selected @endif>{{ $month }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+        </x-stat-header>
 
         <div class="p-0 my-3 bg-white col-md-4">
             <div class="flex flex-col rounded shadow-sm">

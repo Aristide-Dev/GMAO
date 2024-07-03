@@ -4,7 +4,6 @@ namespace App\Livewire;
 
 use App\Enums\StatusEnum;
 use App\Models\DemandeIntervention;
-use App\Models\Site;
 use Asantibanez\LivewireCharts\Facades\LivewireCharts;
 use Livewire\Component;
 
@@ -14,24 +13,53 @@ class EvolutionRequetes extends Component
     public $showDataLabels = false;
     public $total_demande = 0;
     public $status_list = [];
+
+    public $year_filter;
+    public $month_filter;
+
+    private function between()
+    {
+        $startDate = date('Y-m-d', strtotime("$this->year_filter-$this->month_filter-01"));
+        $endDate = date('Y-m-d', strtotime("$this->year_filter-$this->month_filter-" . date('t', strtotime($startDate))));
+        return [$startDate, $endDate];
+    }
     
     public function mount()
     {
-        // Récupérer le nombre total de demandes d'intervention
-        $this->total_demande = DemandeIntervention::count();
+        // Initialiser les filtres avec l'année et le mois en cours
+        $this->year_filter = date('Y');
+        $this->month_filter = date('n');
 
-        // Récupérer les requêtes groupées par type d'équipement
-        $this->status_list = DemandeIntervention::get()
+        // Charger les données initiales
+        $this->loadData();
+    }
+
+    public function updatedYearFilter()
+    {
+        $this->loadData();
+    }
+
+    public function updatedMonthFilter()
+    {
+        $this->loadData();
+    }
+
+    private function loadData()
+    {
+        // Récupérer le nombre total de demandes d'intervention pour le mois et l'année sélectionnés
+        $this->total_demande = DemandeIntervention::whereBetween('created_at', $this->between())->count();
+
+        // Récupérer les requêtes groupées par type d'équipement pour le mois et l'année sélectionnés
+        $this->status_list = DemandeIntervention::whereBetween('created_at', $this->between())
+            ->get()
             ->groupBy('status')
             ->map(function ($group, $status) {
                 return [
                     'name' => $status,
                     'count' => count($group),
-                    // 'color' => StatusEnum::getColor($status),
                 ];
             })
-            ->sortByDesc('status')
-            ->take(10)
+            ->sortByDesc('count')
             ->values()
             ->all();
     }
@@ -65,7 +93,7 @@ class EvolutionRequetes extends Component
 
     public function render()
     {
-        $demandes = DemandeIntervention::all();
+        $demandes = DemandeIntervention::whereBetween('created_at', $this->between())->get();
         
         $total = count($demandes);
 

@@ -15,6 +15,31 @@ class RequeteByZone extends Component
     public $firstRun = true;
     public $showDataLabels = false;
 
+    public $year_filter;
+    public $month_filter;
+
+
+    private function loadData()
+    {
+        // Récupérer le nombre total de demandes d'intervention pour le mois et l'année sélectionnés
+        $this->total_bt = BonTravail::whereBetween('created_at', $this->between())->count();
+
+        // Récupérer les requêtes par zone et supprimer les doublons
+        $this->requeteByZone = Zone::whereBetween('created_at', $this->between())
+            ->withCount('bon_travails')
+            ->get()
+            ->unique('name')  // Suppression des doublons basés sur le nom de la zone
+            ->groupBy('name')
+            ->map(function ($group, $name) {
+                // dd($group->first());
+                return [
+                    'name' => $name,
+                    'count' => $group->first()->bon_travails_count,
+                ];
+            })
+            ->toArray();
+    }
+
     protected $listeners = [
         'onPointClick' => 'handleOnPointClick',
         'onSliceClick' => 'handleOnSliceClick',
@@ -42,25 +67,31 @@ class RequeteByZone extends Component
         // Logique ou action spécifique lors du clic sur un bloc
     }
 
+    private function between()
+    {
+        $startDate = date('Y-m-d', strtotime("$this->year_filter-$this->month_filter-01"));
+        $endDate = date('Y-m-d', strtotime("$this->year_filter-$this->month_filter-" . date('t', strtotime($startDate))));
+        return [$startDate, $endDate];
+    }
+    
     public function mount()
     {
-        // Récupérer le nombre total de bons de travail
-        $this->total_bt = BonTravail::count();
+        // Initialiser les filtres avec l'année et le mois en cours
+        $this->year_filter = date('Y');
+        $this->month_filter = date('n');
 
+        // Charger les données initiales
+        $this->loadData();
+    }
 
-        // Récupérer les requêtes par zone et supprimer les doublons
-        $this->requeteByZone = Zone::withCount('bon_travails')
-            ->get()
-            ->unique('name')  // Suppression des doublons basés sur le nom de la zone
-            ->groupBy('name')
-            ->map(function ($group, $name) {
-                // dd($group->first());
-                return [
-                    'name' => $name,
-                    'count' => $group->first()->bon_travails_count,
-                ];
-            })
-            ->toArray();
+    public function updatedYearFilter()
+    {
+        $this->loadData();
+    }
+
+    public function updatedMonthFilter()
+    {
+        $this->loadData();
     }
 
     public function render()

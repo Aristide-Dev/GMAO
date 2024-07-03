@@ -1,6 +1,23 @@
 <div>
     <div class="px-2 row">
-        <x-stat-header title="TOP 10 PANNES" />
+        <x-stat-header title="TOP 10 PANNES" >
+            <div class="row">
+                <div class="col-4">
+                    <select name="evolution_des_requetes_year_filter" id="evolution_des_requetes_year_filter" class="form-control" wire:model.live="year_filter">
+                        @for ($year = 2024; $year <= 2032; $year++)
+                            <option value="{{ $year }}">{{ $year }}</option>
+                        @endfor
+                    </select>
+                </div>
+                <div class="col-4">
+                    <select name="evolution_des_requetes_month_filter" id="evolution_des_requetes_month_filter" class="form-control" wire:model.live="month_filter">
+                        @foreach (['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'] as $index => $month)
+                            <option value="{{ $index + 1 }}" @if($index + 1 == date('n')) selected @endif>{{ $month }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+        </x-stat-header>
 
         <div class="p-0 my-3 bg-white col-md-6">
             <div class="flex flex-col rounded shadow-sm">
