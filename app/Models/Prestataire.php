@@ -72,5 +72,30 @@ class Prestataire extends Model
         )->distinct();
     }
 
+    /**
+     * Récupère toutes les demandes attribuées à ce prestataire via les bons de travail.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function rapport_intervebton()
+    {
+        return $this->hasManyThrough(
+            BonTravail::class, // Modèle de bon travail
+            RapportIntervention::class, // Modèle du rapport d'intervention
+            'prestataire_id', // Clé étrangère du prestataire dans le rapport d'intervention
+            'di_reference', // Clé étrangère du bon de travail dans la demande
+            'id', // Clé primaire du prestataire
+            'di_reference' // Clé primaire du bon de travail
+        )->distinct();
+    }
+
+    public function getIndicePerformanceGeneralAttribute()
+    {
+        // il s'agit de savoir il ya combien de rapport d'intervention lié aux bt du prestataire
+        // puis determiner combiens ont pour kpi 0 et combbien ont  pour kpi 1 
+        //puis faire le rapport pour l'indice de performance
+
+    }
+
 
 }

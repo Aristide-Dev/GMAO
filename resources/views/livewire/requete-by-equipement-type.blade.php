@@ -47,7 +47,7 @@
                                     @php
                                         $request_count = $requete['count'];
                                         $total += $request_count;
-                                        $percentage = ($request_count * 100) / $total_bt;
+                                        $percentage = ($request_count > 0) ? (($request_count * 100) / $total_bt) : 0;
                                         $total_per_cent += $percentage;
                                     @endphp
 

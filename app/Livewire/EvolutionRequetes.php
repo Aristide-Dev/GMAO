@@ -19,11 +19,12 @@ class EvolutionRequetes extends Component
 
     private function between()
     {
-        $startDate = date('Y-m-d', strtotime("$this->year_filter-$this->month_filter-01"));
-        $endDate = date('Y-m-d', strtotime("$this->year_filter-$this->month_filter-" . date('t', strtotime($startDate))));
+        $startDate = date('Y-m-d', strtotime("$this->year_filter-$this->month_filter-01 00:00:00"));
+        $endDate = date('Y-m-d', strtotime("$this->year_filter-$this->month_filter-31 23:59:59"));
+        // $endDate = date('Y-m-d', strtotime("$this->year_filter-$this->month_filter-" . date('t', strtotime($startDate))));
         return [$startDate, $endDate];
     }
-    
+
     public function mount()
     {
         // Initialiser les filtres avec l'année et le mois en cours
@@ -94,7 +95,7 @@ class EvolutionRequetes extends Component
     public function render()
     {
         $demandes = DemandeIntervention::whereBetween('created_at', $this->between())->get();
-        
+
         $total = count($demandes);
 
         $columnChartModel = $demandes->groupBy('status')
@@ -111,7 +112,7 @@ class EvolutionRequetes extends Component
                 ->legendHorizontallyAlignedCenter()
                 ->withoutDataLabels()
                 ->setDataLabelsEnabled($this->showDataLabels)
-                ->setColumnWidth(70)
+                ->setColumnWidth(20)
                 ->withGrid()
         );
 
@@ -132,7 +133,7 @@ class EvolutionRequetes extends Component
                 ->withoutDataLabels()
                 ->setDataLabelsEnabled($this->showDataLabels)
         );
-        
+
         $this->firstRun = false;
 
         return view('livewire.evolution-requetes', compact('columnChartModel', 'pieChartModel'));

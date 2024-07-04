@@ -19,7 +19,8 @@ class DemandeInterventionController extends Controller
     public function index()
     {
         // dd($demandes);
-        return view('demandeur.demandes.index');
+        $sites = Site::all();
+        return view('demandeur.demandes.index', compact('sites'));
     }
 
     /**

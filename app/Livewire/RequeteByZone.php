@@ -25,8 +25,9 @@ class RequeteByZone extends Component
         $this->total_bt = BonTravail::whereBetween('created_at', $this->between())->count();
 
         // Récupérer les requêtes par zone et supprimer les doublons
-        $this->requeteByZone = Zone::whereBetween('created_at', $this->between())
-            ->withCount('bon_travails')
+        $this->requeteByZone = Zone::withcount(['bon_travails' => function($query) {
+            $query->whereBetween('created_at', $this->between());
+        }])
             ->get()
             ->unique('name')  // Suppression des doublons basés sur le nom de la zone
             ->groupBy('name')
@@ -70,7 +71,8 @@ class RequeteByZone extends Component
     private function between()
     {
         $startDate = date('Y-m-d', strtotime("$this->year_filter-$this->month_filter-01"));
-        $endDate = date('Y-m-d', strtotime("$this->year_filter-$this->month_filter-" . date('t', strtotime($startDate))));
+        $endDate = date('Y-m-d', strtotime("$this->year_filter-$this->month_filter-31 23:59:59"));
+        // $endDate = date('Y-m-d', strtotime("$this->year_filter-$this->month_filter-" . date('t', strtotime($startDate))));
         return [$startDate, $endDate];
     }
     

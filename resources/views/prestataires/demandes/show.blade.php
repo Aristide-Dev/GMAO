@@ -92,7 +92,7 @@
 
 
         {{-- Activity Timeline --}}
-        <x-gmao.historique-interventions :bon_travails="$demande->bon_travails" />
+        {{-- <x-gmao.historique-interventions :bon_travails="$demande->bon_travails" /> --}}
         {{-- Activity Timeline --}}
 
     </div>

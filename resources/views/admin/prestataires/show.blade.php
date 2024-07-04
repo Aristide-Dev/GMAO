@@ -66,7 +66,7 @@
         </div>
     </div>
 
-    <div class="p-2 mx-1 border shadow-lg bg-light">
+    {{-- <div class="p-2 mx-1 border shadow-lg bg-light">
         <h3>Indice de performance</h3>
         <div class="justify-between p-0 m-0 row d-flex">
 
@@ -106,7 +106,7 @@
                     <h6 class="mb-0">Général</h6> -
                     <p class="mb-0 badge bg-dark d-end">2023 - 2024</p>
                 </div>
-                <h4 class="pt-1 my-2">80%</h4>
+                <h4 class="pt-1 my-2">{{ $prestataire->indice_performance_general }}</h4>
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="progress w-75" style="height:4px">
                         <div class="progress-bar bg-primary" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
@@ -115,7 +115,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 
     <div class="mt-5 row">
         <div class="card-body">

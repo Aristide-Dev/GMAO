@@ -27,7 +27,7 @@
         <div class="overflow-hidden card">
             <div class="border-b-2 card-header row">
                 <div class="mb-3 col-12">
-                    
+                    <x-gmao.create-demande action="demandeur" :sites="$sites"/>
                 </div>
                 <div class="col-12">
                     <h5>Vos demandes d'interventions</h5>

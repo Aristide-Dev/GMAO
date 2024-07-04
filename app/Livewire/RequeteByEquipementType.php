@@ -52,26 +52,28 @@ class RequeteByEquipementType extends Component
         $this->total_bt = BonTravail::whereBetween('created_at', $this->between())->count();
 
         // Récupérer les requêtes groupées par type d'équipement
-        $this->requeteByTypes = Equipement::whereBetween('created_at', $this->between())
-            ->withCount('bon_travails')
-            ->get()
-            ->groupBy('categorie')
-            ->map(function ($group, $categorie) {
-                return [
-                    'categorie' => $categorie,
-                    'count' => $group->sum('bon_travails_count'),
-                ];
-            })
-            ->sortByDesc('count')
-            ->take(10)
-            ->values()
-            ->all();
+        $this->requeteByTypes = Equipement::withcount(['bon_travails' => function($query) {
+            $query->whereBetween('created_at', $this->between());
+        }])
+        ->get()
+        ->groupBy('categorie')
+        ->map(function ($group, $categorie) {
+            return [
+                'categorie' => $categorie,
+                'count' => $group->sum('bon_travails_count'),
+            ];
+        })
+        ->sortByDesc('count')
+        ->take(10)
+        ->values()
+        ->all();
     }
 
     private function between()
     {
         $startDate = date('Y-m-d', strtotime("$this->year_filter-$this->month_filter-01"));
-        $endDate = date('Y-m-d', strtotime("$this->year_filter-$this->month_filter-" . date('t', strtotime($startDate))));
+        $endDate = date('Y-m-d', strtotime("$this->year_filter-$this->month_filter-31 23:59:59"));
+        // $endDate = date('Y-m-d', strtotime("$this->year_filter-$this->month_filter-" . date('t', strtotime($startDate))));
         return [$startDate, $endDate];
     }
     

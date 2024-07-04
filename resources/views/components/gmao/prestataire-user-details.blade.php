@@ -3,7 +3,7 @@
 @php
     $details_active_class = "show active";
     $details_active_btn = "active";
-    
+
     $password_active_class = "";
     $password_active_btn = "active";
 
@@ -11,16 +11,16 @@
     {
         $details_active_class = "show active";
         $details_active_btn = "active";
-        
+
         $password_active_class = "";
         $password_active_btn = "";
     }
-    
+
     if($errors->rest_password_for_utilisateur->isNotEmpty())
     {
         $details_active_class = "";
         $details_active_btn = "";
-        
+
         $password_active_class = "show active";
         $password_active_btn = "active";
     }
@@ -56,8 +56,8 @@
         if($indice < 30 ) { $indice_color="danger" ; $indice_label="Mauvais" ; }elseif($indice>= 30 && $indice < 60) {
                 $indice_color="warning" ; $indice_label="Moyen" ; }elseif($indice>= 60 && $indice < 90) {
                     $indice_color="primary" ; $indice_label="Bon" ; }elseif($indice>= 90 && $indice <= 100) {
-                        $indice_color="success" ; $indice_label="Excellent" ; } 
-@endphp 
+                        $indice_color="success" ; $indice_label="Excellent" ; }
+@endphp
         <!-- Plan Card -->
         @if ($utilisateur->role == 'prestataire_admin' || $utilisateur->role == 'agent')
         <div class="mb-4 card">
@@ -66,7 +66,7 @@
                 <h1 class="m-0 font-bold text-white uppercase card-title me-2">{{ $utilisateur->prestataire->name }}</h1>
                 <h5 class="m-0 text-gray-300 uppercase card-title ms-2">{{ $utilisateur->prestataire->slug }}</h5>
             </div>
-            <div class="p-3 card-body rounded-3">
+            {{-- <div class="p-3 card-body rounded-3">
                 <div class="d-flex justify-content-between align-items-start">
                     <span class="badge bg-label-{{ $indice_color }}">{{ $indice_label }}</span>
                     <div class="d-flex justify-content-center">
@@ -103,7 +103,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
         @endif
         <!-- /Plan Card -->
@@ -279,7 +279,7 @@
                                 </form>
                             </div>
 
-                            
+
                             {{-- <h5 class="card-header">Changer mon mot de Passe</h5>
                             <div class="card-body">
                                 <form id="formChangePassword" method="GET" onsubmit="return false">

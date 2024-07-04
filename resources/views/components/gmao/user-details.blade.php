@@ -65,7 +65,7 @@ $password_active_btn = "active";
                                 <h5 class="m-0 text-gray-300 uppercase card-title ms-2">{{
                                     $utilisateur->prestataire->slug }}</h5>
                             </div>
-                            <div class="p-3 card-body rounded-3">
+                            {{-- <div class="p-3 card-body rounded-3">
                                 <div class="d-flex justify-content-between align-items-start">
                                     <span class="badge bg-label-{{ $indice_color }}">{{ $indice_label }}</span>
                                     <div class="d-flex justify-content-center">
@@ -102,7 +102,7 @@ $password_active_btn = "active";
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                         @endif
                         <!-- /Plan Card -->
