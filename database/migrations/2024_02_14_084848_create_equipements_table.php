@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('categorie');
             $table->string('numero_serie');
             $table->double('forfait_contrat');
-            $table->integer('site_id');
+            $table->unsignedBigInteger('site_id');
             $table->foreign('site_id')->references('id')->on('sites')->onDelete('cascade');
             $table->timestamps();
         });

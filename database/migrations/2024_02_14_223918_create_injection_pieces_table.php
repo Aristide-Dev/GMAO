@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('injection_pieces', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("piece_id")->constrained('pieces', 'id')->onDelete('cascade');
-            $table->foreignId("ri_reference")->constrained("rapport_interventions",'ri_reference')->onDelete('cascade');
+            $table->unsignedBigInteger("piece_id");
+            $table->string("ri_reference");
             $table->integer("quantite");
             $table->boolean("take_in_stock")->default(true);
             $table->integer("stock_price");
@@ -23,6 +23,9 @@ return new class extends Migration
             $table->integer("fournisseur_price")->default(0);
             $table->string('injection_file')->nullable();
             $table->timestamps();
+
+            $table->foreign('piece_id')->references('id')->on('pieces')->onDelete('cascade');
+            $table->foreign('ri_reference')->references('ri_reference')->on('rapport_interventions')->onDelete('cascade');
         });
     }
 

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('rapport_interventions', function (Blueprint $table) {
             $table->id();
             $table->string("ri_reference")->index()->unique();
-            $table->string("bt_reference")->index();
+            $table->foreignId("bt_reference")->index();
             $table->timestamps();
 
             $table->foreign('bt_reference')->references('bt_reference')->on('bon_travails')->onDelete('cascade');

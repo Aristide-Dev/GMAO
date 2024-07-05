@@ -19,14 +19,14 @@ return new class extends Migration
             $table->string("zone_name");
             $table->enum("zone_priorite", [1,2,3,4,5,6]); // 1 == faible // 2 == moyen // 3 == prioritaire
             $table->integer("zone_delais");
-            $table->integer("equipement_id");
-            $table->integer("prestataire_id");
-            $table->integer("last_prestataire_id")->nullable()->default(null); // pour savoir quel est le precedent prestataire qui traitait la demande
-            $table->integer("user_id"); // pour savoir quel utilisateur a fait le BT
+            $table->unsignedBigInteger("equipement_id");
+            $table->unsignedBigInteger("prestataire_id");
+            $table->unsignedBigInteger("last_prestataire_id")->nullable()->default(null); // pour savoir quel est le precedent prestataire qui traitait la demande
+            $table->unsignedBigInteger("user_id"); // pour savoir quel utilisateur a fait le BT
             $table->string('status');
             $table->datetime('date_echeance')->nullable();
 
-            
+
             $table->foreign('di_reference')->references('di_reference')->on('demande_interventions')->onDelete('cascade');
             $table->foreign('equipement_id')->references('id')->on('equipements')->onDelete('cascade');
             $table->foreign('prestataire_id')->references('id')->on('prestataires')->onDelete('cascade');

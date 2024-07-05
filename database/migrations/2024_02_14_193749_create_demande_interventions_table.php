@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('demande_interventions', function (Blueprint $table) {
             $table->id();
             $table->string('di_reference')->index()->unique();
-            $table->integer('site_id');
+            $table->unsignedBigInteger('site_id');
             $table->foreign('site_id')->references('id')->on('sites')->onDelete('cascade');
-            $table->integer('demandeur_id');
+            $table->unsignedBigInteger('demandeur_id');
             $table->foreign('demandeur_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('demande_file')->nullable();
             $table->string('status');
