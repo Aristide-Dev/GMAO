@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('injection_pieces', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger("piece_id");
-            $table->string("ri_reference");
+            $table->string("ri_reference")->index();
             $table->integer("quantite");
             $table->boolean("take_in_stock")->default(true);
             $table->integer("stock_price");

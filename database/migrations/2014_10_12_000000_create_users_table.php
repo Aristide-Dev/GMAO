@@ -27,8 +27,8 @@ return new class extends Migration
             $table->boolean("first_login")->default(true);
             $table->enum("role",['super_admin','admin','maintenance','demandeur','prestataire_admin','agent']);
 
-            $table->unsignedBigInteger('prestataire_own')->nullable();
-            $table->foreign('prestataire_own')->references('id')->on('prestataires')->onDelete('cascade');
+            $table->foreignId('prestataire_own')->nullable();
+            // $table->foreign('prestataire_own')->references('id')->on('prestataires')->onDelete('cascade');
             $table->timestamps();
         });
     }
