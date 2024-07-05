@@ -228,7 +228,7 @@
         'resources/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js',
         'resources/assets/vendor/libs/hammer/hammer.js',
         'resources/assets/vendor/libs/i18n/i18n.js',
-        'resources/assets/vendor/libs//typeahead-js/typeahead.js',
+        'resources/assets/vendor/libs/typeahead-js/typeahead.js',
         'resources/assets/vendor/js/menu.js',
         'resources/assets/vendor/libs/dropzone/dropzone.js',
         // <!-- Vendors JS -->
