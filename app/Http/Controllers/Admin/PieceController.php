@@ -33,7 +33,7 @@ class PieceController extends Controller
     public function store(Request $request)
     {
         $request->validateWithBag('store_new_piece',[
-            'piece' => ['required', 'string', 'max:55', 'unique:pieces,name'],
+            'piece' => ['required', 'string', 'max:55', 'unique:pieces,piece'],
             'prix' => ['required', 'numeric', 'min:0'],
             'quantite' => ['required', 'numeric', 'min:0'],
             'stock_min' => ['required', 'numeric', 'min:0'],
