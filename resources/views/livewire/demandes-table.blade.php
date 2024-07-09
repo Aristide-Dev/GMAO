@@ -1,31 +1,27 @@
 @props(['url', 'demandes'])
 
 <div>
-    
     <div class="flex px-1 my-3 col-md-6 offset-md-6 justify-content-end">
         <div class="p-3 bg-gray-100 d-flex align-items-center justify-content-between rounded-2xl w-100">
             <label for="search" class="mx-1 font-bold">Rechercher</label>
             <input wire:model.live="search" name="search" type="search" placeholder="Rechercher une demande" class="mx-2 form-control rounded-2xl" />
-            {{-- <button type="submit" class="px-3 py-2 text-white bg-blue-500 btn-icon rounded-xl"><i class="ti ti-search"></i></button> --}}
         </div>
     </div>
     <div class="table-responsive text-nowrap">
-        
         <table class="table table-hover">
             <caption class="ms-4">Liste des Demandes d'interventions (DI)</caption>
             <thead class="table-light">
                 <tr>
-                    <th>N°</th>
-                    <th>D.I</th>
-                    <th class="text-left">Site</th>
+                    <th><a href="#" wire:click.prevent="sortBy('id')">N°</a></th>
+                    <th><a href="#" wire:click.prevent="sortBy('di_reference')">D.I</a></th>
+                    <th class="text-left"><a href="#" wire:click.prevent="sortBy('site.name')">Site</a></th>
                     <th class="text-left">Document</th>
-                    <th class="text-left">Demandeur</th>
-                    <th>Status</th>
+                    <th class="text-left"><a href="#" wire:click.prevent="sortBy('demandeur.name')">Demandeur</a></th>
+                    <th><a href="#" wire:click.prevent="sortBy('status')">Status</a></th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody class="table-border-bottom-0">
-
                 <div class="flex justify-content-center col-12" wire:loading>
                     <div class="flex gap-0 p-3 bg-transparent rounded-lg justify-content-center animate-pulse">
                         <div class="demo-inline-spacing display-1">
@@ -37,7 +33,7 @@
                 </div>
                 
                 @forelse ($demandes as $key => $demande)
-                    <tr  wire:loading.class="hidden">
+                    <tr wire:loading.class="hidden">
                         <td>{{ $key + 1 }}</td>
                         <td><span class="fw-bold">{{ $demande->di_reference }}</span></td>
                         <td class="text-left">
@@ -76,12 +72,12 @@
             </tbody>
             <tfoot class="table-light">
                 <tr>
-                    <th>N°</th>
-                    <th>D.I</th>
-                    <th class="text-left">Site</th>
+                    <th><a href="#" wire:click.prevent="sortBy('id')">N°</a></th>
+                    <th><a href="#" wire:click.prevent="sortBy('di_reference')">D.I</a></th>
+                    <th class="text-left"><a href="#" wire:click.prevent="sortBy('site.name')">Site</a></th>
                     <th class="text-left">Document</th>
-                    <th class="text-left">Demandeur</th>
-                    <th>Status</th>
+                    <th class="text-left"><a href="#" wire:click.prevent="sortBy('demandeur.name')">Demandeur</a></th>
+                    <th><a href="#" wire:click.prevent="sortBy('status')">Status</a></th>
                     <th>Action</th>
                 </tr>
             </tfoot>
