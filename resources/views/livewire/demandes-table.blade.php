@@ -1,23 +1,23 @@
-@props(['url', 'demandes'])
-
 <div>
     <div class="flex px-1 my-3 col-md-6 offset-md-6 justify-content-end">
         <div class="p-3 bg-gray-100 d-flex align-items-center justify-content-between rounded-2xl w-100">
             <label for="search" class="mx-1 font-bold">Rechercher</label>
             <input wire:model.live="search" name="search" type="search" placeholder="Rechercher une demande" class="mx-2 form-control rounded-2xl" />
+            <button wire:click="exportExcel" class="mx-2 btn btn-success">Export Excel</button>
+            <button wire:click="exportPDF" class="mx-2 btn btn-danger">Export PDF</button>
         </div>
     </div>
+
     <div class="table-responsive text-nowrap">
         <table class="table table-hover">
             <caption class="ms-4">Liste des Demandes d'interventions (DI)</caption>
             <thead class="table-light">
                 <tr>
-                    <th><a href="#" wire:click.prevent="sortBy('id')">N°</a></th>
                     <th><a href="#" wire:click.prevent="sortBy('di_reference')">D.I</a></th>
-                    <th class="text-left"><a href="#" wire:click.prevent="sortBy('site.name')">Site</a></th>
-                    <th class="text-left">Document</th>
-                    <th class="text-left"><a href="#" wire:click.prevent="sortBy('demandeur.name')">Demandeur</a></th>
-                    <th><a href="#" wire:click.prevent="sortBy('status')">Status</a></th>
+                    <th><a href="#" wire:click.prevent="sortBy('site.name')">Site</a></th>
+                    <th>Document</th>
+                    <th><a href="#" wire:click.prevent="sortBy('demandeur.first_name')">Demandeur</a></th>
+                    <th>Status</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -34,7 +34,6 @@
                 
                 @forelse ($demandes as $key => $demande)
                     <tr wire:loading.class="hidden">
-                        <td>{{ $key + 1 }}</td>
                         <td><span class="fw-bold">{{ $demande->di_reference }}</span></td>
                         <td class="text-left">
                             @if ($url == 'prestataires')
@@ -64,7 +63,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="7">
+                        <td colspan="6">
                             <h3 class="text-xl font-bold text-center animate-pulse">Aucune demande</h3>
                         </td>
                     </tr>
@@ -72,12 +71,11 @@
             </tbody>
             <tfoot class="table-light">
                 <tr>
-                    <th><a href="#" wire:click.prevent="sortBy('id')">N°</a></th>
                     <th><a href="#" wire:click.prevent="sortBy('di_reference')">D.I</a></th>
-                    <th class="text-left"><a href="#" wire:click.prevent="sortBy('site.name')">Site</a></th>
-                    <th class="text-left">Document</th>
-                    <th class="text-left"><a href="#" wire:click.prevent="sortBy('demandeur.name')">Demandeur</a></th>
-                    <th><a href="#" wire:click.prevent="sortBy('status')">Status</a></th>
+                    <th><a href="#" wire:click.prevent="sortBy('site.name')">Site</a></th>
+                    <th>Document</th>
+                    <th><a href="#" wire:click.prevent="sortBy('demandeur.first_name')">Demandeur</a></th>
+                    <th>Status</th>
                     <th>Action</th>
                 </tr>
             </tfoot>

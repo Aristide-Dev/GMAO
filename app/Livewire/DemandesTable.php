@@ -2,10 +2,13 @@
 
 namespace App\Livewire;
 
+use App\Exports\ExportExcel;
+use App\Exports\ExportPDF;
 use App\Models\DemandeIntervention;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Maatwebsite\Excel\Facades\Excel;
 
 class DemandesTable extends Component
 {
@@ -42,12 +45,8 @@ class DemandesTable extends Component
         }
     }
 
-    public function render()
+    private function getDemandes()
     {
-        $url = $this->determineUrl($this->action);
-
-        $demandeur_id = Auth::user()->id;
-
         $query = DemandeIntervention::query();
 
         if ($this->action == 'demandeur') {
@@ -75,7 +74,14 @@ class DemandesTable extends Component
             $query->orderBy('demande_interventions.' . $this->getDemandeursortField(), $this->sortDirection);
         }
 
-        $demandes = $query->paginate(10);
+        return $query;
+    }
+
+    public function render()
+    {
+        $url = $this->determineUrl($this->action);
+
+        $demandes = $this->getDemandes()->paginate(10);
 
         return view('livewire.demandes-table', [
             'url' => $url,
@@ -93,5 +99,29 @@ class DemandesTable extends Component
             default:
                 return 'demandeur';
         }
+    }
+
+    public function exportExcel()
+    {
+        $demandes = $this->getDemandes()->get()->map(function ($demande) {
+            return [
+                'ID' => $demande->id,
+                'Reference' => $demande->di_reference,
+                'Demandeur' => $demande->demandeur->first_name . ' ' . $demande->demandeur->last_name,
+                'Site' => $demande->site->name,
+                'Status' => $demande->status,
+                'Created At' => $demande->created_at,
+                'Updated At' => $demande->updated_at,
+            ];
+        });
+        
+        return Excel::download(new ExportExcel($demandes), 'demandes.xlsx');
+    }
+
+
+    public function exportPDF()
+    {
+        $demandes = $this->getDemandes()->get();
+        return (new ExportPDF($demandes))->download();
     }
 }
