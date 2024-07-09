@@ -2,8 +2,6 @@
 
 namespace App\Rules;
 
-use Closure;
-// use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Contracts\Validation\Rule;
 
 class DateInterventionRule implements Rule
@@ -17,12 +15,18 @@ class DateInterventionRule implements Rule
 
     public function passes($attribute, $value)
     {
-        // Vérifie si la date_intervention est postérieure à $demande->created_at
-        return strtotime($value) <= strtotime($this->demandeCreatedAt);
+        // Convertir la date de création de la demande en timestamp
+        $demandeCreatedAtTimestamp = strtotime($this->demandeCreatedAt);
+
+        // Convertir la date et l'heure d'intervention en timestamp
+        $interventionTimestamp = strtotime($value);
+
+        // Vérifie si la date et l'heure d'intervention sont postérieures à la date de création de la demande
+        return $interventionTimestamp >= $demandeCreatedAtTimestamp;
     }
 
     public function message()
     {
-        return 'La date d\'intervention doit être superieur à la date de création de la demande. '.$this->demandeCreatedAt;
+        return 'La date et l\'heure d\'intervention doivent être supérieures à la date de création de la demande : ' . $this->demandeCreatedAt;
     }
 }

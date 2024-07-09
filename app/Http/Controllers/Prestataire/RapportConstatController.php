@@ -40,7 +40,13 @@ class RapportConstatController extends Controller
             'date_intervention' => [
                 'required',
                 'date',
-                new DateInterventionRule($demande->created_at)
+                function ($attribute, $value, $fail) use ($request, $demande) {
+                    $dateTimeIntervention = $value . ' ' . $request->heure_intervention;
+                    $rule = new DateInterventionRule($demande->created_at);
+                    if (!$rule->passes($attribute, $dateTimeIntervention)) {
+                        $fail($rule->message());
+                    }
+                }
             ],
             'heure_intervention' => [
                 'required',
@@ -54,22 +60,24 @@ class RapportConstatController extends Controller
             ],
             'commentaire' => 'nullable|string|max:250',
         ]);
-        
-
+    
         $image = $request->file('rapport_constat_file');
         $imagePath = $this->saveImageWithUniqueName($image, $demande->di_reference, 'rapport_constat');
         // Récupérer le rapport d'intervention associé au bon de travail
         $rapportIntervention = $bonTravail->rapportsIntervention;
-
+    
         RapportConstat::create([
             'ri_reference' => "$rapportIntervention->ri_reference",
             'rapport_constat_file' => $imagePath,
             'commentaire' => $request->commentaire ?? "",
         ]);
-
+    
         switch ($request->status) {
             case 'terminé':
                 $request->status = StatusEnum::TERMINE;
+                break;
+            case 'en attente':
+                $request->status = StatusEnum::EN_ATTENTE;
                 break;
             case 'rejeté':
                 $request->status = StatusEnum::REJETE;
@@ -78,41 +86,47 @@ class RapportConstatController extends Controller
                 $request->status = StatusEnum::REJETE;
                 break;
         }
-
-        
-
+    
         if($request->status == StatusEnum::TERMINE)
         {
-            // $demande->status = $request->status;
-            // $demande->save();
             $bonTravail->status = StatusEnum::CLOTURE;
             $bonTravail->save();
-
-            // Modifier le statut du rapport d'intervention
+    
             if ($rapportIntervention) {
                 $rapportIntervention->status = StatusEnum::EN_ATTENTE;
                 $rapportIntervention->date_intervention = $request->date_intervention.' '.$request->heure_intervention;
                 $rapportIntervention->save();
             }
         }
-
-        if($request->status == StatusEnum::REJETE)
+    
+        if($request->status == StatusEnum::EN_ATTENTE)
         {
-            // $demande->status = $request->status;
-            // $demande->save();
             $bonTravail->status = $request->status;
             $bonTravail->save();
-
-            // Modifier le statut du rapport d'intervention
+    
             if ($rapportIntervention) {
                 $rapportIntervention->status = $request->status;
                 $rapportIntervention->date_intervention = $request->date_intervention.' '.$request->heure_intervention;
                 $rapportIntervention->save();
             }
         }
-        
+    
+        if($request->status == StatusEnum::REJETE)
+        {
+            $bonTravail->status = $request->status;
+            $bonTravail->save();
+    
+            if ($rapportIntervention) {
+                $rapportIntervention->status = $request->status;
+                $rapportIntervention->date_intervention = $request->date_intervention.' '.$request->heure_intervention;
+                $rapportIntervention->save();
+            }
+        }
+    
         return redirect()->back()->with('success', 'Nouveau Rapport généré avec succès!');
     }
+    
+
 
     /**
      * Display the specified resource.

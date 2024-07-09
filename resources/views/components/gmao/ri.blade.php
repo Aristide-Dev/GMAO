@@ -27,8 +27,11 @@
     {{-- Numero Rapport (RI) --}}
 
     {{-- rapport_constat --}}
-    @if($rapport_intervention->rapport_constat)
-    <x-gmao.rapport-constat :rapport_constat="$rapport_intervention->rapport_constat" :status_color="$rapport_intervention->statutColor()"/>
+    @if($rapport_intervention->rapport_constats)
+    
+        @foreach ($rapport_intervention->rapport_constats as $rapport_constat)
+            <x-gmao.rapport-constat :rapport_constat="$rapport_constat" :status_color="$rapport_intervention->statutColor()"/>
+        @endforeach
     @endif
     {{-- rapport_constat --}}
 
