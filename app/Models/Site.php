@@ -6,6 +6,20 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Site
+ *
+ * @package App\Models
+ *
+ * @property int $id
+ * @property string $name
+ * @property string $registre
+ * @property bool $actif
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Database\Eloquent\Collection|Equipement[] $equipements
+ * @property \Illuminate\Database\Eloquent\Collection|DemandeIntervention[] $demande_interventions
+ */
 class Site extends Model
 {
     use HasFactory;
@@ -16,21 +30,43 @@ class Site extends Model
         'actif',
     ];
 
+    /**
+     * Get the equipment associated with the site.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function equipements()
     {
         return $this->hasMany(Equipement::class);
     }
 
+    /**
+     * Get the intervention requests associated with the site.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function demande_interventions()
     {
         return $this->hasMany(DemandeIntervention::class);
     }
 
+    /**
+     * Get the equipment by category.
+     *
+     * @param string $category
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
     public function equipementsByCategory($category)
     {
-        return $this->hasMany(Equipement::class)->where('categorie', $category)->get();
+        return $this->equipements()->where('categorie', $category)->get();
     }
 
+    /**
+     * Calculate the total forfait contrat by category.
+     *
+     * @param string $category
+     * @return float
+     */
     public function totalForfaitContratByCategory($category)
     {
         return $this->equipements()
@@ -38,7 +74,7 @@ class Site extends Model
                     ->sum('forfait_contrat');
     }
 
-     /**
+    /**
      * Calculate the total sum of forfait contrat for all equipment in this site.
      *
      * @return float
@@ -48,40 +84,58 @@ class Site extends Model
         return $this->equipements()->sum('forfait_contrat');
     }
 
+    /**
+     * Show the forfait contrat for a specific period.
+     *
+     * @param int $year
+     * @param int $month
+     * @return float
+     */
     public function showForfaitContratForPeriod($year, $month)
     {
         $startDate = Carbon::createFromDate($year, $month, 1)->startOfMonth();
         $endDate = Carbon::createFromDate($year, $month, 1)->endOfMonth();
-        $totalCost = 0;
-        $ValidateforfaitsContrat = ForfaitContrat::where('site_id', $this->id)->whereBetween('created_at', [$year, $month])->first();
-        if($ValidateforfaitsContrat)
-        {
-            // dd($ValidateforfaitsContrat);
-            return ($ValidateforfaitsContrat->validated) ? $ValidateforfaitsContrat->amount : $this->calculateTotalForfaitContrat();
+
+        $forfaitContrat = ForfaitContrat::where('site_id', $this->id)
+            ->whereBetween('created_at', [$startDate, $endDate])
+            ->first();
+
+        if ($forfaitContrat) {
+            return $forfaitContrat->validated ? $forfaitContrat->amount : $this->calculateTotalForfaitContrat();
         }
+
         return $this->calculateTotalForfaitContrat();
     }
 
+    /**
+     * Calculate the total maintenance cost for a specific period.
+     *
+     * @param int $year
+     * @param int $month
+     * @return float
+     */
     public function calculateMonthlyCosts($year, $month)
     {
         $startDate = Carbon::createFromDate($year, $month, 1)->startOfMonth();
         $endDate = Carbon::createFromDate($year, $month, 1)->endOfMonth();
         $totalCost = 0;
-        
+
         foreach ($this->demande_interventions as $demande) {
             if ($demande->created_at->between($startDate, $endDate)) {
                 foreach ($demande->bon_travails as $bonTravail) {
                     $rapportIntervention = $bonTravail->rapportIntervention;
 
-                    if ($rapportIntervention->injection_pieces) {
+                    if ($rapportIntervention && $rapportIntervention->injection_pieces) {
                         foreach ($rapportIntervention->injection_pieces as $injectionPiece) {
-                        // dd($injectionPiece);
-                            $totalCost += $injectionPiece->take_in_stock ? ($injectionPiece->stock_price*$injectionPiece->quantite):($injectionPiece->fournisseur_price*$injectionPiece->quantite);
+                            $totalCost += $injectionPiece->take_in_stock 
+                                ? ($injectionPiece->stock_price * $injectionPiece->quantite)
+                                : ($injectionPiece->fournisseur_price * $injectionPiece->quantite);
                         }
                     }
                 }
             }
         }
+
         return $totalCost;
     }
 

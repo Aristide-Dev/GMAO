@@ -5,7 +5,8 @@
                 <div class="col-4">
                     <label for="evolution_des_requetes_registre_filter">Registre</label>
                     <select name="evolution_des_requetes_registre_filter" id="evolution_des_requetes_registre_filter" class="form-control" wire:model.live="registre_filter">
-                        @foreach (['', 'b2b', 'contrat', 'depot', 'autre'] as $index => $registre)
+                        <option value="">Tous les sites</option>
+                        @foreach (['b2b', 'contrat', 'depot', 'autre'] as $index => $registre)
                             <option value="{{ $registre }}">{{ $registre ?? '*' }}</option>
                         @endforeach
                     </select>
