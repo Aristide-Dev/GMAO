@@ -76,14 +76,14 @@
                     </div>
                 </div>
 
-                <div class="p-0 m-0 rounded col-6 bg-label-danger">
+                <div class="p-0 m-0 rounded col-6 bg-label-{{ $rapport_intervention->kpi ?'success':'danger' }}">
                     <div class="border-0 list-group-item">
                         <div class="w-100 justify-content-end">
                             <p class="mb-1 text-end text-primary fw-bold">
                                 <i class="fa-solid fa-ellipsis ti-sm" style="color: #C0C0C0;"></i>
                                 KPI
                             </p>
-                            <p class="mb-1 text-end">{{ $rapport_intervention->kpi ?? '---' }}</p>
+                            <p class="mb-1 text-end">{{ $rapport_intervention->kpi ?'Dans les delais':'Hors delais' }}</p>
                         </div>
                     </div>
                 </div>

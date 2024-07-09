@@ -19,10 +19,15 @@ class DemandeInterventionController extends Controller
     public function index()
     {
         $agent = Auth::user();
-        $prestataire = $agent->prestataire;
-        $bon_travails = $prestataire->bon_travails ?? [];
-        $demandes = $prestataire->demandes;
-        // dd($demandes);
+    $prestataire = $agent->prestataire;
+
+        if($prestataire) {
+            // Récupérer les bons de travail associés au prestataire et les trier par ID décroissant
+            $bon_travails = $prestataire->bon_travails()->orderBy('id', 'desc')->get();
+        } else {
+            $bon_travails = collect(); // Collection vide si le prestataire n'existe pas
+        }
+        // dd($bon_travails);
         return view('prestataires.demandes.index', compact('bon_travails', 'prestataire'));
     }
 

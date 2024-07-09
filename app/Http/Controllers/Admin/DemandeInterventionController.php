@@ -228,7 +228,7 @@ class DemandeInterventionController extends Controller
             'injection_file' =>$validateData['injection_file_file'],
         ]);
 
-        if($piece->quantite < $request->quantite)
+        if($validateData['take_in_stock'] == true)
         {
             $quantite = intval($request->quantite);
             $quantite = abs($quantite);
