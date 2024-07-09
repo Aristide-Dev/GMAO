@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\ZoneController as AdminZoneController;
 use App\Http\Controllers\Admin\BonTravailController as AdminBonTravailController;
 use App\Http\Controllers\Admin\PieceController as AdminPieceController;
 use App\Http\Controllers\Admin\EquipementController as AdminEquipementController;
+use App\Http\Controllers\Admin\ForfaitContratController as AdminForfaitContratController;
 
 
 use App\Http\Controllers\Demandeur\SiteController as DemandeurSiteController;
@@ -103,6 +104,10 @@ Route::middleware([
     Route::resource('/zones', AdminZoneController::class);
     Route::resource('/pieces', AdminPieceController::class);
     Route::resource('/bon-travail', AdminBonTravailController::class);
+
+    Route::get('forfaits', [AdminForfaitContratController::class, 'index'])->name('forfaits.index');
+    Route::put('forfaits/{id}/validate', [AdminForfaitContratController::class, 'validateForfait'])->name('forfaits.validate');
+    Route::get('forfaits/{year}/{month}', [AdminForfaitContratController::class, 'getForfaitsByMonth'])->name('forfaits.byMonth');
 });
 
 

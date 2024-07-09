@@ -64,6 +64,14 @@
         </a>
     </x-gmao.nav-link>
 
+    {{-- Forfaits Contrat --}}
+    <x-gmao.nav-link :active="request()->routeIs('admin.forfaits.*')">
+        <a href="{{ route('admin.forfaits.index') }}" class="menu-link">
+            <i class="menu-icon fa-solid fa-gear"></i>
+            <div data-i18n="Forfaits Contrat">Forfaits Contrat</div>
+        </a>
+    </x-gmao.nav-link>
+
     {{-- pieces --}}
     {{-- <x-gmao.nav-link :active="request()->routeIs('admin.pieces.*')">
         <a href="{{ route('admin.pieces.index') }}" class="menu-link">

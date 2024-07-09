@@ -12,7 +12,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->command('inspire')->hourly();
+        // Planifier la génération des forfaits de contrat mensuels en attente de validation
+        $schedule->command('generate:monthly-pending-forfait-contrat')->monthlyOn(1, '00:00');
     }
 
     /**
