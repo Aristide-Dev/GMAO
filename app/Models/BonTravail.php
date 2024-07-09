@@ -42,6 +42,11 @@ class BonTravail extends Model
         // return RapportIntervention::where('bt_reference', $this->bt_reference)->get();
         return $this->hasOne(RapportIntervention::class, 'bt_reference', 'bt_reference');
     }
+    
+    public function rapportIntervention() : HasOne
+    {
+        return $this->hasOne(RapportIntervention::class, 'bt_reference', 'bt_reference');
+    }
 
     public function equipement() :BelongsTo
     {

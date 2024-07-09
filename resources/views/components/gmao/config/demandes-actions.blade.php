@@ -18,7 +18,7 @@
         {
             $btn_injection_piece_disabled = "";
             $btn_bt_disabled = "disabled";
-            $btn_cloture_disabled = "disabled";
+            $btn_cloture_disabled = "";
         }
 
         if(
@@ -26,6 +26,7 @@
         ($demande->bon_travails->last())->status != 'rejeté' ||
         ($demande->bon_travails->last())->status != 'terminé')
         {
+            $btn_injection_piece_disabled = "";
             $btn_cloture_disabled = "";
         }
     }

@@ -63,7 +63,7 @@ class CoutTotalMaintenanceBySite extends Component
                     // dd($group->first());
                     return [
                         'name' => $name,
-                        'count' => $group->first()->demande_interventions_count,
+                        'count' => $group->first()->showForfaitContratForPeriod,
                     ];
                 })
             ->toArray();
