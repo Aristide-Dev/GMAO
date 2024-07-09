@@ -30,8 +30,6 @@
                     <div class="mb-0 card-title">
                         <h5 class="mb-0 font-bold me-2">{{ number_format($site->calculateTotalForfaitContrat(), 2, '.', ' ')
                             }} GNF</h5>
-                        <h5 class="mb-0 font-bold me-2">{{ number_format($site->calculateMonthlyCosts(2024,05), 2, '.', ' ')
-                            }} GNF</h5>
                         <small>forfait contrat</small>
                     </div>
                     <div class="card-icon">

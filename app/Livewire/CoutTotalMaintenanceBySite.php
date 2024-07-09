@@ -3,7 +3,6 @@
 namespace App\Livewire;
 
 use App\Enums\StatusEnum;
-use App\Models\DemandeIntervention;
 use App\Models\Site;
 use Asantibanez\LivewireCharts\Facades\LivewireCharts;
 use Livewire\Component;
@@ -11,7 +10,6 @@ use Livewire\Component;
 class CoutTotalMaintenanceBySite extends Component
 {
     public $requeteBySite = [];
-    public $total_di = 0;
     public $firstRun = true;
     public $showDataLabels = false;
 
@@ -48,63 +46,40 @@ class CoutTotalMaintenanceBySite extends Component
 
     private function loadData()
     {
-        // Récupérer le nombre total de demandes d'intervention pour le mois et l'année sélectionnés
-        $this->total_di = DemandeIntervention::whereBetween('created_at', $this->between())->count();
+        $startDate = date('Y-m-d', strtotime("$this->year_filter-$this->month_filter-01"));
+        $endDate = date('Y-m-d', strtotime("$this->year_filter-$this->month_filter-31 23:59:59"));
 
         if($this->registre_filter)
         {
-            // Récupérer les requêtes par site et supprimer les doublons
-            $this->requeteBySite = Site::whereBetween('created_at', $this->between())
-                ->where('registre',$this->registre_filter)
-                ->withCount('demande_interventions')
+            $this->requeteBySite = Site::where('registre', $this->registre_filter)
                 ->get()
-                ->groupBy('name')
-                ->map(function ($group, $name) {
-                    // dd($group->first());
+                ->map(function ($site) use ($startDate, $endDate) {
                     return [
-                        'name' => $name,
-                        'count' => $group->first()->showForfaitContratForPeriod,
+                        'name' => $site->name,
+                        'forfait_contrat' => $site->showForfaitContratForPeriod($this->year_filter, $this->month_filter),
+                        'cout_maintenance' => $site->calculateMonthlyMaintenanceCost($startDate, $endDate),
                     ];
                 })
-            ->toArray();
-        }else{
-            // Récupérer les requêtes par site et supprimer les doublons
-            $this->requeteBySite = Site::whereBetween('created_at', $this->between())
-                ->withCount('demande_interventions')
-                ->get()
-                ->groupBy('name')
-                ->map(function ($group, $name) {
-                    // dd($group->first());
+                ->toArray();
+        } else {
+            $this->requeteBySite = Site::all()
+                ->map(function ($site) use ($startDate, $endDate) {
                     return [
-                        'name' => $name,
-                        'count' => $group->first()->demande_interventions_count,
+                        'name' => $site->name,
+                        'forfait_contrat' => $site->showForfaitContratForPeriod($this->year_filter, $this->month_filter),
+                        'cout_maintenance' => $site->calculateMonthlyMaintenanceCost($startDate, $endDate),
                     ];
                 })
-            ->toArray();
+                ->toArray();
         }
     }
 
-    private function loadDataWithRegistreFilter()
-    {
-
-    }
-
-    private function between()
-    {
-        $startDate = date('Y-m-d', strtotime("$this->year_filter-$this->month_filter-01"));
-        $endDate = date('Y-m-d', strtotime("$this->year_filter-$this->month_filter-31 23:59:59"));
-        // $endDate = date('Y-m-d', strtotime("$this->year_filter-$this->month_filter-" . date('t', strtotime($startDate))));
-        return [$startDate, $endDate];
-    }
-    
     public function mount()
     {
-        // Initialiser les filtres avec l'année et le mois en cours
         $this->year_filter = date('Y');
         $this->month_filter = date('n');
         $this->registre_filter = '';
 
-        // Charger les données initiales
         $this->loadData();
     }
 
@@ -121,13 +96,12 @@ class CoutTotalMaintenanceBySite extends Component
     public function updatedRegistreFilter()
     {
         $this->loadData();
-        // $this->loadDataWithRegistreFilter();
     }
 
     public function render()
     {
         $columnChartModel = LivewireCharts::columnChartModel()
-            ->setTitle('Bons de Travail par Type d\'Équipement')
+            ->setTitle('Coût Total de Maintenance par Site')
             ->setAnimated($this->firstRun)
             ->withOnColumnClickEventName('onColumnClick')
             ->setLegendVisibility(false)
@@ -137,7 +111,7 @@ class CoutTotalMaintenanceBySite extends Component
             ->withGrid();
 
         foreach ($this->requeteBySite as $site) {
-            $columnChartModel = $columnChartModel->addColumn($site['name'], $site['count'], StatusEnum::randomColor());
+            $columnChartModel = $columnChartModel->addColumn($site['name'], $site['cout_maintenance'], StatusEnum::randomColor());
         }
 
         return view('livewire.cout-total-maintenance-by-site', [

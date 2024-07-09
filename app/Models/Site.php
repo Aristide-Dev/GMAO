@@ -53,12 +53,13 @@ class Site extends Model
         $startDate = Carbon::createFromDate($year, $month, 1)->startOfMonth();
         $endDate = Carbon::createFromDate($year, $month, 1)->endOfMonth();
         $totalCost = 0;
-        $ValidateforfaitsContrat = ForfaitContrat::where('site_id', $this->id)->between($startDate, $endDate)->limit(1)->get();
-        if($ValidateforfaitsContrat && $ValidateforfaitsContrat->validated == true)
+        $ValidateforfaitsContrat = ForfaitContrat::where('site_id', $this->id)->whereBetween('created_at', [$year, $month])->first();
+        if($ValidateforfaitsContrat)
         {
-            return $ValidateforfaitsContrat->amount;
+            // dd($ValidateforfaitsContrat);
+            return ($ValidateforfaitsContrat->validated) ? $ValidateforfaitsContrat->amount : $this->calculateTotalForfaitContrat();
         }
-        return $this->calculateTotalForfaitContrat;
+        return $this->calculateTotalForfaitContrat();
     }
 
     public function calculateMonthlyCosts($year, $month)
@@ -81,6 +82,38 @@ class Site extends Model
                 }
             }
         }
+        return $totalCost;
+    }
+
+    /**
+     * Calculate the total maintenance cost for a specific period.
+     *
+     * @param string $startDate
+     * @param string $endDate
+     * @return float
+     */
+    public function calculateMonthlyMaintenanceCost($startDate, $endDate)
+    {
+        $startDate = Carbon::parse($startDate)->startOfDay();
+        $endDate = Carbon::parse($endDate)->endOfDay();
+        $totalCost = 0;
+
+        foreach ($this->demande_interventions as $demande) {
+            if ($demande->created_at->between($startDate, $endDate)) {
+                foreach ($demande->bon_travails as $bonTravail) {
+                    $rapportIntervention = $bonTravail->rapportIntervention;
+
+                    if ($rapportIntervention && $rapportIntervention->injection_pieces) {
+                        foreach ($rapportIntervention->injection_pieces as $injectionPiece) {
+                            $totalCost += $injectionPiece->take_in_stock 
+                                ? ($injectionPiece->stock_price * $injectionPiece->quantite)
+                                : ($injectionPiece->fournisseur_price * $injectionPiece->quantite);
+                        }
+                    }
+                }
+            }
+        }
+
         return $totalCost;
     }
 }
