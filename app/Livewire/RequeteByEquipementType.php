@@ -7,6 +7,7 @@ use App\Models\BonTravail;
 use App\Models\Equipement;
 use Asantibanez\LivewireCharts\Facades\LivewireCharts;
 use Livewire\Component;
+use Carbon\Carbon;
 
 class RequeteByEquipementType extends Component
 {
@@ -44,7 +45,13 @@ class RequeteByEquipementType extends Component
     {
         // Logique ou action spécifique lors du clic sur un bloc
     }
-    
+
+    private function between()
+    {
+        $startDate = Carbon::createFromDate($this->year_filter, $this->month_filter, 1)->startOfDay();
+        $endDate = $startDate->copy()->endOfMonth()->endOfDay();
+        return [$startDate, $endDate];
+    }
 
     private function loadData()
     {
@@ -52,7 +59,7 @@ class RequeteByEquipementType extends Component
         $this->total_bt = BonTravail::whereBetween('created_at', $this->between())->count();
 
         // Récupérer les requêtes groupées par type d'équipement
-        $this->requeteByTypes = Equipement::withcount(['bon_travails' => function($query) {
+        $this->requeteByTypes = Equipement::withCount(['bon_travails' => function($query) {
             $query->whereBetween('created_at', $this->between());
         }])
         ->get()
@@ -69,14 +76,6 @@ class RequeteByEquipementType extends Component
         ->all();
     }
 
-    private function between()
-    {
-        $startDate = date('Y-m-d', strtotime("$this->year_filter-$this->month_filter-01"));
-        $endDate = date('Y-m-d', strtotime("$this->year_filter-$this->month_filter-31 23:59:59"));
-        // $endDate = date('Y-m-d', strtotime("$this->year_filter-$this->month_filter-" . date('t', strtotime($startDate))));
-        return [$startDate, $endDate];
-    }
-    
     public function mount()
     {
         // Initialiser les filtres avec l'année et le mois en cours
@@ -99,24 +98,22 @@ class RequeteByEquipementType extends Component
 
     public function render()
     {
-
-
-        $equipement = Equipement::whereBetween('created_at', $this->between())->get();
-        $total_equipement = count($equipement);
-
         $columnChartModel = LivewireCharts::columnChartModel()
-        ->setTitle('Demandes par Type d\'Équipement')
-        ->setAnimated($this->firstRun)
-        ->withOnColumnClickEventName('onColumnClick')
-        ->setLegendVisibility(false)
-        ->legendHorizontallyAlignedCenter()
-        ->setDataLabelsEnabled($this->showDataLabels)
-        ->setColumnWidth(70)
-        ->withGrid();
+            ->setTitle('Demandes par Type d\'Équipement')
+            ->setAnimated($this->firstRun)
+            ->withOnColumnClickEventName('onColumnClick')
+            ->setLegendVisibility(false)
+            ->legendHorizontallyAlignedCenter()
+            ->setDataLabelsEnabled($this->showDataLabels)
+            ->setColumnWidth(70)
+            ->withGrid();
 
-    foreach ($this->requeteByTypes as $type) {
-        $columnChartModel = $columnChartModel->addColumn($type['categorie'], $type['count'], StatusEnum::randomColor());
-    }
+        foreach ($this->requeteByTypes as $type) {
+            $columnChartModel = $columnChartModel->addColumn($type['categorie'], $type['count'], StatusEnum::randomColor());
+        }
+
+        $this->firstRun = false;
+
         return view('livewire.requete-by-equipement-type', [
             'requeteByTypes' => $this->requeteByTypes,
             'columnChartModel' => $columnChartModel,

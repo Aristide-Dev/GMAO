@@ -6,6 +6,7 @@ use App\Enums\StatusEnum;
 use App\Models\DemandeIntervention;
 use Asantibanez\LivewireCharts\Facades\LivewireCharts;
 use Livewire\Component;
+use Carbon\Carbon;
 
 class EvolutionRequetes extends Component
 {
@@ -19,9 +20,8 @@ class EvolutionRequetes extends Component
 
     private function between()
     {
-        $startDate = date('Y-m-d', strtotime("$this->year_filter-$this->month_filter-01 00:00:00"));
-        $endDate = date('Y-m-d', strtotime("$this->year_filter-$this->month_filter-31 23:59:59"));
-        // $endDate = date('Y-m-d', strtotime("$this->year_filter-$this->month_filter-" . date('t', strtotime($startDate))));
+        $startDate = Carbon::createFromDate($this->year_filter, $this->month_filter, 1)->startOfDay();
+        $endDate = $startDate->copy()->endOfMonth()->endOfDay();
         return [$startDate, $endDate];
     }
 

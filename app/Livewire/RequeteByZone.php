@@ -7,6 +7,7 @@ use App\Models\BonTravail;
 use App\Models\Zone;
 use Asantibanez\LivewireCharts\Facades\LivewireCharts;
 use Livewire\Component;
+use Carbon\Carbon;
 
 class RequeteByZone extends Component
 {
@@ -41,6 +42,7 @@ class RequeteByZone extends Component
             ->toArray();
     }
 
+
     protected $listeners = [
         'onPointClick' => 'handleOnPointClick',
         'onSliceClick' => 'handleOnSliceClick',
@@ -70,12 +72,11 @@ class RequeteByZone extends Component
 
     private function between()
     {
-        $startDate = date('Y-m-d', strtotime("$this->year_filter-$this->month_filter-01"));
-        $endDate = date('Y-m-d', strtotime("$this->year_filter-$this->month_filter-31 23:59:59"));
-        // $endDate = date('Y-m-d', strtotime("$this->year_filter-$this->month_filter-" . date('t', strtotime($startDate))));
+        $startDate = Carbon::createFromDate($this->year_filter, $this->month_filter, 1)->startOfDay();
+        $endDate = $startDate->copy()->endOfMonth()->endOfDay();
         return [$startDate, $endDate];
     }
-    
+
     public function mount()
     {
         // Initialiser les filtres avec l'année et le mois en cours
@@ -99,7 +100,7 @@ class RequeteByZone extends Component
     public function render()
     {
         $columnChartModel = LivewireCharts::columnChartModel()
-            ->setTitle('Bons de Travail par Type d\'Équipement')
+            ->setTitle('Bons de Travail par Zone')
             ->setAnimated($this->firstRun)
             ->withOnColumnClickEventName('onColumnClick')
             ->setLegendVisibility(false)

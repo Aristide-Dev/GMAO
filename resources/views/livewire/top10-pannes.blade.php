@@ -25,7 +25,6 @@
                     <div class="inline-block min-w-full p-0 align-middle">
                         <div class="p-0 overflow-hidden">
                             <table class="min-w-full divide-y divide-gray-200">
-                                total_demande {{ $total_demande }} - {{implode(" ",$between)}}
                                 <thead class="bg-blue-200">
                                     <tr>
                                         <th scope="col" class="py-2 text-xs font-bold text-gray-900 uppercase text-start">
