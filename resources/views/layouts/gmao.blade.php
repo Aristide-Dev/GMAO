@@ -160,13 +160,14 @@
                     <!-- / Content -->
 
 
-                    <!-- Footer -->
-                    @include('layouts.gmao.footer')
-                    <!-- / Footer -->
 
                     <div class="content-backdrop fade"></div>
                 </div>
                 <!-- Content wrapper -->
+                
+                <!-- Footer -->
+                @include('layouts.gmao.footer')
+                <!-- / Footer -->
             </div>
             <!-- / Layout page -->
             <!-- Overlay -->

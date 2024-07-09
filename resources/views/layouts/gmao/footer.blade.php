@@ -2,10 +2,7 @@
     <div class="container-xxl">
         <div class="py-2 footer-container d-flex align-items-center justify-content-between flex-md-row flex-column">
             <div>
-                © G-MAINTEANCE <script>
-                    document.write(new Date().getFullYear())
-
-                </script>, made with ❤️
+                © G-MAINTEANCE {{ date('Y') }}
             </div>
             
             {{-- <div class="d-none d-lg-inline-block">
