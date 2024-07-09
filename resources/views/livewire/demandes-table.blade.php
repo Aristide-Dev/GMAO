@@ -3,8 +3,8 @@
         <div class="p-3 bg-gray-100 d-flex align-items-center justify-content-between rounded-2xl w-100">
             <label for="search" class="mx-1 font-bold">Rechercher</label>
             <input wire:model.live="search" name="search" type="search" placeholder="Rechercher une demande" class="mx-2 form-control rounded-2xl" />
-            <button wire:click="exportExcel" class="mx-2 btn btn-success">Export Excel</button>
-            <button wire:click="exportPDF" class="mx-2 btn btn-danger">Export PDF</button>
+            <button wire:click="exportExcel" class="mx-2 btn btn-sm btn-success">Export Excel</button>
+            {{-- <button wire:click="exportPDF" class="mx-2 btn btn-danger">Export PDF</button> --}}
         </div>
     </div>
 
