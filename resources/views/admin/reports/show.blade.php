@@ -54,31 +54,31 @@
 
     <div class="row">
         <div class="p-3 my-3 col-12">
-            <livewire:evolution-requetes />
+            <livewire:rapports.evolution-requetes />
         </div>
     </div>
 
     <div class="row">
         <div class="p-3 my-3 shadow col-12">
-            <livewire:top-10-pannes />
+            <livewire:rapports.top-10-pannes />
         </div>
     </div>
 
     <div class="row">
         <div class="p-3 my-3 shadow col-12">
-            <livewire:requete-by-equipement-type />
+            <livewire:rapports.requete-by-equipement-type />
         </div>
     </div>
 
     <div class="row">
         <div class="p-3 my-3 shadow col-12">
-            <livewire:requete-by-zone />
+            <livewire:rapports.requete-by-zone />
         </div>
     </div>
 
     <div class="row">
         <div class="p-3 my-3 shadow col-12">
-            <livewire:cout-total-maintenance-by-site />
+            <livewire:rapports.cout-total-maintenance />
         </div>
     </div>
 </x-gmao-layout>
