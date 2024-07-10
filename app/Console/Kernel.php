@@ -15,6 +15,10 @@ class Kernel extends ConsoleKernel
         $schedule->command('inspire')->hourly();
         // Planifier la génération des forfaits de contrat mensuels en attente de validation
         $schedule->command('generate:monthly-pending-forfait-contrat')->monthlyOn(1, '00:00');
+
+        // Planifier la génération du rapport mensuel
+        $schedule->command('generate:report')->monthlyOn(1, '00:00');
+        $schedule->command('generate:report')->everyMinute();
     }
 
     /**

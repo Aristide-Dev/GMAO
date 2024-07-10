@@ -1,20 +1,20 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AppController;
-use App\Http\Controllers\Admin\SiteController as AdminSiteController;
-use App\Http\Controllers\Admin\DemandeInterventionController as AdminDemandeInterventionController;
-use App\Http\Controllers\Admin\UtilisateurController as AdminUtilisateurController;
-use App\Http\Controllers\Admin\PrestataireController as AdminPrestataireController;
-use App\Http\Controllers\Admin\ZoneController as AdminZoneController;
 use App\Http\Controllers\Admin\BonTravailController as AdminBonTravailController;
-use App\Http\Controllers\Admin\PieceController as AdminPieceController;
+use App\Http\Controllers\Admin\DemandeInterventionController as AdminDemandeInterventionController;
 use App\Http\Controllers\Admin\EquipementController as AdminEquipementController;
 use App\Http\Controllers\Admin\ForfaitContratController as AdminForfaitContratController;
+use App\Http\Controllers\Admin\MonthlyReportController;
+use App\Http\Controllers\Admin\PieceController as AdminPieceController;
+use App\Http\Controllers\Admin\PrestataireController as AdminPrestataireController;
+use App\Http\Controllers\Admin\SiteController as AdminSiteController;
+use App\Http\Controllers\Admin\UtilisateurController as AdminUtilisateurController;
+use App\Http\Controllers\Admin\ZoneController as AdminZoneController;
+use App\Http\Controllers\AppController;
 
 
-use App\Http\Controllers\Demandeur\SiteController as DemandeurSiteController;
 use App\Http\Controllers\Demandeur\DemandeInterventionController as DemandeurDemandeInterventionController;
+use App\Http\Controllers\Demandeur\SiteController as DemandeurSiteController;
 
 
 
@@ -22,6 +22,8 @@ use App\Http\Controllers\Prestataire\DemandeInterventionController as Prestatair
 use App\Http\Controllers\Prestataire\RapportConstatController as PrestataireRapportConstatController;
 use App\Http\Controllers\Prestataire\RapportRemplacementPieceController as PrestataireRapportRemplacementPieceController;
 use App\Http\Controllers\Prestataire\UtilisateurController as PrestataireUtilisateurController;
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -108,6 +110,10 @@ Route::middleware([
     Route::get('forfaits', [AdminForfaitContratController::class, 'index'])->name('forfaits.index');
     Route::put('forfaits/{id}/validate', [AdminForfaitContratController::class, 'validateForfait'])->name('forfaits.validate');
     Route::get('forfaits/{year}/{month}', [AdminForfaitContratController::class, 'getForfaitsByMonth'])->name('forfaits.byMonth');
+
+    Route::get('rapport-mensuel', [MonthlyReportController::class, 'index'])->name('reports.index');
+    Route::put('rapport-mensuel/{id}/validate', [MonthlyReportController::class, 'validateReport'])->name('reports.validate');
+    Route::get('rapport-mensuel/{monthlyReport}', [MonthlyReportController::class, 'show'])->name('reports.show');
 });
 
 

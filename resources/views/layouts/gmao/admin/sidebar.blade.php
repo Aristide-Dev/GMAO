@@ -72,6 +72,14 @@
         </a>
     </x-gmao.nav-link>
 
+    {{-- Rapport mensuel --}}
+    <x-gmao.nav-link :active="request()->routeIs('admin.reports.*')">
+        <a href="{{ route('admin.reports.index') }}" class="menu-link">
+            <i class="menu-icon fa-solid fa-gear"></i>
+            <div data-i18n="Rapport mensuel">Rapport mensuel</div>
+        </a>
+    </x-gmao.nav-link>
+
     {{-- pieces --}}
     {{-- <x-gmao.nav-link :active="request()->routeIs('admin.pieces.*')">
         <a href="{{ route('admin.pieces.index') }}" class="menu-link">
