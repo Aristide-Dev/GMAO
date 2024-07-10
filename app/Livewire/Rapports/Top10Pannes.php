@@ -4,13 +4,15 @@ namespace App\Livewire\Rapports;
 
 use App\Enums\StatusEnum;
 use App\Models\DemandeIntervention;
+use App\Models\MonthlyReport;
 use App\Models\Site;
 use Asantibanez\LivewireCharts\Facades\LivewireCharts;
-use Livewire\Component;
 use Carbon\Carbon;
+use Livewire\Component;
 
 class Top10Pannes extends Component
 {
+    public MonthlyReport $monthlyReport;
     public $topSites = [];
     public $total_demande = 0;
     public $firstRun = true;
@@ -23,11 +25,12 @@ class Top10Pannes extends Component
         'onColumnClick' => 'handleOnColumnClick',
     ];
 
-    public function mount()
+    public function mount(MonthlyReport $monthlyReport)
     {
         // Initialiser les filtres avec l'année et le mois en cours
-        $this->year_filter = date('Y');
-        $this->month_filter = date('n');
+        $this->monthlyReport = $monthlyReport;
+        $this->year_filter = $this->monthlyReport->year;
+        $this->month_filter = $this->monthlyReport->month;
 
         // Charger les données initiales
         $this->loadData();

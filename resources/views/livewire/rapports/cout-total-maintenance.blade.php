@@ -1,34 +1,6 @@
 <div>
     <div class="px-2 row">
-        <x-stat-header title="Coût total de la maintenance par site" color="red">
-            <div class="row">
-                <div class="col-4">
-                    <label for="evolution_des_requetes_registre_filter">Registre</label>
-                    <select name="evolution_des_requetes_registre_filter" id="evolution_des_requetes_registre_filter" class="form-control" wire:model.live="registre_filter">
-                        <option value="">Tous les sites</option>
-                        @foreach (['b2b', 'contrat', 'depot', 'autre'] as $index => $registre)
-                            <option value="{{ $registre }}">{{ $registre ?? '*' }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="col-4">
-                    <label for="evolution_des_requetes_year_filter">Année</label>
-                    <select name="evolution_des_requetes_year_filter" id="evolution_des_requetes_year_filter" class="form-control" wire:model.live="year_filter">
-                        @for ($year = 2024; $year <= 2032; $year++)
-                            <option value="{{ $year }}">{{ $year }}</option>
-                        @endfor
-                    </select>
-                </div>
-                <div class="col-4">
-                    <label for="evolution_des_requetes_month_filter">Mois</label>
-                    <select name="evolution_des_requetes_month_filter" id="evolution_des_requetes_month_filter" class="form-control" wire:model.live="month_filter">
-                        @foreach (['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'] as $index => $month)
-                            <option value="{{ $index + 1 }}" @if($index + 1 == date('n')) selected @endif>{{ $month }}</option>
-                        @endforeach
-                    </select>
-                </div>
-            </div>
-        </x-stat-header>
+        <x-stat-header title="Coût total de la maintenance par site du mois de {{ $monthlyReport->title }}" color="{{ !$monthlyReport->validated ? 'red':'green' }}"  :unique="true"/>
 
         <div class="p-0 my-3 bg-white col-md-5">
             <div class="flex flex-col rounded shadow-sm">
@@ -36,7 +8,7 @@
                     <div class="inline-block min-w-full p-0 align-middle">
                         <div class="p-0 overflow-hidden">
                             <table class="min-w-full divide-y divide-gray-200">
-                                <thead class="bg-blue-200">
+                                <thead class="bg-{{ !$monthlyReport->validated ? 'red':'green' }}-200">
                                     <tr>
                                         <th scope="col" class="py-2 text-xs font-bold text-gray-900 uppercase text-start">
                                             Site
@@ -72,7 +44,7 @@
                                     @endforeach
                                 </tbody>
                                 <tfoot>
-                                    <tr class="bg-blue-200">
+                                    <tr class="bg-{{ !$monthlyReport->validated ? 'red':'green' }}-200">
                                         <td class="font-bold text-black text-md whitespace-nowrap">TOTAL</td>
                                         <td class="text-sm font-bold text-black whitespace-nowrap">{{ number_format($total_forfait_contrat, 0,'',' ') }} F</td>
                                         <td class="text-sm font-bold text-black whitespace-nowrap">{{ number_format($total_cout_maintenance, 0,'',' ') }} F</td>

@@ -5,12 +5,14 @@ namespace App\Livewire\Rapports;
 use App\Enums\StatusEnum;
 use App\Models\BonTravail;
 use App\Models\Equipement;
+use App\Models\MonthlyReport;
 use Asantibanez\LivewireCharts\Facades\LivewireCharts;
-use Livewire\Component;
 use Carbon\Carbon;
+use Livewire\Component;
 
 class RequeteByEquipementType extends Component
 {
+    public MonthlyReport $monthlyReport;
     public $requeteByTypes = [];
     public $total_bt = 0;
     public $firstRun = true;
@@ -76,11 +78,12 @@ class RequeteByEquipementType extends Component
         ->all();
     }
 
-    public function mount()
+    public function mount(MonthlyReport $monthlyReport)
     {
         // Initialiser les filtres avec l'année et le mois en cours
-        $this->year_filter = date('Y');
-        $this->month_filter = date('n');
+        $this->monthlyReport = $monthlyReport;
+        $this->year_filter = $this->monthlyReport->year;
+        $this->month_filter = $this->monthlyReport->month;
 
         // Charger les données initiales
         $this->loadData();

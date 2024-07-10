@@ -3,12 +3,14 @@
 namespace App\Livewire\Rapports;
 
 use App\Enums\StatusEnum;
+use App\Models\MonthlyReport;
 use App\Models\Site;
 use Asantibanez\LivewireCharts\Facades\LivewireCharts;
 use Livewire\Component;
 
 class CoutTotalMaintenance extends Component
 {
+    public MonthlyReport $monthlyReport;
     public $requeteBySite = [];
     public $firstRun = true;
     public $showDataLabels = false;
@@ -74,10 +76,11 @@ class CoutTotalMaintenance extends Component
         }
     }
 
-    public function mount()
+    public function mount(MonthlyReport $monthlyReport)
     {
-        $this->year_filter = date('Y');
-        $this->month_filter = date('n');
+        $this->monthlyReport = $monthlyReport;
+        $this->year_filter = $this->monthlyReport->year;
+        $this->month_filter = $this->monthlyReport->month;
         $this->registre_filter = '';
 
         $this->loadData();

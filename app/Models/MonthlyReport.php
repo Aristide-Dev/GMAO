@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -19,6 +20,11 @@ class MonthlyReport extends Model
         'month',
         'validated',
     ];
+
+    public function getTitleAttribute()
+    {
+        return Carbon::parse(Carbon::createFromFormat('m', $this->month))->translatedFormat('F').' '.$this->year;
+    }
 
     public function evolution_requete_report()
     {

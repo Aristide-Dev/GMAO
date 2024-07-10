@@ -27,10 +27,12 @@
                     <td>
                         <div class="flex gap-2">
                             <a href="{{ route('admin.reports.show', $report) }}" class="text-white bg-blue-500 hover:bg-blue-500 btn">Voir +</a>
+                        @if (!$report->validated)
                         <form action="{{ route('admin.reports.validate', $report->id) }}" method="POST">
                             @csrf
-                            <button type="submit" class="btn btn-success">Validate</button>
+                            <button type="submit" class="text-white bg-green-500 btn hover:bg-green-500">Validate</button>
                         </form>
+                        @endif
                         </div>
                     </td>
                 </tr>

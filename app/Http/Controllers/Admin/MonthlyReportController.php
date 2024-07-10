@@ -13,7 +13,8 @@ class MonthlyReportController extends Controller
      */
     public function index()
     {
-        $reports = MonthlyReport::where('validated', false)->get();
+        // $reports = MonthlyReport::where('validated', false)->get();
+        $reports = MonthlyReport::orderby('id', 'desc')->get();
         return view('admin.reports.index', compact('reports'));
     }
 
