@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
@@ -61,6 +62,10 @@ class UtilisateurController extends Controller
      */
     public function show(User $utilisateur)
     {
+        if(Auth::user()->role != 'super_admin' && $utilisateur->role == 'super_admin')
+        {
+            abort(403,'Action non autorisé');
+        }
         return view('admin.utilisateurs.show', compact('utilisateur'));
     }
 
