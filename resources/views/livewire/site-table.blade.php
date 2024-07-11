@@ -53,7 +53,7 @@
                     </td>
                     <td>
                         <span class="fw-bold">
-                            {{ number_format($site->calculateTotalForfaitContrat(), 2, '.', ' ') }} GNF
+                            {{ number_format($site->calculateTotalForfaitContrat(), 2, '.', ' ') }} F
                         </span>
                     </td>
                     <td>

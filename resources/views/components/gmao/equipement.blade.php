@@ -141,7 +141,7 @@ break;
                 <small class="mb-0 fw-bold text-dark">Jan 2024</small>
             </div>
             <small class="pt-1 my-2 badge bg-label-dark w-100 fw-bolder">{{ number_format(rand(50000,5000000), 2, ",", '
-                ') }} GNF</small>
+                ') }} F</small>
         </div>
 
         <div class="col-4">
@@ -152,7 +152,7 @@ break;
                 <small class="mb-0 fw-bold text-dark">Cette Année</small>
             </div>
             <small class="pt-1 my-2 badge bg-label-dark w-100 fw-bolder">{{ number_format(rand(50000,5000000), 2, ",", '
-                ') }} GNF</small>
+                ') }} F</small>
         </div>
 
 
@@ -164,7 +164,7 @@ break;
                 <small class="mb-0 fw-bold text-dark">General</small>
             </div>
             <small class="pt-1 my-2 badge bg-label-dark w-100 fw-bolder">{{ number_format(rand(50000,5000000), 2, ",", '
-                ') }} GNF</small>
+                ') }} F</small>
         </div>
 
     </div>
@@ -263,7 +263,7 @@ break;
                         </div>
                         <small class="pt-1 my-2 badge bg-label-dark w-100 fw-bolder">{{
                             number_format(rand(50000,5000000), 2, ",", '
-                            ') }} GNF</small>
+                            ') }} F</small>
                     </div>
 
                     <div class="col-4">
@@ -275,7 +275,7 @@ break;
                         </div>
                         <small class="pt-1 my-2 badge bg-label-dark w-100 fw-bolder">{{
                             number_format(rand(50000,5000000), 2, ",", '
-                            ') }} GNF</small>
+                            ') }} F</small>
                     </div>
 
 
@@ -288,7 +288,7 @@ break;
                         </div>
                         <small class="pt-1 my-2 badge bg-label-dark w-100 fw-bolder">{{
                             number_format(rand(50000,5000000), 2, ",", '
-                            ') }} GNF</small>
+                            ') }} F</small>
                     </div>
 
                 </div>

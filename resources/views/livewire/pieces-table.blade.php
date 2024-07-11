@@ -46,7 +46,7 @@
                     </td>
                     <td>
                         <span class="fw-bold">
-                            {{ number_format($piece->price, 0, '.', ' ') }} GNF
+                            {{ number_format($piece->price, 0, '.', ' ') }} F
                         </span>
                     </td>
                     <td>
