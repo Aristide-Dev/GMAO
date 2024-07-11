@@ -37,12 +37,12 @@ class Equipement extends Model
     public function getQrCodeAttribute()
     {
 
-        $logo_path = storage_path('app/public/assets/img/logo.png'); // Utilisez storage_path pour le chemin complet
+        // $logo_path = storage_path('app/public/assets/img/logo.png'); // Utilisez storage_path pour le chemin complet
 
-        // Vérifiez si le fichier logo existe
-        if (!file_exists($logo_path)) {
-            throw new \Exception("Le fichier logo n'existe pas à l'emplacement spécifié : " . $logo_path);
-        }
+        // // Vérifiez si le fichier logo existe
+        // if (!file_exists($logo_path)) {
+        //     throw new \Exception("Le fichier logo n'existe pas à l'emplacement spécifié : " . $logo_path);
+        // }
 
         $data = [
             'equipement' => $this->name,
@@ -84,12 +84,12 @@ class Equipement extends Model
     public function qrcode(int $size=50)
     {
 
-        $logo_path = storage_path('app/public/assets/img/logo.png'); // Utilisez storage_path pour le chemin complet
+        // $logo_path = storage_path('app/public/assets/img/logo.png'); // Utilisez storage_path pour le chemin complet
 
-        // Vérifiez si le fichier logo existe
-        if (!file_exists($logo_path)) {
-            throw new \Exception("Le fichier logo n'existe pas à l'emplacement spécifié : " . $logo_path);
-        }
+        // // Vérifiez si le fichier logo existe
+        // if (!file_exists($logo_path)) {
+        //     throw new \Exception("Le fichier logo n'existe pas à l'emplacement spécifié : " . $logo_path);
+        // }
 
         $data = [
             'equipement' => $this->name,
