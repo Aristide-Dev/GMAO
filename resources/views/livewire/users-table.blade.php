@@ -61,6 +61,9 @@ $statuts = [
                     </td>
                     <td>
                         <a class="fw-bold"href="{{ route('admin.utilisateurs.show', $utilisateur) }}">{{ $utilisateur->first_name }} {{ $utilisateur->last_name }}</</a>
+                        @if(Auth::user()->id == $utilisateur->id)
+                        <span class="text-gray-800 bg-blue-200 badge">vous</span>
+                        @endif
                     </td>
                     <td class="text-left">
                         {{ $utilisateur->email }}
