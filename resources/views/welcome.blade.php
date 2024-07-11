@@ -22,6 +22,8 @@
         <div class="h-screen pb-10 bg-gradient-to-b from-blue-600 via-blue-400">
             <div class="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 py-24 space-y-8">
                 <!-- Announcement Banner -->
+        
+                @include('layouts.alert_message')
                 <div class="flex justify-center">
                     @auth
                         <a href="{{ url('/dashboard') }}"

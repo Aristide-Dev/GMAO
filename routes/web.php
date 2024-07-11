@@ -39,7 +39,7 @@ Route::get("/init", [AppController::class, 'init'])->name('app.init');
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 
 Route::middleware([

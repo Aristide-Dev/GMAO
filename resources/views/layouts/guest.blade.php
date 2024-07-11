@@ -20,6 +20,7 @@
     </head>
     <body>
         <div class="font-sans antialiased text-gray-900">
+            @include('layouts.alert_message')
             {{ $slot }}
         </div>
 

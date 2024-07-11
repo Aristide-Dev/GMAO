@@ -25,7 +25,13 @@ class AppController extends Controller
 
     public function init()
     {
+        $count_user = User::count();
+        if($count_user > 0)
+        {
+            return redirect(route('welcome'))->with('error','You can not do this action');
+        }
         $super_user = $this->create_super_user();
+        return redirect(route('login'))->with('success','super admin created succefully');
 
         // $super_Admin_team = $this->createTeam($super_user, 'Super Admin');
         // $maintenance_team = $this->createTeam($super_user, 'Service Maintenace');
@@ -213,30 +219,35 @@ class AppController extends Controller
         };
     }
 
-    private function create_super_user($first_name="Aristide", $last_name="GNIMASSOU", $email="aristide@yelema.tech", $telephone="620407236", $password="@BTd^yriL.38zik", $first_login=true)
+    private function create_super_user($first_name="Aristide", $last_name="GNIMASSOU", $email="aristechdev@gmail.com", $telephone="620407236", String $password="P@ssword2024", $first_login=true, $status=1)
     {
+        
         $data = [
             'first_name' => $first_name,
             'last_name' => $last_name,
             'name' => "ArisTech",
             'email' => $email,
             'telephone' => $telephone,
-            'password' => $password,
+            'password' => Hash::make($password),
             'first_login' => $first_login,
+            'status' => 1,
+            'role' => "super_admin",
         ];
-        return DB::transaction(function () use ($data) {
-            $user = User::create([
-                'first_name' => $data['first_name'],
-                'last_name' => $data['last_name'],
-                'name' => $data['name'],
-                'email' => $data['email'],
-                'telephone' => $data['telephone'],
-                'password' => Hash::make($data['password']),
-                'first_login' => true,
-                'role' => "super_admin",
-            ]);
-            return $user;
-        });
+        $user = User::create($data);
+        return $user;
+        // return DB::transaction(function () use ($data) {
+        //     $user = User::create([
+        //         'first_name' => $data['first_name'],
+        //         'last_name' => $data['last_name'],
+        //         'name' => $data['name'],
+        //         'email' => $data['email'],
+        //         'telephone' => $data['telephone'],
+        //         'password' => Hash::make($data['password']),
+        //         'first_login' => true,
+        //         'role' => "super_admin",
+        //     ]);
+        //     return $user;
+        // });
     }
 
     /**
