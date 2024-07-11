@@ -60,7 +60,7 @@ class Equipement extends Model
                     ->color(255, 0, 0)
                     ->gradient($from[0], $from[1], $from[2], $to[0], $to[1], $to[2], 'diagonal')
                     ->margin(1)
-                    ->merge('/storage/app/public/assets/img/logo.png',.3)
+                    // ->merge('/storage/app/public/assets/img/logo.png',.3)
                     ->generate($data);
     }
 
