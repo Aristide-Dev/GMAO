@@ -36,7 +36,7 @@ break;
 switch ($equipement->categorie) {
 case 'distributeur':
 $selected_icon = '<i class="fa-solid fa-gas-pump fa-lg" style="color: #74C0FC;"></i>';
-$bg_image = Storage::url('assets/img/illustrations/distributtteur.jpg');
+$bg_image = asset('storage/assets/img/illustrations/distributtteur.jpg');
 break;
 case 'stockage-et-tuyauterie':
 $selected_icon = '<i class="fa-solid fa-database fa-lg" style="color: #c0c0c0;"></i>';
@@ -54,7 +54,7 @@ break;
 case 'branding':
 $selected_icon = '<i class="fa-solid fa-ranking-star fa-lg" style="color: #FFD43B;"></i>';
 // $bg_image = "https://img.freepik.com/premium-psd/3d-branding-icon_453897-1213.jpg?w=740";
-$bg_image = Storage::url("assets/img/illustrations/3d-branding-icon.avif");
+$bg_image = asset("storage/assets/img/illustrations/3d-branding-icon.avif");
 break;
 case 'groupe-electrogene':
 $selected_icon = '<i class="fa-solid fa-charging-station fa-lg" style="color: #ffff00;"></i>';
@@ -65,7 +65,7 @@ case 'electricite':
 $selected_icon = '<i class="fa-solid fa-bolt fa-lg" style="color: #ffff00;"></i>';
 // $bg_image =
 "https://img.freepik.com/free-vector/electric-cables-lightning-realistic-composition_1284-26544.jpg?t=st=1717978679~exp=1717982279~hmac=2ea8b00a2926343af275745bd36508149e270de7eec2cd0eefef8999f5ab8e59&w=740";
-$bg_image = Storage::url("assets/img/illustrations/electricite.jpg");
+$bg_image = asset("storage/assets/img/illustrations/electricite.jpg");
 break;
 case 'equipement-incendie':
 $selected_icon = '<i class="fa-solid fa-fire-extinguisher fa-lg" style="color: #ff0000;"></i>';
