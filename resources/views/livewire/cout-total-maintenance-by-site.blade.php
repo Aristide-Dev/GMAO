@@ -1,10 +1,10 @@
 <div>
     <div class="px-2 row">
         <x-stat-header title="Coût total de la maintenance par site" >
-            <div class="row">
+            <div class="p-3 row">
                 <div class="col-4">
                     <label for="evolution_des_requetes_registre_filter">Registre</label>
-                    <select name="evolution_des_requetes_registre_filter" id="evolution_des_requetes_registre_filter" class="form-control" wire:model.live="registre_filter">
+                    <select name="evolution_des_requetes_registre_filter" id="evolution_des_requetes_registre_filter" class="form-control form-control-sm" wire:model.live="registre_filter">
                         <option value="">Tous les sites</option>
                         @foreach (['b2b', 'contrat', 'depot', 'autre'] as $index => $registre)
                             <option value="{{ $registre }}">{{ $registre ?? '*' }}</option>
@@ -13,7 +13,7 @@
                 </div>
                 <div class="col-4">
                     <label for="evolution_des_requetes_year_filter">Année</label>
-                    <select name="evolution_des_requetes_year_filter" id="evolution_des_requetes_year_filter" class="form-control" wire:model.live="year_filter">
+                    <select name="evolution_des_requetes_year_filter" id="evolution_des_requetes_year_filter" class="form-control form-control-sm" wire:model.live="year_filter">
                         @for ($year = 2024; $year <= 2032; $year++)
                             <option value="{{ $year }}">{{ $year }}</option>
                         @endfor
@@ -21,7 +21,7 @@
                 </div>
                 <div class="col-4">
                     <label for="evolution_des_requetes_month_filter">Mois</label>
-                    <select name="evolution_des_requetes_month_filter" id="evolution_des_requetes_month_filter" class="form-control" wire:model.live="month_filter">
+                    <select name="evolution_des_requetes_month_filter" id="evolution_des_requetes_month_filter" class="form-control form-control-sm" wire:model.live="month_filter">
                         @foreach (['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'] as $index => $month)
                             <option value="{{ $index + 1 }}" @if($index + 1 == date('n')) selected @endif>{{ $month }}</option>
                         @endforeach

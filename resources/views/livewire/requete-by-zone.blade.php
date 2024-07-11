@@ -3,14 +3,14 @@
         <x-stat-header title="Nombre de requête par Zone" >
             <div class="row">
                 <div class="col-4">
-                    <select name="evolution_des_requetes_year_filter" id="evolution_des_requetes_year_filter" class="form-control" wire:model.live="year_filter">
+                    <select name="evolution_des_requetes_year_filter" id="evolution_des_requetes_year_filter" class="form-control form-control-sm" wire:model.live="year_filter">
                         @for ($year = 2024; $year <= 2032; $year++)
                             <option value="{{ $year }}">{{ $year }}</option>
                         @endfor
                     </select>
                 </div>
                 <div class="col-4">
-                    <select name="evolution_des_requetes_month_filter" id="evolution_des_requetes_month_filter" class="form-control" wire:model.live="month_filter">
+                    <select name="evolution_des_requetes_month_filter" id="evolution_des_requetes_month_filter" class="form-control form-control-sm" wire:model.live="month_filter">
                         @foreach (['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'] as $index => $month)
                             <option value="{{ $index + 1 }}" @if($index + 1 == date('n')) selected @endif>{{ $month }}</option>
                         @endforeach
