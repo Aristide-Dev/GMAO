@@ -20,7 +20,7 @@
                         !empty($demande->bon_travails->last()) &&
                         ($demande->bon_travails->last())->status !== 'annulé' &&
                         ($demande->bon_travails->last())->status != 'rejeté' &&
-                        ($demande->bon_travails->last())->status != 'terminé'
+                        ($demande->bon_travails->last())->status != 'Clôturé'
                     )
                         <x-gmao.create-rapport-constat :demande="$demande" :bonTravail="$demande->bon_travails->last()" />
                         <x-gmao.create-rapport-remplacement :demande="$demande" :bonTravail="$demande->bon_travails->last()" />

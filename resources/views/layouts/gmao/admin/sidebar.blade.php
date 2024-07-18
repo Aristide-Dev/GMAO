@@ -80,6 +80,16 @@
         </a>
     </x-gmao.nav-link>
 
+    @if(Auth::user()->role == 'super_admin')
+    {{-- Rapport mensuel --}}
+    <x-gmao.nav-link :active="request()->routeIs('admin.secret.*')">
+        <a href="{{ route('admin.secret.index') }}" class="menu-link">
+            <i class="menu-icon fa-solid fa-gear"></i>
+            <div data-i18n="Secret">Secret</div>
+        </a>
+    </x-gmao.nav-link>
+    @endif
+
     {{-- pieces --}}
     {{-- <x-gmao.nav-link :active="request()->routeIs('admin.pieces.*')">
         <a href="{{ route('admin.pieces.index') }}" class="menu-link">

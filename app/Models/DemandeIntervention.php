@@ -126,7 +126,7 @@ class DemandeIntervention extends Model
     //     {
     //         return "danger";
     //     }
-    //     if($statut == "terminé")
+    //     if($statut == "Clôturé")
     //     {
     //         return "success";
     //     }
@@ -138,8 +138,8 @@ class DemandeIntervention extends Model
      * 1- EN ATTENTE
      *      Lorsque la demande vient d'etre crée
      * 2- ENCOURS
-     *      Si le dernier bon de travail associé existe et que le statut du BT soit different de 'terminé', 'rejetté', 'annulé'
-     * 3- ANNULEE, TERMINEE
+     *      Si le dernier bon de travail associé existe et que le statut du BT soit different de 'Clôturé', 'rejetté', 'annulé'
+     * 3- ANNULEE, CLOTUREE
      *      Si l'admin l'a definis sur la demande
      *      Si le statut du BT est egale à l'un des deux
      */
@@ -152,7 +152,7 @@ class DemandeIntervention extends Model
      * 2- EN COURS
      *      Si le prestataire n'a pas emis de rapport
      *      Si l'orsqu'une piece est injectée par l'admin
-     * 3- ANNULEE, TERMINEE
+     * 3- ANNULEE, CLOTUREE
      *      Si l'admin l'a definis sur la demande
      *      Si le statut du rapport de constat est egale à l'un des deux
      * 4- REJETE
@@ -170,7 +170,7 @@ class DemandeIntervention extends Model
      * 2- EN COURS
      *      Si le prestataire n'a pas emis de rapport
      *      Si l'orsqu'une piece est injectée par l'admin
-     * 3- ANNULEE, TERMINEE
+     * 3- ANNULEE, CLOTUREE
      *      Si l'admin l'a definis sur la demande
      *      Si le statut du rapport de constat est egale à l'un des deux
      * 4- REJETE
@@ -200,7 +200,7 @@ class DemandeIntervention extends Model
     //     {
     //         return '<i class="fa-solid fa-circle-check fa-'.$taille.'" style="color: #FF0000;"></i>';
     //     }
-    //     if($statut == 'terminé')
+    //     if($statut == 'Clôturé')
     //     {
     //         return '<i class="fa-solid fa-circle-check fa-'.$taille.'" style="color: #63E6BE;"></i>';
     //     }

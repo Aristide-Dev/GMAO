@@ -105,7 +105,7 @@
             <div class="mb-3">
                 <label class="m-0 text-gray-500 h6 text-uppercase" for="status">statut</label>
                 <select id="status" name="status" class="select2 form-select form-select-lg" data-allow-clear="true" data-placeholder="--CHOISIR--">
-                    <option value="terminé">terminé / (reparé)</option>
+                    <option value="Clôturé">Clôturé / (reparé)</option>
                     <option value="en attente">En Attente de validation</option>
                     <option value="rejeté">rejeté</option>
                 </select>

@@ -36,7 +36,7 @@ class RapportConstatController extends Controller
     {
         $request->validateWithBag('create_rapport_constat', [
             'rapport_constat_file' => 'required|image|extensions:jpeg,jpg,png|max:2000',
-            'status' => 'required|string|in:terminé,en attente,annulé,rejeté',
+            'status' => 'required|string|in:Clôturé,en attente,annulé,rejeté',
             'date_intervention' => [
                 'required',
                 'date',
@@ -73,8 +73,8 @@ class RapportConstatController extends Controller
         ]);
     
         switch ($request->status) {
-            case 'terminé':
-                $request->status = StatusEnum::TERMINE;
+            case 'Clôturé':
+                $request->status = StatusEnum::CLOTURE;
                 break;
             case 'en attente':
                 $request->status = StatusEnum::EN_ATTENTE;
@@ -87,7 +87,7 @@ class RapportConstatController extends Controller
                 break;
         }
     
-        if($request->status == StatusEnum::TERMINE)
+        if($request->status == StatusEnum::CLOTURE)
         {
             $bonTravail->status = StatusEnum::CLOTURE;
             $bonTravail->save();

@@ -40,7 +40,7 @@
             'value' => number_format(rand(500000,15000000), 2, '.', " "),
         ],
         [
-            'statut' => 'terminé',
+            'statut' => 'Clôturé',
             'color' => 'success',
             'signe' => '+',
             'other-color' => 'success',

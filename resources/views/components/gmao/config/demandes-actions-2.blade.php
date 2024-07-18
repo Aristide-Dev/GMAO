@@ -24,7 +24,7 @@
         if(
         ($demande->bon_travails->last())->status != 'annulé' ||
         ($demande->bon_travails->last())->status != 'rejeté' ||
-        ($demande->bon_travails->last())->status != 'terminé')
+        ($demande->bon_travails->last())->status != 'Clôturé')
         {
             $btn_cloture_disabled = "";
         }
