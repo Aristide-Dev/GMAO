@@ -17,7 +17,7 @@
         <div class="mb-4 col-md-12 h-72">
             <div class="bg-center bg-no-repeat bg-cover border shadow shadow-red-500 size-full" style="background-image: url('{{ Storage::url("assets/img/sog/".$userImageIllustration[rand(0,1)]) }}');">
                 <div class="h-full mx-auto rounded-lg row">
-                    <div class="h-full mb-3 rounded-lg col-12">
+                    <div class="h-full mb-3 rounded-lg col-12 h-72">
                         <div class="pb-3 mb-3 card-body text-start ps-sm-0">
                             <!-- Contenu de la carte ici -->
                         </div>
