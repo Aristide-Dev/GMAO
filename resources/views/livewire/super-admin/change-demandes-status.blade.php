@@ -1,4 +1,5 @@
-<div class="w-full my-3 bg-white rounded shadow">
+<div class="w-full p-3 mx-3 my-3 bg-white rounded shadow">
+ demandes_need_change: {{ count($demandes_need_change) }}
     @if (count($demandes_need_change) > 0)
     <div class="flex items-center p-4 mb-4 text-sm text-red-800 bg-red-300 rounded-lg " role="alert">
         <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
