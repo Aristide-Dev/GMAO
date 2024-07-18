@@ -13,7 +13,7 @@
                     <div class="col-sm-9">
                         <div class="input-group input-group-merge">
                             <span id="basic-icon-default-fullname2" class="input-group-text"><i class="ti ti-user"></i></span>
-                            <input type="text" name="name" class="form-control" id="basic-icon-default-fullname" placeholder="Star Oil Guinée" aria-label="Star Oil Guinée" aria-describedby="basic-icon-default-fullname2" value="{{ old('name') }}"/>
+                            <input type="text" name="name" class="form-control" id="basic-icon-default-fullname" placeholder="Star Oil Guinée" aria-label="Star Oil Guinée" aria-describedby="basic-icon-default-fullname2" value="{{ old('name') }}" />
                         </div>
                         <x-input-error bag="create_prestataire" for="name" class="mt-2" />
                     </div>
@@ -24,7 +24,7 @@
                     <div class="col-sm-9">
                         <div class="input-group input-group-merge">
                             <span id="basic-icon-default-fullname2" class="input-group-text"><i class="ti ti-user"></i></span>
-                            <input type="text" name="slug" class="form-control" id="basic-icon-default-fullname_" placeholder="SOG" aria-label="SOG" aria-describedby="basic-icon-default-fullname"  value="{{ old('slug') }}"/>
+                            <input type="text" name="slug" class="form-control" id="basic-icon-default-fullname_" placeholder="SOG" aria-label="SOG" aria-describedby="basic-icon-default-fullname" value="{{ old('slug') }}" />
                         </div>
                         <x-input-error bag="create_prestataire" for="slug" class="mt-2" />
                     </div>
@@ -35,7 +35,7 @@
                     <div class="col-sm-9">
                         <div class="input-group input-group-merge">
                             <span class="input-group-text"><i class="ti ti-mail"></i></span>
-                            <input type="text" name="email" id="basic-icon-default-email" class="form-control" placeholder="adresse Email" aria-label="adresse Email" aria-describedby="basic-icon-default-email2"  value="{{ old('email') }}"/>
+                            <input type="text" name="email" id="basic-icon-default-email" class="form-control" placeholder="adresse Email" aria-label="adresse Email" aria-describedby="basic-icon-default-email2" value="{{ old('email') }}" />
                         </div>
                         <x-input-error bag="create_prestataire" for="email" class="mt-2" />
                     </div>
@@ -46,7 +46,7 @@
                     <div class="col-sm-9">
                         <div class="input-group input-group-merge">
                             <span id="basic-icon-default-phone2" class="input-group-text"><i class="ti ti-phone"></i></span>
-                            <input type="text" name="telephone" id="basic-icon-default-phone" class="form-control phone-mask" placeholder="658 799 8941" aria-label="658 799 8941" aria-describedby="basic-icon-default-phone2"  value="{{ old('telephone') }}"/>
+                            <input type="text" name="telephone" id="basic-icon-default-phone" class="form-control phone-mask" placeholder="658 799 8941" aria-label="658 799 8941" aria-describedby="basic-icon-default-phone2" value="{{ old('telephone') }}" />
                         </div>
                         <x-input-error bag="create_prestataire" for="telephone" class="mt-2" />
                     </div>
@@ -57,7 +57,7 @@
                     <div class="col-sm-9">
                         <div class="input-group input-group-merge">
                             <span id="basic-icon-default-adresse2" class="input-group-text"><i class="ti ti-building"></i></span>
-                            <input type="text" name="adresse" id="basic-icon-default-adresse" class="form-control phone-mask" placeholder="Conakry/Ratoma" aria-label="Conakry/Ratoma" aria-describedby="basic-icon-default-adresse2"  value="{{ old('adresse') }}"/>
+                            <input type="text" name="adresse" id="basic-icon-default-adresse" class="form-control phone-mask" placeholder="Conakry/Ratoma" aria-label="Conakry/Ratoma" aria-describedby="basic-icon-default-adresse2" value="{{ old('adresse') }}" />
                         </div>
                         <x-input-error bag="create_prestataire" for="adresse" class="mt-2" />
                     </div>
@@ -74,4 +74,4 @@
         </div>
     </div>
 </div>
-</div>
+

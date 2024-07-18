@@ -86,7 +86,7 @@
                                 <i class="fa-solid fa-ellipsis ti-sm" style="color: #C0C0C0;"></i>
                                 KPI
                             </p>
-                            <p class="mb-1 text-end">{{ $rapport_intervention->kpi ?'Dans les delais':'Hors delais' }}</p>
+                            <p class="mb-1 text-end">{{ ($rapport_intervention->kpi != null)?$rapport_intervention->kpi ?'Dans les delais':'Hors delais':'---' }}</p>
                         </div>
                     </div>
                 </div>

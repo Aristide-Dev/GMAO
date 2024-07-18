@@ -50,7 +50,7 @@
                 </td>
                 <td class="text-left">
                     <div class="avatar avatar-md me-2">
-                        <img src="{{ $demande->document() }}" alt="document" class="rounded-circle" id="doc_image_url{{ $key+1 }}" onclick="displayImageInModal('doc_image_url{{ $key+1 }}')">
+                        <img src="{{ asset($demande->document()) }}" alt="document" class="rounded-circle" id="doc_image_url{{ $key+1 }}" onclick="displayImageInModal('doc_image_url{{ $key+1 }}')">
                     </div>
                 </td>
                 <td class="justify-center align-items-center">
@@ -121,7 +121,7 @@
             <span class="badge me-1" style="background-color: {{ $demande->statutColor() }}">{{ $demande->status }}</span>
         </div>
 
-        <img class="mx-auto my-4 rounded img-fluid d-flex" src="{{ $demande->document() }}" alt="Docuement" id="doc_image_id_for_mobile{{ $key+1 }}" onclick="displayImageInModal('doc_image_id_for_mobile{{ $key+1 }}')"/>
+        <img class="mx-auto my-4 rounded img-fluid d-flex" src="{{ asset($demande->document()) }}" alt="Docuement" id="doc_image_id_for_mobile{{ $key+1 }}" onclick="displayImageInModal('doc_image_id_for_mobile{{ $key+1 }}')"/>
 
         <a href="{{ route($url.'.demandes.show', $demande) }}" class="card-link btn btn-primary">Suivis</a>
     </div>
