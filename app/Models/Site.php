@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\EquipementEnum;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -169,5 +170,15 @@ class Site extends Model
         }
 
         return $totalCost;
+    }
+
+    public function categorieEquipementColor($categorie)
+    {
+        return EquipementEnum::getColor($categorie);
+    }
+
+    public function categorieEquipementText($categorie)
+    {
+        return EquipementEnum::getText($categorie);
     }
 }
