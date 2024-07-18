@@ -31,7 +31,7 @@
             <div class="mb-3">
                 <label class="m-0 text-white h6 text-uppercase" for="r_cloture_status">statut</label>
                 <select id="r_cloture_status" name="status" class="select2 form-select form-select-lg" data-allow-clear="true" data-placeholder="--CHOISIR--">
-                    <option value="Clôturé">Clôturé / (reparé)</option>
+                    <option value="terminé">terminé / (reparé)</option>
                     <option value="annulé">annulé</option>
                 </select>
                 <x-input-error bag="create_cloture_rapport" for="status" class="mt-2" />

@@ -9,8 +9,9 @@ enum StatusEnum: string {
     case EN_ATTENTE = 'en attente';
     case EN_COURS = 'en cours';
     case ANNULE = 'annulé';
-    case CLOTURE = 'Clôturé';
+    case TERMINE = 'terminé';
     case REJETE = 'rejeté';
+    case CLOTURE = 'cloturé';
     case INJECTION_PIECE = 'injection de pièce';
     case PAS_TRAITE = 'pas traité';
 
@@ -28,8 +29,8 @@ enum StatusEnum: string {
             self::ANNULE => '#991B1B', // Rouge
             'annulé' => '#991B1B', // Rouge
 
-            self::CLOTURE => '#166534', // Vert
-            'Clôturé' => '#166534', // Vert
+            self::TERMINE => '#166534', // Vert
+            'terminé' => '#166534', // Vert
 
             self::CLOTURE => '#22C55E', // Vert
             'cloturé' => '#22C55E', // Vert
