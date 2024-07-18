@@ -28,11 +28,7 @@ class DemandesTable extends Component
 
     private function getDemandeursortField()
     {
-        if($this->sortField == 'demandeur.name')
-        {
-            return 'created_at';
-        }
-        return $this->sortField;
+        return $this->sortField == 'demandeur.name' ? 'created_at' : $this->sortField;
     }
 
     public function sortBy($field)
@@ -50,12 +46,12 @@ class DemandesTable extends Component
         $query = DemandeIntervention::query();
 
         if ($this->action == 'demandeur') {
-            $query->where("demandeur_id", $demandeur_id);
+            $query->where("demandeur_id", Auth::id());
         }
 
         $query->where(function($query) {
             $query->where('di_reference', 'like', '%' . $this->search . '%')
-                  ->orWhere('demande_interventions.created_at', 'like', '%' . $this->search . '%')
+                  ->orWhere('created_at', 'like', '%' . $this->search . '%')
                   ->orWhereHas('site', function($query) {
                       $query->where('name', 'like', '%' . $this->search . '%');
                   })
@@ -71,7 +67,7 @@ class DemandesTable extends Component
                   ->orderBy($this->sortField == 'site.name' ? 'sites.name' : ($this->sortField == 'demandeur.first_name' ? 'users.first_name' : 'users.last_name'), $this->sortDirection)
                   ->select('demande_interventions.*');
         } else {
-            $query->orderBy('demande_interventions.' . $this->getDemandeursortField(), $this->sortDirection);
+            $query->orderBy($this->getDemandeursortField(), $this->sortDirection);
         }
 
         return $query;
@@ -110,7 +106,6 @@ class DemandesTable extends Component
             $equipement = $bonTravail ? $bonTravail->equipement : null;
             $prestataire = $bonTravail ? $bonTravail->prestataire : null;
             $rapportIntervention = $bonTravail ? $bonTravail->rapportIntervention : null;
-            // dd($rapportIntervention);
 
             return [
                 'Reference' => $demande->di_reference,
@@ -120,19 +115,17 @@ class DemandesTable extends Component
                 'Nom et Réference équipement' => $equipement ? $equipement->name . " _ " . $equipement->numero_serie : '',
                 'Prestataire' => $prestataire ? $prestataire->name : '',
                 'Status' => $demande->status,
-                'Heure d\'emission BT' => $bonTravail ? $bonTravail->created_at->format('Y-m-d H:i:s') : '',
-                'Heure d\'intervention Prestataire' => $rapportIntervention ? $rapportIntervention->created_at->format('Y-m-d H:i:s') : '',
+                'Heure d\'emission BT' => $bonTravail ? $bonTravail->created_at->format('Y-m-d à H:i:s') : '',
+                'Heure d\'intervention Prestataire' => $rapportIntervention ? $rapportIntervention->created_at->format('Y-m-d à H:i:s') : '',
             ];
         });
 
-        return Excel::download(new ExportExcel($formattedDemandes), 'demandes.xlsx');
+        return Excel::download(new ExportExcel($formattedDemandes), 'liste_demandes_' . now()->format('Y_m_d_H_i_s') . '.xlsx');
     }
-
-
 
     public function exportPDF()
     {
-        $demandes = $this->getDemandes()->get();
+        $demandes = $this->getDemandes()->with(['demandeur', 'site', 'bon_travails.equipement', 'bon_travails.prestataire', 'bon_travails.rapportIntervention'])->get();
         return (new ExportPDF($demandes))->download();
     }
 }
