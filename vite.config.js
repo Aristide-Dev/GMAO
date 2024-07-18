@@ -59,6 +59,7 @@ export default defineConfig({
                 'resources/assets/js/dashboards-analytics.js',
                 'resources/assets/js/forms-selects.js',
                 'resources/assets/js/ui-modals.js',
+                'resources/assets/js/extended-ui-blockui.js',
 
                 // <!-- AUTRES -->
                 'resources/css/file_viewer.css'

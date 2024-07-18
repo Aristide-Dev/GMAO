@@ -42,16 +42,15 @@
     <link rel="stylesheet" href="/storage/assets/vendor/libs/select2/select2.css" />
     <link rel="stylesheet" href="/storage/assets/vendor/libs/flatpickr/flatpickr.css" />
     <link rel="stylesheet" href="/storage/assets/vendor/libs/dropzone/dropzone.css" /> --}}
-
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="/storage/assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="/storage/assets/vendor/css/rtl/theme-default.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="/storage/assets/css/demo.css" />
     @vite([
         // Icons
         'resources/assets/vendor/fonts/fontawesome.css',
         'resources/assets/vendor/fonts/tabler-icons.css',
         'resources/assets/vendor/fonts/flag-icons.css',
-        // Core CSS
-        'resources/assets/vendor/css/rtl/core.css',
-        'resources/assets/vendor/css/rtl/theme-default.css',
-        'resources/assets/css/demo.css',
         // Vendors CSS
         'resources/assets/vendor/libs/node-waves/node-waves.css',
         'resources/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css',
@@ -82,11 +81,15 @@
 
     {{-- <script src="../../assets/vendor/js/template-customizer.js"></script> --}}
 
+    
+    <!-- Page CSS -->
+    <link rel="stylesheet" href="/storage/assets/vendor/css/pages/cards-advance.css" />
+    <!-- Helpers -->
+    <script src="/storage/assets/vendor/js/helpers.js"></script>
+    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+    <script src="/storage/assets/js/config.js"></script>
+    
     @vite([
-        'resources/assets/vendor/css/pages/cards-advance.css',
-        'resources/assets/vendor/js/helpers.js',
-        'resources/assets/vendor/js/template-customizer.js',
-        'resources/assets/js/config.js',
         'resources/js/app.js',
         'resources/css/app.css',
         'resources/css/main.css',
