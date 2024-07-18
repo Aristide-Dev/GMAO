@@ -44,10 +44,7 @@
                         </td>
                         <td class="text-left">
                             <div class="avatar avatar-md me-2">
-                                @php
-                                    $img_url = Storage::url(str_replace('/storage/', '', $demande->document()));
-                                @endphp
-                            <img src="{{ $img_url }}" alt="document" class="rounded-circle" id="doc_image_url{{ $key + 1 }}" onclick="displayImageInModal('doc_image_url{{ $key + 1 }}')">
+                                <img src="{{ $demande->document() }}" alt="document" class="rounded-circle" id="doc_image_url{{ $key + 1 }}" onclick="displayImageInModal('doc_image_url{{ $key + 1 }}')">
                             </div>
                         </td>
                         <td class="justify-center align-items-center">
