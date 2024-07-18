@@ -103,20 +103,31 @@ class DemandesTable extends Component
 
     public function exportExcel()
     {
-        $demandes = $this->getDemandes()->get()->map(function ($demande) {
+        $demandes = $this->getDemandes()->with(['demandeur', 'site', 'bon_travails.equipement', 'bon_travails.prestataire', 'bon_travails.rapportIntervention'])->get();
+
+        $formattedDemandes = $demandes->map(function ($demande) {
+            $bonTravail = $demande->bon_travails->first();
+            $equipement = $bonTravail ? $bonTravail->equipement : null;
+            $prestataire = $bonTravail ? $bonTravail->prestataire : null;
+            $rapportIntervention = $bonTravail ? $bonTravail->rapportIntervention : null;
+            // dd($rapportIntervention);
+
             return [
-                'ID' => $demande->id,
                 'Reference' => $demande->di_reference,
                 'Demandeur' => $demande->demandeur->first_name . ' ' . $demande->demandeur->last_name,
                 'Site' => $demande->site->name,
+                'Panne declarée' => $bonTravail ? $bonTravail->requete : '',
+                'Nom et Réference équipement' => $equipement ? $equipement->name . " _ " . $equipement->numero_serie : '',
+                'Prestataire' => $prestataire ? $prestataire->name : '',
                 'Status' => $demande->status,
-                'Created At' => $demande->created_at,
-                'Updated At' => $demande->updated_at,
+                'Heure d\'emission BT' => $bonTravail ? $bonTravail->created_at->format('Y-m-d H:i:s') : '',
+                'Heure d\'intervention Prestataire' => $rapportIntervention ? $rapportIntervention->created_at->format('Y-m-d H:i:s') : '',
             ];
         });
-        
-        return Excel::download(new ExportExcel($demandes), 'demandes.xlsx');
+
+        return Excel::download(new ExportExcel($formattedDemandes), 'demandes.xlsx');
     }
+
 
 
     public function exportPDF()

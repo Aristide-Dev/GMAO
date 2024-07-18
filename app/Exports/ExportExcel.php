@@ -22,13 +22,15 @@ class ExportExcel implements FromCollection, WithHeadings
     public function headings(): array
     {
         return [
-            'ID',
             'Reference',
             'Demandeur',
             'Site',
+            'Panne declarée',
+            'Nom et Réference équipement',
+            'Prestataire',
             'Status',
-            'Created At',
-            'Updated At',
+            'Heure d\'emission BT',
+            'Heure d\'intervention Prestataire',
         ];
     }
 }
