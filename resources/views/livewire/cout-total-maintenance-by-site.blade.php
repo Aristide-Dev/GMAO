@@ -30,7 +30,7 @@
             </div>
         </x-stat-header>
 
-        <div class="p-0 my-3 bg-white col-md-5">
+        <div class="p-0 my-3 bg-white col-md-6 pe-1">
             <div class="flex flex-col rounded shadow-sm">
                 <div class="overflow-x-auto">
                     <div class="inline-block min-w-full p-0 align-middle">
@@ -86,8 +86,9 @@
             </div>
         </div>
 
-        <div class="col-md-7">
-            <div class="flex-1 p-4 bg-white border rounded shadow" style="height: 32rem;">
+        <div class="p-0 my-3 bg-white col-md-6 ps-1">
+            <div class="flex-1 h-full p-4 bg-white border rounded shadow">
+                <p>Coût Total de Maintenance par Site</p>
                 <livewire:livewire-column-chart
                     key="{{ $columnChartModel->reactiveKey() }}"
                     :column-chart-model="$columnChartModel"

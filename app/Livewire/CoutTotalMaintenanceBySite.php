@@ -49,8 +49,7 @@ class CoutTotalMaintenanceBySite extends Component
         $startDate = date('Y-m-d', strtotime("$this->year_filter-$this->month_filter-01"));
         $endDate = date('Y-m-d', strtotime("$this->year_filter-$this->month_filter-31 23:59:59"));
 
-        if($this->registre_filter)
-        {
+        if ($this->registre_filter) {
             $this->requeteBySite = Site::where('registre', $this->registre_filter)
                 ->get()
                 ->map(function ($site) use ($startDate, $endDate) {
@@ -101,13 +100,14 @@ class CoutTotalMaintenanceBySite extends Component
     public function render()
     {
         $columnChartModel = LivewireCharts::columnChartModel()
-            ->setTitle('Coût Total de Maintenance par Site')
+            // ->setTitle('Coût Total de Maintenance par Site')
             ->setAnimated($this->firstRun)
-            ->withOnColumnClickEventName('onColumnClick')
+            // ->withOnColumnClickEventName('onColumnClick')
             ->setLegendVisibility(false)
-            ->legendHorizontallyAlignedCenter()
+            ->legendHorizontallyAlignedCenter(true)
             ->setDataLabelsEnabled($this->showDataLabels)
             ->setColumnWidth(20)
+            ->setHorizontal(true) // Set columns to be horizontal
             ->withGrid();
 
         foreach ($this->requeteBySite as $site) {
