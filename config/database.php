@@ -63,6 +63,25 @@ return [
             ]) : [],
         ],
 
+        'mysql_remote' => [
+            'driver' => 'mysql',
+            'host' => env('DB_REMOTE_HOST', '193.203.168.101'),
+            'port' => env('DB_REMOTE_PORT', '3306'),
+            'database' => env('DB_REMOTE_DATABASE', 'u474716291_gngmaintenance'),
+            'username' => env('DB_REMOTE_USERNAME', 'u474716291_gngm_admin'),
+            'password' => env('DB_REMOTE_PASSWORD', 'r[7pCh[/im!R'),
+            'unix_socket' => env('DB_REMOTE_SOCKET', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'strict' => true,
+            'engine' => null,
+            'options' => extension_loaded('pdo_mysql') ? array_filter([
+                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+            ]) : [],
+        ],
+
         'pgsql' => [
             'driver' => 'pgsql',
             'url' => env('DATABASE_URL'),

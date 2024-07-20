@@ -27,8 +27,9 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row p-3">
         <livewire:super-admin.change-demandes-status />
+        <livewire:super-admin.sync-database />
     </div>
 </x-gmao-layout>
 
