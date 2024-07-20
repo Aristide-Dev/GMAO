@@ -248,6 +248,8 @@
         'resources/assets/js/dashboards-analytics.js',
         'resources/assets/js/forms-selects.js',
         'resources/assets/js/ui-modals.js',
+        'resources/assets/js/forms-pickers.js',
+  
     ])
 
 

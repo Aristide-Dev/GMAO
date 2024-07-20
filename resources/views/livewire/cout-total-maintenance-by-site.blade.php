@@ -2,7 +2,7 @@
     <div class="px-2 row">
         <x-stat-header title="Coût total de la maintenance par site" >
             <div class="p-3 row">
-                <div class="col-4">
+                {{-- <div class="col-4">
                     <label for="evolution_des_requetes_registre_filter">Registre</label>
                     <select name="evolution_des_requetes_registre_filter" id="evolution_des_requetes_registre_filter" class="form-control form-control-sm" wire:model.live="registre_filter">
                         <option value="">Tous les sites</option>
@@ -26,9 +26,29 @@
                             <option value="{{ $index + 1 }}" @if($index + 1 == date('n')) selected @endif>{{ $month }}</option>
                         @endforeach
                     </select>
-                </div>
+                </div> --}}
+            <div class="col-4">
+                <label for="evolution_des_requetes_registre_filter">Registre</label>
+                <select name="evolution_des_requetes_registre_filter" id="evolution_des_requetes_registre_filter" class="form-control" wire:model.live="registre_filter">
+                    <option value="">Tous les sites</option>
+                    @foreach (['b2b', 'contrat', 'depot', 'autre'] as $index => $registre)
+                        <option value="{{ $registre }}">{{ $registre ?? '*' }}</option>
+                    @endforeach
+                </select>
+            </div>
+                
+          <!-- Range Picker-->
+          <div class="col-8">            
+            <label for="flatpickr-range">Periode</label>
+            <input type="text" name='periode' class="rounded form-control form-control-sm" placeholder="YYYY-MM-DD au YYYY-MM-DD" id="flatpickr-range" wire:model.live='periode' />
+          </div>
+          <!-- /Range Picker-->
             </div>
         </x-stat-header>
+
+        <div class="col-12">
+            <h1 class="py-2 my-3 text-xl font-bold text-center bg-white rounded shadow">{{ $periode_text }}</h1>
+        </div>
 
         <div class="p-0 my-3 bg-white col-md-6 pe-1">
             <div class="flex flex-col rounded shadow-sm">
@@ -67,7 +87,7 @@
                                         <td class="text-sm font-bold text-gray-500 whitespace-nowrap">{{ $site['name'] }}</td>
                                         <td class="text-sm text-gray-800 whitespace-nowrap">{{ number_format($site['forfait_contrat'], 0,'',' ') }} F</td>
                                         <td class="text-sm text-gray-800 whitespace-nowrap">{{ number_format($site['cout_maintenance'], 0,'',' ') }} F</td>
-                                        <td class="text-sm text-gray-800 whitespace-nowrap">{{ number_format($site['cout_maintenance']+$site['forfait_contrat'], 0,'',' ') }} F</td>
+                                        <td class="text-sm text-gray-800 whitespace-nowrap">{{ number_format($site['total_frais_maintenance'], 0,'',' ') }} F</td>
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -87,8 +107,7 @@
         </div>
 
         <div class="p-0 my-3 bg-white col-md-6 ps-1">
-            <div class="flex-1 h-full p-4 bg-white border rounded shadow">
-                <p>Coût Total de Maintenance par Site</p>
+            <div class="flex p-4 bg-white border rounded shadow h-full min-h-[1000px]" style="height: 100%">
                 <livewire:livewire-column-chart
                     key="{{ $columnChartModel->reactiveKey() }}"
                     :column-chart-model="$columnChartModel"

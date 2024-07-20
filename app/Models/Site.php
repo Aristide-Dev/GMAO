@@ -92,20 +92,22 @@ class Site extends Model
      * @param int $month
      * @return float
      */
-    public function showForfaitContratForPeriod($year, $month)
+    public function showForfaitContratForPeriod($year=null, $month=null)
     {
-        $startDate = Carbon::createFromDate($year, $month, 1)->startOfMonth();
-        $endDate = Carbon::createFromDate($year, $month, 1)->endOfMonth();
+        $startDate = Carbon::createFromDate($year ?? date('Y'), $month??date('n'), 1)->startOfMonth();
+        $endDate = Carbon::createFromDate($year ?? date('Y'), $month??date('n'), 1)->endOfMonth();
 
         $forfaitContrat = ForfaitContrat::where('site_id', $this->id)
             ->whereBetween('created_at', [$startDate, $endDate])
             ->first();
 
+        // dd($forfaitContrat);
+
         if ($forfaitContrat) {
-            return $forfaitContrat->validated ? $forfaitContrat->amount : $this->calculateTotalForfaitContrat();
+            return $forfaitContrat->validated ? $forfaitContrat->amount : 0;
         }
 
-        return $this->calculateTotalForfaitContrat();
+        return 0;
     }
 
     /**
@@ -152,6 +154,7 @@ class Site extends Model
         $startDate = Carbon::parse($startDate)->startOfDay();
         $endDate = Carbon::parse($endDate)->endOfDay();
         $totalCost = 0;
+        
 
         foreach ($this->demande_interventions as $demande) {
             if ($demande->created_at->between($startDate, $endDate)) {
@@ -168,6 +171,7 @@ class Site extends Model
                 }
             }
         }
+
 
         return $totalCost;
     }
