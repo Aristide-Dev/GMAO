@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Enums\StatusEnum;
+use App\Events\CreateBTEvent;
 use App\Http\Controllers\Controller;
 use App\Mail\CreateBTMail;
 use App\Models\BonTravail;
@@ -103,7 +104,8 @@ class BonTravailController extends Controller
         $demande->status = StatusEnum::EN_COURS;
         $demande->save();
 
-        Mail::send(new CreateBTMail($bon_travail, $prestataire));
+        event(new CreateBTEvent($bon_travail, $prestataire));
+        // Mail::send(new CreateBTMail($bon_travail, $prestataire));
 
         return redirect()->back()->with('success', 'Nouveau bon de travail créé avec succès!');
     }

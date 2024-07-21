@@ -16,6 +16,6 @@ NB: Veuillez vous connecter à votre interface pour traiter la demande.
 Button Text
 </x-mail::button> --}}
 
-Merci,<br>
+Cdtm,<br>
 {{ config('app.name') }}
 </x-mail::message>

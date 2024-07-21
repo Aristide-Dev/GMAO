@@ -8,6 +8,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
+use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
@@ -28,6 +29,10 @@ class CreateBTMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
+            // from: new Address('maintenance@staroilgroup.com', 'Star oil Group / G-Maintenance'),
+            replyTo: [
+                new Address('maintenance@staroilgroup.com', 'Star oil Group / G-Maintenance'),
+            ],
             subject: 'Demande d\'intervention - STAR OIL GUINEE',
             // to: $this->prestataire->email,
             to: "aristidegnimassouu@gmail.com",

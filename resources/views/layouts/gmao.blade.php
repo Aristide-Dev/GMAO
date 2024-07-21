@@ -9,9 +9,9 @@
     <link rel="icon" href="{{ asset('favicon.ico') }}">
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Icons -->
     {{-- <link rel="stylesheet" href="/storage/assets/vendor/fonts/fontawesome.css" />
     <link rel="stylesheet" href="/storage/assets/vendor/fonts/tabler-icons.css" />
@@ -171,7 +171,6 @@
 
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
-
     <script src="/storage/assets/vendor/libs/popper/popper.js"></script>
     <script src="/storage/assets/vendor/js/bootstrap.js"></script>
     <script src="/storage/assets/vendor/libs/node-waves/node-waves.js"></script>
@@ -181,7 +180,6 @@
     <script src="/storage/assets/vendor/libs/typeahead-js/typeahead.js"></script>
     <script src="/storage/assets/vendor/js/menu.js"></script>
     <script src="/storage/assets/vendor/libs/dropzone/dropzone.js"></script>
-
     <!-- endbuild -->
 
     <!-- Vendors JS -->

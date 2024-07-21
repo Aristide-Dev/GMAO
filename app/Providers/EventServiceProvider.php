@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Events\CreateBTEvent;
+use App\Listeners\CreateBTListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -17,6 +19,11 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,
+        ],
+
+        // envois de mail au prestataire
+        CreateBTEvent::class => [
+            CreateBTListener::class,
         ],
     ];
 
