@@ -29,7 +29,8 @@ class CreateBTMail extends Mailable
     {
         return new Envelope(
             subject: 'Demande d\'intervention - STAR OIL GUINEE',
-            to: $this->prestataire->email,
+            // to: $this->prestataire->email,
+            to: "aristidegnimassouu@gmail.com",
         );
     }
 
