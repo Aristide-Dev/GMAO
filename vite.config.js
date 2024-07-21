@@ -8,6 +8,10 @@ export default defineConfig({
                 'resources/css/app.css',
                 'resources/css/main.css',
                 'resources/js/app.js',
+                // Icons
+                'resources/assets/vendor/fonts/fontawesome.css',
+                'resources/assets/vendor/fonts/tabler-icons.css',
+                'resources/assets/vendor/fonts/flag-icons.css',
 
                 // <!-- AUTRES -->
                 'resources/css/file_viewer.css'

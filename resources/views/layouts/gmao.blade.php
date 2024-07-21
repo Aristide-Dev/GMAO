@@ -17,9 +17,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;ampdisplay=swap" rel="stylesheet">
 
     <!-- Icons -->
-    <link rel="stylesheet" href="/storage/assets/vendor/fonts/fontawesome.css" />
+    {{-- <link rel="stylesheet" href="/storage/assets/vendor/fonts/fontawesome.css" />
     <link rel="stylesheet" href="/storage/assets/vendor/fonts/tabler-icons.css" />
-    <link rel="stylesheet" href="/storage/assets/vendor/fonts/flag-icons.css" />
+    <link rel="stylesheet" href="/storage/assets/vendor/fonts/flag-icons.css" /> --}}
 
 
 
@@ -46,25 +46,12 @@
     <link rel="stylesheet" href="/storage/assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
     <link rel="stylesheet" href="/storage/assets/vendor/css/rtl/theme-default.css" class="template-customizer-theme-css" />
     <link rel="stylesheet" href="/storage/assets/css/demo.css" />
-    {{-- @vite([
+    @vite([
         // Icons
         'resources/assets/vendor/fonts/fontawesome.css',
         'resources/assets/vendor/fonts/tabler-icons.css',
         'resources/assets/vendor/fonts/flag-icons.css',
-        // Vendors CSS
-        'resources/assets/vendor/libs/node-waves/node-waves.css',
-        'resources/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css',
-        'resources/assets/vendor/libs/typeahead-js/typeahead.css',
-        'resources/assets/vendor/libs/apex-charts/apex-charts.css',
-        'resources/assets/vendor/libs/swiper/swiper.css',
-        'resources/assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css',
-        'resources/assets/vendor/libs/datatables-checkboxes-jquery/datatables.checkboxes.css',
-        'resources/assets/vendor/libs/select2/select2.css',
-        // 'resources/assets/vendor/libs/bootstrap-select/bootstrap-select.css',
-        'resources/assets/vendor/libs/flatpickr/flatpickr.css',
-        'resources/assets/vendor/libs/dropzone/dropzone.css',
-        'resources/assets/vendor/libs/animate-css/animate.css',
-    ]) --}}
+    ])
 
 
     @if(isset($custum_styles))
