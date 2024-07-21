@@ -33,6 +33,8 @@ class GenerateMonthlyPendingForfaitContrat extends Command
         $sites = Site::all();
         $startDate = Carbon::now()->startOfMonth();
         $endDate = Carbon::now()->endOfMonth();
+        // $startDate->addMonth(1);
+        // $endDate->addMonth(1);
 
         foreach ($sites as $site) {
             ForfaitContrat::create([
@@ -43,7 +45,7 @@ class GenerateMonthlyPendingForfaitContrat extends Command
             ]);
         }
 
-        $this->info('Monthly pending forfait contrats generated successfully.');
+        $this->info('Monthly pending forfait contrats generated successfully for '.$startDate);
 
         return 0;
     }

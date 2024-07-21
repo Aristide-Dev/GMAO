@@ -94,17 +94,19 @@ class Site extends Model
      */
     public function showForfaitContratForPeriod($year=null, $month=null)
     {
+        // dd($year,$month);
+
         $startDate = Carbon::createFromDate($year ?? date('Y'), $month??date('n'), 1)->startOfMonth();
         $endDate = Carbon::createFromDate($year ?? date('Y'), $month??date('n'), 1)->endOfMonth();
 
         $forfaitContrat = ForfaitContrat::where('site_id', $this->id)
-            ->whereBetween('created_at', [$startDate, $endDate])
-            ->first();
-
+                                        ->whereBetween('start_date',[$startDate,$endDate])
+                                        // ->where('end_date', $endDate)
+                                        ->first();
         // dd($forfaitContrat);
 
         if ($forfaitContrat) {
-            return $forfaitContrat->validated ? $forfaitContrat->amount : 0;
+            return $forfaitContrat->validated == true ? $forfaitContrat->amount : 0;
         }
 
         return 0;
@@ -161,11 +163,15 @@ class Site extends Model
                 foreach ($demande->bon_travails as $bonTravail) {
                     $rapportIntervention = $bonTravail->rapportIntervention;
 
-                    if ($rapportIntervention && $rapportIntervention->injection_pieces) {
+                    if ($rapportIntervention && $rapportIntervention->injection_pieces) 
+                    {
                         foreach ($rapportIntervention->injection_pieces as $injectionPiece) {
-                            $totalCost += $injectionPiece->take_in_stock 
-                                ? ($injectionPiece->stock_price * $injectionPiece->quantite)
-                                : ($injectionPiece->fournisseur_price * $injectionPiece->quantite);
+                            if($injectionPiece->created_at->between($startDate, $endDate))
+                            {
+                                $totalCost += $injectionPiece->take_in_stock 
+                                    ? ($injectionPiece->stock_price * $injectionPiece->quantite)
+                                    : ($injectionPiece->fournisseur_price * $injectionPiece->quantite);
+                            }
                         }
                     }
                 }

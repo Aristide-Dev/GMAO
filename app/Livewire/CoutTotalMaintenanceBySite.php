@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Enums\StatusEnum;
 use App\Models\Site;
 use Asantibanez\LivewireCharts\Facades\LivewireCharts;
+use Carbon\Carbon;
 use Livewire\Component;
 
 class CoutTotalMaintenanceBySite extends Component
@@ -48,23 +49,24 @@ class CoutTotalMaintenanceBySite extends Component
 
     private function loadData()
     {
+        $this->requeteBySite = [];
         // Gestion de la période personnalisée
         if ($this->periode) {
             $dates = explode(' to ', $this->periode);
             if (count($dates) == 2) {
-                $startDate = date('Y-m-d', strtotime($dates[0]));
-                $endDate = date('Y-m-d', strtotime($dates[1] . ' 23:59:59'));
-                $this->periode_text = "Période du " . date('d F Y', strtotime($dates[0])) . " au " . date('d F Y', strtotime($dates[1]));
+                $startDate = Carbon::createFromFormat('Y-m-d', trim($dates[0]));
+                $endDate = Carbon::createFromFormat('Y-m-d', trim($dates[1]))->endOfDay();
+
+                $this->periode_text = "Période du " . $startDate->translatedFormat('d F Y') . " au " . $endDate->translatedFormat('d F Y');
             } else {
-                // Gestion des cas où la période n'est pas au format attendu
                 $this->initPeriode();
-                $startDate = date('Y-m-d', strtotime("$this->year_filter-$this->month_filter-01"));
-                $endDate = date('Y-m-d', strtotime("$this->year_filter-$this->month_filter-31 23:59:59"));
+                $startDate = Carbon::create($this->year_filter, $this->month_filter, 1);
+                $endDate = $startDate->copy()->endOfMonth();
             }
         } else {
             $this->initPeriode();
-            $startDate = date('Y-m-d', strtotime("$this->year_filter-$this->month_filter-01"));
-            $endDate = date('Y-m-d', strtotime("$this->year_filter-$this->month_filter-31 23:59:59"));
+            $startDate = Carbon::create($this->year_filter, $this->month_filter, 1);
+            $endDate = $startDate->copy()->endOfMonth();
         }
 
         if ($this->registre_filter) {
@@ -73,9 +75,9 @@ class CoutTotalMaintenanceBySite extends Component
                 ->map(function ($site) use ($startDate, $endDate) {
                     return [
                         'name' => $site->name,
-                        'forfait_contrat' => $site->showForfaitContratForPeriod($this->year_filter, $this->month_filter),
+                        'forfait_contrat' => $site->showForfaitContratForPeriod($startDate, $endDate),
                         'cout_maintenance' => $site->calculateMonthlyMaintenanceCost($startDate, $endDate),
-                        'total_frais_maintenance' => $site->showForfaitContratForPeriod($this->year_filter, $this->month_filter)+$site->calculateMonthlyMaintenanceCost($startDate, $endDate),
+                        'total_frais_maintenance' => $site->showForfaitContratForPeriod($startDate, $endDate) + $site->calculateMonthlyMaintenanceCost($startDate, $endDate),
                     ];
                 })
                 ->toArray();
@@ -84,10 +86,9 @@ class CoutTotalMaintenanceBySite extends Component
                 ->map(function ($site) use ($startDate, $endDate) {
                     return [
                         'name' => $site->name,
-                        'forfait_contrat' => $site->showForfaitContratForPeriod($this->year_filter, $this->month_filter),
+                        'forfait_contrat' => $site->showForfaitContratForPeriod($startDate, $endDate),
                         'cout_maintenance' => $site->calculateMonthlyMaintenanceCost($startDate, $endDate),
-                        'cout_maintenance' => $site->calculateMonthlyMaintenanceCost($startDate, $endDate),
-                        'total_frais_maintenance' => $site->showForfaitContratForPeriod($this->year_filter, $this->month_filter)+$site->calculateMonthlyMaintenanceCost($startDate, $endDate),
+                        'total_frais_maintenance' => $site->showForfaitContratForPeriod($startDate, $endDate) + $site->calculateMonthlyMaintenanceCost($startDate, $endDate),
                     ];
                 })
                 ->toArray();
@@ -104,17 +105,11 @@ class CoutTotalMaintenanceBySite extends Component
         $this->loadData();
     }
 
-    /**
-     * Initializes the period based on the selected year and month filters.
-     *
-     * @return void
-     */
     private function initPeriode()
     {
-        $startDate = date('Y-m-d', strtotime("$this->year_filter-$this->month_filter-01"));
-        $endDate = date('Y-m-t', strtotime("$this->year_filter-$this->month_filter")); // -t gives the last day of the month
-        $this->periode = $startDate . ' to ' . $endDate;
-        $this->periode_text = "Période du " . date('d F Y', strtotime($startDate)) . " au " . date('d F Y', strtotime($endDate));
+        $startDate = Carbon::create($this->year_filter, $this->month_filter, 1);
+        $endDate = $startDate->copy()->endOfMonth();
+        $this->periode_text = "Période du " . $startDate->translatedFormat('d F Y') . " au " . $endDate->translatedFormat('d F Y');
     }
 
     public function updatedYearFilter()
@@ -135,12 +130,21 @@ class CoutTotalMaintenanceBySite extends Component
     public function updatedPeriode()
     {
         $this->loadData();
+        $dates = explode(' to ', $this->periode);
+        if($this->periode)
+        {
+            if (count($dates) == 2) {
+                $this->year_filter = date('Y', strtotime($dates[0]));
+                $this->month_filter = date('n', strtotime($dates[0]));
+                // dd($this->year_filter,$this->month_filter);
+            }
+        }
     }
 
     public function render()
     {
         $columnChartModel = LivewireCharts::columnChartModel()
-            // ->setTitle('Coût Total de Maintenance par Site')
+            ->setTitle('Coût Total de Maintenance par Site')
             ->setAnimated($this->firstRun)
             ->setLegendVisibility(false)
             ->legendHorizontallyAlignedCenter(true)

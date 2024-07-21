@@ -14,9 +14,23 @@ class ForfaitContratController extends Controller
      */
     public function index()
     {
-        $pendingForfaits = ForfaitContrat::where('validated', false)->get();
-        return view('admin.forfaits_contrat.index', compact('pendingForfaits'));
+        // Récupérer les forfaits non validés et les regrouper par mois
+        $pendingForfaits = ForfaitContrat::where('validated', false)
+            ->selectRaw('strftime("%Y", created_at) as year, strftime("%m", created_at) as month, COUNT(*) as total')
+            ->groupBy('year', 'asc')
+            ->orderBy('year', 'asc')
+            ->get();
+    
+        // Récupérer les forfaits validés et les regrouper par mois
+        $validateForfaits = ForfaitContrat::where('validated', true)        
+            ->selectRaw('strftime("%Y", created_at) as year, strftime("%m", created_at) as month, COUNT(*) as total')
+            ->groupBy('year', 'asc')
+            ->orderBy('year', 'asc')
+            ->get();
+    
+        return view('admin.forfaits_contrat.index', compact('pendingForfaits', 'validateForfaits'));
     }
+    
 
     public function validateForfait($id)
     {
