@@ -14,23 +14,23 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com/">
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
-    {{-- <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;ampdisplay=swap" rel="stylesheet"> --}}
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;ampdisplay=swap" rel="stylesheet">
 
     <!-- Icons -->
-    {{-- <link rel="stylesheet" href="/storage/assets/vendor/fonts/fontawesome.css" />
+    <link rel="stylesheet" href="/storage/assets/vendor/fonts/fontawesome.css" />
     <link rel="stylesheet" href="/storage/assets/vendor/fonts/tabler-icons.css" />
-    <link rel="stylesheet" href="/storage/assets/vendor/fonts/flag-icons.css" /> --}}
+    <link rel="stylesheet" href="/storage/assets/vendor/fonts/flag-icons.css" />
 
 
 
     <!-- Core CSS -->
-    {{-- <link rel="stylesheet" href="/storage/assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="/storage/assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
     <link rel="stylesheet" href="/storage/assets/vendor/css/rtl/theme-default.css" class="template-customizer-theme-css" />
-    <link rel="stylesheet" href="/storage/assets/css/demo.css" /> --}}
+    <link rel="stylesheet" href="/storage/assets/css/demo.css" />
 
 
     <!-- Vendors CSS -->
-    {{-- <link rel="stylesheet" href="/storage/assets/vendor/libs/node-waves/node-waves.css" />
+    <link rel="stylesheet" href="/storage/assets/vendor/libs/node-waves/node-waves.css" />
     <link rel="stylesheet" href="/storage/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
     <link rel="stylesheet" href="/storage/assets/vendor/libs/typeahead-js/typeahead.css" />
     <link rel="stylesheet" href="/storage/assets/vendor/libs/bootstrap-select/bootstrap-select.css" />
@@ -41,12 +41,12 @@
     <link rel="stylesheet" href="/storage/assets/vendor/libs/datatables-checkboxes-jquery/datatables.checkboxes.css">
     <link rel="stylesheet" href="/storage/assets/vendor/libs/select2/select2.css" />
     <link rel="stylesheet" href="/storage/assets/vendor/libs/flatpickr/flatpickr.css" />
-    <link rel="stylesheet" href="/storage/assets/vendor/libs/dropzone/dropzone.css" /> --}}
+    <link rel="stylesheet" href="/storage/assets/vendor/libs/dropzone/dropzone.css" />
     <!-- Core CSS -->
     <link rel="stylesheet" href="/storage/assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
     <link rel="stylesheet" href="/storage/assets/vendor/css/rtl/theme-default.css" class="template-customizer-theme-css" />
     <link rel="stylesheet" href="/storage/assets/css/demo.css" />
-    @vite([
+    {{-- @vite([
         // Icons
         'resources/assets/vendor/fonts/fontawesome.css',
         'resources/assets/vendor/fonts/tabler-icons.css',
@@ -64,7 +64,7 @@
         'resources/assets/vendor/libs/flatpickr/flatpickr.css',
         'resources/assets/vendor/libs/dropzone/dropzone.css',
         'resources/assets/vendor/libs/animate-css/animate.css',
-    ])
+    ]) --}}
 
 
     @if(isset($custum_styles))
@@ -189,7 +189,7 @@
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
 
-    {{-- <script src="/storage/assets/vendor/libs/popper/popper.js"></script>
+    <script src="/storage/assets/vendor/libs/popper/popper.js"></script>
     <script src="/storage/assets/vendor/js/bootstrap.js"></script>
     <script src="/storage/assets/vendor/libs/node-waves/node-waves.js"></script>
     <script src="/storage/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
@@ -197,33 +197,33 @@
     <script src="/storage/assets/vendor/libs/i18n/i18n.js"></script>
     <script src="/storage/assets/vendor/libs/typeahead-js/typeahead.js"></script>
     <script src="/storage/assets/vendor/js/menu.js"></script>
-    <script src="/storage/assets/vendor/libs/dropzone/dropzone.js"></script> --}}
+    <script src="/storage/assets/vendor/libs/dropzone/dropzone.js"></script>
 
     <!-- endbuild -->
 
     <!-- Vendors JS -->
-    {{-- <script src="/storage/assets/vendor/libs/select2/select2.js"></script>
+    <script src="/storage/assets/vendor/libs/select2/select2.js"></script>
     <script src="/storage/assets/vendor/libs/apex-charts/apexcharts.js"></script>
     <script src="/storage/assets/vendor/libs/swiper/swiper.js"></script>
     <script src="/storage/assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
     <script src="/storage/assets/vendor/libs/flatpickr/flatpickr.js"></script>
-    <script src="/storage/assets/vendor/libs/autosize/autosize.js"></script> --}}
+    <script src="/storage/assets/vendor/libs/autosize/autosize.js"></script>
 
 
     <!-- Main JS -->
-    {{-- <script src="/storage/assets/js/main.js"></script> --}}
+    <script src="/storage/assets/js/main.js"></script>
 
 
     <!-- Page JS -->
-    {{-- <script src="/storage/assets/js/dashboards-analytics.js"></script>
+    <script src="/storage/assets/js/dashboards-analytics.js"></script>
     <script src="/storage/assets/js/forms-selects.js"></script>
     <script src="/storage/assets/js/charts-apex.js"></script>
     <script src="/storage/assets/js/forms-file-upload.js"></script>
     <script src="/storage/assets/js/forms-extras.js"></script>
-    <script src="/storage/assets/js/cards-statistics.js"></script> --}}
+    <script src="/storage/assets/js/cards-statistics.js"></script>
 
 
-    @vite([
+    {{-- @vite([
         // <!-- Core JS -->
         'resources/assets/vendor/libs/jquery/jquery.js',
         'resources/assets/vendor/libs/popper/popper.js',
@@ -250,7 +250,7 @@
         'resources/assets/js/ui-modals.js',
         'resources/assets/js/forms-pickers.js',
   
-    ])
+    ]) --}}
 
 
     @if(isset($custum_scripts))
