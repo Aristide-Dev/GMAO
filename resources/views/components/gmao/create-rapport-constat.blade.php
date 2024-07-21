@@ -61,9 +61,9 @@
 </style>
 
 
-<button class="add-new btn btn-primary waves-effect waves-light" data-bs-toggle="offcanvas" data-bs-target="#{{ $rapport_id }}" align="right">
+<button class="add-new btn btn-primary waves-effect waves-light uppercase" data-bs-toggle="offcanvas" data-bs-target="#{{ $rapport_id }}" align="right">
     <i class="ti ti-plus me-0 me-sm-1 ti-xs"></i>
-    <span>RAPPORT DE CONSTAT</span>
+    <span>RAPPORT DE CONSTAT / Clôture</span>
 </button>
 <!-- Offcanvas to add new demande -->
 <div class="offcanvas offcanvas-end bg-gray-100 {{ $show }}" tabindex="-1" id="{{ $rapport_id }}" aria-labelledby="{{ $rapport_id }}Label">
