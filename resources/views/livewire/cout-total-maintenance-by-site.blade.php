@@ -48,8 +48,6 @@
 
         <div class="col-12">
             <h1 class="py-2 my-3 text-xl font-bold text-center bg-white rounded shadow">{{ $periode_text }}</h1>
-            <h1 class="py-2 my-3 text-xl font-bold text-center bg-white rounded shadow">{{ $year_filter }}</h1>
-            <h1 class="py-2 my-3 text-xl font-bold text-center bg-white rounded shadow">{{ $month_filter }}</h1>
         </div>
 
         <div class="p-0 my-3 bg-white col-md-6 pe-1">
