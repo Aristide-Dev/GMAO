@@ -202,6 +202,8 @@
     <script src="/storage/assets/js/forms-file-upload.js"></script>
     <script src="/storage/assets/js/forms-extras.js"></script>
     <script src="/storage/assets/js/cards-statistics.js"></script>
+    <script src="/storage/assets/js/ui-modals.js"></script>
+    <script src="/storage/assets/js/forms-pickers.js"></script>
 
 
     {{-- @vite([
