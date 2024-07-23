@@ -51,28 +51,101 @@
         </div>
 
         <div class="p-0 my-3 bg-white col-md-6 pe-1">
-            <div class="flex flex-col rounded shadow-sm">
+            <div class="flex flex-col rounded shadow">
                 <div class="overflow-x-auto">
                     <div class="inline-block min-w-full p-0 align-middle">
                         <div class="p-0 overflow-hidden">
                             <table class="min-w-full divide-y divide-gray-200">
-                                <thead class="bg-blue-200">
+                                <thead class="p-1 bg-blue-200">
                                     <tr>
-                                        <th scope="col" class="py-2 text-xs font-bold text-gray-900 uppercase text-start">
-                                            Site
+                                        <th scope="col" class="px-1 py-2 text-xs font-bold text-gray-900 uppercase text-start">
+                                            <a href="javascript:;" wire:click.prevent="sortBy('name')">Site</a>
                                         </th>
-                                        <th scope="col" class="py-2 text-xs font-bold text-gray-900 uppercase text-start">
-                                            Forfait Contrat
+                                        <th scope="col" class="px-1 py-2 text-xs font-bold text-gray-900 uppercase text-start">
+                                            <a href="javascript:;" wire:click.prevent="sortBy('forfait_contrat')">Forfait Contrat</a>
                                         </th>
-                                        <th scope="col" class="py-2 text-xs font-bold text-gray-900 uppercase text-start">
-                                            Coût Maintenance
+                                        <th scope="col" class="px-1 py-2 text-xs font-bold text-gray-900 uppercase text-start">
+                                            <a href="javascript:;" wire:click.prevent="sortBy('cout_maintenance')">Coût Maintenance</a>
                                         </th>
-                                        <th scope="col" class="py-2 text-xs font-bold text-gray-900 uppercase text-start">
-                                            Total
+                                        <th scope="col" class="px-1 py-2 text-xs font-bold text-gray-900 uppercase text-start">
+                                            <a href="javascript:;" wire:click.prevent="sortBy('total_frais_maintenance')">Total</a>
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y divide-gray-200">
+                                    
+                                    <tr wire:loading>
+                                        <td colspan="4" class="w-full px-1 py-2 text-sm text-gray-800 whitespace-nowrap"  style="width:100%">
+                                            <div role="status" class="space-y-2.5 animate-pulse w-100 border-2 p-2"  style="width:100%">
+                                                <div class="flex items-center w-full">
+                                                    <div class="h-2.5 bg-gray-500 rounded-full w-1/2"></div>
+                                                    <div class="h-2.5 ms-2 bg-gray-600 rounded-full w-3/4"></div>
+                                                    <div class="h-2.5 ms-2 bg-gray-600 rounded-full w-full"></div>
+                                                </div>
+                                                <div class="flex items-center w-full">
+                                                    <div class="h-2.5 bg-gray-500 rounded-full w-full"></div>
+                                                    <div class="h-2.5 ms-2 bg-gray-600 rounded-full w-full"></div>
+                                                    <div class="h-2.5 ms-2 bg-gray-600 rounded-full w-3/4"></div>
+                                                </div>
+                                                <div class="flex items-center w-full">
+                                                    <div class="h-2.5 bg-gray-600 rounded-full w-full"></div>
+                                                    <div class="h-2.5 ms-2 bg-gray-500 rounded-full w-80"></div>
+                                                    <div class="h-2.5 ms-2 bg-gray-600 rounded-full w-full"></div>
+                                                </div>
+                                                <div class="flex items-center w-full">
+                                                    <div class="h-2.5 ms-2 bg-gray-500 rounded-full w-full"></div>
+                                                    <div class="h-2.5 ms-2 bg-gray-600 rounded-full w-full"></div>
+                                                    <div class="h-2.5 ms-2 bg-gray-600 rounded-full w-3/4"></div>
+                                                </div>
+                                                <div class="flex items-center w-full">
+                                                    <div class="h-2.5 ms-2 bg-gray-600 rounded-full dark:bg-gray-600 w-32"></div>
+                                                    <div class="h-2.5 ms-2 bg-gray-600 rounded-full w-3/4"></div>
+                                                    <div class="h-2.5 ms-2 bg-gray-500 rounded-full w-full"></div>
+                                                </div>
+                                                <div class="flex items-center w-full">
+                                                    <div class="h-2.5 ms-2 bg-gray-600 rounded-full w-full"></div>
+                                                    <div class="h-2.5 ms-2 bg-gray-500 rounded-full w-80"></div>
+                                                    <div class="h-2.5 ms-2 bg-gray-600 rounded-full w-full"></div>
+                                                </div>
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                        </td>
+                                        <td colspan="4" class="w-full px-1 py-2 text-sm text-gray-800 whitespace-nowrap"  style="width:100%">
+                                            <div role="status" class="space-y-2.5 animate-pulse w-100 border-2 p-2"  style="width:100%">
+                                                <div class="flex items-center w-full">
+                                                    <div class="h-2.5 bg-gray-500 rounded-full w-1/2"></div>
+                                                    <div class="h-2.5 ms-2 bg-gray-600 rounded-full w-3/4"></div>
+                                                    <div class="h-2.5 ms-2 bg-gray-600 rounded-full w-full"></div>
+                                                </div>
+                                                <div class="flex items-center w-full">
+                                                    <div class="h-2.5 bg-gray-500 rounded-full w-full"></div>
+                                                    <div class="h-2.5 ms-2 bg-gray-600 rounded-full w-full"></div>
+                                                    <div class="h-2.5 ms-2 bg-gray-600 rounded-full w-3/4"></div>
+                                                </div>
+                                                <div class="flex items-center w-full">
+                                                    <div class="h-2.5 bg-gray-600 rounded-full w-full"></div>
+                                                    <div class="h-2.5 ms-2 bg-gray-500 rounded-full w-80"></div>
+                                                    <div class="h-2.5 ms-2 bg-gray-600 rounded-full w-full"></div>
+                                                </div>
+                                                <div class="flex items-center w-full">
+                                                    <div class="h-2.5 ms-2 bg-gray-500 rounded-full w-full"></div>
+                                                    <div class="h-2.5 ms-2 bg-gray-600 rounded-full w-full"></div>
+                                                    <div class="h-2.5 ms-2 bg-gray-600 rounded-full w-3/4"></div>
+                                                </div>
+                                                <div class="flex items-center w-full">
+                                                    <div class="h-2.5 ms-2 bg-gray-600 rounded-full dark:bg-gray-600 w-32"></div>
+                                                    <div class="h-2.5 ms-2 bg-gray-600 rounded-full w-3/4"></div>
+                                                    <div class="h-2.5 ms-2 bg-gray-500 rounded-full w-full"></div>
+                                                </div>
+                                                <div class="flex items-center w-full">
+                                                    <div class="h-2.5 ms-2 bg-gray-600 rounded-full w-full"></div>
+                                                    <div class="h-2.5 ms-2 bg-gray-500 rounded-full w-80"></div>
+                                                    <div class="h-2.5 ms-2 bg-gray-600 rounded-full w-full"></div>
+                                                </div>
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                        </td>
+                                    </tr>
                                     @php
                                         $total_forfait_contrat = 0;
                                         $total_cout_maintenance = 0;
@@ -82,88 +155,21 @@
                                         $total_forfait_contrat += $site['forfait_contrat'];
                                         $total_cout_maintenance += $site['cout_maintenance'];
                                     @endphp
-
+        
                                     <tr wire:loading.remove>
-                                        <td class="text-sm font-bold text-gray-500 whitespace-nowrap">{{ $site['name'] }}</td>
-                                        <td class="text-sm text-gray-800 whitespace-nowrap">{{ number_format($site['forfait_contrat'], 0,'',' ') }} F</td>
-                                        <td class="text-sm text-gray-800 whitespace-nowrap">{{ number_format($site['cout_maintenance'], 0,'',' ') }} F</td>
-                                        <td class="text-sm text-gray-800 whitespace-nowrap">{{ number_format($site['total_frais_maintenance'], 0,'',' ') }} F</td>
+                                        <td class="px-1 py-2 text-sm font-bold text-gray-500 whitespace-nowrap">{{ $site['name'] }}</td>
+                                        <td class="px-1 py-2 text-sm text-gray-800 whitespace-nowrap">{{ number_format($site['forfait_contrat'], 0,'',' ') }} F</td>
+                                        <td class="px-1 py-2 text-sm text-gray-800 whitespace-nowrap">{{ number_format($site['cout_maintenance'], 0,'',' ') }} F</td>
+                                        <td class="px-1 py-2 text-sm text-gray-800 whitespace-nowrap">{{ number_format($site['total_frais_maintenance'], 0,'',' ') }} F</td>
                                     </tr>
                                     @endforeach
-                                    <tr wire:loading>
-                                        <td colspan="4">
-                                            <div role="status" class="space-y-2.5 animate-pulse max-w-lg">
-                                                <div class="flex items-center w-full">
-                                                    <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-32"></div>
-                                                    <div class="h-2.5 ms-2 bg-gray-300 rounded-full dark:bg-gray-600 w-24"></div>
-                                                    <div class="h-2.5 ms-2 bg-gray-300 rounded-full dark:bg-gray-600 w-full"></div>
-                                                </div>
-                                                <div class="flex items-center w-full max-w-[480px]">
-                                                    <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-full"></div>
-                                                            <div class="h-2.5 ms-2 bg-gray-300 rounded-full dark:bg-gray-600 w-full"></div>
-                                                    <div class="h-2.5 ms-2 bg-gray-300 rounded-full dark:bg-gray-600 w-24"></div>
-                                                </div>
-                                                <div class="flex items-center w-full max-w-[400px]">
-                                                    <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-full"></div>
-                                                    <div class="h-2.5 ms-2 bg-gray-200 rounded-full dark:bg-gray-700 w-80"></div>
-                                                    <div class="h-2.5 ms-2 bg-gray-300 rounded-full dark:bg-gray-600 w-full"></div>
-                                                </div>
-                                                <div class="flex items-center w-full max-w-[480px]">
-                                                    <div class="h-2.5 ms-2 bg-gray-200 rounded-full dark:bg-gray-700 w-full"></div>
-                                                            <div class="h-2.5 ms-2 bg-gray-300 rounded-full dark:bg-gray-600 w-full"></div>
-                                                    <div class="h-2.5 ms-2 bg-gray-300 rounded-full dark:bg-gray-600 w-24"></div>
-                                                </div>
-                                                <div class="flex items-center w-full max-w-[440px]">
-                                                    <div class="h-2.5 ms-2 bg-gray-300 rounded-full dark:bg-gray-600 w-32"></div>
-                                                    <div class="h-2.5 ms-2 bg-gray-300 rounded-full dark:bg-gray-600 w-24"></div>
-                                                    <div class="h-2.5 ms-2 bg-gray-200 rounded-full dark:bg-gray-700 w-full"></div>
-                                                </div>
-                                                <div class="flex items-center w-full max-w-[360px]">
-                                                    <div class="h-2.5 ms-2 bg-gray-300 rounded-full dark:bg-gray-600 w-full"></div>
-                                                    <div class="h-2.5 ms-2 bg-gray-200 rounded-full dark:bg-gray-700 w-80"></div>
-                                                    <div class="h-2.5 ms-2 bg-gray-300 rounded-full dark:bg-gray-600 w-full"></div>
-                                                </div>
-                                                <div class="flex items-center w-full">
-                                                    <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-32"></div>
-                                                    <div class="h-2.5 ms-2 bg-gray-300 rounded-full dark:bg-gray-600 w-24"></div>
-                                                    <div class="h-2.5 ms-2 bg-gray-300 rounded-full dark:bg-gray-600 w-full"></div>
-                                                </div>
-                                                <div class="flex items-center w-full max-w-[480px]">
-                                                    <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-full"></div>
-                                                            <div class="h-2.5 ms-2 bg-gray-300 rounded-full dark:bg-gray-600 w-full"></div>
-                                                    <div class="h-2.5 ms-2 bg-gray-300 rounded-full dark:bg-gray-600 w-24"></div>
-                                                </div>
-                                                <div class="flex items-center w-full max-w-[400px]">
-                                                    <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-full"></div>
-                                                    <div class="h-2.5 ms-2 bg-gray-200 rounded-full dark:bg-gray-700 w-80"></div>
-                                                    <div class="h-2.5 ms-2 bg-gray-300 rounded-full dark:bg-gray-600 w-full"></div>
-                                                </div>
-                                                <div class="flex items-center w-full max-w-[480px]">
-                                                    <div class="h-2.5 ms-2 bg-gray-200 rounded-full dark:bg-gray-700 w-full"></div>
-                                                            <div class="h-2.5 ms-2 bg-gray-300 rounded-full dark:bg-gray-600 w-full"></div>
-                                                    <div class="h-2.5 ms-2 bg-gray-300 rounded-full dark:bg-gray-600 w-24"></div>
-                                                </div>
-                                                <div class="flex items-center w-full max-w-[440px]">
-                                                    <div class="h-2.5 ms-2 bg-gray-300 rounded-full dark:bg-gray-600 w-32"></div>
-                                                    <div class="h-2.5 ms-2 bg-gray-300 rounded-full dark:bg-gray-600 w-24"></div>
-                                                    <div class="h-2.5 ms-2 bg-gray-200 rounded-full dark:bg-gray-700 w-full"></div>
-                                                </div>
-                                                <div class="flex items-center w-full max-w-[360px]">
-                                                    <div class="h-2.5 ms-2 bg-gray-300 rounded-full dark:bg-gray-600 w-full"></div>
-                                                    <div class="h-2.5 ms-2 bg-gray-200 rounded-full dark:bg-gray-700 w-80"></div>
-                                                    <div class="h-2.5 ms-2 bg-gray-300 rounded-full dark:bg-gray-600 w-full"></div>
-                                                </div>
-                                                <span class="sr-only">Loading...</span>
-                                            </div>
-                                        </td>
-                                    </tr>
                                 </tbody>
                                 <tfoot>
                                     <tr class="bg-blue-200">
-                                        <td class="font-bold text-black text-md whitespace-nowrap">TOTAL</td>
-                                        <td class="text-sm font-bold text-black whitespace-nowrap">{{ number_format($total_forfait_contrat, 0,'',' ') }} F</td>
-                                        <td class="text-sm font-bold text-black whitespace-nowrap">{{ number_format($total_cout_maintenance, 0,'',' ') }} F</td>
-                                        <td class="text-sm font-bold text-black whitespace-nowrap">{{ number_format($total_forfait_contrat+$total_cout_maintenance, 0,'',' ') }} F</td>
+                                        <td class="py-2 font-bold text-black text-md whitespace-nowrap">TOTAL</td>
+                                        <td class="py-2 text-sm font-bold text-black whitespace-nowrap">{{ number_format($total_forfait_contrat, 0,'',' ') }} F</td>
+                                        <td class="py-2 text-sm font-bold text-black whitespace-nowrap">{{ number_format($total_cout_maintenance, 0,'',' ') }} F</td>
+                                        <td class="py-2 text-sm font-bold text-black whitespace-nowrap">{{ number_format($total_forfait_contrat+$total_cout_maintenance, 0,'',' ') }} F</td>
                                     </tr>
                                 </tfoot>
                             </table>
@@ -172,6 +178,7 @@
                 </div>
             </div>
         </div>
+        
 
         <div class="p-0 my-3 bg-white col-md-6 ps-1">
             <div class="flex p-4 bg-white border rounded shadow h-full min-h-[1000px]" style="height: 100%">

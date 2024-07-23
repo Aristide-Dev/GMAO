@@ -11,7 +11,7 @@ export default defineConfig({
                 // Icons
                 'resources/assets/vendor/fonts/fontawesome.css',
                 'resources/assets/vendor/fonts/tabler-icons.css',
-                'resources/assets/vendor/fonts/flag-icons.css',
+                'resources/assets/js/forms-pickers.js',
 
                 // <!-- AUTRES -->
                 'resources/css/file_viewer.css'

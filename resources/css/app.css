@@ -1,7 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-[x-cloak] {
+
+/* @import 'lightgallery/css/lightgallery.css'; */
+
+[ x-cloak] {
     display: none;
 }
 

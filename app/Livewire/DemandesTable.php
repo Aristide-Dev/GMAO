@@ -69,7 +69,6 @@ class DemandesTable extends Component
         } else {
             $query->orderBy($this->getDemandeursortField(), $this->sortDirection);
         }
-
         return $query;
     }
 
@@ -78,10 +77,12 @@ class DemandesTable extends Component
         $url = $this->determineUrl($this->action);
 
         $demandes = $this->getDemandes()->paginate(10);
+        $demandes_count = $this->getDemandes()->count();
 
         return view('livewire.demandes-table', [
             'url' => $url,
-            'demandes' => $demandes
+            'demandes' => $demandes,
+            'demandes_count' => $demandes_count,
         ]);
     }
 

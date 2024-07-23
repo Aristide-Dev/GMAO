@@ -20,6 +20,9 @@ class CoutTotalMaintenanceBySite extends Component
     public $month_filter;
     public $registre_filter;
 
+    public $sortField = 'total_frais_maintenance'; // Default sort field
+    public $sortDirection = 'desc'; // Default sort direction
+
     protected $listeners = [
         'onPointClick' => 'handleOnPointClick',
         'onSliceClick' => 'handleOnSliceClick',
@@ -47,10 +50,23 @@ class CoutTotalMaintenanceBySite extends Component
         // Logique ou action spécifique lors du clic sur un bloc
     }
 
+    public function sortBy($field)
+    {
+        if ($this->sortField === $field) {
+            $this->sortDirection = $this->sortDirection === 'asc' ? 'desc' : 'asc';
+        } else {
+            $this->sortDirection = 'asc';
+        }
+
+        $this->sortField = $field;
+
+        $this->loadData();
+    }
+
     private function loadData()
     {
         $this->requeteBySite = [];
-        // Gestion de la période personnalisée
+
         if ($this->periode) {
             $dates = explode(' to ', $this->periode);
             if (count($dates) == 2) {
@@ -69,19 +85,21 @@ class CoutTotalMaintenanceBySite extends Component
             $endDate = $startDate->copy()->endOfMonth();
         }
 
-        if ($this->registre_filter) {
+        if($this->registre_filter)
+        {
             $this->requeteBySite = Site::where('registre', $this->registre_filter)
-                ->get()
-                ->map(function ($site) use ($startDate, $endDate) {
-                    return [
-                        'name' => $site->name,
-                        'forfait_contrat' => $site->showForfaitContratForPeriod($startDate, $endDate),
-                        'cout_maintenance' => $site->calculateMonthlyMaintenanceCost($startDate, $endDate),
-                        'total_frais_maintenance' => $site->showForfaitContratForPeriod($startDate, $endDate) + $site->calculateMonthlyMaintenanceCost($startDate, $endDate),
-                    ];
-                })
-                ->toArray();
-        } else {
+            ->get()
+            ->map(function ($site) use ($startDate, $endDate) {
+                return [
+                    'name' => $site->name,
+                    'forfait_contrat' => $site->showForfaitContratForPeriod($startDate, $endDate),
+                    'cout_maintenance' => $site->calculateMonthlyMaintenanceCost($startDate, $endDate),
+                    'total_frais_maintenance' => $site->showForfaitContratForPeriod($startDate, $endDate) + $site->calculateMonthlyMaintenanceCost($startDate, $endDate),
+                ];
+            })
+            ->toArray();
+            $this->sortData();
+        }else{
             $this->requeteBySite = Site::all()
                 ->map(function ($site) use ($startDate, $endDate) {
                     return [
@@ -92,7 +110,16 @@ class CoutTotalMaintenanceBySite extends Component
                     ];
                 })
                 ->toArray();
+            $this->sortData();
+
         }
+    }
+
+    private function sortData()
+    {
+        $this->requeteBySite = collect($this->requeteBySite)->sortBy([
+            [$this->sortField, $this->sortDirection]
+        ])->toArray();
     }
 
     public function mount()
@@ -114,11 +141,13 @@ class CoutTotalMaintenanceBySite extends Component
 
     public function updatedYearFilter()
     {
+        $this->initPeriode();
         $this->loadData();
     }
 
     public function updatedMonthFilter()
     {
+        $this->initPeriode();
         $this->loadData();
     }
 
@@ -131,13 +160,9 @@ class CoutTotalMaintenanceBySite extends Component
     {
         $this->loadData();
         $dates = explode(' to ', $this->periode);
-        if($this->periode)
-        {
-            if (count($dates) == 2) {
-                $this->year_filter = date('Y', strtotime($dates[0]));
-                $this->month_filter = date('n', strtotime($dates[0]));
-                // dd($this->year_filter,$this->month_filter);
-            }
+        if ($this->periode && count($dates) == 2) {
+            $this->year_filter = date('Y', strtotime($dates[0]));
+            $this->month_filter = date('n', strtotime($dates[0]));
         }
     }
 
@@ -150,7 +175,7 @@ class CoutTotalMaintenanceBySite extends Component
             ->legendHorizontallyAlignedCenter(true)
             ->setDataLabelsEnabled(false)
             ->setColumnWidth(50)
-            ->setHorizontal(true) // Set columns to be horizontal
+            ->setHorizontal(true)
             ->withGrid();
 
         foreach ($this->requeteBySite as $site) {

@@ -101,9 +101,11 @@ class Site extends Model
 
         $forfaitContrat = ForfaitContrat::where('site_id', $this->id)
                                         ->whereBetween('start_date',[$startDate,$endDate])
+                                        ->whereBetween('end_date',[$startDate,$endDate])
                                         // ->where('end_date', $endDate)
                                         ->first();
         // dd($forfaitContrat);
+
 
         if ($forfaitContrat) {
             return $forfaitContrat->validated == true ? $forfaitContrat->amount : 0;

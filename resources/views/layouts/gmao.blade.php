@@ -78,6 +78,8 @@
         'resources/css/main.css',
     ])
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.5.0/css/lightgallery.min.css">
+
 
     <!-- Styles -->
     @livewireStyles
@@ -89,7 +91,7 @@
         <div class="min-h-screen layout-container">
 
             <!-- Menu -->
-            <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+            <aside class="layout-menu menu-vertical menu bg-menu-theme">
                 <div class="app-brand demo">
                     <a href="/" class="app-brand-link">
                         <span class="app-brand-logo">
