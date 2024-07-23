@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\StatusEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -77,7 +78,7 @@ class Prestataire extends Model
      *
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function rapport_intervebton()
+    public function rapport_intervention()
     {
         return $this->hasManyThrough(
             BonTravail::class, // Modèle de bon travail
@@ -91,10 +92,46 @@ class Prestataire extends Model
 
     public function getIndicePerformanceGeneralAttribute()
     {
-        // il s'agit de savoir il ya combien de rapport d'intervention lié aux bt du prestataire
-        // puis determiner combiens ont pour kpi 0 et combbien ont  pour kpi 1 
-        //puis faire le rapport pour l'indice de performance
+        $bonsTravail = $this->bon_travails;
+        $bonsTravail = BonTravail::where('prestataire_id',$this->id)
+                                ->where('status','<>',StatusEnum::EN_ATTENTE)
+                                ->where('status','<>',StatusEnum::EN_COURS)
+                                ->where('status','<>',StatusEnum::PAS_TRAITE)
+                                ->get();
+        $totalRapports = 0;
+        $kpiZeroCount = 0;
+        $kpiOneCount = 0;
+        // dd($bonsTravail);
 
+        if($bonsTravail)
+        {
+            foreach ($bonsTravail as $bt) {
+                $rapport = $bt->rapportIntervention;
+                if($rapport)
+                {
+                    $totalRapports += 1;
+                    
+                    if ($rapport->kpi == 0) {
+                        $kpiZeroCount++;
+                    } elseif ($rapport->kpi == 1) {
+                        $kpiOneCount++;
+                    }
+                }
+                // $totalRapports += $rapports->count();
+            }
+        }
+        
+
+        if ($totalRapports == 0) {
+            return 0; // Aucun rapport d'intervention
+        }
+
+        // Calculer l'indice de performance
+        // $performanceIndex = ($kpiOneCount - $kpiZeroCount) / $totalRapports;
+        $performanceIndex = ($kpiOneCount *100) / $totalRapports;
+        // dd($kpiOneCount,$kpiZeroCount,$totalRapports);
+
+        return round($performanceIndex, 2); // Arrondir à deux décimales
     }
 
 

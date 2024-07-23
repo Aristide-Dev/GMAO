@@ -77,7 +77,7 @@ $indices_performance = [
                                         <span class="text-{{ $st['color'] }}"><i class="ti ti-wand me-1 mt-n1"></i></span>
                                         <span class="badge bg-label-{{ $st['color'] }}">{{ $st['statut'] }}</span>
                                         <p class="font-bold">
-                                            {{ $st['value'] }}%
+                                            {{ $prestataire->indice_performance_general }}%
                                         </p>
                                     </div>
                                     <a href="{{ route('admin.prestataires.show', $prestataire) }}" class="btn btn-primary">Voir +</a>
