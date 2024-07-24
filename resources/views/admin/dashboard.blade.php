@@ -55,32 +55,38 @@
 
 
     <div class="row">
-        <div class="p-3 my-3 col-12">
+        <div class="my-3 bg-gray-200 border rounded shadow col-12">
             <livewire:evolution-requetes />
         </div>
     </div>
 
     <div class="row">
-        <div class="p-3 my-3 shadow col-12">
+        <div class="my-3 bg-gray-200 border rounded shadow col-12">
             <livewire:top-10-pannes />
         </div>
     </div>
 
     <div class="row">
-        <div class="p-3 my-3 shadow col-12">
+        <div class="my-3 bg-gray-200 border rounded shadow col-12">
             <livewire:requete-by-equipement-type />
         </div>
     </div>
 
     <div class="row">
-        <div class="p-3 my-3 shadow col-12">
+        <div class="my-3 bg-gray-200 border rounded shadow col-12">
             <livewire:requete-by-zone />
         </div>
     </div>
 
     <div class="row">
-        <div class="p-3 my-3 shadow col-12">
+        <div class="my-3 bg-gray-200 border rounded shadow col-12">
             <livewire:cout-total-maintenance-by-site />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="my-3 bg-gray-200 border rounded shadow col-12">
+            <livewire:prestataire-indice-performance />
         </div>
     </div>
 </x-gmao-layout>

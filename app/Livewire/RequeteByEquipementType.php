@@ -105,7 +105,8 @@ class RequeteByEquipementType extends Component
             ->setLegendVisibility(false)
             ->legendHorizontallyAlignedCenter()
             ->setDataLabelsEnabled($this->showDataLabels)
-            ->setColumnWidth(70)
+            ->setHorizontal(true)
+            ->setColumnWidth(5)
             ->withGrid();
 
         foreach ($this->requeteByTypes as $type) {

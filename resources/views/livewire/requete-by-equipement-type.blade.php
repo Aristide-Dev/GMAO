@@ -1,5 +1,5 @@
 <div>
-    <div class="px-2 row">
+    <div class="row">
         <x-stat-header title="Nombre de requête par type d'équipement" >
             <div class="row">
                 <div class="col-4">
@@ -19,7 +19,10 @@
             </div>
         </x-stat-header>
 
-        <div class="p-0 my-3 bg-white col-md-5">
+        <div class="my-3 row">
+            
+
+        <div class="p-0 bg-white col-md-5">
             <div class="flex flex-col rounded shadow-sm">
                 <div class="overflow-x-auto">
                     <div class="inline-block min-w-full p-0 align-middle">
@@ -81,6 +84,7 @@
                     :column-chart-model="$columnChartModel"
                 />
             </div>
+        </div>
         </div>
     </div>
 </div>

@@ -34,105 +34,154 @@ class Prestataire extends Model
         'telephone_verified_at' => 'datetime',
     ];
 
+    /**
+     * Get the admin user for this prestataire.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function admin()
     {
-        return User::where('id', $this->prestataire_admin_id)->first();
+        return $this->belongsTo(User::class, 'prestataire_admin_id');
     }
 
+    /**
+     * Get the agents for this prestataire.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function agents()
     {
-        return User::where('prestataire_own', $this->id)
-                    ->where('id', '<>', $this->prestataire_admin_id)
-                    ->get();
+        return $this->hasMany(User::class, 'prestataire_own')->where('id', '<>', $this->prestataire_admin_id);
     }
 
+    /**
+     * Get the users for this prestataire.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function users()
     {
-        return $this->hasMany(User::class,'prestataire_own');
+        return $this->hasMany(User::class, 'prestataire_own');
     }
 
+    /**
+     * Get the bon_travails for this prestataire.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function bon_travails()
     {
         return $this->hasMany(BonTravail::class);
     }
 
     /**
-     * Récupère toutes les demandes attribuées à ce prestataire via les bons de travail.
+     * Get all demandes attribuees to this prestataire via bon_travails.
      *
      * @return \Illuminate\Database\Eloquent\Collection
      */
     public function demandesAttribuees()
     {
         return $this->hasManyThrough(
-            Demande::class, // Modèle de la demande
-            BonTravail::class, // Modèle du bon de travail
-            'prestataire_id', // Clé étrangère du prestataire dans le bon de travail
-            'di_reference', // Clé étrangère du bon de travail dans la demande
-            'id', // Clé primaire du prestataire
-            'di_reference' // Clé primaire du bon de travail
+            Demande::class,
+            BonTravail::class,
+            'prestataire_id', // Foreign key on bon_travails table
+            'di_reference', // Foreign key on demandes table
+            'id', // Local key on prestataires table
+            'di_reference' // Local key on bon_travails table
         )->distinct();
     }
 
     /**
-     * Récupère toutes les demandes attribuées à ce prestataire via les bons de travail.
+     * Get all rapports_interventions for this prestataire via bon_travails.
      *
      * @return \Illuminate\Database\Eloquent\Collection
      */
     public function rapport_intervention()
     {
         return $this->hasManyThrough(
-            BonTravail::class, // Modèle de bon travail
-            RapportIntervention::class, // Modèle du rapport d'intervention
-            'prestataire_id', // Clé étrangère du prestataire dans le rapport d'intervention
-            'di_reference', // Clé étrangère du bon de travail dans la demande
-            'id', // Clé primaire du prestataire
-            'di_reference' // Clé primaire du bon de travail
+            RapportIntervention::class,
+            BonTravail::class,
+            'prestataire_id', // Foreign key on bon_travails table
+            'di_reference', // Foreign key on rapports_interventions table
+            'id', // Local key on prestataires table
+            'di_reference' // Local key on bon_travails table
         )->distinct();
     }
 
-    public function getIndicePerformanceGeneralAttribute()
+    /**
+     * Calculate the performance index.
+     *
+     * @return float
+     */
+    public function indicePerformancePeriod($startDate = null, $endDate = null)
     {
-        $bonsTravail = $this->bon_travails;
-        $bonsTravail = BonTravail::where('prestataire_id',$this->id)
-                                ->where('status','<>',StatusEnum::EN_ATTENTE)
-                                ->where('status','<>',StatusEnum::EN_COURS)
-                                ->where('status','<>',StatusEnum::PAS_TRAITE)
-                                ->get();
+        // Si aucune date de début ou de fin n'est fournie, on utilise la période complète.
+        $startDate = $startDate ?? now()->startOfYear();
+        $endDate = $endDate ?? now()->endOfYear();
+    
+        $bonsTravail = $this->bon_travails()
+                            ->whereNotIn('status', [StatusEnum::EN_ATTENTE, StatusEnum::EN_COURS, StatusEnum::PAS_TRAITE])
+                            ->whereBetween('created_at', [$startDate, $endDate])
+                            ->get();
+    
         $totalRapports = 0;
         $kpiZeroCount = 0;
         $kpiOneCount = 0;
-        // dd($bonsTravail);
-
-        if($bonsTravail)
-        {
-            foreach ($bonsTravail as $bt) {
-                $rapport = $bt->rapportIntervention;
-                if($rapport)
-                {
-                    $totalRapports += 1;
-                    
-                    if ($rapport->kpi == 0) {
-                        $kpiZeroCount++;
-                    } elseif ($rapport->kpi == 1) {
-                        $kpiOneCount++;
-                    }
+    
+        foreach ($bonsTravail as $bt) {
+            $rapport = $bt->rapportIntervention()->first();
+            if ($rapport) {
+                $totalRapports++;
+                if ($rapport->kpi == 0) {
+                    $kpiZeroCount++;
+                } elseif ($rapport->kpi == 1) {
+                    $kpiOneCount++;
                 }
-                // $totalRapports += $rapports->count();
             }
         }
-        
+    
+        if ($totalRapports == 0) {
+            return 0; // Aucun rapport d'intervention
+        }
+    
+        $performanceIndex = ($kpiOneCount * 100) / $totalRapports;
+    
+        return round($performanceIndex, 2); // Arrondir à deux décimales
+    }
+
+    /**
+     * Calculate the performance index.
+     *
+     * @return float
+     */
+    public function getIndicePerformanceGeneralAttribute()
+    {
+        $bonsTravail = $this->bon_travails()
+                            ->whereNotIn('status', [StatusEnum::EN_ATTENTE, StatusEnum::EN_COURS, StatusEnum::PAS_TRAITE])
+                            ->get();
+                            
+        $totalRapports = 0;
+        $kpiZeroCount = 0;
+        $kpiOneCount = 0;
+
+        foreach ($bonsTravail as $bt) {
+            $rapport = $bt->rapportIntervention()->first();
+            if ($rapport) {
+                $totalRapports++;
+                if ($rapport->kpi == 0) {
+                    $kpiZeroCount++;
+                } elseif ($rapport->kpi == 1) {
+                    $kpiOneCount++;
+                }
+            }
+        }
 
         if ($totalRapports == 0) {
             return 0; // Aucun rapport d'intervention
         }
 
-        // Calculer l'indice de performance
-        // $performanceIndex = ($kpiOneCount - $kpiZeroCount) / $totalRapports;
-        $performanceIndex = ($kpiOneCount *100) / $totalRapports;
-        // dd($kpiOneCount,$kpiZeroCount,$totalRapports);
+        $performanceIndex = ($kpiOneCount * 100) / $totalRapports;
 
         return round($performanceIndex, 2); // Arrondir à deux décimales
     }
-
-
 }

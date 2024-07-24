@@ -78,16 +78,33 @@ class Top10Pannes extends Component
             ->setLegendVisibility(false)
             ->legendHorizontallyAlignedCenter()
             ->setDataLabelsEnabled($this->showDataLabels)
-            ->setColumnWidth(20)
+            ->setColumnWidth(10)
+            ->setHorizontal(true)
             ->withGrid();
+
+        $pieChartModel = LivewireCharts::pieChartModel()
+            ->setTitle('TOP 10 PANNES')
+            ->setAnimated($this->firstRun)
+            ->setType('pie')
+            ->withOnSliceClickEvent('onSliceClick')
+            ->legendPositionBottom()
+            ->setLegendVisibility(true)
+            ->legendHorizontallyAlignedCenter()
+            ->withoutDataLabels()
+            ->setDataLabelsEnabled($this->showDataLabels);
 
         foreach ($this->topSites as $site) {
             $columnChartModel = $columnChartModel->addColumn($site->name, $site->demande_interventions_count, StatusEnum::randomColor());
         }
 
+        foreach ($this->topSites as $site) {
+            $pieChartModel = $pieChartModel->addSlice($site->name, $site->demande_interventions_count, StatusEnum::randomColor());
+        }
+
         return view('livewire.top10-pannes', [
             'topSites' => $this->topSites,
             'total_demande' => $this->total_demande,
+            'pieChartModel' => $pieChartModel,
             'columnChartModel' => $columnChartModel,
         ]);
     }

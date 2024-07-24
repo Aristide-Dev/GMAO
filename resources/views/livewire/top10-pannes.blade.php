@@ -1,5 +1,5 @@
-<div>
-    <div class="px-2 row">
+<div class="mx-0">
+    <div class="gap-1 row">
         <x-stat-header title="TOP 10 PANNES" >
             <div class="row">
                 <div class="col-4">
@@ -18,8 +18,10 @@
                 </div>
             </div>
         </x-stat-header>
+    </div>
 
-        <div class="p-0 my-3 bg-white col-md-5">
+    <div class="gap-1 p-1 my-3 row">
+        <div class="p-0 bg-white col-md-7">
             <div class="flex flex-col rounded shadow-sm">
                 <div class="overflow-x-auto">
                     <div class="inline-block min-w-full p-0 align-middle">
@@ -71,7 +73,17 @@
             </div>
         </div>
 
-        <div class="col-md-7">
+        
+        <div class="col-md-4">
+            <div class="flex-1 p-4 bg-white border rounded shadow" style="height: 32rem;">
+                <livewire:livewire-pie-chart
+                    key="{{ $pieChartModel->reactiveKey() }}"
+                    :pie-chart-model="$pieChartModel"
+                />
+            </div>
+        </div>
+
+        <div class="p-0 bg-white col-md-12">
             <div class="flex-1 p-4 bg-white border rounded shadow" style="height: 32rem;">
                 <livewire:livewire-column-chart
                     key="{{ $columnChartModel->reactiveKey() }}"
