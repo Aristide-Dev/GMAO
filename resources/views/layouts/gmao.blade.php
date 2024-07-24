@@ -13,9 +13,9 @@
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Icons -->
-    {{-- <link rel="stylesheet" href="/storage/assets/vendor/fonts/fontawesome.css" />
+    <link rel="stylesheet" href="/storage/assets/vendor/fonts/fontawesome.css" />
     <link rel="stylesheet" href="/storage/assets/vendor/fonts/tabler-icons.css" />
-    <link rel="stylesheet" href="/storage/assets/vendor/fonts/flag-icons.css" /> --}}
+    <link rel="stylesheet" href="/storage/assets/vendor/fonts/flag-icons.css" />
 
 
 
@@ -42,12 +42,12 @@
     <link rel="stylesheet" href="/storage/assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
     <link rel="stylesheet" href="/storage/assets/vendor/css/rtl/theme-default.css" class="template-customizer-theme-css" />
     <link rel="stylesheet" href="/storage/assets/css/demo.css" />
-    @vite([
+    {{-- @vite([
         // Icons
         'resources/assets/vendor/fonts/fontawesome.css',
         'resources/assets/vendor/fonts/tabler-icons.css',
         'resources/assets/vendor/fonts/flag-icons.css',
-    ])
+    ]) --}}
 
 
     @if(isset($custum_styles))
