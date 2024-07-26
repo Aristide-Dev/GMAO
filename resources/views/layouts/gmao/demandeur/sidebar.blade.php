@@ -25,11 +25,11 @@
     </x-gmao.nav-link>
 
     <!-- Demandes -->
-    <x-gmao.nav-link :active="request()->routeIs('demandeur.sites.*')">
+    {{-- <x-gmao.nav-link :active="request()->routeIs('demandeur.sites.*')">
         <a href="{{ route('demandeur.sites.index') }}" class="menu-link">
             <i class="menu-icon fa-solid fa-screwdriver-wrench"></i>
             <div data-i18n="Sites">Sites</div>
         </a>
-    </x-gmao.nav-link>
+    </x-gmao.nav-link> --}}
 </ul>
 

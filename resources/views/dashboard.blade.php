@@ -1,26 +1,20 @@
 @if (Auth::user())
     @php
-        $gmao_dash_role = Auth::user()->role;
+        $gmao_dash_role = Auth::user()->role ?? null;
     @endphp
-
     @if ($gmao_dash_role == 'super_admin' || $gmao_dash_role == 'admin' || $gmao_dash_role == 'maintenance')
+        @include('admin.dashboard')
+    @elseif ($gmao_dash_role == 'demandeur')
+        @include('demandeur.dashboard')
+    @elseif ($gmao_dash_role == 'prestataire_admin' || $gmao_dash_role == 'agent')
+        @include('prestataires.dashboard')
+    @else
         <script>
-            window.location = "{{ route('admin.dashboard') }}";
+            window.location = "{{ route('welcome') }}";
         </script>
-        <?php exit(); ?>
     @endif
-
-    @if ($gmao_dash_role == 'demandeur')
-        <script>
-            window.location = "{{ route('demandeur.dashboard') }}";
-        </script>
-        <?php exit(); ?>
-    @endif
-
-    @if ($gmao_dash_role == 'prestataire_admin' || $gmao_dash_role == 'agent')
-        <script>
-            window.location = "{{ route('prestataires.dashboard') }}";
-        </script>
-        <?php exit(); ?>
-    @endif
+@else
+    <script>
+        window.location = "{{ route('welcome') }}";
+    </script>
 @endif

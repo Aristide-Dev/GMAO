@@ -36,7 +36,7 @@
                 <tr wire:loading.class="hidden">
                     <td><span class="fw-bold">{{ $demande->di_reference }}</span></td>
                     <td class="text-left">
-                        @if ($url == 'prestataires')
+                        @if ($url == 'prestataires' || $url == 'demandeur')
                         <p class="fw-bold">{{ $demande->site->name }}</p>
                         @else
                         <a class="fw-bold" href="{{ route($url.'.sites.show', $demande->site->id) }}">{{ $demande->site->name }}</a>
