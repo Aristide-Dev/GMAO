@@ -22,6 +22,12 @@ class Equipement extends Model
         'numero_serie',
         'forfait_contrat',
         'site_id',
+        'marque',
+        'type',
+        'produit',
+        'annee_fabrication',
+        'puissance',
+        'observations',
     ];
 
     public function site()

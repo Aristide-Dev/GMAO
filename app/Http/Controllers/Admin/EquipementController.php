@@ -61,12 +61,28 @@ class EquipementController extends Controller
             'numero_serie' => ['required', 'string', 'max:30', Rule::unique('equipements')->ignore($equipement->id)],
             'categorie' => ['required', 'string', 'max:30', 'in:distributeur,stockage-et-tuyauterie,forage,servicing,branding,groupe-electrogene,electricite,equipement-incendie'],
             'forfait_contrat' => ['required', 'integer', 'min:0'],
+
+            'marque' => 'nullable|string|max:255',
+            'type' => 'nullable|string|max:255',
+            'produit' => 'nullable|string|max:20',
+            'annee_fabrication' => 'nullable|integer|min:1900|max:' . date('Y'),
+            'puissance' => 'nullable|integer|min:0',
+            'capacite' => 'nullable|integer|min:0',
+            'observations' => 'nullable|string',
         ]);
 
         $equipement->name = $request->name;
         $equipement->numero_serie = $request->numero_serie;
         $equipement->categorie = $request->categorie;
         $equipement->forfait_contrat = $request->forfait_contrat;
+
+        $equipement->marque = $request->marque;
+        $equipement->type = $request->type;
+        $equipement->produit = $request->produit;
+        $equipement->annee_fabrication = $request->annee_fabrication;
+        $equipement->puissance = $request->puissance;
+        $equipement->capacite = $request->capacite;
+        $equipement->observations = $request->observations;
         $equipement->save();
         return redirect(route("admin.sites.equipement.categorie", ['site' => $site, 'categorie_equipement' => $equipement->categorie]))->with('success', 'Informations  de l\'equipement editées avec success!');
     }

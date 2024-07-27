@@ -27,6 +27,7 @@
 
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="/storage/assets/vendor/libs/node-waves/node-waves.css" />
+    <link rel="stylesheet" href="/storage/assets/vendor/libs/select2/select2.css" />
     <link rel="stylesheet" href="/storage/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
     <link rel="stylesheet" href="/storage/assets/vendor/libs/typeahead-js/typeahead.css" />
     <link rel="stylesheet" href="/storage/assets/vendor/libs/bootstrap-select/bootstrap-select.css" />
@@ -35,7 +36,6 @@
     <link rel="stylesheet" href="/storage/assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css">
     <link rel="stylesheet" href="/storage/assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css">
     <link rel="stylesheet" href="/storage/assets/vendor/libs/datatables-checkboxes-jquery/datatables.checkboxes.css">
-    <link rel="stylesheet" href="/storage/assets/vendor/libs/select2/select2.css" />
     <link rel="stylesheet" href="/storage/assets/vendor/libs/flatpickr/flatpickr.css" />
     <link rel="stylesheet" href="/storage/assets/vendor/libs/dropzone/dropzone.css" />
     <!-- Core CSS -->
@@ -173,6 +173,7 @@
 
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
+    <script src="/storage/assets/vendor/libs/jquery/jquery.js"></script>
     <script src="/storage/assets/vendor/libs/popper/popper.js"></script>
     <script src="/storage/assets/vendor/js/bootstrap.js"></script>
     <script src="/storage/assets/vendor/libs/node-waves/node-waves.js"></script>
@@ -191,7 +192,9 @@
     <script src="/storage/assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
     <script src="/storage/assets/vendor/libs/flatpickr/flatpickr.js"></script>
     <script src="/storage/assets/vendor/libs/autosize/autosize.js"></script>
+    <script src="/storage/assets/vendor/libs/bootstrap-select/bootstrap-select.js"></script>
 
+    <script src="/storage/assets/vendor/libs/bloodhound/bloodhound.js"></script>
 
     <!-- Main JS -->
     <script src="/storage/assets/js/main.js"></script>
