@@ -352,7 +352,7 @@ class DemandeInterventionController extends Controller
      */
     public function show(DemandeIntervention $demande)
     {
-        // dd($demande->bon_travails,$demande->bon_travails->last());
+        // dd($demande->bon_travails,$demande->bon_travails->first());
         $zones = Zone::all();
         $prestataires = Prestataire::all();
         $pieces = Piece::all();

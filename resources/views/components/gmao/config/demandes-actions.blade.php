@@ -6,15 +6,15 @@
     $btn_injection_piece_disabled = "disabled";
 
     if(
-        !$demande->bon_travails->last()
+        !$demande->bon_travails->first()
     ){
         $btn_bt_disabled = "";
     }else{
         $btn_bt_disabled = "disabled";
     }
 
-    if($demande->bon_travails->last() && ($demande->bon_travails->last())->rapportsIntervention){
-        if(($demande->bon_travails->last())->status == 'injection de pièce')
+    if($demande->bon_travails->first() && ($demande->bon_travails->first())->rapportsIntervention){
+        if(($demande->bon_travails->first())->status == 'injection de pièce')
         {
             $btn_injection_piece_disabled = "";
             $btn_bt_disabled = "disabled";
@@ -22,9 +22,9 @@
         }
 
         if(
-        ($demande->bon_travails->last())->status != 'annulé' ||
-        ($demande->bon_travails->last())->status != 'rejeté' ||
-        ($demande->bon_travails->last())->status != 'terminé')
+        ($demande->bon_travails->first())->status != 'annulé' ||
+        ($demande->bon_travails->first())->status != 'rejeté' ||
+        ($demande->bon_travails->first())->status != 'terminé')
         {
             $btn_injection_piece_disabled = "";
             $btn_cloture_disabled = "";

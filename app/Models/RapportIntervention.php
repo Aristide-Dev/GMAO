@@ -45,7 +45,7 @@ class RapportIntervention extends Model
 
     public function rapport_remplacement_piece()
     {
-        return $this->hasOne(RapportRemplacementPiece::class, 'ri_reference', 'ri_reference');
+        return $this->hasMany(RapportRemplacementPiece::class, 'ri_reference', 'ri_reference');
     }
 
     public function injection_piece()

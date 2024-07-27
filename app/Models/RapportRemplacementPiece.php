@@ -18,6 +18,7 @@ class RapportRemplacementPiece extends Model
     protected $fillable = [
         'ri_reference',
         'rapport_remplacement_piece_file',
+        'commentaire',
     ];
 
 

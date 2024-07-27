@@ -39,6 +39,7 @@ class RapportRemplacementPieceController extends Controller
             'commentaire' => 'nullable|string|max:250',
         ]);
 
+
         $image = $request->file('rapport_remplacement_piece_file');
         $imagePath = $this->saveImageWithUniqueName($image, $demande->di_reference, 'rapport_remplacement_piece');
         // Récupérer le rapport d'intervention associé au bon de travail

@@ -1,4 +1,4 @@
-@props(['injection_piece' => '', 'status_color'])
+@props(['injection_piece' => '', 'status_color', 'action' => "admin"])
 
 
 
@@ -6,7 +6,8 @@
     <div class="p-3 mb-3 text-center bg-purple-600 text-uppercase fw-bold w-100 badge">
         <div class="flex justify-between">
             <span>INJECTION DE PIECE DE RECHANGE</span>
-            
+            @if ($action == 'admin')
+                
            <div class="flex justify-center gap-1">
             <button type="submit" class="p-1 text-white bg-yellow-500 rounded-full hover:bg-yellow-600" title="editer">
                 <i class="ti ti-edit ti-xs"></i>
@@ -15,6 +16,7 @@
                 <i class="ti ti-trash ti-xs"></i>
             </button>
            </div>
+            @endif
         </div>
     </div>
 

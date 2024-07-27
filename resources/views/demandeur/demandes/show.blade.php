@@ -26,8 +26,8 @@
                     {{-- Demande d'Intervention (DI) --}}
 
                     {{-- Bon De Travail (BT) --}}
-                    @if (!empty($demande->bon_travails->last()))
-                    <x-gmao.bt :bonTravail="$demande->bon_travails->last()" />
+                    @if (!empty($demande->bon_travails->first()))
+                    <x-gmao.bt :bonTravail="$demande->bon_travails->first()" />
                     @endif
                     {{-- Bon De Travail (BT) --}}
                 </div>
@@ -44,8 +44,8 @@
                 </div>
                 <div class="card-body">
                     {{-- Rapport --}}
-                    @if ($demande->bon_travails->last() && ($demande->bon_travails->last())->rapportsIntervention)
-                    <x-gmao.ri :rapport_intervention="($demande->bon_travails->last())->rapportsIntervention" />
+                    @if ($demande->bon_travails->first() && ($demande->bon_travails->first())->rapportsIntervention)
+                    <x-gmao.ri :rapport_intervention="($demande->bon_travails->first())->rapportsIntervention" />
                     @endif
                     {{-- Rapport --}}
                 </div>

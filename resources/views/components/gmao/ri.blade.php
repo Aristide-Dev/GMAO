@@ -6,7 +6,7 @@
         Rapport d'intervention
         <br/>
         <br/>
-        (<span class="text-sm text-dark fw-medium">{{ $rapport_intervention->status }}</span>)
+        (<span class="text-sm text-white fw-medium">{{ $rapport_intervention->status }}</span>)
     </div>
 
     {{-- Numero Rapport (RI) --}}
@@ -38,8 +38,10 @@
 
 
     {{-- rapport_remplacement_piece --}}
-    @if($rapport_intervention->rapport_remplacement_pieces)
-        <x-gmao.rapport-remplacement-piece :rapport_remplacement_piece="$rapport_intervention->rapport_remplacement_piece" :status_color="$rapport_intervention->statutColor()"/>
+    @if($rapport_intervention->rapport_remplacement_piece)
+        @foreach ($rapport_intervention->rapport_remplacement_piece as $rapport_remplacement_piece)
+            <x-gmao.rapport-remplacement-piece :rapport_remplacement_piece="$rapport_remplacement_piece" :status_color="$rapport_intervention->statutColor()"/>
+        @endforeach
     @endif
     {{-- rapport_remplacement_piece --}}
 

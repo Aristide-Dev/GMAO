@@ -15,16 +15,16 @@
     </div>
 
     <x-gmao.create-bt :zones="$zones" :demande="$demande" :prestataires="$prestataires" :btn="false"/>
-    @if($demande->bon_travails->last() && ($demande->bon_travails->last())?->rapportsIntervention)
-        <x-gmao.injection-piece :pieces="$pieces" :rapport_intervention="($demande->bon_travails->last())?->rapportsIntervention" :btn="false"/>
-        <x-gmao.cloture-rapport :rapport_intervention="($demande->bon_travails->last())?->rapportsIntervention" :btn="false"/>
+    @if($demande->bon_travails->first() && ($demande->bon_travails->first())?->rapportsIntervention)
+        <x-gmao.injection-piece :pieces="$pieces" :rapport_intervention="($demande->bon_travails->first())?->rapportsIntervention" :btn="false"/>
+        <x-gmao.cloture-rapport :rapport_intervention="($demande->bon_travails->first())?->rapportsIntervention" :btn="false"/>
     @endif
 
     <br/>
 
     <div class="mt-3 row">
         {{-- Details de la Requete --}}
-        <div class="mb-4 col-lg-10 offset-md-1 col-md-10 offset-lg-1">
+        <div class="mb-4 col-lg-6 col-md-6">
             <div class="card h-100">
                 <div class="card-header d-flex justify-content-between">
                     <div class="mb-0 card-title">
@@ -49,8 +49,8 @@
                 </div>
                 <div class="card-body">
                     {{-- Bon De Travail (BT) --}}
-                    @if (!empty($demande->bon_travails->last()))
-                        <x-gmao.bt :bonTravail="$demande->bon_travails->last()" />
+                    @if (!empty($demande->bon_travails->first()))
+                        <x-gmao.bt :bonTravail="$demande->bon_travails->first()" />
                     @endif
                 </div>
             </div>
@@ -65,8 +65,8 @@
                 </div>
                 <div class="card-body">
                     {{-- Rapport --}}
-                    @if ($demande->bon_travails->last() && ($demande->bon_travails->last())->rapportsIntervention)
-                        <x-gmao.ri :rapport_intervention="($demande->bon_travails->last())->rapportsIntervention" :pieces="$pieces" action="admin"/>
+                    @if ($demande->bon_travails->first() && ($demande->bon_travails->first())->rapportsIntervention)
+                        <x-gmao.ri :rapport_intervention="($demande->bon_travails->first())->rapportsIntervention" :pieces="$pieces" action="admin"/>
                     @endif
                 </div>
             </div>
