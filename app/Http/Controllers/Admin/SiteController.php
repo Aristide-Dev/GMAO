@@ -93,7 +93,7 @@ class SiteController extends Controller
     {
         $request->validateWithBag('create_equipement',[
             'name' =>                   ['required', 'string', 'max:55'],
-            'categorie' =>              ['required', 'string', 'max:30', 'in:distributeur,stockage-et-tuyauterie,forage,servicing,branding,groupe-electrogene,electricite,equipement-incendie'],
+            'categorie' =>              ['required', 'string', 'max:55', 'in:distributeur,stockage-et-tuyauterie,forage,servicing,branding,groupe-electrogene,electricite,equipement-incendie,compteur-et-pompes-de-transfert'],
             'numero_serie' =>           ['required', 'string', 'max:150', 'unique:equipements'],
             'forfait_contrat' =>        ['required', 'integer', 'min:0'],
         ]);
@@ -114,7 +114,7 @@ class SiteController extends Controller
             'site_id' => $site->id,
         ]);
 
-        return redirect()->back()->with('success', 'Nouveau site ajouté avec succès!');
+        return redirect()->back()->with('success', 'Nouveau équipement ajouté avec succès!');
     }
 
     public function show_categorie_equipement(Site $site, $categorie_equipement)
@@ -130,6 +130,7 @@ class SiteController extends Controller
             'groupe-electrogene',
             'electricite',
             'equipement-incendie',
+            'compteur-et-pompes-de-transfert',
         ]; // Remplacez par vos catégories
 
         // Vérifier si la catégorie spécifiée existe dans le tableau des catégories disponibles

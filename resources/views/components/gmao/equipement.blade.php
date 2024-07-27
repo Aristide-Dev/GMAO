@@ -72,6 +72,10 @@ $selected_icon = '<i class="fa-solid fa-fire-extinguisher fa-lg" style="color: #
 $bg_image =
 "https://img.freepik.com/free-vector/fire-extinguisger-frame-with-clear-piece-paper-wooden-surface-with-fire-suppression-bottle-units-illustration_1284-29510.jpg?t=st=1717978783~exp=1717982383~hmac=89e36bc6fea9970ebccd6330623094ff0e9982603c218890fef695cfaf7de842&w=740";
 break;
+case 'compteur-et-pompes-de-transfert':
+$selected_icon = '<i class="fa-solid fa-fire-extinguisher fa-lg" style="color: #ff0000;"></i>';
+$bg_image = Storage::url('assets/img/compteur-et-pompes-de-transfert.png');
+break;
 default:
 $selected_icon = '';
 break;
@@ -174,7 +178,7 @@ break;
     <div class="card shadow-3xl" style="height: auto;">
         <div class="bg-white card-body">
             <div class="pt-4 mb-3 text-center bg-label-primary rounded-3 w-100"
-                style="background-image: url('{{ $bg_image }}'); background-size:cover; background-position:center; background-repeat:no-repeat; height:150px;">
+                style="background-image: url('{{ $bg_image }}'); background-size:contain; background-position:center; background-repeat:no-repeat; height:200px;">
                 {{-- <img class="img-fluid w-50" src="{{ $bg_image }}" alt="Card girl image" width="50" /> --}}
             </div>
             <div class="flex justify-between gap-1 my-3">

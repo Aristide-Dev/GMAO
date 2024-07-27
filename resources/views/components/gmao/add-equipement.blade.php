@@ -50,6 +50,7 @@
                     <option value="groupe-electrogene" {{ old('categorie') == 'groupe-electrogene' ? 'selected' : '' }}>groupe electrogene</option>
                     <option value="electricite" {{ old('categorie') == 'electricite' ? 'selected' : '' }}>electricite</option>
                     <option value="equipement-incendie" {{ old('categorie') == 'equipement-incendie' ? 'selected' : '' }}>equipement incendie</option>
+                    <option value="compteur-et-pompes-de-transfert" {{ old('categorie') == 'compteur-et-pompes-de-transfert' ? 'selected' : '' }}>Compteur et Pompes de transfert</option>
                 </select>
                 <x-input-error bag="create_equipement" for="categorie" class="mt-2" />
             </div>
