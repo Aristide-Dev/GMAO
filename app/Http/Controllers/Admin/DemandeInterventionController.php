@@ -97,6 +97,7 @@ class DemandeInterventionController extends Controller
             'status' => 'required|string|max:255',
             'numero_devis' => 'string|max:100|min:2|'.Rule::unique('rapport_interventions')->ignore($rapportIntervention->id),
             'bon_commande' => 'string|max:100|min:2|'.Rule::unique('rapport_interventions')->ignore($rapportIntervention->id),
+            'commentaire' => 'nullable|string|max:255',
         ]);
 
         $auth_user = Auth::user();
@@ -106,7 +107,7 @@ class DemandeInterventionController extends Controller
         $priseEnChargeInfo = $this->calculerPriseEnCharge(
             $rapportIntervention->bon_travail->created_at,
             $rapportIntervention->date_intervention, // Utiliser la date de création du rapport d'intervention comme date d'intervention
-            $rapportIntervention->bon_travail->date_echeance
+            $rapportIntervention->bon_travail->date_echeance,
         );
 
         if(array_key_exists('error',$priseEnChargeInfo))
@@ -143,6 +144,7 @@ class DemandeInterventionController extends Controller
             'status' => $request->status,
             'numero_devis' => $request->numero_devis,
             'bon_commande' => $request->bon_commande,
+            'commentaire' => $request->commentaire,
             'temps_prise_en_charge' => $priseEnChargeInfo['temps_prise_en_charge'],
             'kpi' => $priseEnChargeInfo['kpis'],
         ]);

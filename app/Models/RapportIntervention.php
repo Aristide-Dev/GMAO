@@ -30,6 +30,7 @@ class RapportIntervention extends Model
         'numero_devis',
         'bon_commande',
         'date_intervention',
+        'commentaire',
     ];
 
 

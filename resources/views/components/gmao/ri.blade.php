@@ -133,5 +133,28 @@
         </div>
     </div>
     {{-- Numero Devis & Bon de Commande --}}
+
+    
+    @if ($rapport_intervention->commentaire)
+        {{-- Numero Rapport (RI) --}}
+        <div class="col-12">
+            <div class="shadow-xs border-top border-top-3 list-group">
+                <div class="border-0 list-group-item list-group-item-action d-flex align-items-start">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h6 class="mb-1 text-primary fw-bold">
+                            @php
+                            echo $rapport_intervention->statutIcon('xl');
+                            @endphp
+                            Commentaire </h6>
+                    </div>
+                </div>
+                <div class="border-0 list-group-item list-group-item-action d-flex align-items-start">
+                    <div class="d-flex w-100 justify-content-between">
+                    <small class="mb-1 w-30">{{ $rapport_intervention->commentaire }}</small>
+                </div>
+            </div>
+        </div>
+        {{-- Numero Rapport (RI) --}}
+    @endif
 </div>
 
