@@ -2,12 +2,13 @@
 
 namespace App\Livewire;
 
+use App\Enums\EquipementEnum;
 use App\Enums\StatusEnum;
 use App\Models\BonTravail;
 use App\Models\Equipement;
 use Asantibanez\LivewireCharts\Facades\LivewireCharts;
-use Livewire\Component;
 use Carbon\Carbon;
+use Livewire\Component;
 
 class RequeteByEquipementType extends Component
 {
@@ -66,7 +67,7 @@ class RequeteByEquipementType extends Component
         ->groupBy('categorie')
         ->map(function ($group, $categorie) {
             return [
-                'categorie' => $categorie,
+                'categorie' => EquipementEnum::getText($categorie),
                 'count' => $group->sum('bon_travails_count'),
             ];
         })

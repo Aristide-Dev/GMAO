@@ -6,7 +6,6 @@ throw new InvalidArgumentException('Le composant (demande) nécessite une prop "
 @endphp
 @endif
 
-
 <div class="p-3 m-0 mb-3 border rounded shadow-sm" style="background-color: #F3F4F6;">
     <div class="p-3 mb-3 text-center text-uppercase fw-bold w-100 badge" style="background-color: {{ $demande->statutColor() }}">
         Demande d'Intervention
@@ -97,4 +96,3 @@ throw new InvalidArgumentException('Le composant (demande) nécessite une prop "
     </div>
     {{-- Document --}}
 </div>
-

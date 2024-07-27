@@ -41,7 +41,7 @@ class Prestataire extends Model
      */
     public function admin()
     {
-        return $this->belongsTo(User::class, 'prestataire_admin_id');
+        return User::where('id', $this->prestataire_admin_id)->first();
     }
 
     /**
