@@ -13,7 +13,7 @@
         $btn_bt_disabled = "disabled";
     }
 
-    if($demande->bon_travails->first() && ($demande->bon_travails->first())->rapportsIntervention){
+    if($demande->bon_travails->first() && ($demande->bon_travails->first())->rapportIntervention){
         if(($demande->bon_travails->first())->status == 'injection de pièce')
         {
             $btn_injection_piece_disabled = "";

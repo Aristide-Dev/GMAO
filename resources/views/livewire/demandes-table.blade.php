@@ -37,7 +37,7 @@
                 <tr wire:loading.class="hidden">
                     <td><span class="fw-bold">{{ $demande->di_reference }}</span></td>
                     <td class="px-2 py-4 text-justify text-wrap">
-                        {{ $demande->bon_travail?->rapportsIntervention->commentaire }}
+                        {{ $demande->bon_travail?->rapportIntervention->commentaire }}
                     </td>
                     <td class="text-left">
                         @if ($url == 'prestataires' || $url == 'demandeur')

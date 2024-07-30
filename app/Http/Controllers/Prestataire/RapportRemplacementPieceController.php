@@ -43,7 +43,7 @@ class RapportRemplacementPieceController extends Controller
         $image = $request->file('rapport_remplacement_piece_file');
         $imagePath = $this->saveImageWithUniqueName($image, $demande->di_reference, 'rapport_remplacement_piece');
         // Récupérer le rapport d'intervention associé au bon de travail
-        $rapportIntervention = $bonTravail->rapportsIntervention;
+        $rapportIntervention = $bonTravail->rapportIntervention;
 
         RapportRemplacementPiece::create([
             'ri_reference' => "$rapportIntervention->ri_reference",

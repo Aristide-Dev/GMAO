@@ -44,8 +44,8 @@
                 </div>
                 <div class="card-body">
                     {{-- Rapport --}}
-                    @if ($demande->bon_travails->first() && ($demande->bon_travails->first())->rapportsIntervention)
-                    <x-gmao.ri :rapport_intervention="($demande->bon_travails->first())->rapportsIntervention" />
+                    @if ($demande->bon_travails->first() && ($demande->bon_travails->first())->rapportIntervention)
+                    <x-gmao.ri :rapport_intervention="($demande->bon_travails->first())->rapportIntervention" />
                     @endif
                     {{-- Rapport --}}
                 </div>

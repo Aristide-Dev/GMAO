@@ -37,13 +37,13 @@ class BonTravail extends Model
         return $this->belongsTo(DemandeIntervention::class, 'di_reference', 'di_reference');
     }
 
-    public function rapportsIntervention() :hasOne
+    public function rapportIntervention() :hasOne
     {
         // return RapportIntervention::where('bt_reference', $this->bt_reference)->get();
         return $this->hasOne(RapportIntervention::class, 'bt_reference', 'bt_reference');
     }
     
-    public function rapportInterventions() : HasOne
+    public function rapport_Interventions() : HasMany
     {
         return $this->hasMany(RapportIntervention::class, 'bt_reference', 'bt_reference');
     }

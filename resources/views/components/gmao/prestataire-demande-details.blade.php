@@ -8,7 +8,7 @@ throw new InvalidArgumentException('Le composant (demande) nécessite une prop "
 
 @php
 $bonTravail = $demande->bon_travails->first() ?? null;
-$rapport_intervention = $bonTravail?->rapportsIntervention ?? null;
+$rapport_intervention = $bonTravail?->rapportIntervention ?? null;
 @endphp
 <div class="justify-center row">
 

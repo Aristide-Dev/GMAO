@@ -15,9 +15,9 @@
     </div>
 
     <x-gmao.create-bt :zones="$zones" :demande="$demande" :prestataires="$prestataires" :btn="false"/>
-    @if($demande->bon_travails->first() && ($demande->bon_travails->first())?->rapportsIntervention)
-        <x-gmao.injection-piece :pieces="$pieces" :rapport_intervention="($demande->bon_travails->first())?->rapportsIntervention" :btn="false"/>
-        <x-gmao.cloture-rapport :rapport_intervention="($demande->bon_travails->first())?->rapportsIntervention" :btn="false"/>
+    @if($demande->bon_travails->first() && ($demande->bon_travails->first())?->rapportIntervention)
+        <x-gmao.injection-piece :pieces="$pieces" :rapport_intervention="($demande->bon_travails->first())?->rapportIntervention" :btn="false"/>
+        <x-gmao.cloture-rapport :rapport_intervention="($demande->bon_travails->first())?->rapportIntervention" :btn="false"/>
     @endif
 
     <br/>
@@ -65,8 +65,8 @@
                 </div>
                 <div class="card-body">
                     {{-- Rapport --}}
-                    @if ($demande->bon_travails->first() && ($demande->bon_travails->first())->rapportsIntervention)
-                        <x-gmao.ri :rapport_intervention="($demande->bon_travails->first())->rapportsIntervention" :pieces="$pieces" action="admin"/>
+                    @if ($demande->bon_travails->first() && ($demande->bon_travails->first())->rapportIntervention)
+                        <x-gmao.ri :rapport_intervention="($demande->bon_travails->first())->rapportIntervention" :pieces="$pieces" action="admin"/>
                     @endif
                 </div>
             </div>

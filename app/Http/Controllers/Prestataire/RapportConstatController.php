@@ -64,7 +64,7 @@ class RapportConstatController extends Controller
         $image = $request->file('rapport_constat_file');
         $imagePath = $this->saveImageWithUniqueName($image, $demande->di_reference, 'rapport_constat');
         // Récupérer le rapport d'intervention associé au bon de travail
-        $rapportIntervention = $bonTravail->rapportsIntervention;
+        $rapportIntervention = $bonTravail->rapportIntervention;
     
         RapportConstat::create([
             'ri_reference' => "$rapportIntervention->ri_reference",

@@ -110,7 +110,7 @@ class DemandesTable extends Component
 
             return [
                 'Reference' => $demande->di_reference,
-                'Commentaires' => $bonTravail->rapportsIntervention->commentaire ?? '',
+                'Commentaires' => $bonTravail->rapportIntervention->commentaire ?? '',
                 'Demandeur' => $demande->demandeur->first_name . ' ' . $demande->demandeur->last_name,
                 'Site' => $demande->site->name,
                 'Panne declarée' => $bonTravail ? $bonTravail->requete : '',
