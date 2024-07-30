@@ -8,7 +8,7 @@ use Asantibanez\LivewireCharts\Facades\LivewireCharts;
 use Carbon\Carbon;
 use Livewire\Component;
 
-class CoutTotalMaintenanceBySite extends Component
+class CoutPiecesRechange extends Component
 {
     public $requeteBySite = [];
     public $firstRun = true;
@@ -20,7 +20,7 @@ class CoutTotalMaintenanceBySite extends Component
     public $month_filter;
     public $registre_filter;
 
-    public $sortField = 'total_frais_maintenance'; // Default sort field
+    public $sortField = 'cout_maintenance'; // Default sort field
     public $sortDirection = 'desc'; // Default sort direction
 
     protected $listeners = [
@@ -93,8 +93,6 @@ class CoutTotalMaintenanceBySite extends Component
                 return [
                     'name' => $site->name,
                     'forfait_contrat' => $site->showForfaitContratForPeriod($startDate, $endDate),
-                    'cout_maintenance' => $site->calculateMonthlyMaintenanceCost($startDate, $endDate),
-                    'total_frais_maintenance' => $site->showForfaitContratForPeriod($startDate, $endDate) + $site->calculateMonthlyMaintenanceCost($startDate, $endDate),
                 ];
             })
             ->toArray();
@@ -104,9 +102,7 @@ class CoutTotalMaintenanceBySite extends Component
                 ->map(function ($site) use ($startDate, $endDate) {
                     return [
                         'name' => $site->name,
-                        'forfait_contrat' => $site->showForfaitContratForPeriod($startDate, $endDate),
                         'cout_maintenance' => $site->calculateMonthlyMaintenanceCost($startDate, $endDate),
-                        'total_frais_maintenance' => $site->showForfaitContratForPeriod($startDate, $endDate) + $site->calculateMonthlyMaintenanceCost($startDate, $endDate),
                     ];
                 })
                 ->toArray();
@@ -168,8 +164,9 @@ class CoutTotalMaintenanceBySite extends Component
 
     public function render()
     {
+        
         $columnChartModel = LivewireCharts::columnChartModel()
-            ->setTitle('Coûts des PR')
+            ->setTitle('Coût des pieces de rechange')
             ->setAnimated($this->firstRun)
             ->setLegendVisibility(false)
             ->legendHorizontallyAlignedCenter(true)
@@ -179,10 +176,10 @@ class CoutTotalMaintenanceBySite extends Component
             ->withGrid();
 
         foreach ($this->requeteBySite as $site) {
-            $columnChartModel = $columnChartModel->addColumn($site['name'], $site['total_frais_maintenance'], StatusEnum::randomColor());
+            $columnChartModel = $columnChartModel->addColumn($site['name'], $site['cout_maintenance'], StatusEnum::randomColor());
         }
 
-        return view('livewire.cout-total-maintenance-by-site', [
+        return view('livewire.cout-pieces-rechange', [
             'requeteBySite' => $this->requeteBySite,
             'columnChartModel' => $columnChartModel,
         ]);

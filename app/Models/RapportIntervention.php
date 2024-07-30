@@ -39,6 +39,11 @@ class RapportIntervention extends Model
         return $this->belongsTo(BonTravail::class, 'bt_reference', 'bt_reference');
     }
 
+    public function rapport_constat()
+    {
+        return $this->hasOne(RapportConstat::class, 'ri_reference', 'ri_reference');
+    }
+
     public function rapport_constats()
     {
         return $this->hasMany(RapportConstat::class, 'ri_reference', 'ri_reference');

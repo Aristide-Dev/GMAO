@@ -86,6 +86,12 @@
 
     <div class="row">
         <div class="my-3 bg-gray-200 border rounded shadow col-12">
+            <livewire:cout-pieces-rechange />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="my-3 bg-gray-200 border rounded shadow col-12">
             <livewire:prestataire-indice-performance />
         </div>
     </div>

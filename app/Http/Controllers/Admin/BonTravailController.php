@@ -55,7 +55,11 @@ class BonTravailController extends Controller
         $zone = Zone::where('id', $request->zone)->first();
         $demande = DemandeIntervention::where('di_reference', $request->di_reference)->first();
         $prestataire = Prestataire::where('id', $request->prestataire)->first();
-        $date_echeance = $this->generateDateEcheane($demande->created_at,$zone->delais);
+        // $date_echeance = $this->generateDateEcheane($demande->created_at,$zone->delais);
+        $date_echeance = $this->getIntervalTime($demande->created_at,$zone->delais);
+        // dd($date_echeance,$date_echeance_2);
+
+
         // dd($demande);
         $bt_reference = $this->generateBTReference();
         $break_stepp = 0;
@@ -218,4 +222,38 @@ class BonTravailController extends Controller
         }
         return $dateStart;
     }
+
+    public function getIntervalTime($dateStart, $delaisHeure)
+    {
+        //heure de travail = 8h-17h => 9h
+        $dateStart = date("Y-m-d H:i:s", strtotime($dateStart));
+
+
+        $test_dimanche = date("Y-m-d", strtotime($dateStart));
+        $test_dimanche = explode("-", $test_dimanche);
+        $test_dimanche = mktime(0, 0, 0, $test_dimanche[1], $test_dimanche[2], $test_dimanche[0]);
+        $dimanche = date("w", $test_dimanche);
+        if ($dimanche == 0) {
+            $dateStart = date('Y-m-d H:i:s', strtotime("+1 day", strtotime(substr($dateStart, 0, 10) . " 08:00:00")));
+        }
+        // die(json_encode('dateStart: ' . $dateStart));
+        while ($delaisHeure > 0) {
+
+            $heureJourEnCours = intval(substr($dateStart, 11, -6));
+            $reste = $heureJourEnCours + $delaisHeure - 17;
+            if (($reste) > 0) {
+                $delaisHeure = abs($reste);
+                $dateStart = date('Y-m-d H:i:s', strtotime("+1 day", strtotime(substr($dateStart, 0, 10) . " 08:" . substr($dateStart, 14, -3))));
+            } else {
+                $reste = $delaisHeure;
+                $delaisHeure = 0;
+                if ($heureJourEnCours < 8) {
+                    $dateStart = date("Y-m-d H:i:s", strtotime(substr($dateStart, 0, 10) . " 08:" . substr($dateStart, 14, -3)));
+                }
+                $dateStart = date('Y-m-d H:i:s', strtotime("+{$reste} hour", strtotime($dateStart)));
+            }
+        }
+        return $dateStart;
+    }
+
 }

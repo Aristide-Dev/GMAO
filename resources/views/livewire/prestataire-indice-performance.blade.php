@@ -5,8 +5,8 @@
             <div class="p-3 row">
                 <!-- Range Picker-->
                 <div class="col-8">
-                    <label for="flatpickr-range">Période</label>
-                    <input type="text" name='periode' class="rounded form-control form-control-sm" placeholder="YYYY-MM-DD au YYYY-MM-DD" id="flatpickr-range" wire:model.live='periode' />
+                    <label for="flatpickr-range-3">Période</label>
+                    <input type="text" name='periode' class="rounded form-control form-control-sm" placeholder="YYYY-MM-DD au YYYY-MM-DD" id="flatpickr-range-1" wire:model.live='periode' />
                 </div>
                 <!-- /Range Picker-->
             </div>

@@ -38,6 +38,9 @@
     <link rel="stylesheet" href="/storage/assets/vendor/libs/datatables-checkboxes-jquery/datatables.checkboxes.css">
     <link rel="stylesheet" href="/storage/assets/vendor/libs/flatpickr/flatpickr.css" />
     <link rel="stylesheet" href="/storage/assets/vendor/libs/dropzone/dropzone.css" />
+    
+    <link rel="stylesheet" href="/storage/assets/vendor/libs/bootstrap-datepicker/bootstrap-datepicker.css" />
+    <link rel="stylesheet" href="/storage/assets/vendor/libs/bootstrap-daterangepicker/bootstrap-daterangepicker.422.delay" />
     <!-- Core CSS -->
     <link rel="stylesheet" href="/storage/assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
     <link rel="stylesheet" href="/storage/assets/vendor/css/rtl/theme-default.css" class="template-customizer-theme-css" />
@@ -208,7 +211,10 @@
     <script src="/storage/assets/js/forms-extras.js"></script>
     <script src="/storage/assets/js/cards-statistics.js"></script>
     <script src="/storage/assets/js/ui-modals.js"></script>
+    <script src="/storage/assets/vendor/libs/bootstrap-datepicker/bootstrap-datepicker.js"></script>
+    <script src="/storage/assets/vendor/libs/bootstrap-daterangepicker/bootstrap-daterangepicker.426.delay"></script>
     <script src="/storage/assets/js/forms-pickers.js"></script>
+    <script src="/storage/js/file_viewer.js"></script>
 
 
     {{-- @vite([

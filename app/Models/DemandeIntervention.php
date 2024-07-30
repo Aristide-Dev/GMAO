@@ -33,6 +33,11 @@ class DemandeIntervention extends Model
         return $this->belongsTo(Site::class);
     }
 
+    public function bon_travail()
+    {
+        return $this->hasOne(BonTravail::class, 'di_reference', 'di_reference');
+    }
+
     public function bon_travails()
     {
         return $this->hasMany(BonTravail::class, 'di_reference', 'di_reference');

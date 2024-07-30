@@ -23,6 +23,7 @@ class ExportExcel implements FromCollection, WithHeadings
     {
         return [
             'Reference',
+            'Commentaires',
             'Demandeur',
             'Site',
             'Panne declarée',

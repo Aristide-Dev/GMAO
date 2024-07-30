@@ -14,6 +14,7 @@
             <thead class="table-light">
                 <tr>
                     <th><a href="#" wire:click.prevent="sortBy('di_reference')">D.I</a></th>
+                    <th>Commentaires</th>
                     <th><a href="#" wire:click.prevent="sortBy('site.name')">Site</a></th>
                     <th>Document</th>
                     <th><a href="#" wire:click.prevent="sortBy('demandeur.first_name')">Demandeur</a></th>
@@ -35,6 +36,9 @@
                 @forelse ($demandes as $key => $demande)
                 <tr wire:loading.class="hidden">
                     <td><span class="fw-bold">{{ $demande->di_reference }}</span></td>
+                    <td class="px-2 py-4 text-justify text-wrap">
+                        {{ $demande->bon_travail?->rapportsIntervention->commentaire }}
+                    </td>
                     <td class="text-left">
                         @if ($url == 'prestataires' || $url == 'demandeur')
                         <p class="fw-bold">{{ $demande->site->name }}</p>
@@ -77,6 +81,7 @@
             <tfoot class="table-light">
                 <tr>
                     <th><a href="#" wire:click.prevent="sortBy('di_reference')">D.I</a></th>
+                    <th>Commentaires</th>
                     <th><a href="#" wire:click.prevent="sortBy('site.name')">Site</a></th>
                     <th>Document</th>
                     <th><a href="#" wire:click.prevent="sortBy('demandeur.first_name')">Demandeur</a></th>

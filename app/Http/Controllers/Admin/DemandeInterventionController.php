@@ -104,16 +104,43 @@ class DemandeInterventionController extends Controller
         if ($auth_user->role !== 'super_admin' && $auth_user->role !== 'admin' && $auth_user->role !== 'maintenance') {
             return redirect()->back()->with('error', 'Action non autorisée');
         }
-        $priseEnChargeInfo = $this->calculerPriseEnCharge(
-            $rapportIntervention->bon_travail->created_at,
-            $rapportIntervention->date_intervention, // Utiliser la date de création du rapport d'intervention comme date d'intervention
-            $rapportIntervention->bon_travail->date_echeance,
-        );
 
-        if(array_key_exists('error',$priseEnChargeInfo))
-        {
-            return redirect()->back()->with('error', $priseEnChargeInfo['error']);
+        // dd($rapportIntervention->rapport_constats);
+        $intervention_time = $rapportIntervention->rapport_constat->created_at ?? now();
+        $temps_prise_en_charge = $rapportIntervention->bon_travail->demande->created_at->diff($intervention_time);
+
+        if ($temps_prise_en_charge->d <= 0) {
+            $temps_prise_en_charge = $temps_prise_en_charge->format('%H:%I:%S');
+        } elseif ($temps_prise_en_charge->d >= 1) {
+            if ($temps_prise_en_charge->i == 0) {
+                $temps_prise_en_charge = $temps_prise_en_charge->days . " jour(s) et " . $temps_prise_en_charge->h . 'h ' . $temps_prise_en_charge->i;
+            } else {
+                $temps_prise_en_charge = $temps_prise_en_charge->days . " jour(s) et " . $temps_prise_en_charge->h . 'h ' . $temps_prise_en_charge->i . 'min ' . $temps_prise_en_charge->s . "s";
+            }
         }
+
+        // Calculer les KPIs
+        if (strtotime($rapportIntervention->bon_travail->date_echeance) >= strtotime($intervention_time)) {
+            // $kpis = "Dans les délais.";
+            $kpis = 1;
+        } else {
+            // $kpis = "Hors délais.";
+            $kpis = 0;
+        }
+
+        // dd($temps_prise_en_charge,$kpis);
+        // dd($rapportIntervention->bon_travail->demande->created_at,$temps_prise_en_charge);
+
+        // $priseEnChargeInfo = $this->calculerPriseEnCharge(
+        //     $rapportIntervention->bon_travail->created_at,
+        //     now(), // Utiliser la date de création du rapport d'intervention comme date d'intervention
+        //     $rapportIntervention->bon_travail->date_echeance,
+        // );
+
+        // if(array_key_exists('error',$priseEnChargeInfo))
+        // {
+        //     return redirect()->back()->with('error', $priseEnChargeInfo['error']);
+        // }
         // dd($priseEnChargeInfo);
 
         // $data = [
@@ -145,8 +172,10 @@ class DemandeInterventionController extends Controller
             'numero_devis' => $request->numero_devis,
             'bon_commande' => $request->bon_commande,
             'commentaire' => $request->commentaire,
-            'temps_prise_en_charge' => $priseEnChargeInfo['temps_prise_en_charge'],
-            'kpi' => $priseEnChargeInfo['kpis'],
+            'temps_prise_en_charge' => $temps_prise_en_charge,
+            'kpi' => $kpis,
+            // 'temps_prise_en_charge' => $priseEnChargeInfo['temps_prise_en_charge'],
+            // 'kpi' => $priseEnChargeInfo['kpis'],
         ]);
 
         $bon_travail = $rapportIntervention->bon_travail;
@@ -492,6 +521,8 @@ class DemandeInterventionController extends Controller
             // $kpis = "Hors délais.";
             $kpis = 0;
         }
+
+        dd("date_declaration",$date_declaration, "date_intervention",$date_intervention, "date_echeance",$date_echeance,"temps_prise_en_charge_format",$temps_prise_en_charge_format,"kpis",$kpis);
 
         return ['temps_prise_en_charge' => $temps_prise_en_charge_format, 'kpis' => $kpis];
     }
