@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Enums\StatusEnum;
+use App\Events\ClotureEvent;
+use App\Events\CreateBTEvent;
 use App\Http\Controllers\Controller;
 use App\Models\DemandeIntervention;
 use App\Models\InjectionPiece;
@@ -184,6 +186,7 @@ class DemandeInterventionController extends Controller
 
         $bon_travail->demande->status = $request->status;
         $bon_travail->demande->save();
+        event(new ClotureEvent($rapportIntervention, $bon_travail->prestataire));
 
         return redirect()->back()->with('success', 'Rapport d\'intervention clôturé avec succès!');
     }

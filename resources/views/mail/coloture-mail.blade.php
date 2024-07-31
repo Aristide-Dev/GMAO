@@ -1,8 +1,9 @@
 <x-mail::message>
 # Bonjour,
 
-## Merci de consulter le rapport {{ $rapport_interventon->ri_reference }} lié au BT suivant:
+## Nous vous informons de la clôture de la requête suivante:
 
+- **Numero de Rapport D'intervention**: {{ $rapport_interventon->ri_reference }}
 - **Numero de Bon de Travail**: {{ $bonTravail->bt_reference }}
 - **Panne**: {{ $bonTravail->requete }}
 - **Site**: {{ $bonTravail->demande->site->name }}
@@ -11,6 +12,7 @@
 - **Zone et Qualification**: {{ $bonTravail->zone_name }} - {{ $bonTravail->prioriteText() }}
 - **Delais**: {{ $bonTravail->zone_delais }} H
 - **Date Echeance**: {{ $bonTravail->date_echeance->format('d/m/Y à H:i') }}
+- **KPIs**: {{ $bonTravail->kpi ? 'Dans les Délais':'Hors Délais' }}
 
 @if ($rapport_interventon->commentaire)
 ### Commentaire:
@@ -23,9 +25,8 @@ Cliquer Ici
 </x-mail::button> --}}
 
 @if (config('app.env') != 'production')
-<img src="https://gn-gmaintenance.com/storage/assets/img/logo.png" alt="Star Oil logo" width="50%" />
+    <img src="https://gn-gmaintenance.com/storage/assets/img/logo.png" alt="Logo Star Oil" width="50%" />
 @else
-<img src="{{ config('app.url') . '/storage/assets/img/logo.png' }}" alt="Star Oillogo" width="50%" />
+    <img src="{{ config('app.url') . '/storage/assets/img/logo.png' }}" alt="Logo Star Oil" width="50%" />
 @endif
-
 </x-mail::message>

@@ -2,8 +2,12 @@
 
 namespace App\Providers;
 
+use App\Events\ClotureEvent;
 use App\Events\CreateBTEvent;
+use App\Events\FirstRapportConstatEvent;
+use App\Listeners\ClotureListener;
 use App\Listeners\CreateBTListener;
+use App\Listeners\FirstRapportConstatListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -24,6 +28,16 @@ class EventServiceProvider extends ServiceProvider
         // envois de mail au prestataire
         CreateBTEvent::class => [
             CreateBTListener::class,
+        ],
+
+        // envois de mail au prestataire
+        FirstRapportConstatEvent::class => [
+            FirstRapportConstatListener::class,
+        ],
+
+        // cloture
+        ClotureEvent::class => [
+            ClotureListener::class,
         ],
     ];
 

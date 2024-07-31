@@ -3,7 +3,7 @@
 namespace App\Mail;
 
 use App\Models\Prestataire;
-use App\Models\RapportIntervention as ModelRapportIntervention;
+use App\Models\RapportIntervention;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -12,7 +12,7 @@ use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class RapportIntervention extends Mailable
+class ColotureMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -21,7 +21,7 @@ class RapportIntervention extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct(public ModelRapportIntervention $rapport_interventon, public Prestataire $prestataire)
+    public function __construct(public RapportIntervention $rapport_interventon, public Prestataire $prestataire)
     {
         $this->bonTravail = $rapport_interventon->bon_travail;
     }
@@ -31,7 +31,6 @@ class RapportIntervention extends Mailable
      */
     public function envelope(): Envelope
     {
-        
         return new Envelope(
             // From PrestataireEmail
             replyTo: [
@@ -49,7 +48,7 @@ class RapportIntervention extends Mailable
     public function content(): Content
     {
         return new Content(
-            markdown: 'mail.rapport-intervention',
+            markdown: 'mail.coloture-mail',
         );
     }
 

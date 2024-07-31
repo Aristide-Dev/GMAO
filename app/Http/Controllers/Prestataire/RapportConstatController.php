@@ -1,15 +1,16 @@
 <?php
 
 namespace App\Http\Controllers\Prestataire;
-use Illuminate\Http\File;
-use App\Models\BonTravail;
-use Illuminate\Http\Request;
-use App\Models\RapportConstat;
-use App\Models\DemandeIntervention;
-use App\Rules\DateInterventionRule;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Storage;
 use App\Enums\StatusEnum;
+use App\Events\FirstRapportConstatEvent;
+use App\Http\Controllers\Controller;
+use App\Models\BonTravail;
+use App\Models\DemandeIntervention;
+use App\Models\RapportConstat;
+use App\Rules\DateInterventionRule;
+use Illuminate\Http\File;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class RapportConstatController extends Controller
 {
@@ -67,7 +68,7 @@ class RapportConstatController extends Controller
         $rapportIntervention = $bonTravail->rapportIntervention;
     
         RapportConstat::create([
-            'ri_reference' => "$rapportIntervention->ri_reference",
+            'ri_reference' => $rapportIntervention->ri_reference,
             'rapport_constat_file' => $imagePath,
             'commentaire' => $request->commentaire ?? "",
         ]);
@@ -122,6 +123,13 @@ class RapportConstatController extends Controller
                 $rapportIntervention->save();
             }
         }
+        
+        event(new FirstRapportConstatEvent($rapportIntervention, $bonTravail->prestataire));
+
+        // if(empty($rapportIntervention->rapport_constat))
+        // {
+        //     event(new FirstRapportConstatEvent($rapportIntervention, $prestataire));
+        // }
     
         return redirect()->back()->with('success', 'Nouveau Rapport généré avec succès!');
     }
