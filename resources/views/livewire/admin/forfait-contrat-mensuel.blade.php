@@ -1,6 +1,4 @@
-
 <div class="container">
-    
     <x-stat-header title="Forfaits en attente de validation">
         <div class="p-3 row">
             <div class="col-12">
@@ -9,16 +7,16 @@
         </div>
         <div class="p-3 row">
             <div class="col-4">
-                <label for="evolution_des_requetes_year_filter">Année</label>
-                <select name="evolution_des_requetes_year_filter" id="evolution_des_requetes_year_filter" class="form-control form-control-sm" wire:model.live="year_filter">
+                <label for="year_filter">Année</label>
+                <select name="year_filter" id="year_filter" class="form-control form-control-sm" wire:model.live="year_filter">
                     @for ($year = 2024; $year <= 2032; $year++)
                         <option value="{{ $year }}">{{ $year }}</option>
                     @endfor
                 </select>
             </div>
             <div class="col-4">
-                <label for="evolution_des_requetes_month_filter">Mois</label>
-                <select name="evolution_des_requetes_month_filter" id="evolution_des_requetes_month_filter" class="form-control form-control-sm" wire:model.live="month_filter">
+                <label for="month_filter">Mois</label>
+                <select name="month_filter" id="month_filter" class="form-control form-control-sm" wire:model.live="month_filter">
                     @foreach (['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'] as $index => $month)
                         <option value="{{ $index + 1 }}" @if($index + 1 == date('n')) selected @endif>{{ $month }}</option>
                     @endforeach
@@ -39,6 +37,7 @@
         </div>
     @endif
 
+    <h2 class="mt-5">Forfaits en attente</h2>
     <table class="table">
         <thead>
             <tr>
@@ -53,9 +52,9 @@
             @foreach ($pendingForfaits as $forfait)
                 <tr>
                     <td>{{ $forfait->site->name }}</td>
-                    <td>{{ $forfait->amount }}</td>
-                    <td>{{ $forfait->start_date }}</td>
-                    <td>{{ $forfait->end_date }}</td>
+                    <td>{{ number_format($forfait->amount, 0, '', ' ') }} F</td>
+                    <td>{{ $forfait->start_date->format('d-m-Y') }}</td>
+                    <td>{{ $forfait->end_date->format('d-m-Y') }}</td>
                     <td>
                         <form action="{{ route('admin.forfaits.validate', $forfait->id) }}" method="POST">
                             @csrf
@@ -68,8 +67,7 @@
         </tbody>
     </table>
 
-    
-    <h1 class="mt-5">Forfaits Validés</h1>
+    <h2 class="mt-5">Forfaits Validés</h2>
     <table class="table">
         <thead>
             <tr>
@@ -84,14 +82,14 @@
             @foreach ($validateForfaits as $forfait)
                 <tr>
                     <td>{{ $forfait->site->name }}</td>
-                    <td>{{ $forfait->amount }}</td>
-                    <td>{{ $forfait->start_date }}</td>
-                    <td>{{ $forfait->end_date }}</td>
+                    <td>{{ number_format($forfait->amount, 0, '', ' ') }} F</td>
+                    <td>{{ $forfait->start_date->format('d-m-Y') }}</td>
+                    <td>{{ $forfait->end_date->format('d-m-Y') }}</td>
                     <td>
                         <form action="{{ route('admin.forfaits.validate', $forfait->id) }}" method="POST">
-                            {{-- @csrf --}}
-                            {{-- @method('PUT') --}}
-                            <button type="submit" class="bg-green-500 btn btn-success">Valider</button>
+                            @csrf
+                            @method('PUT')
+                            <button type="submit" class="bg-red-500 btn btn-danger">Valider</button>
                         </form>
                     </td>
                 </tr>

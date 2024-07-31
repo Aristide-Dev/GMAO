@@ -1,0 +1,62 @@
+<?php
+
+namespace App\Mail;
+
+use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Content;
+use Illuminate\Mail\Mailables\Envelope;
+use Illuminate\Queue\SerializesModels;
+
+class RapportIntervention extends Mailable
+{
+    use Queueable, SerializesModels;
+
+    public BonTravail $bonTravail;
+
+    /**
+     * Create a new message instance.
+     */
+    public function __construct(public RapportIntervention $rapport_interventon)
+    {
+        $this->bonTravail = $rapport_interventon->bon_travail;
+    }
+
+    /**
+     * Get the message envelope.
+     */
+    public function envelope(): Envelope
+    {
+        
+        return new Envelope(
+            // From PrestataireEmail
+            replyTo: [
+                new Address('maintenance@staroilgroup.com', 'Star oil Group / G-Maintenance'),
+            ],
+            subject: 'Demande d\'intervention - STAR OIL GUINEE',
+            // to : "maintenance@staroilgroup.com",
+            to: "aristidegnimassouu@gmail.com",
+        );
+    }
+
+    /**
+     * Get the message content definition.
+     */
+    public function content(): Content
+    {
+        return new Content(
+            markdown: 'mail.rapport-intervention',
+        );
+    }
+
+    /**
+     * Get the attachments for the message.
+     *
+     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
+     */
+    public function attachments(): array
+    {
+        return [];
+    }
+}

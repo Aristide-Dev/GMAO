@@ -36,6 +36,12 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+use Illuminate\Support\Facades\File;
+
+Route::get('robots.txt', function() {
+    return response("User-agent: *\nDisallow: /", 200)
+            ->header('Content-Type', 'text/plain');
+});
 
 Route::get("/init", [AppController::class, 'init'])->name('app.init');
 

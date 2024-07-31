@@ -1,7 +1,7 @@
 <x-mail::message>
 # Bonjour,
 
-## Merci de prendre en compte la requête suivante:
+## Merci de consulter le rapport {{ $rapport_interventon->ri_reference }} lié au BT suivant:
 
 - **Numero de Bon de Travail**: {{ $bonTravail->bt_reference }}
 - **Panne**: {{ $bonTravail->requete }}
@@ -12,7 +12,12 @@
 - **Delais**: {{ $bonTravail->zone_delais }} H
 - **Date Echeance**: {{ $bonTravail->date_echeance->format('d/m/Y à H:i') }}
 
-## **NB**: Données disponibles sur G-Maintenance 
+@if ($rapport_interventon->commentaire)
+### Commentaire:
+{{ $rapport_interventon->commentaire }}
+@endif
+
+NB: Données disponibles sur G-Maintenance 
 <x-mail::button :url="{{ config('app.url') }}">
 Cliquer Ici
 </x-mail::button>
