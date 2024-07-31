@@ -98,7 +98,7 @@
                 <div class="app-brand demo">
                     <a href="/" class="app-brand-link">
                         <span class="app-brand-logo">
-                            <img src="/storage/assets/img/logo.png" alt="logo" width="35%" />
+                            <img src="{{ asset('storage/assets/img/logo.png') }}" alt="logo" width="35%" />
                         </span>
                     </a>
                 </div>

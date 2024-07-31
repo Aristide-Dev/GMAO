@@ -94,7 +94,7 @@ class BonTravail extends Model
      */
     protected $casts = [
         // 'status' => StatusEnum::class,
-        // 'telephone_verified_at' => 'datetime',
+        'date_echeance' => 'datetime',
     ];
 
 }
