@@ -29,14 +29,13 @@ class CreateBTMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            // from: new Address('maintenance@staroilgroup.com', 'Star oil Group / G-Maintenance'),
             replyTo: [
                 new Address('maintenance@staroilgroup.com', 'Star oil Group / G-Maintenance'),
             ],
             subject: 'Demande d\'intervention - STAR OIL GUINEE',
-            // to: $this->prestataire->email,
-            to: "aristidegnimassouu@gmail.com",
+            to: (config('app.env') !== 'production') ? 'aristidegnimassouu@gmail.com' :$this->prestataire->email,
         );
+
     }
 
     /**

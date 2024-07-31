@@ -31,15 +31,12 @@ class RapportIntervention extends Mailable
      */
     public function envelope(): Envelope
     {
-        
         return new Envelope(
-            // From PrestataireEmail
             replyTo: [
                 new Address('maintenance@staroilgroup.com', 'Star oil Group / G-Maintenance'),
             ],
-            subject: 'Demande d\'intervention - STAR OIL GUINEE',
-            // to : "maintenance@staroilgroup.com",
-            to: "aristidegnimassouu@gmail.com",
+            subject: 'Rapport de Constat - STAR OIL GUINEE',
+            to: (config('app.env') !== 'production') ? 'aristidegnimassouu@gmail.com' :$this->prestataire->email,
         );
     }
 
