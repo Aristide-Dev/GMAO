@@ -1,9 +1,7 @@
+@import './file_viewer.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 [ x-cloak] {
     display: none;
 }
-
-
-/* @import './file_viewer.css'; */
