@@ -91,7 +91,7 @@ throw new InvalidArgumentException('Le composant (demande) nécessite une prop "
                         Document
                     </h6>
                 </div>
-                <img src="{{ asset($demande->document()) }}" alt="document" class="mb-1 rounded w-50" id="doc_image_url_in_show_demande" onclick="displayImageInModal('doc_image_url_in_show_demande', 'myShowDemandeModal')" width="100">
+                <img src="{{ asset($demande->document()) }}" alt="document" class="mb-1 rounded w-50" id="doc_image_url_in_show_demande_{{ $demande->id }}" onclick="displayImageInModal('doc_image_url_in_show_demande_{{ $demande->id }}', 'myModal')" width="100">
             </div>
         </div>
     </div>

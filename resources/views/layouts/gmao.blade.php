@@ -77,6 +77,7 @@
     
     @vite([
         'resources/js/app.js',
+        'resources/js/file_viewer.js',
         'resources/css/app.css',
         'resources/css/main.css',
     ])
@@ -173,6 +174,12 @@
 
     </div>
     <!-- / Layout wrapper -->
+    
+    <div id="myModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="img01">
+        <div id="caption"></div>
+    </div>
 
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
@@ -214,8 +221,36 @@
     <script src="/storage/assets/vendor/libs/bootstrap-datepicker/bootstrap-datepicker.js"></script>
     <script src="/storage/assets/vendor/libs/bootstrap-daterangepicker/bootstrap-daterangepicker.426.delay"></script>
     <script src="/storage/assets/js/forms-pickers.js"></script>
-    <script src="/storage/js/file_viewer.js"></script>
 
+    <script>
+        // Fonction générique pour afficher une image en grand
+        // Set up modal functionality
+        function displayImageInModal(imageId, modalId = 'myModal') {
+            var modal = document.getElementById(modalId); 
+            var img = document.getElementById(imageId);
+            var modalImg = modal.querySelector(".modal-content");
+            var captionText = modal.querySelector("#caption");
+        
+            // Ajoutez un événement de clic à l'image
+            img.addEventListener('click', function() {
+                modalImg.src = this.src; // Mettre à jour l'image de la modale avec l'image cliquée
+                captionText.innerHTML = this.alt; // Mettre à jour la légende avec l'attribut alt de l'image cliquée
+                modal.style.display = "block"; // Afficher la modale
+            });
+        
+            var span = modal.querySelector(".close");
+            span.onclick = function() {
+                modal.style.display = "none";
+            };
+        
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            };
+        }
+    </script>
+  
 
     {{-- @vite([
         // <!-- Core JS -->

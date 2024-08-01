@@ -4,11 +4,6 @@
     <x-slot name="sidebar">admin</x-slot>
     <x-breadcrumb :data="['Demandes'=> route('admin.demandes.index'), 'suivi' => '']"/>
 
-    <div id="myShowDemandeModal" class="modal">
-        <span class="close">&times;</span>
-        <img class="modal-content" id="img01">
-        <div id="caption"></div>
-    </div>
 
     <div class="flex justify-end md:pr-20">
         <x-gmao.config.demandes-actions :demande="$demande"/>
@@ -78,10 +73,4 @@
             {{-- Activity Timeline --}}
         @endif
     </div>
-
-    <x-slot name="custum_styles">
-        @vite(['resources/css/file_viewer.css'])
-    </x-slot>
-
-    <script src="/storage/js/file_viewer.js"></script>
 </x-gmao-layout>

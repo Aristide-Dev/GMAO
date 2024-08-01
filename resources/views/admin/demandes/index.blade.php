@@ -2,23 +2,9 @@
     <x-slot name="title">{{ __('Demandes') }}</x-slot>
     <x-slot name="title_desc">{{ __('Demandes') }}</x-slot>
     <x-slot name="sidebar">admin</x-slot>
-    <x-slot name="custum_styles">
-
-        @vite(['resources/css/file_viewer.css'])
-    </x-slot>
     <x-breadcrumb :data="['Demandes'=> '']"/>
 
-    <script src="/storage/js/file_viewer.js">
 
-    </script>
-
-
-<!-- La modale -->
-<div id="myModal" class="modal">
-    <span class="close">&times;</span>
-    <img class="modal-content" id="img01">
-    <div id="caption"></div>
-  </div>
 
 
 

@@ -14,7 +14,7 @@
                         Document
                     </h6>
                 </div>
-                <img src="{{ $rapport_remplacement_piece->document() }}" alt="document" class="mb-1 rounded w-50" id="doc_image_url_in_show_rapport_intervention" onclick="displayImageInModal('doc_image_url_in_show_rapport_intervention', 'myShowDemandeModal')" width="100">
+                <img src="{{ $rapport_remplacement_piece->document() }}" alt="document" class="mb-1 rounded w-50" id="doc_image_url_in_show_rapport_intervention" onclick="displayImageInModal('doc_image_url_in_show_rapport_intervention', 'myModal')" width="100">
             </div>
 
             @if ($rapport_remplacement_piece->commentaire)

@@ -16,7 +16,7 @@
                         Document
                     </h6>
                 </div>
-                <img src="{{ $rapport_constat->document() }}" alt="document" class="mb-1 rounded w-50" id="{{ $component_id }}" onclick="displayImageInModal('{{ $component_id }}', 'myShowDemandeModal')" width="100">
+                <img src="{{ $rapport_constat->document() }}" alt="document" class="mb-1 rounded w-50" id="{{ $component_id }}" onclick="displayImageInModal('{{ $component_id }}', 'myModal')" width="100">
             </div>
 
             @if ($rapport_constat->commentaire)

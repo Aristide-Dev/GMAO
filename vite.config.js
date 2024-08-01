@@ -8,13 +8,14 @@ export default defineConfig({
                 'resources/css/app.css',
                 'resources/css/main.css',
                 'resources/js/app.js',
+                'resources/js/file_viewer.js',
                 // Icons
                 'resources/assets/vendor/fonts/fontawesome.css',
                 'resources/assets/vendor/fonts/tabler-icons.css',
                 'resources/assets/js/forms-pickers.js',
 
                 // <!-- AUTRES -->
-                'resources/css/file_viewer.css'
+                // 'resources/css/file_viewer.css'
             ],
             refresh: true,
         }),
