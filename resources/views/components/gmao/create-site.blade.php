@@ -30,7 +30,7 @@
                 <label class="form-label" for="registre">registre</label>
                 <select id="registre" name="registre" class="select2 form-select form-select-sm" data-allow-clear="true">
                     <option value="0">-- CHOISIR --</option>
-                    <option value="contrat">CONTRAT</option>
+                    <option value="réseau">RESEAU</option>
                     <option value="b2b">B2B</option>
                     <option value="dépot">DEPOT</option>
                     <option value="autre">AUTRE</option>

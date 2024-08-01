@@ -26,9 +26,10 @@
                                 
                                 <div class="mb-3">
                                     <label class="form-label" for="registre">Registre</label>
-                                    <select id="registre" name="registre" class="form-control">
-                                        <option value="contrat" {{ old('registre', $site->registre) == 'contrat' ? 'selected' : '' }}>CONTRAT</option>
+                                    <select id="registre" name="registre" class="form-control">réseau
+                                        <option value="réseau" {{ old('registre', $site->registre) == 'réseau' ? 'selected' : '' }}>RESEAU</option>
                                         <option value="b2b" {{ old('registre', $site->registre) == 'b2b' ? 'selected' : '' }}>B2B</option>
+                                        <option value="dépot" {{ old('registre', $site->registre) == 'dépot' ? 'selected' : '' }}>DEPOT</option>
                                         <option value="autre" {{ old('registre', $site->registre) == 'autre' ? 'selected' : '' }}>AUTRE</option>
                                     </select>
                                     <x-input-error bag="edit_site" for="registre" class="mt-2" />
