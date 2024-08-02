@@ -59,12 +59,5 @@
         {{-- Activity Timeline --}}
 
     </div>
-
-    <x-slot name="custum_styles">
-
-        @vite(['resources/css/file_viewer.css'])
-    </x-slot>
-
-    <script src="/storage/js/file_viewer.js">
 </x-gmao-layout>
 
