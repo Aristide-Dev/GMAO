@@ -3,8 +3,6 @@
     <x-slot name="title_desc">{{ __('Demandes') }}</x-slot>
     <x-slot name="sidebar">demandeur</x-slot>
 
-    </x-slot>
-
 
 
     <!-- La modale -->
