@@ -2,10 +2,6 @@
     <x-slot name="title">{{ __('Demandes') }}</x-slot>
     <x-slot name="title_desc">{{ __('Demandes') }}</x-slot>
     <x-slot name="sidebar">demandeur</x-slot>
-    <x-slot name="custum_styles">
-
-        @vite(['resources/css/file_viewer.css'])
-    <script src="/storage/js/file_viewer.js">
 
     </x-slot>
 
