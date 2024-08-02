@@ -51,7 +51,7 @@ class DemandeInterventionController extends Controller
         $request->validateWithBag('create_demande_intervention', [
             'site' => 'required|exists:sites,id',
             'demandeur' => 'required|exists:users,id',
-            'photo_demande_intervention' => 'required|image|extensions:jpeg,jpg,png|max:2000',
+            'photo_demande_intervention' => 'required|image|extensions:jpeg,jpg,png|max:5000',
         ]);
 
         $auth_user = Auth::user();
