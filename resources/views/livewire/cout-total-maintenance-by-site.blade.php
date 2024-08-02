@@ -1,6 +1,6 @@
 <div>
     <div class="px-2 row">
-        <x-stat-header title="Coûts des PR" >
+        <x-stat-header title=" Coût Global de la Maintenance" >
             <div class="p-3 row">
                 {{-- <div class="col-4">
                     <label for="evolution_des_requetes_registre_filter">Registre</label>
