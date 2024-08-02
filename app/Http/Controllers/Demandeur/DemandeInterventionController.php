@@ -68,7 +68,7 @@ class DemandeInterventionController extends Controller
             'site_id' => $request->site,
             'demandeur_id' => $demandeur->id,
             'demande_file' => $imagePath,
-            'status' => StatusEnum::EN_ATTENTE,
+            'status' => StatusEnum::PAS_TRAITE,
         ])->save();
 
         return redirect()->back()->with('success', 'Nouvelle demande créée avec succès!');

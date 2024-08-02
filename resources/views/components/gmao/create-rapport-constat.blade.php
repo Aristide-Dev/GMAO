@@ -61,7 +61,7 @@
 </style>
 
 
-<button class="add-new btn btn-primary waves-effect waves-light uppercase" data-bs-toggle="offcanvas" data-bs-target="#{{ $rapport_id }}" align="right">
+<button class="uppercase add-new btn btn-primary waves-effect waves-light" data-bs-toggle="offcanvas" data-bs-target="#{{ $rapport_id }}" align="right">
     <i class="ti ti-plus me-0 me-sm-1 ti-xs"></i>
     <span>RAPPORT DE CONSTAT / Clôture</span>
 </button>
@@ -105,9 +105,9 @@
             <div class="mb-3">
                 <label class="m-0 text-gray-500 h6 text-uppercase" for="status">statut</label>
                 <select id="status" name="status" class="select2 form-select form-select-lg" data-allow-clear="true" data-placeholder="--CHOISIR--">
-                    <option value="terminé">terminé / (reparé)</option>
-                    <option value="en attente">En Attente de validation</option>
-                    <option value="rejeté">rejeté</option>
+                    <option value="Clôturé">Clôturé / (reparé)</option>
+                    <option value="en cours" selected>En Cours</option>
+                    <option value="affectées travaux">Affectées Travaux</option>
                 </select>
                 <x-input-error bag="create_rapport_constat" for="status" class="mt-2" />
             </div>

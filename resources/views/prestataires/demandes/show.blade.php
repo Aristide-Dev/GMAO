@@ -5,14 +5,6 @@
 
 
 
-
-    <div id="myShowDemandeModal" class="modal">
-        <span class="close">&times;</span>
-        <img class="modal-content" id="img01">
-        <div id="caption"></div>
-    </div>
-
-
     <div class="row">
         <div class="mb-4 col-12">
             <div class="justify-between gap-2 accordion-body d-flex">

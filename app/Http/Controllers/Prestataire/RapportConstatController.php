@@ -74,17 +74,17 @@ class RapportConstatController extends Controller
         ]);
     
         switch ($request->status) {
-            case 'terminé':
-                $request->status = StatusEnum::TERMINE;
+            case 'Clôturé':
+                $request->status = StatusEnum::CLOTURE;
                 break;
-            case 'en attente':
-                $request->status = StatusEnum::EN_ATTENTE;
+            case 'en cours':
+                $request->status = StatusEnum::EN_COURS;
                 break;
-            case 'rejeté':
-                $request->status = StatusEnum::REJETE;
+            case 'affectées travaux':
+                $request->status = StatusEnum::AFFECTER_TRAVAUX;
                 break;
             default:
-                $request->status = StatusEnum::REJETE;
+                $request->status = StatusEnum::AFFECTER_TRAVAUX;
                 break;
         }
     
@@ -94,13 +94,13 @@ class RapportConstatController extends Controller
             $bonTravail->save();
     
             if ($rapportIntervention) {
-                $rapportIntervention->status = StatusEnum::EN_ATTENTE;
+                $rapportIntervention->status = StatusEnum::EN_COURS;
                 $rapportIntervention->date_intervention = $request->date_intervention.' '.$request->heure_intervention;
                 $rapportIntervention->save();
             }
         }
     
-        if($request->status == StatusEnum::EN_ATTENTE)
+        if($request->status == StatusEnum::EN_COURS)
         {
             $bonTravail->status = $request->status;
             $bonTravail->save();
@@ -112,7 +112,7 @@ class RapportConstatController extends Controller
             }
         }
     
-        if($request->status == StatusEnum::REJETE)
+        if($request->status == StatusEnum::AFFECTER_TRAVAUX)
         {
             $bonTravail->status = $request->status;
             $bonTravail->save();

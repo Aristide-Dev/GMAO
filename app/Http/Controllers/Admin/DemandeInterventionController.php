@@ -162,6 +162,9 @@ class DemandeInterventionController extends Controller
             case 'annulé':
                 $request->status = StatusEnum::ANNULE;
                 break;
+            case 'affectées travaux':
+                $request->status = StatusEnum::AFFECTER_TRAVAUX;
+                break;
             default:
                 $request->status = StatusEnum::ANNULE;
                 break;

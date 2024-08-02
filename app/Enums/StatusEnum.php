@@ -14,6 +14,7 @@ enum StatusEnum: string {
     case CLOTURE = 'Clôturé';
     case INJECTION_PIECE = 'injection de pièce';
     case PAS_TRAITE = 'pas traité';
+    case AFFECTER_TRAVAUX = 'affectées travaux';
 
     /**
      * Associer les couleurs aux statuts
@@ -28,6 +29,9 @@ enum StatusEnum: string {
 
             self::ANNULE => '#991B1B', // Rouge
             'annulé' => '#991B1B', // Rouge
+
+            self::AFFECTER_TRAVAUX => '#991B1B', // Rouge
+            'affectées travaux' => '#991B1B', // Rouge
 
             self::TERMINE => '#166534', // Vert
             'terminé' => '#166534', // Vert
