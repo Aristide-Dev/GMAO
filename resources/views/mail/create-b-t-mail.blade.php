@@ -13,7 +13,7 @@
 - **Date Echeance**: {{ $bonTravail->date_echeance->format('d/m/Y à H:i') }}
 
 ## **NB**: Données disponibles sur G-Maintenance 
-<x-mail::button :url="{{ config('app.url') }}">
+<x-mail::button :url="'{{ config('app.url') }}'">
 Cliquer Ici
 </x-mail::button>
 

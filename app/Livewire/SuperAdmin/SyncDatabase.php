@@ -47,7 +47,7 @@ class SyncDatabase extends Component
             DB::statement('PRAGMA foreign_keys = OFF');
 
             foreach ($orderedTables as $tableName) {
-                $this->message .= "\nSyncing table: $tableName";
+                $this->message .= "\n\t * Syncing table: $tableName";
                 $this->syncTable($tableName);
             }
 

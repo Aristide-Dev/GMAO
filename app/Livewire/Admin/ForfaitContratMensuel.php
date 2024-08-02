@@ -10,6 +10,7 @@ class ForfaitContratMensuel extends Component
 {
     public $pendingForfaits;
     public $validateForfaits;
+    public $amounts = [];
 
     public $year_filter;
     public $month_filter;
@@ -21,7 +22,7 @@ class ForfaitContratMensuel extends Component
         $endDate = $startDate->copy()->endOfMonth()->endOfDay();
         return [$startDate, $endDate];
     }
-    
+
     public function mount()
     {
         // Initialiser les filtres avec l'année et le mois en cours
@@ -40,29 +41,18 @@ class ForfaitContratMensuel extends Component
 
     private function loadData()
     {
-        
-
-        // $this->pendingForfaits = ForfaitContrat::where('validated', false)
-        // ->get()
-        // ->groupBy(function ($date) {
-        //     return \Carbon\Carbon::parse($date->created_at)->format('Y-m'); // Grouper par année et mois
-        // });
-
         $this->pendingForfaits = ForfaitContrat::where('validated', false)
-        ->whereBetween('start_date', $this->between())
-        ->get();
+            ->whereBetween('start_date', $this->between())
+            ->get();
 
         $this->validateForfaits = ForfaitContrat::where('validated', true)
             ->whereBetween('start_date', $this->between())
             ->get();
 
-    
-        // Récupérer les forfaits validés et les regrouper par mois
-        // $this->validateForfaits = ForfaitContrat::where('validated', true)
-        // ->get()
-        // ->groupBy(function ($date) {
-        //     return Carbon::parse($date->created_at)->format('Y-m'); // Grouper par année et mois
-        // });
+        // Initialiser les montants pour chaque forfait
+        foreach ($this->pendingForfaits as $forfait) {
+            $this->amounts[$forfait->id] = $forfait->amount;
+        }
     }
 
     public function updatedYearFilter()
@@ -80,5 +70,28 @@ class ForfaitContratMensuel extends Component
     public function render()
     {
         return view('livewire.admin.forfait-contrat-mensuel');
+    }
+
+    public function saveForfait($forfaitId)
+    {
+        // Trouver le forfait par son ID
+        $forfait = ForfaitContrat::find($forfaitId);
+
+        // Valider l'input
+        $this->validate([ 
+            'amounts.'.$forfaitId => 'required|numeric|min:0',
+        ]);
+
+        // Mettre à jour le montant
+        $forfait->update([
+            'amount' => $this->amounts[$forfaitId],
+            'validated' => true,
+        ]);
+
+        // Recharger les données après mise à jour
+        $this->loadData();
+
+        // Eventuellement, envoyer un message de succès ou de confirmation
+        session()->flash('success', 'Forfait mis à jour avec succès.');
     }
 }

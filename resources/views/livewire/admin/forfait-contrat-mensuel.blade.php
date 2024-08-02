@@ -43,8 +43,6 @@
             <tr>
                 <th>Site</th>
                 <th>Montant</th>
-                <th>Date de début</th>
-                <th>Date de fin</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -52,15 +50,13 @@
             @foreach ($pendingForfaits as $forfait)
                 <tr>
                     <td>{{ $forfait->site->name }}</td>
-                    <td>{{ number_format($forfait->amount, 0, '', ' ') }} F</td>
-                    <td>{{ $forfait->start_date->format('d-m-Y') }}</td>
-                    <td>{{ $forfait->end_date->format('d-m-Y') }}</td>
                     <td>
-                        <form action="{{ route('admin.forfaits.validate', $forfait->id) }}" method="POST">
-                            @csrf
-                            @method('PUT')
-                            <button type="submit" class="bg-green-500 btn btn-success">Valider</button>
-                        </form>
+                        <x-input type="number" name="amount_{{ $forfait->id }}" wire:model.defer="amounts.{{ $forfait->id }}" value="{{ $forfait->amount }}" class="form-control" />
+
+                        {{-- <x-input type="number" name="amount" value="{{ $forfait->amount }}" class="form-control" /> --}}
+                    </td>
+                    <td>
+                        <button wire:click="saveForfait({{ $forfait->id }})" class="bg-green-500 btn btn-success">Valider</button>
                     </td>
                 </tr>
             @endforeach
@@ -86,11 +82,7 @@
                     <td>{{ $forfait->start_date->format('d-m-Y') }}</td>
                     <td>{{ $forfait->end_date->format('d-m-Y') }}</td>
                     <td>
-                        <form action="{{ route('admin.forfaits.validate', $forfait->id) }}" method="POST">
-                            @csrf
-                            @method('PUT')
-                            <button type="submit" class="bg-red-500 btn btn-danger">Valider</button>
-                        </form>
+                        <button type="button" disabled class="bg-red-500 btn btn-danger">Validé</button>
                     </td>
                 </tr>
             @endforeach
