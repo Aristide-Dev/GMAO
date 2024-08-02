@@ -13,9 +13,9 @@
 - **Date Echeance**: {{ $bonTravail->date_echeance->format('d/m/Y à H:i') }}
 
 ## **NB**: Données disponibles sur G-Maintenance 
-<x-mail::button :url="'{{ config('app.url') }}'">
+{{-- <x-mail::button :url="'{{ config('app.url') }}'">
 Cliquer Ici
-</x-mail::button>
+</x-mail::button> --}}
 
 @if (config('app.env') != 'production')
 <img src="https://gn-gmaintenance.com/storage/assets/img/logo.png" alt="Star Oil logo" width="50%" />
