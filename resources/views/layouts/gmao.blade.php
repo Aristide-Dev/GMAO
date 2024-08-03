@@ -117,6 +117,10 @@
                 @include('layouts.gmao.admin.sidebar')
                 @break
 
+                @case($sidebar == "commercial")
+                @include('layouts.gmao.commercial.sidebar')
+                @break
+
                 @case(2)
                 @break
                 @default
