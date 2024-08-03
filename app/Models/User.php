@@ -20,7 +20,7 @@ class User extends Authenticatable
     use Notifiable;
     use TwoFactorAuthenticatable;
 
-    private $roles_list = ['super_admin','admin','maintenance','demandeur','prestataire_admin','agent','commerial'];
+    private $roles_list = ['super_admin','admin','maintenance','demandeur','prestataire_admin','agent','commercial'];
 
     /**
      * The attributes that are mass assignable.

@@ -132,6 +132,39 @@ Route::middleware([
  * **************************************************************************************************
  * **************************************************************************************************
  * **************************************************************************************************
+ *      COMMERCIAL ROUTES
+ */
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+    'isnotblocked'
+])->prefix('commercial')->name('commercial.')->group(function () {
+
+    Route::get('/dashboard', function () {
+        return view('commercial.dashboard');
+    })->name('dashboard');
+
+    Route::resource('/demandes', DemandeurDemandeInterventionController::class);
+    // Route::resource('/sites', DemandeurSiteController::class);
+
+    // Route::post('/sites/{site}/equipement/store', [DemandeurSiteController::class, 'add_equipement'])
+    //     ->name('sites.equipement.store');
+
+    // Route::get('/sites/{site}/{categorie_equipement}', [DemandeurSiteController::class, 'show_categorie_equipement'])
+    //     ->name('sites.equipement.categorie');
+
+    // Route::get('/sites/{id}/{type_equipement}', function () {
+    //     return view('demandeur.sites.equipements');
+    // })->name('sites.type_equipement');
+});
+
+
+
+/**
+ * **************************************************************************************************
+ * **************************************************************************************************
+ * **************************************************************************************************
  *      DEMANDEUR ROUTES
  */
 Route::middleware([

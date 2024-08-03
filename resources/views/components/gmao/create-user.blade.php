@@ -47,6 +47,7 @@ $show = "";
                 <label class="form-label" for="role">role</label>
                 <select id="role" name="role" class="select2 form-select form-select-lg" data-allow-clear="true" data-placeholder="-- CHOISIR --">
                     <option value="">-- CHOISIR --</option>
+                    <option value="commercial">Commercial</option>
                     <option value="demandeur">Demandeur</option>
                     <option value="maintenance">agent maintenance</option>
                     <option value="admin">Admin</option>

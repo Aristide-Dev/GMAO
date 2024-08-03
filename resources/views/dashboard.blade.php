@@ -6,6 +6,8 @@
         @include('admin.dashboard')
     @elseif ($gmao_dash_role == 'demandeur')
         @include('demandeur.dashboard')
+    @elseif ($gmao_dash_role == 'commercial')
+        @include('commercial.dashboard')
     @elseif ($gmao_dash_role == 'prestataire_admin' || $gmao_dash_role == 'agent')
         @include('prestataires.dashboard')
     @else
