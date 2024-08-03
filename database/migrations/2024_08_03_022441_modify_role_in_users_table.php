@@ -25,6 +25,11 @@ return new class extends Migration
         $table->timestamp('email_verified_at')->nullable();
         $table->timestamp('telephone_verified_at')->nullable();
         $table->string('password');
+        $table->text('two_factor_secret')->nullable();
+        $table->text('two_factor_recovery_codes')->nullable();
+        if (Fortify::confirmsTwoFactorAuthentication()) {
+            $table->timestamp('two_factor_confirmed_at')->nullable();
+        }
         $table->rememberToken();
         $table->foreignId('current_team_id')->nullable();
         $table->string('profile_photo_path', 2048)->nullable();
@@ -34,19 +39,6 @@ return new class extends Migration
 
         $table->foreignId('prestataire_own')->nullable();
         // $table->foreign('prestataire_own')->references('id')->on('prestataires')->onDelete('cascade');
-            $table->text('two_factor_secret')
-            ->after('password')
-            ->nullable();
-
-        $table->text('two_factor_recovery_codes')
-            ->after('two_factor_secret')
-            ->nullable();
-
-        if (Fortify::confirmsTwoFactorAuthentication()) {
-            $table->timestamp('two_factor_confirmed_at')
-                ->after('two_factor_recovery_codes')
-                ->nullable();
-        }
         $table->timestamps();
     });
 
