@@ -22,6 +22,14 @@ class User extends Authenticatable
 
     private $roles_list = ['super_admin','admin','maintenance','demandeur','prestataire_admin','agent','commercial'];
 
+    const ROLE_SUPER_ADMIN = 'super_admin';
+    const ROLE_ADMIN = 'admin';
+    const ROLE_MAINTENANCE = 'maintenance';
+    const ROLE_DEMANDEUR = 'demandeur';
+    const ROLE_PRESTATAIRE_ADMIN = 'prestataire_admin';
+    const ROLE_AGENT = 'agent';
+    const ROLE_COMMERCIAL = 'commercial';
+
     /**
      * The attributes that are mass assignable.
      *
