@@ -11,15 +11,15 @@
         >
             Sync Remote Database
         </button>
-    @else
+        @else
         <p class="text-danger">This command can only be run in a local environment.</p>
-    @endif
-    <hr class="w-full border-2 border-blue-300">
-    
-    @if ($message)
-        <div class="mt-3 font-bold text-white bg-gray-500 alert">
+        @endif
+        <hr class="w-full border-2 border-blue-300">
+
+        @if ($message)
+        <div class="mt-3 font-bold text-white bg-gray-800 alert">
             <pre>{{ $message }}</pre>
         </div>
-    @endif
+        @endif
     </div>
 </div>

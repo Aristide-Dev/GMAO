@@ -9,16 +9,22 @@ use Livewire\Component;
 
 class SyncDatabase extends Component
 {
-    public $canSync;
-    public $message;
+    public bool $canSync = false;
+    public string $message = "";
 
     /**
      * Initialize the component.
      */
     public function mount(Application $app)
     {
-        $this->canSync = $app->environment('local') ?? false;
+        $this->canSync = $app->environment("local") ?? false;
+        if ($this->canSync) {
+            $this->message = "Wellcome To Sync DataBase From Gn.";
+        } else {
+            $this->message = "";
+        }
     }
+
 
     /**
      * Syncs the remote database tables excluding the specified tables if canSync is true.
@@ -26,35 +32,30 @@ class SyncDatabase extends Component
     public function syncRemoteDatabase()
     {
         if ($this->canSync) {
-            $this->message = "Starting database synchronization...";
+            $this->message = "\nStarting database synchronization...";
 
-            // Get all table names from the remote database
-            $remoteTables = DB::connection('mysql_remote')->select('SHOW FULL TABLES WHERE Table_type = "BASE TABLE"');
-            $excludedTables = [
-                // 'gmao_users',
-                'gmao_failed_jobs',
-                // 'gmao_migrations',
-                // 'gmao_sessions',
-                'gmao_team_invitations',
-                'gmao_team_user',
-                'gmao_teams'
-            ];
+            try {
+                $remoteTables = DB::connection('mysql_remote')->select('SHOW FULL TABLES WHERE Table_type = "BASE TABLE"');
+                $excludedTables = ['gmao_failed_jobs', 'gmao_team_invitations', 'gmao_team_user', 'gmao_teams'];
 
-            // Create an ordered list of tables to sync based on foreign key dependencies
-            $orderedTables = $this->getOrderedTablesForSync($remoteTables, $excludedTables);
+                $orderedTables = $this->getOrderedTablesForSync($remoteTables, $excludedTables);
 
-            // Disable foreign key checks
-            DB::statement('PRAGMA foreign_keys = OFF');
+                DB::statement('PRAGMA foreign_keys = OFF');
 
-            foreach ($orderedTables as $tableName) {
-                $this->message .= "\n\t * Syncing table: $tableName";
-                $this->syncTable($tableName);
+                foreach ($orderedTables as $tableName) {
+                    $this->message .= "\n\t * Syncing table: $tableName";
+                    $this->syncTable($tableName);
+                    $this->dispatch('syncProgress'); // Émettre un événement pour indiquer la progression
+                }
+
+                DB::statement('PRAGMA foreign_keys = ON');
+                $this->message .= "\n------------------------------------------------------------------";
+                $this->message .= "\nDatabase synchronization completed.";
+                $this->message .= "\n------------------------------------------------------------------";
+
+            } catch (\Exception $e) {
+                $this->message = 'Error during synchronization: ' . $e->getMessage();
             }
-
-            // Re-enable foreign key checks
-            DB::statement('PRAGMA foreign_keys = ON');
-
-            $this->message .= "\nDatabase synchronization completed.";
         } else {
             $this->message = 'This command can only be run in a local environment.';
         }
@@ -96,6 +97,7 @@ class SyncDatabase extends Component
 
     public function render()
     {
-        return view('livewire.super-admin.sync-database');
+        $message = $this->message;
+        return view('livewire.super-admin.sync-database', compact('message'));
     }
 }
