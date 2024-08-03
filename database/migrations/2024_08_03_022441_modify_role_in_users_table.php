@@ -3,6 +3,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Config;
 
 return new class extends Migration
 {
@@ -11,14 +12,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // Détecter le type de base de données
-        $driver = DB::getDriverName();
+        // Récupérer le nom de la table avec préfixe
+        $table = Config::get('database.connections.'.Config::get('database.default').'.prefix') . 'users';
 
-        if ($driver === 'mysql') {
-            // Pour MySQL
-            DB::statement("ALTER TABLE users MODIFY role ENUM('super_admin', 'admin', 'maintenance', 'demandeur', 'prestataire_admin', 'agent', 'commercial') NOT NULL");
-        } elseif ($driver === 'sqlite') {
-            // Pour SQLite
+        if (DB::getDriverName() === 'mysql') {
+            // Commande SQL pour MySQL
+            DB::statement("ALTER TABLE {$table} MODIFY COLUMN role ENUM('super_admin', 'admin', 'maintenance', 'demandeur', 'prestataire_admin', 'agent', 'commercial') NOT NULL");
+        } elseif (DB::getDriverName() === 'sqlite') {
+            // Migration spécifique pour SQLite
             Schema::create('users_temp', function (Blueprint $table) {
                 $table->id();
                 $table->string('first_name');
@@ -31,21 +32,23 @@ return new class extends Migration
                 $table->string('password');
                 $table->text('two_factor_secret')->nullable();
                 $table->text('two_factor_recovery_codes')->nullable();
-                $table->timestamp('two_factor_confirmed_at')->nullable();
+                if (Fortify::confirmsTwoFactorAuthentication()) {
+                    $table->timestamp('two_factor_confirmed_at')->nullable();
+                }
                 $table->rememberToken();
                 $table->foreignId('current_team_id')->nullable();
                 $table->string('profile_photo_path', 2048)->nullable();
                 $table->boolean("first_login")->default(true);
-                $table->enum("role", ['super_admin', 'admin', 'maintenance', 'demandeur', 'prestataire_admin', 'agent', 'commercial']);
+                $table->enum("role",['super_admin','admin','maintenance','demandeur','prestataire_admin','agent', 'commercial']);
                 $table->boolean('status')->default(false);
                 $table->foreignId('prestataire_own')->nullable();
                 $table->timestamps();
             });
 
-            // Copier les données de la table modifiée vers l'ancienne structure
+            // Copier les données de l'ancienne table vers la nouvelle
             DB::table('users_temp')->insert(DB::table('users')->select('*')->get()->toArray());
 
-            // Supprimer la table modifiée
+            // Supprimer l'ancienne table
             Schema::dropIfExists('users');
 
             // Renommer la table temporaire
@@ -58,13 +61,12 @@ return new class extends Migration
      */
     public function down(): void
     {
-        $driver = DB::getDriverName();
+        $table = Config::get('database.connections.'.Config::get('database.default').'.prefix') . 'users';
 
-        if ($driver === 'mysql') {
-            // Revenir à l'ancien ENUM pour MySQL
-            DB::statement("ALTER TABLE users MODIFY role ENUM('super_admin', 'admin', 'maintenance', 'demandeur', 'prestataire_admin', 'agent') NOT NULL");
-        } elseif ($driver === 'sqlite') {
-            // Pour SQLite, inverser la migration
+        if (DB::getDriverName() === 'mysql') {
+            DB::statement("ALTER TABLE {$table} MODIFY COLUMN role ENUM('super_admin', 'admin', 'maintenance', 'demandeur', 'prestataire_admin', 'agent') NOT NULL");
+        } elseif (DB::getDriverName() === 'sqlite') {
+            // Revenir à la structure précédente pour SQLite
             Schema::create('users_temp', function (Blueprint $table) {
                 $table->id();
                 $table->string('first_name');
@@ -77,21 +79,23 @@ return new class extends Migration
                 $table->string('password');
                 $table->text('two_factor_secret')->nullable();
                 $table->text('two_factor_recovery_codes')->nullable();
-                $table->timestamp('two_factor_confirmed_at')->nullable();
+                if (Fortify::confirmsTwoFactorAuthentication()) {
+                    $table->timestamp('two_factor_confirmed_at')->nullable();
+                }
                 $table->rememberToken();
                 $table->foreignId('current_team_id')->nullable();
                 $table->string('profile_photo_path', 2048)->nullable();
                 $table->boolean("first_login")->default(true);
-                $table->enum("role", ['super_admin', 'admin', 'maintenance', 'demandeur', 'prestataire_admin', 'agent']);
+                $table->enum("role",['super_admin','admin','maintenance','demandeur','prestataire_admin','agent']);
                 $table->boolean('status')->default(false);
                 $table->foreignId('prestataire_own')->nullable();
                 $table->timestamps();
             });
 
-            // Copier les données de la table modifiée vers l'ancienne structure
+            // Copier les données de l'ancienne table vers la nouvelle
             DB::table('users_temp')->insert(DB::table('users')->select('*')->get()->toArray());
 
-            // Supprimer la table modifiée
+            // Supprimer l'ancienne table
             Schema::dropIfExists('users');
 
             // Renommer la table temporaire
