@@ -36,7 +36,7 @@ class RapportConstatController extends Controller
     public function store(Request $request, DemandeIntervention $demande, BonTravail $bonTravail)
     {
         $request->validateWithBag('create_rapport_constat', [
-            'rapport_constat_file' => 'required|image|extensions:jpeg,jpg,png|max:2000',
+            'rapport_constat_file' => 'required|image|extensions:jpeg,jpg,png|max:5000',
             'status' => 'required|string|in:terminé,en attente,annulé,rejeté',
             'date_intervention' => [
                 'required',

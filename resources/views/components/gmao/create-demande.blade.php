@@ -1,4 +1,4 @@
-@props(['action' => 'demandeur', 'sites', 'demandeurs'])
+@props(['action' => 'demandeur', 'sites', 'demandeurs' => null])
 
 {{-- @if (!isset($sites))
 @php
@@ -19,6 +19,9 @@ throw new InvalidArgumentException('Le composant (add-demande) nécessite une pr
         $routeName = 'demandeur.demandes.store';
     } elseif ($action == 'admin') {
         $routeName = 'admin.demandes.store';
+    } 
+    elseif ($action == 'commercial') {
+        $routeName = 'commercial.demandes.store';
     }
 @endphp
 

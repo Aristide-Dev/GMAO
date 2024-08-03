@@ -28,55 +28,66 @@ class DemandesTable extends Component
 
     private function getDemandeursortField()
     {
-        return $this->sortField == 'demandeur.name' ? 'created_at' : $this->sortField;
+        return $this->sortField == 'demandeur.name' ? 'gmao_demande_interventions.created_at' : $this->sortField;
     }
-
     public function sortBy($field)
     {
-        if ($this->sortField === $field) {
-            $this->sortDirection = $this->sortDirection === 'asc' ? 'desc' : 'asc';
-        } else {
-            $this->sortField = $field;
-            $this->sortDirection = 'asc';
-        }
+        $this->sortField = $field;
+        $this->sortDirection = $this->sortDirection === 'asc' ? 'desc' : 'asc';
     }
+
 
     private function getDemandes()
     {
-        $query = DemandeIntervention::query();
-
+        $query = DemandeIntervention::with(['site', 'demandeur', 'bon_travail.rapportIntervention']);
+        
         if ($this->action == 'demandeur') {
             $query->where("demandeur_id", Auth::id());
         }
-
+    
         $query->where(function($query) {
-            $query->where('di_reference', 'like', '%' . $this->search . '%')
-                  ->orWhere('created_at', 'like', '%' . $this->search . '%')
+            $query->where('demande_interventions.di_reference', 'like', '%' . $this->search . '%')
+                  ->orWhere('demande_interventions.created_at', 'like', '%' . $this->search . '%')
                   ->orWhereHas('site', function($query) {
                       $query->where('name', 'like', '%' . $this->search . '%');
                   })
                   ->orWhereHas('demandeur', function($query) {
                       $query->where('first_name', 'like', '%' . $this->search . '%')
                             ->orWhere('last_name', 'like', '%' . $this->search . '%');
+                  })
+                  ->orWhereHas('bon_travail.rapportIntervention', function($query) {
+                      $query->where('commentaire', 'like', '%' . $this->search . '%');
                   });
         });
-
-        if (in_array($this->sortField, ['site.name', 'demandeur.first_name', 'demandeur.last_name'])) {
-            $query->join('sites as sites', 'demande_interventions.site_id', '=', 'sites.id')
-                  ->join('users as users', 'demande_interventions.demandeur_id', '=', 'users.id')
-                  ->orderBy($this->sortField == 'site.name' ? 'sites.name' : ($this->sortField == 'demandeur.first_name' ? 'users.first_name' : 'users.last_name'), $this->sortDirection)
-                  ->select('demande_interventions.*');
+    
+        // Adjust sort logic based on the sort field
+        if ($this->sortField === 'site.name') {
+            $query->join('sites', 'demande_interventions.site_id', '=', 'sites.id')
+                  ->orderBy('sites.name', $this->sortDirection);
+        } elseif ($this->sortField === 'demandeur.first_name') {
+            $query->join('users as demandeur', 'demande_interventions.demandeur_id', '=', 'demandeur.id')
+                  ->orderBy('demandeur.first_name', $this->sortDirection);
+        } elseif ($this->sortField === 'commentaires') {
+            $query->join('bon_travails as bon_travails', 'demande_interventions.di_reference', '=', 'bon_travails.di_reference')
+                  ->join('rapport_interventions as rapport', 'bon_travails.bt_reference', '=', 'rapport.bt_reference')
+                  ->orderBy('rapport.commentaire', $this->sortDirection);
         } else {
-            $query->orderBy($this->getDemandeursortField(), $this->sortDirection);
+            $query->orderBy('demande_interventions.' . $this->sortField, $this->sortDirection);
         }
+    
         return $query;
     }
+    
+    
+    
+    
+
 
     public function render()
     {
         $url = $this->determineUrl($this->action);
 
-        $demandes = $this->getDemandes()->paginate(10);
+        $demandes = $this->getDemandes()->paginate(50);
         $demandes_count = $this->getDemandes()->count();
 
         return view('livewire.demandes-table', [

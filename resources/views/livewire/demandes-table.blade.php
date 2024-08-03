@@ -4,7 +4,6 @@
             <label for="search" class="mx-1 font-bold">Rechercher</label>
             <input wire:model.live="search" name="search" type="search" placeholder="Rechercher une demande" class="mx-2 form-control rounded-2xl" />
             <button wire:click="exportExcel" class="mx-2 btn btn-sm btn-success">Export Excel</button>
-            {{-- <button wire:click="exportPDF" class="mx-2 btn btn-danger">Export PDF</button> --}}
         </div>
     </div>
 
@@ -13,12 +12,12 @@
             <caption class="ms-4">Liste des Demandes d'interventions (DI)</caption>
             <thead class="table-light">
                 <tr>
-                    <th><a href="#" wire:click.prevent="sortBy('di_reference')">D.I</a></th>
-                    <th>Commentaires</th>
-                    <th><a href="#" wire:click.prevent="sortBy('site.name')">Site</a></th>
+                    <th><a href="javascript:;" wire:click.prevent="sortBy('di_reference')">D.I</a></th>
+                    <th><a href="javascript:;" wire:click.prevent="sortBy('commentaires')">Commentaires</a></th>
+                    <th><a href="javascript:;" wire:click.prevent="sortBy('site.name')">Site</a></th>
                     <th>Document</th>
-                    <th><a href="#" wire:click.prevent="sortBy('demandeur.first_name')">Demandeur</a></th>
-                    <th>Status</th>
+                    <th><a href="javascript:;" wire:click.prevent="sortBy('demandeur.first_name')">Demandeur</a></th>
+                    <th><a href="javascript:;" wire:click.prevent="sortBy('status')">Status</a></th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -50,11 +49,6 @@
                         <div class="avatar avatar-md me-2">
                             <img src="{{ $demande->document() }}" alt="" class="rounded-circle image-to-display" id="doc_image_url{{ $key + 1 }}" onclick="displayImageInModal('doc_image_url{{ $key + 1 }}', 'myModal')">
                         </div>
-                        {{-- <div class="z-50 avatar avatar-md me-2" id="lightgallery-{{ $key }}" style="z-index:1000 !important;">
-                            <a href="{{ Storage::url(str_replace('/storage', '', $demande->document())) }}" style="z-index:10000 !important;">
-                                <img src="{{ Storage::url(str_replace('/storage', '', $demande->document())) }}" class="relative w-full rounded-full shadow-lg" style="z-index:1000000000040 !important;"/>
-                            </a>
-                        </div> --}}
                     </td>
                     <td class="justify-center align-items-center">
                         @if ($url == 'prestataires' || $url == 'demandeur')
@@ -80,12 +74,12 @@
             </tbody>
             <tfoot class="table-light">
                 <tr>
-                    <th><a href="#" wire:click.prevent="sortBy('di_reference')">D.I</a></th>
+                    <th><a href="javascript:;" wire:click.prevent="sortBy('di_reference')">D.I</a></th>
                     <th>Commentaires</th>
-                    <th><a href="#" wire:click.prevent="sortBy('site.name')">Site</a></th>
+                    <th><a href="javascript:;" wire:click.prevent="sortBy('sites.name')">Site</a></th>
                     <th>Document</th>
-                    <th><a href="#" wire:click.prevent="sortBy('demandeur.first_name')">Demandeur</a></th>
-                    <th>Status</th>
+                    <th><a href="javascript:;" wire:click.prevent="sortBy('demandeur.first_name')">Demandeur</a></th>
+                    <th><a href="javascript:;" wire:click.prevent="sortBy('status')">Status</a></th>
                     <th>Action</th>
                 </tr>
             </tfoot>
@@ -94,43 +88,4 @@
     <nav aria-label="Page navigation" class="mx-3 d-flex">
         {{ $demandes->links() }}
     </nav>
-    
-    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.5.0/lightgallery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.5.0/plugins/zoom/lg-zoom.min.js"></script> --}}
 </div>
-
-
-{{-- <script>
-    document.addEventListener('livewire:init', function () {
-        initLightGallery();
-    });
-
-    document.addEventListener('livewire:update', function () {
-        initLightGallery();
-    });
-
-    function initLightGallery() {
-        const demandes_count = @json($demandes_count);
-        
-        // console.log("initLightGallery Is Called");
-        // console.log(demandes_count);
-
-        for (let index = 0; index < demandes_count; index++) {
-            // console.log("initLightGallery: "+index);
-            lightGallery(document.getElementById('lightgallery-' + index), {
-                plugins: [lgThumbnail, lgZoom],
-                speed: 500,
-            });
-        }
-        
-        // demandes_count.forEach((demande, index) => {
-        //     console.log("initLightGallery: "+index);
-        //     lightGallery(document.getElementById('lightgallery-' + index), {
-        //         plugins: [lgThumbnail, lgZoom],
-        //         speed: 500,
-        //     });
-        // });
-    }
-</script> --}}
-

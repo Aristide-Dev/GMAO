@@ -14,16 +14,17 @@ use App\Http\Controllers\Admin\ZoneController as AdminZoneController;
 
 
 use App\Http\Controllers\AppController;
+use App\Http\Controllers\CommercialController;
+
+
+
 use App\Http\Controllers\Demandeur\DemandeInterventionController as DemandeurDemandeInterventionController;
-
-
-
 use App\Http\Controllers\Demandeur\SiteController as DemandeurSiteController;
+
 use App\Http\Controllers\Prestataire\DemandeInterventionController as PrestataireDemandeInterventionController;
 use App\Http\Controllers\Prestataire\RapportConstatController as PrestataireRapportConstatController;
 use App\Http\Controllers\Prestataire\RapportRemplacementPieceController as PrestataireRapportRemplacementPieceController;
 use App\Http\Controllers\Prestataire\UtilisateurController as PrestataireUtilisateurController;
-use Illuminate\Support\Facades\Route;
 
 
 /*
@@ -37,6 +38,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Route;
+
 
 Route::get('robots.txt', function() {
     return response("User-agent: *\nDisallow: /", 200)
@@ -145,7 +148,8 @@ Route::middleware([
         return view('commercial.dashboard');
     })->name('dashboard');
 
-    Route::resource('/demandes', DemandeurDemandeInterventionController::class);
+    Route::get('/demandes', [CommercialController::class, 'demandes'])->name('demandes.index');
+    Route::post('/demandes', [CommercialController::class, 'store_demande'])->name('demandes.store');
     // Route::resource('/sites', DemandeurSiteController::class);
 
     // Route::post('/sites/{site}/equipement/store', [DemandeurSiteController::class, 'add_equipement'])

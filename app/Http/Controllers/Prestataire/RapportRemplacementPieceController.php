@@ -35,7 +35,7 @@ class RapportRemplacementPieceController extends Controller
     public function store(Request $request, DemandeIntervention $demande, BonTravail $bonTravail)
     {
         $request->validateWithBag('create_rapport_remplacement_piece', [
-            'rapport_remplacement_piece_file' => 'required|image|extensions:jpeg,jpg,png|max:2000',
+            'rapport_remplacement_piece_file' => 'required|image|extensions:jpeg,jpg,png|max:5000',
             'commentaire' => 'nullable|string|max:250',
         ]);
 
