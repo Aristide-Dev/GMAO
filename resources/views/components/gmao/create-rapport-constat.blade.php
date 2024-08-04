@@ -107,7 +107,6 @@
                 <select id="status" name="status" class="select2 form-select form-select-lg" data-allow-clear="true" data-placeholder="--CHOISIR--">
                     <option value="Clôturé">Clôturé / (reparé)</option>
                     <option value="en cours" selected>En Cours</option>
-                    <option value="affectées travaux">Affectées Travaux</option>
                 </select>
                 <x-input-error bag="create_rapport_constat" for="status" class="mt-2" />
             </div>

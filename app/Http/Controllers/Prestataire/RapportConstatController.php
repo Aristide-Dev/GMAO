@@ -37,7 +37,7 @@ class RapportConstatController extends Controller
     {
         $request->validateWithBag('create_rapport_constat', [
             'rapport_constat_file' => 'required|image|extensions:jpeg,jpg,png|max:5000',
-            'status' => 'required|string|in:terminé,en attente,annulé,rejeté',
+            'status' => 'required|string|in:Clôturé,en cours',
             'date_intervention' => [
                 'required',
                 'date',
@@ -67,7 +67,7 @@ class RapportConstatController extends Controller
         // Récupérer le rapport d'intervention associé au bon de travail
         $rapportIntervention = $bonTravail->rapportIntervention;
     
-        RapportConstat::create([
+        $rapportConstat = RapportConstat::create([
             'ri_reference' => $rapportIntervention->ri_reference,
             'rapport_constat_file' => $imagePath,
             'commentaire' => $request->commentaire ?? "",
@@ -80,56 +80,45 @@ class RapportConstatController extends Controller
             case 'en cours':
                 $request->status = StatusEnum::EN_COURS;
                 break;
-            case 'affectées travaux':
-                $request->status = StatusEnum::AFFECTER_TRAVAUX;
-                break;
             default:
-                $request->status = StatusEnum::AFFECTER_TRAVAUX;
+                $request->status = StatusEnum::EN_COURS;
                 break;
         }
     
-        if($request->status == StatusEnum::TERMINE)
+        if($request->status == StatusEnum::CLOTURE)
         {
             $bonTravail->status = StatusEnum::CLOTURE;
-            $bonTravail->save();
     
             if ($rapportIntervention) {
                 $rapportIntervention->status = StatusEnum::EN_COURS;
                 $rapportIntervention->date_intervention = $request->date_intervention.' '.$request->heure_intervention;
-                $rapportIntervention->save();
             }
         }
     
         if($request->status == StatusEnum::EN_COURS)
         {
             $bonTravail->status = $request->status;
-            $bonTravail->save();
     
             if ($rapportIntervention) {
                 $rapportIntervention->status = $request->status;
                 $rapportIntervention->date_intervention = $request->date_intervention.' '.$request->heure_intervention;
-                $rapportIntervention->save();
             }
         }
     
         if($request->status == StatusEnum::AFFECTER_TRAVAUX)
         {
             $bonTravail->status = $request->status;
-            $bonTravail->save();
     
             if ($rapportIntervention) {
                 $rapportIntervention->status = $request->status;
                 $rapportIntervention->date_intervention = $request->date_intervention.' '.$request->heure_intervention;
-                $rapportIntervention->save();
             }
         }
         
-        event(new FirstRapportConstatEvent($rapportIntervention, $bonTravail->prestataire));
+        $bonTravail->save();
+        $rapportIntervention->save();
 
-        // if(empty($rapportIntervention->rapport_constat))
-        // {
-        //     event(new FirstRapportConstatEvent($rapportIntervention, $prestataire));
-        // }
+        event(new FirstRapportConstatEvent($rapportIntervention, $bonTravail->prestataire));
     
         return redirect()->back()->with('success', 'Nouveau Rapport généré avec succès!');
     }

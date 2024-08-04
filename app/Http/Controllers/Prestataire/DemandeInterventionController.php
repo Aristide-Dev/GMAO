@@ -19,7 +19,7 @@ class DemandeInterventionController extends Controller
     public function index()
     {
         $agent = Auth::user();
-    $prestataire = $agent->prestataire;
+        $prestataire = $agent->prestataire;
 
         if($prestataire) {
             // Récupérer les bons de travail associés au prestataire et les trier par ID décroissant
