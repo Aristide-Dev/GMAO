@@ -25,7 +25,7 @@ class UsersTable extends Component
                         ->orwhere('telephone', 'like', '%'.$this->search.'%');
             })
             ->orderby('created_at', 'desc')
-            ->paginate(8);
+            ->paginate(32);
         }else{
             $utilisateurs = User::where("role", '<>', 'agent')
             ->where("role", '<>', 'super_admin')
@@ -36,7 +36,7 @@ class UsersTable extends Component
                         ->orwhere('telephone', 'like', '%'.$this->search.'%');
             })
             ->orderby('created_at', 'desc')
-            ->paginate(8);
+            ->paginate(32);
         }
         
         return view('livewire.users-table', ['utilisateurs' =>$utilisateurs]);

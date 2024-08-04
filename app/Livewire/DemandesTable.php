@@ -104,6 +104,8 @@ class DemandesTable extends Component
                 return 'admin';
             case 'prestataires':
                 return 'prestataires';
+            case 'commercial':
+                return 'commercial';
             default:
                 return 'demandeur';
         }

@@ -19,7 +19,7 @@ class Prestataires extends Component
             'prestataires' => Prestataire::where('name', 'like', '%'.$this->search.'%')
                                             ->orwhere('slug', 'like', '%'.$this->search.'%')
                                             ->orderby('name', 'asc')
-                                            ->paginate(9),
+                                            ->paginate(15),
         ]);
     }
 }

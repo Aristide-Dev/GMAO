@@ -26,7 +26,7 @@ class SiteTable extends Component
             'sites' => Site::where('name', 'like', '%'.$this->search.'%')
                                             ->orwhere('registre', 'like', '%'.$this->search.'%')
                                             ->orderby('name', 'asc')
-                                            ->paginate(20),
+                                            ->paginate(30),
         ]);
     }
 
