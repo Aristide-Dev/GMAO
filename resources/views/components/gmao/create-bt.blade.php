@@ -64,9 +64,14 @@
             </div>
 
             <div class="mb-3">
-                <label class="h6" for="create_bt_prestataire">prestataire</label>
-                <select id="create_bt_prestataire" name="prestataire" class="rounded-lg select2 form-select form-select-lg" data-allow-clear="true"
-                    data-placeholder="--CHOISIR--">
+                <input class="form-check-input" type="checkbox" value="1" id="create_bt_affectee_travaux" name="create_bt_affectee_travaux" onclick="togglePrestataire()"/>
+                <label class="pt-3 mt-3 h6" for="create_bt_affectee_travaux">Affectées Travaux ?</label>
+                <x-input-error bag="create_bon_travail" for="create_bt_affectee_travaux" class="mt-2" />
+            </div>
+            
+            <div class="mb-3" id="prestataire_div">
+                <label class="h6" for="create_bt_prestataire">Prestataire</label>
+                <select id="create_bt_prestataire" name="prestataire" class="rounded-lg select2 form-select form-select-lg" data-allow-clear="true" data-placeholder="--CHOISIR--">
                     <option value="">--CHOISIR--</option>
                     @foreach ($prestataires as $prestataire)
                         <option value="{{ $prestataire->id }}">{{ $prestataire->slug }} - {{ $prestataire->name }} </option>
@@ -81,3 +86,15 @@
         </form>
     </div>
 </div>
+<script>
+    // function togglePrestataire() {
+    //     var isChecked = document.getElementById('create_bt_affectee_travaux').checked;
+    //     var prestataireDiv = document.getElementById('prestataire_div');
+    //     if (isChecked) {
+    //         prestataireDiv.style.display = 'none';
+    //         document.getElementById('create_bt_prestataire').value = '';
+    //     } else {
+    //         prestataireDiv.style.display = 'block';
+    //     }
+    // }
+</script>

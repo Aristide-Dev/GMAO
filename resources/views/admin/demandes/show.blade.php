@@ -69,7 +69,7 @@
 
         @if ($demande->oldBonTravails()->isNotEmpty())
             {{-- Activity Timeline --}}
-            <x-gmao.historique-interventions :bon_travails="$demande->oldBonTravails()"/>
+            {{-- <x-gmao.historique-interventions :bon_travails="$demande->oldBonTravails()"/> --}}
             {{-- Activity Timeline --}}
         @endif
     </div>

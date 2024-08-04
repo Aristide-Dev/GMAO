@@ -14,6 +14,8 @@ use App\Models\Zone;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class BonTravailController extends Controller
@@ -45,6 +47,7 @@ class BonTravailController extends Controller
             'equipement' => 'required|exists:equipements,id',
             'prestataire' => 'required|exists:prestataires,id',
             'di_reference' => 'required|exists:demande_interventions,di_reference',
+            'create_bt_affectee_travaux' => 'nullable|boolean',
         ]);
 
         $auth_user = Auth::user();
@@ -59,7 +62,10 @@ class BonTravailController extends Controller
         $date_echeance = $this->getIntervalTime($demande->created_at,$zone->delais);
         // dd($date_echeance,$date_echeance_2);
 
-
+        if($demande && $demande->bon_travails)
+        {
+            return redirect()->back()->with('error', 'Il existe deja un bon de travail pour cette demande');
+        }
         // dd($demande);
         $bt_reference = $this->generateBTReference();
         $break_stepp = 0;
@@ -77,36 +83,67 @@ class BonTravailController extends Controller
         $ri_reference = $this->generateRIReference();
         while (RapportIntervention::where("ri_reference", $ri_reference)->first()) {
             if ($break_stepp >= 50) {
+                Log::error("Failed to generate a unique BT reference after 50 attempts.");
                 return redirect()->back()->with('error', 'Trop de tentative! Recommencer svp.');
             }
             $ri_reference = $this->generateRIReference();
             $break_stepp += 1;
         }
 
-        $status = StatusEnum::EN_ATTENTE;
+        $status =  $request->create_bt_affectee_travaux?StatusEnum::AFFECTER_TRAVAUX:StatusEnum::EN_COURS;
 
-        $bon_travail = BonTravail::create([
-            'requete' => $request->requete,
-            'bt_reference' => $bt_reference,
-            'di_reference' => $request->di_reference,
-            'zone_name' => $zone->name,
-            'zone_priorite' => $zone->priorite,
-            'zone_delais' => $zone->delais,
-            'equipement_id' => $request->equipement,
-            'prestataire_id' => $prestataire->id,
-            'user_id' => $auth_user->id,
-            'date_echeance' => $date_echeance,
-            'status' => $status,
-        ]);
+        // $bon_travail = BonTravail::create([
+        //     'requete' => $request->requete,
+        //     'bt_reference' => $bt_reference,
+        //     'di_reference' => $request->di_reference,
+        //     'zone_name' => $zone->name,
+        //     'zone_priorite' => $zone->priorite,
+        //     'zone_delais' => $zone->delais,
+        //     'equipement_id' => $request->equipement,
+        //     'prestataire_id' => $prestataire->id,
+        //     'user_id' => $auth_user->id,
+        //     'date_echeance' => $date_echeance,
+        //     'status' => $status,
+        // ]);
 
-        $rapport_intervention = RapportIntervention::create([
-            'ri_reference' => $ri_reference,
-            'bt_reference' => $bon_travail->bt_reference,
-            'status' => $status,
-        ]);
+        // $rapport_intervention = RapportIntervention::create([
+        //     'ri_reference' => $ri_reference,
+        //     'bt_reference' => $bon_travail->bt_reference,
+        //     'status' => $status,
+        // ]);
 
-        $demande->status = StatusEnum::EN_COURS;
-        $demande->save();
+        // $demande->status = StatusEnum::EN_COURS;
+        // $demande->save();
+
+        $bon_travail = DB::transaction(function () use ($request, $zone, $demande, $prestataire, $auth_user, $bt_reference, $ri_reference, $date_echeance, $status) {
+            $bon_travail = BonTravail::create([
+                'requete' => $request->requete,
+                'bt_reference' => $bt_reference,
+                'di_reference' => $request->di_reference,
+                'zone_name' => $zone->name,
+                'zone_priorite' => $zone->priorite,
+                'zone_delais' => $zone->delais,
+                'equipement_id' => $request->equipement,
+                'prestataire_id' => $prestataire->id,
+                'user_id' => $auth_user->id,
+                'date_echeance' => $date_echeance,
+                'status' => $status,
+            ]);
+        
+            RapportIntervention::create([
+                'ri_reference' => $ri_reference,
+                'bt_reference' => $bon_travail->bt_reference,
+                'status' => $status,
+            ]);
+        
+            $demande->status = $status;
+            $demande->save();
+
+            return $bon_travail;
+        });
+        
+        // dd($bon_travail);
+        
 
         event(new CreateBTEvent($bon_travail, $prestataire));
         // Mail::send(new CreateBTMail($bon_travail, $prestataire));
