@@ -121,13 +121,14 @@ class DemandeInterventionController extends Controller
             }
         }
 
+        $kpis = '0';
         // Calculer les KPIs
         if (strtotime($rapportIntervention->bon_travail->date_echeance) >= strtotime($intervention_time)) {
             // $kpis = "Dans les délais.";
-            $kpis = 1;
+            $kpis = '1';
         } else {
             // $kpis = "Hors délais.";
-            $kpis = 0;
+            $kpis = '0';
         }
 
         // dd($temps_prise_en_charge,$kpis);
