@@ -97,8 +97,8 @@ class DemandeInterventionController extends Controller
     {
         $request->validateWithBag('create_cloture_rapport', [
             'status' => 'required|string|max:255',
-            'numero_devis' => 'string|max:100|min:2|'.Rule::unique('rapport_interventions')->ignore($rapportIntervention->id),
-            'bon_commande' => 'string|max:100|min:2|'.Rule::unique('rapport_interventions')->ignore($rapportIntervention->id),
+            'numero_devis' => 'string|max:100|min:2',
+            'bon_commande' => 'string|max:100|min:2',
             'commentaire' => 'nullable|string|max:255',
         ]);
 
