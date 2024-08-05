@@ -159,24 +159,22 @@ class Site extends Model
         $endDate = Carbon::parse($endDate)->endOfDay();
         $totalCost = 0;
         
-
         foreach ($this->demande_interventions as $demande) {
             if ($demande->created_at->between($startDate, $endDate)) {
-                foreach ($demande->bon_travails as $bonTravail) {
-                    $rapportIntervention = $bonTravail->rapportIntervention;
+                $bonTravail = $demande->bon_travail;
+                $rapportIntervention = $bonTravail->rapportIntervention;
 
-                    if ($rapportIntervention && $rapportIntervention->injection_pieces) 
+                if ($rapportIntervention && $rapportIntervention->injection_pieces) 
                     {
                         foreach ($rapportIntervention->injection_pieces as $injectionPiece) {
                             if($injectionPiece->created_at->between($startDate, $endDate))
                             {
-                                $totalCost += $injectionPiece->take_in_stock 
-                                    ? ($injectionPiece->stock_price * $injectionPiece->quantite)
-                                    : ($injectionPiece->fournisseur_price * $injectionPiece->quantite);
+                                $totalCost += $injectionPiece->fournisseur_price 
+                                    ? ($injectionPiece->fournisseur_price * $injectionPiece->quantite)
+                                    : ($injectionPiece->stock_price * $injectionPiece->quantite);
                             }
                         }
                     }
-                }
             }
         }
 

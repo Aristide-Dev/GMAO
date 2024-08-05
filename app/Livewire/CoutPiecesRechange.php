@@ -92,7 +92,7 @@ class CoutPiecesRechange extends Component
             ->map(function ($site) use ($startDate, $endDate) {
                 return [
                     'name' => $site->name,
-                    'forfait_contrat' => $site->showForfaitContratForPeriod($startDate, $endDate),
+                    'cout_maintenance' => $site->calculateMonthlyMaintenanceCost($startDate, $endDate),
                 ];
             })
             ->toArray();
