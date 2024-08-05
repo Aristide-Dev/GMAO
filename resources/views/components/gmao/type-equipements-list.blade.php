@@ -12,8 +12,11 @@ case 'admin':
 $routeName = 'admin.sites.equipement.categorie';
 break;
 case 'demandeur':
-default:
 $routeName = 'demandeur.sites.equipement.categorie';
+case 'commercial':
+$routeName = 'commercial.sites.equipement.categorie';
+default:
+$routeName = 'commercial.sites.equipement.categorie';
 break;
 }
 
@@ -282,6 +285,40 @@ break;
     </div>
 </a>
 {{-- equipement-incendie --}}
+
+
+{{-- compteur-et-pompes-de-transfert --}}
+<a href="{{ route($routeName, ['site' => $site, 'categorie_equipement' => 'compteur-et-pompes-de-transfert']) }}" class="mb-4 col-md-4">
+    <div class="card card-border-shadow-primary">
+        <div class="card-body">
+            <div class="pb-1 mb-2 d-flex align-items-center">
+                <div class="avatar me-2">
+                    <span class="rounded">
+                        <img src="{{Storage::url('svg/compteur-et-pompes-de-transfert.svg')}}" alt="" width="500px"  style="color: {{ $site->categorieEquipementColor('compteur-et-pompes-de-transfert') }};">
+                    </span>
+                </div>
+                <h4 class="mb-0 ms-1">{{ count($site->equipementsByCategory('compteur-et-pompes-de-transfert')) }}</h4>
+            </div>
+            <h5 class="mb-1 fw-bold">{{ $site->categorieEquipementText('compteur-et-pompes-de-transfert') }}</h5>
+            <ul class="mb-0 list-unstyled d-flex align-items-center avatar-group">
+                <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" title="{{ $site->categorieEquipementText('compteur-et-pompes-de-transfert') }}" class="pt-1 text-center border align-items-center justify-content-center avatar avatar-sm pull-up bg-label-primary rounded-circle">
+                        <img src="{{Storage::url('svg/compteur-et-pompes-de-transfert.svg')}}" alt="">
+                </li>
+                <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" title="{{ $site->categorieEquipementText('compteur-et-pompes-de-transfert') }}" class="pt-1 text-center border align-items-center justify-content-center avatar avatar-sm pull-up bg-label-primary rounded-circle">
+                        <img src="{{Storage::url('svg/compteur-et-pompes-de-transfert.svg')}}" alt="">
+                </li>
+                <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" title="{{ $site->categorieEquipementText('compteur-et-pompes-de-transfert') }}" class="pt-1 text-center border align-items-center justify-content-center avatar avatar-sm pull-up bg-label-primary rounded-circle">
+                        <img src="{{Storage::url('svg/compteur-et-pompes-de-transfert.svg')}}" alt="">
+                </li>
+            </ul>
+            <p class="mb-0">
+                <small class="text-muted">FORFAIT CONTRAT: </small>
+                <span class="fw-medium me-1">{{ number_format($site->totalForfaitContratByCategory('compteur-et-pompes-de-transfert'), 0,'.',' ') }} F</span>
+            </p>
+        </div>
+    </div>
+</a>
+{{-- compteur-et-pompes-de-transfert --}}
 
 
 {{-- compteur-et-pompes-de-transfert --}}

@@ -53,6 +53,24 @@ enum EquipementEnum: string {
     }
 
     /**
+     * Retourner L'image correspondante à une categorie d'equipement
+     */
+    public static function getBG($categorie): string {
+        return match ($categorie) {
+            self::DISTRIBUTEUR, 'distributeur' => asset('storage/assets/img/illustrations/distributtteur.jpg'),
+            self::STOCKAGE_ET_TUYAUTERIE, 'stockage-et-tuyauterie' => 'https://img.freepik.com/premium-psd/3d-rendering-gas-air-tank-transparent-background-ai-generated_768733-37689.jpg?w=300',
+            self::GROUPE_ELECTROGENE, 'groupe-electrogene' => 'Groupe Électrogène',
+            self::FORAGE, 'forage' => 'Forage',
+            self::SERVICING, 'servicing' => 'Servicing',
+            self::BRANDING, 'branding' => 'Branding',
+            self::ELECTRICITE, 'electricite' => 'Électricité',
+            self::EQUIPEMENT_INCENDIE, 'equipement-incendie' => 'Équipement Incendie',
+            self::COMPTEUR_ET_POMPES_DE_TRANSFERT, 'compteur-et-pompes-de-transfert' => 'Compteur et Pompes de transfert',
+            default => 'Inconnu',
+        };
+    }
+
+    /**
      * Retourne une couleur CSS aléatoire
      */
     public static function randomColor(): string {

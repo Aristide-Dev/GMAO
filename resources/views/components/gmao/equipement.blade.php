@@ -39,16 +39,15 @@
             break;
         case 'stockage-et-tuyauterie':
             $selected_icon = '<i class="fa-solid fa-database fa-lg" style="color: #c0c0c0;"></i>';
-            $bg_image =
-                'https://img.freepik.com/premium-psd/3d-rendering-gas-air-tank-transparent-background-ai-generated_768733-37689.jpg?w=300';
+            $bg_image = asset('storage/assets/img/illustrations/stockage-et-tuyauterie.png');
             break;
         case 'forage':
             $selected_icon = '<i class="fa-solid fa-bore-hole fa-lg" style="color: #B197FC;"></i>';
-            $bg_image = '';
+            $bg_image = asset('storage/assets/img/illustrations/forage.png');
             break;
         case 'servicing':
             $selected_icon = '<i class="fa-solid fa-gears fa-lg"></i>';
-            $bg_image = 'https://img.freepik.com/premium-psd/mechanic-servicing-car_1101614-71739.jpg?w=740';
+            $bg_image = asset('storage/assets/img/illustrations/servicing.png');
             break;
         case 'branding':
             $selected_icon = '<i class="fa-solid fa-ranking-star fa-lg" style="color: #FFD43B;"></i>';
@@ -87,7 +86,7 @@
     <div class="card shadow-3xl" style="height: auto;">
         <div class="bg-white card-body">
             <div class="pt-4 mb-3 text-center bg-label-primary rounded-3 w-100"
-                style="background-image: url('{{ $bg_image }}'); background-size:contain; background-position:center; background-repeat:no-repeat; height:200px;">
+                style="height:200px; background-image: url('{{ $bg_image }}'); background-size:90%; background-position:center; background-repeat:no-repeat;">
                 {{-- <img class="img-fluid w-50" src="{{ $bg_image }}" alt="Card girl image" width="50" /> --}}
             </div>
             <div class="flex justify-between gap-1 mt-3 mb-0 border-b border-black rounded">
