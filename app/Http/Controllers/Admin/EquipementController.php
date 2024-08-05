@@ -58,7 +58,7 @@ class EquipementController extends Controller
     {
         $request->validateWithBag('edit_equipement',[
             'name' => ['required', 'string', 'max:100', Rule::unique('sites')->ignore($site->id)],
-            'numero_serie' => ['required', 'string', 'max:30', Rule::unique('equipements')->ignore($equipement->id)],
+            'numero_serie' => ['required', 'string', 'max:30'],
             'categorie' => ['required', 'string', 'max:30', 'in:distributeur,stockage-et-tuyauterie,forage,servicing,branding,groupe-electrogene,electricite,equipement-incendie,compteur-et-pompes-de-transfert,autres-equipements-et-immobiliers'],
             'forfait_contrat' => ['required', 'integer', 'min:0'],
 
