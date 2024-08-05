@@ -74,6 +74,10 @@
             $selected_icon = '<i class="fa-solid fa-fire-extinguisher fa-lg" style="color: #ff0000;"></i>';
             $bg_image = Storage::url('assets/img/compteur-et-pompes-de-transfert.png');
             break;
+        case 'autres-equipements-et-immobiliers':
+            $selected_icon = '<i class="fa-solid fa-fire-extinguisher fa-lg" style="color: #ff0000;"></i>';
+            $bg_image = asset('storage/assets/img/illustrations/autres-equipements-et-immobiliers.png');
+            break;
         default:
             $selected_icon = '';
             break;

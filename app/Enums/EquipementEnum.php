@@ -15,6 +15,7 @@ enum EquipementEnum: string {
     case ELECTRICITE = 'electricite';
     case EQUIPEMENT_INCENDIE = 'equipement-incendie';
     case COMPTEUR_ET_POMPES_DE_TRANSFERT = 'compteur-et-pompes-de-transfert';
+    case AUTRES_EQUIPEMENTS_ET_IMMOBILIERS = 'autres-equipements-et-immobiliers';
 
     /**
      * Associer les couleurs aux types d'équipement
@@ -30,6 +31,7 @@ enum EquipementEnum: string {
             self::ELECTRICITE, 'electricite' => '#ffff00', // Jaune foncé
             self::EQUIPEMENT_INCENDIE, 'equipement-incendie' => '#EF4444', // Rouge
             self::COMPTEUR_ET_POMPES_DE_TRANSFERT, 'compteur-et-pompes-de-transfert' => '#60A5FA', // Bleu-400
+            self::AUTRES_EQUIPEMENTS_ET_IMMOBILIERS, 'autres-equipements-et-immobiliers' => '#fbbf24', // amber-400
             default => '#D1D5DB', // Gris par défaut
         };
     }
@@ -48,6 +50,7 @@ enum EquipementEnum: string {
             self::ELECTRICITE, 'electricite' => 'Électricité',
             self::EQUIPEMENT_INCENDIE, 'equipement-incendie' => 'Équipement Incendie',
             self::COMPTEUR_ET_POMPES_DE_TRANSFERT, 'compteur-et-pompes-de-transfert' => 'Compteur et Pompes de transfert',
+            self::AUTRES_EQUIPEMENTS_ET_IMMOBILIERS, 'autres-equipements-et-immobiliers' => 'Autres équipements et immobiliers',
             default => 'Inconnu',
         };
     }

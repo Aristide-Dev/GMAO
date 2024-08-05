@@ -321,36 +321,36 @@ break;
 {{-- compteur-et-pompes-de-transfert --}}
 
 
-{{-- compteur-et-pompes-de-transfert --}}
-<a href="{{ route($routeName, ['site' => $site, 'categorie_equipement' => 'compteur-et-pompes-de-transfert']) }}" class="mb-4 col-md-4">
+{{-- autres-equipements-et-immobiliers --}}
+<a href="{{ route($routeName, ['site' => $site, 'categorie_equipement' => 'autres-equipements-et-immobiliers']) }}" class="mb-4 col-md-4">
     <div class="card card-border-shadow-primary">
         <div class="card-body">
             <div class="pb-1 mb-2 d-flex align-items-center">
                 <div class="avatar me-2">
                     <span class="rounded">
-                        <img src="{{Storage::url('svg/compteur-et-pompes-de-transfert.svg')}}" alt="" width="500px"  style="color: {{ $site->categorieEquipementColor('compteur-et-pompes-de-transfert') }};">
+                        <img src="{{Storage::url('svg/autres-equipements-et-immobiliers.svg')}}" alt="" width="500px"  style="color: {{ $site->categorieEquipementColor('autres-equipements-et-immobiliers') }};">
                     </span>
                 </div>
-                <h4 class="mb-0 ms-1">{{ count($site->equipementsByCategory('compteur-et-pompes-de-transfert')) }}</h4>
+                <h4 class="mb-0 ms-1">{{ count($site->equipementsByCategory('autres-equipements-et-immobiliers')) }}</h4>
             </div>
-            <h5 class="mb-1 fw-bold">{{ $site->categorieEquipementText('compteur-et-pompes-de-transfert') }}</h5>
+            <h5 class="mb-1 fw-bold">{{ $site->categorieEquipementText('autres-equipements-et-immobiliers') }}</h5>
             <ul class="mb-0 list-unstyled d-flex align-items-center avatar-group">
-                <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" title="{{ $site->categorieEquipementText('compteur-et-pompes-de-transfert') }}" class="pt-1 text-center border align-items-center justify-content-center avatar avatar-sm pull-up bg-label-primary rounded-circle">
-                        <img src="{{Storage::url('svg/compteur-et-pompes-de-transfert.svg')}}" alt="">
+                <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" title="{{ $site->categorieEquipementText('autres-equipements-et-immobiliers') }}" class="pt-1 text-center border align-items-center justify-content-center avatar avatar-sm pull-up bg-label-primary rounded-circle">
+                        <img src="{{Storage::url('svg/autres-equipements-et-immobiliers.svg')}}" alt="">
                 </li>
-                <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" title="{{ $site->categorieEquipementText('compteur-et-pompes-de-transfert') }}" class="pt-1 text-center border align-items-center justify-content-center avatar avatar-sm pull-up bg-label-primary rounded-circle">
-                        <img src="{{Storage::url('svg/compteur-et-pompes-de-transfert.svg')}}" alt="">
+                <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" title="{{ $site->categorieEquipementText('autres-equipements-et-immobiliers') }}" class="pt-1 text-center border align-items-center justify-content-center avatar avatar-sm pull-up bg-label-primary rounded-circle">
+                        <img src="{{Storage::url('svg/autres-equipements-et-immobiliers.svg')}}" alt="">
                 </li>
-                <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" title="{{ $site->categorieEquipementText('compteur-et-pompes-de-transfert') }}" class="pt-1 text-center border align-items-center justify-content-center avatar avatar-sm pull-up bg-label-primary rounded-circle">
-                        <img src="{{Storage::url('svg/compteur-et-pompes-de-transfert.svg')}}" alt="">
+                <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" title="{{ $site->categorieEquipementText('autres-equipements-et-immobiliers') }}" class="pt-1 text-center border align-items-center justify-content-center avatar avatar-sm pull-up bg-label-primary rounded-circle">
+                        <img src="{{Storage::url('svg/autres-equipements-et-immobiliers.svg')}}" alt="">
                 </li>
             </ul>
             <p class="mb-0">
                 <small class="text-muted">FORFAIT CONTRAT: </small>
-                <span class="fw-medium me-1">{{ number_format($site->totalForfaitContratByCategory('compteur-et-pompes-de-transfert'), 0,'.',' ') }} F</span>
+                <span class="fw-medium me-1">{{ number_format($site->totalForfaitContratByCategory('autres-equipements-et-immobiliers'), 0,'.',' ') }} F</span>
             </p>
         </div>
     </div>
 </a>
-{{-- compteur-et-pompes-de-transfert --}}
+{{-- autres-equipements-et-immobiliers --}}
 
