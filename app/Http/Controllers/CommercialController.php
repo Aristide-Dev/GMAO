@@ -63,6 +63,53 @@ class CommercialController extends Controller
         return redirect()->back()->with('success', 'Nouvelle demande créée avec succès!');
     }
 
+    /**
+     * Display the specified resource.
+     */
+    public function demandes_show(DemandeIntervention $demande)
+    {
+        // dd($demande);
+        return view('commercial.demandes.show', compact('demande'));
+    }
+
+    public function sites()
+    {
+        return view('commercial.sites.index');
+    }
+
+    public function sites_show(Site $site)
+    {
+        return view('commercial.sites.show', compact('site'));
+    }
+
+    public function show_categorie_equipement(Site $site, $categorie_equipement)
+    {
+        // Tableau des catégories disponibles
+        $categories_disponibles =
+        [
+            'distributeur',
+            'stockage-et-tuyauterie',
+            'forage',
+            'servicing',
+            'branding',
+            'groupe-electrogene',
+            'electricite',
+            'equipement-incendie',
+        ]; // Remplacez par vos catégories
+
+        // Vérifier si la catégorie spécifiée existe dans le tableau des catégories disponibles
+        if (!in_array($categorie_equipement, $categories_disponibles)) {
+            // Catégorie non valide, rediriger ou afficher un message d'erreur
+            return redirect()->back()->with('error', 'Type d\'equipement invalide.');
+        }
+
+        // Récupérer les équipements de la catégorie spécifiée pour le site donné
+        $equipements = $site->equipements()->where('categorie', $categorie_equipement)->get();
+
+        // Retourner la vue avec les équipements
+        return view('commercial.sites.equipements', ['site' => $site,'type_equipement' => $categorie_equipement,'equipements' => $equipements]);
+    }
+
     
 
     private function generateDIReference()

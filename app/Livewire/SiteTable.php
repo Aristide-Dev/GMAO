@@ -37,8 +37,10 @@ class SiteTable extends Component
                 return 'admin';
             case 'demandeur':
                 return 'demandeur';
+            case 'commercial':
+                return 'commercial';
             default:
-                return 'demandeur';
+                return 'commercial';
         }
     }
 }

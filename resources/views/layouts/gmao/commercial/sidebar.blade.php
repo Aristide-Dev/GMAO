@@ -25,12 +25,12 @@
     </x-gmao.nav-link>
 
     {{-- site --}}
-    {{-- <x-gmao.nav-link :active="request()->routeIs('admin.sites.*')">
-        <a href="{{ route('admin.sites.index') }}" class="menu-link">
+    <x-gmao.nav-link :active="request()->routeIs('commercial.sites.*')">
+        <a href="{{ route('commercial.sites.index') }}" class="menu-link">
             <i class="menu-icon fa-solid fa-screwdriver-wrench"></i>
             <div data-i18n="Sites">Sites</div>
         </a>
-    </x-gmao.nav-link> --}}
+    </x-gmao.nav-link>
 
     {{-- prestataire --}}
     {{-- <x-gmao.nav-link :active="request()->routeIs('admin.prestataires.*')">

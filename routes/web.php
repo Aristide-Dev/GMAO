@@ -150,17 +150,21 @@ Route::middleware([
 
     Route::get('/demandes', [CommercialController::class, 'demandes'])->name('demandes.index');
     Route::post('/demandes', [CommercialController::class, 'store_demande'])->name('demandes.store');
+    Route::get('/demandes/{demande}', [CommercialController::class, 'demandes_show'])->name('demandes.show');
+    
+    Route::get('/sites', [CommercialController::class, 'sites'])->name('sites.index');
+    Route::get('/sites/{site}', [CommercialController::class, 'sites_show'])->name('sites.show');
     // Route::resource('/sites', DemandeurSiteController::class);
 
     // Route::post('/sites/{site}/equipement/store', [DemandeurSiteController::class, 'add_equipement'])
     //     ->name('sites.equipement.store');
 
-    // Route::get('/sites/{site}/{categorie_equipement}', [DemandeurSiteController::class, 'show_categorie_equipement'])
-    //     ->name('sites.equipement.categorie');
+    Route::get('/sites/{site}/{categorie_equipement}', [CommercialController::class, 'show_categorie_equipement'])
+        ->name('sites.equipement.categorie');
 
-    // Route::get('/sites/{id}/{type_equipement}', function () {
-    //     return view('demandeur.sites.equipements');
-    // })->name('sites.type_equipement');
+    Route::get('/sites/{id}/{type_equipement}', function () {
+        return view('demandeur.sites.equipements');
+    })->name('sites.type_equipement');
 });
 
 
