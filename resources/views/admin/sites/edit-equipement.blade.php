@@ -58,6 +58,8 @@
                                         <option value="groupe-electrogene" {{ old('categorie',$equipement->categorie) == 'groupe-electrogene' ? 'selected' : '' }}>groupe electrogene</option>
                                         <option value="electricite" {{ old('categorie',$equipement->categorie) == 'electricite' ? 'selected' : '' }}>electricite</option>
                                         <option value="equipement-incendie" {{ old('categorie',$equipement->categorie) == 'equipement-incendie' ? 'selected' : '' }}>equipement incendie</option>
+                                        <option value="compteur-et-pompes-de-transfert" {{ old('categorie',$equipement->categorie) == 'compteur-et-pompes-de-transfert' ? 'selected' : '' }}>Compteur et Pompes de transfert</option>
+                                        <option value="autres-equipements-et-immobiliers" {{ old('categorie',$equipement->categorie) == 'autres-equipements-et-immobiliers' ? 'selected' : '' }}>Autres équipements et immobiliers</option>
                                     </select>
                                     <x-input-error bag="edit_equipement" for="categorie" class="mt-2" />
                                 </div>
