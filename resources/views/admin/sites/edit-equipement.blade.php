@@ -1,6 +1,6 @@
 @php
     // Liste des produits
-    $products = ['Essence', 'Gasoil', 'JET A1', 'HFO'];
+    $products = ['Essence', 'Super sans plomb', 'Gasoil', 'JET A1', 'HFO'];
 
     // Génération des combinaisons possibles
     $product_combinations = [];
