@@ -208,7 +208,7 @@ class DemandeInterventionController extends Controller
             'piece' => 'required|exists:pieces,id',
             'pris_dans_le_stock' => 'string',
             'quantite' => 'required|numeric|min:1',
-            'injection_file_file' => 'required|image|mimes:jpeg,jpg,png|max:2000',
+            'injection_file_file' => 'nullable|image|mimes:jpeg,jpg,png|max:2000',
         ]);
 
         $piece = Piece::findOrFail($request->piece);
@@ -244,12 +244,17 @@ class DemandeInterventionController extends Controller
         }
         // dd($validateData);
 
-        // Gestion du téléchargement et du stockage du fichier d'injection
-        $injectionFile = $request->file('injection_file_file');
-        $injectionFileName = $injectionFile->getClientOriginalName(); // Nom du fichier
-        $injectionFilePath = $injectionFile->storeAs('injection_files', $injectionFileName); // Stockage du fichier
-
-        $validateData['injection_file_file'] = $injectionFilePath;
+        if(!empty($request->injection_file_file))
+        {
+            // Gestion du téléchargement et du stockage du fichier d'injection
+            $injectionFile = $request->file('injection_file_file');
+            $injectionFileName = $injectionFile->getClientOriginalName(); // Nom du fichier
+            $injectionFilePath = $injectionFile->storeAs('injection_files', $injectionFileName); // Stockage du fichier
+    
+            $validateData['injection_file_file'] = $injectionFilePath;
+        }else{
+            $validateData['injection_file_file'] = null;
+        }
 
         // Création de la nouvelle InjectionPiece
         // dd($validateData);
