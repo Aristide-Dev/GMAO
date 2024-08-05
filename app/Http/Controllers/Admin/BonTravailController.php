@@ -61,8 +61,8 @@ class BonTravailController extends Controller
         // $date_echeance = $this->generateDateEcheane($demande->created_at,$zone->delais);
         $date_echeance = $this->getIntervalTime($demande->created_at,$zone->delais);
         // dd($date_echeance,$date_echeance_2);
-
-        if($demande && $demande->bon_travails)
+// dd($demande->bon_travail);
+        if($demande && !empty($demande->bon_travail))
         {
             return redirect()->back()->with('error', 'Il existe deja un bon de travail pour cette demande');
         }

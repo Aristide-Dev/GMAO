@@ -15,8 +15,8 @@
                 <!-- Range Picker-->
                 <div class="col-8">            
                     <label for="flatpickr-range">Periode</label>
-                    {{-- <input type="text" name='periode' class="rounded form-control form-control-sm" placeholder="YYYY-MM-DD au YYYY-MM-DD" id="flatpickr-multi" wire:model.live='periode' /> --}}
-                    <input type="date" id="bs-rangepicker-basic" class="form-control" />
+                    <input type="text" name='periode' class="rounded form-control form-control-sm" placeholder="YYYY-MM-DD au YYYY-MM-DD" id="flatpickr-range-2" wire:model.live='periode' />
+                    {{-- <input type="date" id="bs-rangepicker-basic" class="form-control" /> --}}
                 </div>
                 <!-- /Range Picker-->
             </div>
