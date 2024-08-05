@@ -105,7 +105,7 @@
             <div class="mb-3">
                 <label class="m-0 text-gray-500 h6 text-uppercase" for="status">statut</label>
                 <select id="status" name="status" class="select2 form-select form-select-lg" data-allow-clear="true" data-placeholder="--CHOISIR--">
-                    <option value="Clôturé">Clôturé / (reparé)</option>
+                    <option value="Clôturé">Clôturée / Réparée</option>
                     <option value="en cours" selected>En Cours</option>
                 </select>
                 <x-input-error bag="create_rapport_constat" for="status" class="mt-2" />

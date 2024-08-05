@@ -156,8 +156,8 @@ class DemandeInterventionController extends Controller
 
 
         switch ($request->status) {
-            case 'terminé':
-                $request->status = StatusEnum::TERMINE;
+            case 'Clôturé':
+                $request->status = StatusEnum::CLOTURE;
                 break;
             case 'annulé':
                 $request->status = StatusEnum::ANNULE;
