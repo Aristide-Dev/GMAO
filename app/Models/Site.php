@@ -162,9 +162,10 @@ class Site extends Model
         foreach ($this->demande_interventions as $demande) {
             if ($demande->created_at->between($startDate, $endDate)) {
                 $bonTravail = $demande->bon_travail;
-                $rapportIntervention = $bonTravail->rapportIntervention;
-
-                if ($rapportIntervention && $rapportIntervention->injection_pieces) 
+                if($bonTravail)
+                {
+                    $rapportIntervention = $bonTravail->rapportIntervention;
+                    if ($rapportIntervention && $rapportIntervention->injection_pieces) 
                     {
                         foreach ($rapportIntervention->injection_pieces as $injectionPiece) {
                             if($injectionPiece->created_at->between($startDate, $endDate))
@@ -175,6 +176,7 @@ class Site extends Model
                             }
                         }
                     }
+                }
             }
         }
 
