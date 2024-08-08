@@ -33,7 +33,7 @@ class CreateBTMail extends Mailable
             replyTo: [
                 new Address('maintenance@staroilgroup.com', 'Star oil Group / G-Maintenance'),
             ],
-            subject: 'Demande d\'intervention - STAR OIL GUINEE',
+            subject: 'Demande d\'intervention - '.config('app.pays_name'),
             to: (config('app.env') !== 'production') ? 'aristidegnimassouu@gmail.com' :$this->prestataire->email,
         );
 

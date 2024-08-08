@@ -35,7 +35,7 @@ class ColotureMail extends Mailable
             replyTo: [
                 new Address('maintenance@staroilgroup.com', 'Star oil Group / G-Maintenance'),
             ],
-            subject: 'Cloture de la Requete - STAR OIL GUINEE',
+            subject: 'Cloture de la Requete - '.config('app.pays_name'),
             to: (config('app.env') !== 'production') ? 'aristidegnimassouu@gmail.com' :$this->prestataire->email,
         );
     }

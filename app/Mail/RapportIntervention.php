@@ -35,7 +35,7 @@ class RapportIntervention extends Mailable
             replyTo: [
                 new Address('maintenance@staroilgroup.com', 'Star oil Group / G-Maintenance'),
             ],
-            subject: 'Rapport de Constat - STAR OIL GUINEE',
+            subject: 'Rapport de Constat - '.config('app.pays_name'),
             to: (config('app.env') !== 'production') ? 'aristidegnimassouu@gmail.com' : $this->prestataire->email,
         );
     }
