@@ -21,6 +21,7 @@ class CreateBTMail extends Mailable
      */
     public function __construct(public BonTravail $bonTravail, public Prestataire $prestataire)
     {
+        dd($this);
     }
 
     /**
