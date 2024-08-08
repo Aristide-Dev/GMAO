@@ -49,7 +49,7 @@ class DemandesTable extends Component
     {
         $query = DemandeIntervention::with(['site', 'demandeur', 'bon_travail.rapportIntervention']);
         
-        if ($this->action == 'demandeur' || $this->action == 'commercial') {
+        if ($this->action == 'demandeur') {
             $query->where("demandeur_id", Auth::id());
         }
     
