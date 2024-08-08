@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Zone;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -11,6 +12,19 @@ class ZonesTable extends Component
     use WithPagination;
 
     public $search = '';
+    public $canActions = false;
+
+
+    public function mount()
+    {
+        $role = Auth::user()?->role;
+        if($role == 'super_admin' || $role == 'admin' || $role == 'maintenance')
+        {
+            $this->canActions = true;
+        }else{
+            $this->canActions = false;
+        }
+    }
 
     public function render()
     {

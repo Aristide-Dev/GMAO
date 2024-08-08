@@ -43,7 +43,10 @@
             <tr>
                 <th>Site</th>
                 <th>Montant</th>
+                
+                @if($canActions)
                 <th>Actions</th>
+                @endif
             </tr>
         </thead>
         <tbody>
@@ -51,13 +54,18 @@
                 <tr>
                     <td>{{ $forfait->site->name }}</td>
                     <td>
+                        @if($canActions)
                         <x-input type="number" name="amount_{{ $forfait->id }}" wire:model.defer="amounts.{{ $forfait->id }}" value="{{ $forfait->amount }}" class="form-control" />
-
+                        @else
+                        <p>{{ number_format($forfait->amount,0,'','') }}</p>
+                        @endif
                         {{-- <x-input type="number" name="amount" value="{{ $forfait->amount }}" class="form-control" /> --}}
                     </td>
+                    @if($canActions)
                     <td>
                         <button wire:click="saveForfait({{ $forfait->id }})" class="bg-green-500 btn btn-success">Valider</button>
                     </td>
+                    @endif
                 </tr>
             @endforeach
         </tbody>
@@ -71,7 +79,9 @@
                 <th>Montant</th>
                 <th>Date de début</th>
                 <th>Date de fin</th>
+                @if($canActions)
                 <th>Actions</th>
+                @endif
             </tr>
         </thead>
         <tbody>
@@ -81,9 +91,11 @@
                     <td>{{ number_format($forfait->amount, 0, '', ' ') }} F</td>
                     <td>{{ $forfait->start_date->format('d-m-Y') }}</td>
                     <td>{{ $forfait->end_date->format('d-m-Y') }}</td>
+                    @if($canActions)
                     <td>
-                        <button type="button" disabled class="bg-red-500 btn btn-danger">Validé</button>
+                        <button type="button" disabled class="bg-red-500 btn btn-danger">Supprimer</button>
                     </td>
+                    @endif
                 </tr>
             @endforeach
         </tbody>

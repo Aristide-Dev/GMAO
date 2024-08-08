@@ -32,6 +32,22 @@
         </a>
     </x-gmao.nav-link>
 
+    {{-- Zones --}}
+    <x-gmao.nav-link :active="request()->routeIs('commercial.zones.*')">
+        <a href="{{ route('commercial.zones.index') }}" class="menu-link">
+            <i class="menu-icon fa-solid fa-map-location-dot"></i>
+            <div data-i18n="Zones & Priorités">Zones & Priorités</div>
+        </a>
+    </x-gmao.nav-link>
+
+    {{-- Forfaits Contrat --}}
+    <x-gmao.nav-link :active="request()->routeIs('commercial.forfaits.*')">
+        <a href="{{ route('commercial.forfaits.index') }}" class="menu-link">
+            <i class="menu-icon fa-solid fa-gear"></i>
+            <div data-i18n="Forfaits Contrat">Forfaits Contrat</div>
+        </a>
+    </x-gmao.nav-link>
+
     {{-- prestataire --}}
     {{-- <x-gmao.nav-link :active="request()->routeIs('admin.prestataires.*')">
         <a href="{{ route('admin.prestataires.index') }}" class="menu-link">
@@ -61,14 +77,6 @@
         <a href="{{ route('admin.zones.index') }}" class="menu-link">
             <i class="menu-icon fa-solid fa-map-location-dot"></i>
             <div data-i18n="Zones & Priorités">Zones & Priorités</div>
-        </a>
-    </x-gmao.nav-link> --}}
-
-    {{-- Forfaits Contrat --}}
-    {{-- <x-gmao.nav-link :active="request()->routeIs('admin.forfaits.*')">
-        <a href="{{ route('admin.forfaits.index') }}" class="menu-link">
-            <i class="menu-icon fa-solid fa-gear"></i>
-            <div data-i18n="Forfaits Contrat">Forfaits Contrat</div>
         </a>
     </x-gmao.nav-link> --}}
 

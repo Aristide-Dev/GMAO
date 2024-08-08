@@ -54,6 +54,7 @@
                         </span>
                     </td>
                     <td>
+                        @if ($canActions)
                         <div class="flex gap-2">
                             <livewire:edit-zone :zone="$zone" />
                             <form method="POST"
@@ -66,7 +67,10 @@
                                     Supprimer
                                 </button>
                             </form>
-                </div>
+                        </div>
+                        @else
+                        ---
+                        @endif
                     </td>
                 </tr>
                 @empty

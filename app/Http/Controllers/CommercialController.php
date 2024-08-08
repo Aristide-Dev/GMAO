@@ -110,6 +110,16 @@ class CommercialController extends Controller
         return view('commercial.sites.equipements', ['site' => $site,'type_equipement' => $categorie_equipement,'equipements' => $equipements]);
     }
 
+    public function zones_index()
+    {
+        return view("commercial.zones.index");
+    }
+
+    public function forfaits_contrat_index()
+    {
+        return view("commercial.forfaits_contrat.index");
+    }
+
     
 
     private function generateDIReference()
@@ -167,4 +177,6 @@ class CommercialController extends Controller
         // Retourner le nom du fichier généré
         return $fuldirectory;
     }
+
+
 }

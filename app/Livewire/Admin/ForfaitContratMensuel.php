@@ -4,6 +4,7 @@ namespace App\Livewire\Admin;
 
 use \Carbon\Carbon;
 use App\Models\ForfaitContrat;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class ForfaitContratMensuel extends Component
@@ -15,6 +16,8 @@ class ForfaitContratMensuel extends Component
     public $year_filter;
     public $month_filter;
     public $periode_text = null;
+    public $canActions = false;
+
 
     private function between()
     {
@@ -30,6 +33,14 @@ class ForfaitContratMensuel extends Component
         $this->month_filter = date('n');
         $this->initPeriode();
         $this->loadData();
+        
+        $role = Auth::user()?->role;
+        if($role == 'super_admin' || $role == 'admin' || $role == 'maintenance')
+        {
+            $this->canActions = true;
+        }else{
+            $this->canActions = false;
+        }
     }
 
     private function initPeriode()

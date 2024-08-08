@@ -165,6 +165,10 @@ Route::middleware([
     Route::get('/sites/{id}/{type_equipement}', function () {
         return view('demandeur.sites.equipements');
     })->name('sites.type_equipement');
+
+
+    Route::get('/zones', [CommercialController::class, 'zones_index'])->name('zones.index');
+    Route::get('forfaits', [CommercialController::class, 'forfaits_contrat_index'])->name('forfaits.index');
 });
 
 
