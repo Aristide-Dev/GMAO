@@ -18,6 +18,8 @@ return [
 
     'name' => env('APP_NAME', 'G-MAINTENANCE'),
     
+    'pays_name' => env('PAYS_NAME', 'STAR OIL'),
+    
     /*
     |--------------------------------------------------------------------------
     | Application Version
