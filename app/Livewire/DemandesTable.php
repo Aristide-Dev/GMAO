@@ -18,12 +18,20 @@ class DemandesTable extends Component
     public $search = '';
     public $sortField = 'created_at';
     public $sortDirection = 'desc';
+    public $canDelete = false;
 
     protected $listeners = ['refreshDemandes' => '$refresh'];
 
     public function mount($action = 'demandeur')
     {
         $this->action = $action;
+        $role = Auth::user()?->role;
+        if($role == 'super_admin' || $role == 'admin')
+        {
+            $this->canDelete = true;
+        }else{
+            $this->canDelete = false;
+        }
     }
 
     private function getDemandeursortField()
@@ -79,7 +87,14 @@ class DemandesTable extends Component
     }
     
     
-    
+    public function deleteDemande($id)
+    {
+        if($this->canDelete)
+        {
+            $demande = DemandeIntervention::find($id);
+            $demande->delete();
+        }
+    }
     
 
 

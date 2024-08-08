@@ -61,7 +61,14 @@
                         <span class="text-center badge me-1 w-100 text-uppercase" style="background-color: {{ $demande->statutColor() }}">{{ $demande->status }}</span>
                     </td>
                     <td>
-                        <a href="{{ route($url.'.demandes.show', $demande) }}" class="btn btn-primary">Suivis</a>
+                        <div class="flex gap-1 flex-rows">
+                            <a href="{{ route($url.'.demandes.show', $demande) }}" class="py-2 btn btn-primary">Suivis</a>
+                            @if ($canDelete)
+                            <form method="POST" wire:submit.prevent='deleteDemande({{ $demande->id }})'>
+                                <button type="submit" class="text-white bg-red-500 btn hover:bg-red-600">Supprimer</button>
+                            </form>
+                            @endif
+                        </div>
                     </td>
                 </tr>
                 @empty
