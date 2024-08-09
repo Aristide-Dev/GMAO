@@ -301,6 +301,7 @@ $password_active_btn = "active";
                             </div> --}}
                         </div>
                         <!--/ Change Password -->
+                        @if (Auth::user?->role == "super_admin" || Auth::user?->role == "admin")
                         @if($utilisateur->role == "commercial" || $utilisateur->role == "demandeur" || $utilisateur->role == "maintenance" || $utilisateur->role == "admin")
                         <!-- Change role -->
                         <div class="mb-4 {{ ($utilisateur->status == true) ? '':'bg-red-100' }} card">
@@ -340,6 +341,7 @@ $password_active_btn = "active";
                                 </form>
                             </div>
                         </div>
+                        @endif
                         @endif
                         <!-- Change Password -->
                         <div class="mb-4 {{ ($utilisateur->status == true) ? '':'bg-red-100' }} card">
