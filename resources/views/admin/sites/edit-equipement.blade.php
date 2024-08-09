@@ -13,6 +13,10 @@
                 if (!in_array($combination, $product_combinations) && !in_array($reverse_combination, $product_combinations)) {
                     $product_combinations[] = $combination;
                 }
+            }else{
+                if (!in_array($product1, $product_combinations)) {
+                    $product_combinations[] = $product1;
+                }
             }
         }
     }
