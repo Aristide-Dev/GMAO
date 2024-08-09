@@ -50,7 +50,9 @@ $show = "";
                     <option value="commercial">Commercial</option>
                     <option value="demandeur">Demandeur</option>
                     <option value="maintenance">agent maintenance</option>
+                    @if (Auth::user()?->role == "admin" || Auth::user()?->role == "super_admin")
                     <option value="admin">Admin</option>
+                    @endif
                 </select>
                 <x-input-error bag="create_utilisateur" for="role" class="mt-2" />
             </div>
