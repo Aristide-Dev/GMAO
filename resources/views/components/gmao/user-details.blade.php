@@ -65,44 +65,6 @@ $password_active_btn = "active";
                                 <h5 class="m-0 text-gray-300 uppercase card-title ms-2">{{
                                     $utilisateur->prestataire->slug }}</h5>
                             </div>
-                            {{-- <div class="p-3 card-body rounded-3">
-                                <div class="d-flex justify-content-between align-items-start">
-                                    <span class="badge bg-label-{{ $indice_color }}">{{ $indice_label }}</span>
-                                    <div class="d-flex justify-content-center">
-                                        <h1 class="mb-0 text-{{ $indice_color }}">{{ $indice }}</h1>
-                                        <sub class="mt-auto mb-2 h6 pricing-duration text-muted fw-normal">%</sub>
-                                    </div>
-                                </div>
-                                <div class="flex-wrap pb-4 mt-3 d-flex justify-content-start border-bottom">
-                                    <div class="gap-2 mt-3 d-flex align-items-start">
-                                        <span class="p-2 rounded badge bg-label-primary"><i
-                                                class='ti ti-briefcase ti-sm'></i></span>
-                                        <div>
-                                            <p class="mb-0 fw-medium">568</p>
-                                            <small>Requêtes traitées</small>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="flex-wrap pb-4 mt-3 d-flex justify-content-between border-bottom">
-                                    <div class="gap-2 mt-3 d-flex align-items-center">
-                                        <span class="p-2 rounded badge bg-label-success"><i
-                                                class='ti ti-clock ti-sm'></i></span>
-                                        <div>
-                                            <p class="mb-0 fw-medium">300</p>
-                                            <small>Dans les delais</small>
-                                        </div>
-                                    </div>
-                                    <div class="gap-2 mt-3 d-flex align-items-center">
-                                        <span class="p-2 rounded badge bg-label-danger"><i
-                                                class='ti ti-clock ti-sm'></i></span>
-                                        <div>
-                                            <p class="mb-0 fw-medium">268</p>
-                                            <small>Hors Délais</small>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> --}}
                         </div>
                         @endif
                         <!-- /Plan Card -->
@@ -339,7 +301,46 @@ $password_active_btn = "active";
                             </div> --}}
                         </div>
                         <!--/ Change Password -->
-                        
+                        @if($utilisateur->role == "commercial" || $utilisateur->role == "demandeur" || $utilisateur->role == "maintenance" || $utilisateur->role == "admin")
+                        <!-- Change role -->
+                        <div class="mb-4 {{ ($utilisateur->status == true) ? '':'bg-red-100' }} card">
+                            <h5 class="mt-2 mb-0 card-header">Changer de role</h5>
+
+                            <div class="px-3 row">
+                                @if (session('status'))
+                                <div class="mb-4 text-sm font-medium text-green-600">
+                                    {{ session('status') }}
+                                </div>
+                                @endif
+
+                                <x-validation-errors class="mb-4" />
+
+                                <form method="POST" action="{{ route('admin.utilisateurs.switchRole', $utilisateur) }}" class="w-full pt-2">
+                                    @csrf
+                                    @method('patch')
+
+                                    <div class="flex items-center justify-center w-full gap-2">
+
+                                        <div class="w-1/3 mb-3">
+                                            <select id="role" name="role" class="select2 form-select form-select-sm" data-allow-clear="true" data-placeholder="-- CHOISIR --">
+                                                <option value="commercial" @if($utilisateur->role === "commercial") selected @endif>Commercial</option>
+                                                <option value="demandeur" @if($utilisateur->role === "demandeur") selected @endif>Demandeur</option>
+                                                <option value="maintenance" @if($utilisateur->role === "maintenance") selected @endif>Agent maintenance</option>
+                                                <option value="admin" @if($utilisateur->role === "admin") selected @endif>Admin</option>
+                                            </select>
+                                            <x-input-error bag="switchRole" for="role" class="mt-2" />
+                                        </div>
+                                        
+                                        <div class="w-1/2 mb-3">
+                                            <button type="submit" class="text-white bg-green-500 btn hover:bg-green-600">
+                                                {{ __('Changer') }}
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        @endif
                         <!-- Change Password -->
                         <div class="mb-4 {{ ($utilisateur->status == true) ? '':'bg-red-100' }} card">
                             <h5 class="mt-2 mb-0 card-header">Renitialiser le mot de passe</h5>

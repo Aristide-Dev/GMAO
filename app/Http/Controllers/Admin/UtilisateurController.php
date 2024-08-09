@@ -127,6 +127,18 @@ class UtilisateurController extends Controller
         return redirect()->back()->with('success', 'Utilisateur '.$status_msg.' avec succès!');
     }
 
+
+    public function switchRole(Request $request, User $utilisateur)
+    {
+        $request->validateWithBag('switchRole',[
+            'role' => ['required', 'string'],
+        ]);
+
+        $utilisateur->role = $request->role;
+        $utilisateur->save();
+        return redirect()->back()->with('success', 'Role Changé avec succès!');
+    }
+
     /**
      * Get the validation rules used to validate passwords.
      *

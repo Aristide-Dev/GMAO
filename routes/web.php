@@ -110,6 +110,8 @@ Route::middleware([
     Route::resource('/utilisateurs', AdminUtilisateurController::class);
     Route::patch('/utilisateurs/{utilisateur}/status', [AdminUtilisateurController::class, 'status'])->name('utilisateurs.status');
 
+    Route::patch('/utilisateurs/{utilisateur}/change-role', [AdminUtilisateurController::class, 'switchRole'])->name('utilisateurs.switchRole');
+
     Route::resource('/prestataires', AdminPrestataireController::class);
     Route::post('/prestataires/{prestataire}/create-admin', [AdminPrestataireController::class, 'create_admin'])->name('prestataires.create_admin');
     Route::post('/prestataires/{prestataire}/create-agent', [AdminPrestataireController::class, 'create_agent'])->name('prestataires.create_agent');
