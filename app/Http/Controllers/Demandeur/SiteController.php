@@ -103,6 +103,8 @@ class SiteController extends Controller
             'groupe-electrogene',
             'electricite',
             'equipement-incendie',
+            'compteur-et-pompes-de-transfert',
+            'autres-equipements-et-immobiliers',
         ]; // Remplacez par vos catégories
 
         // Vérifier si la catégorie spécifiée existe dans le tableau des catégories disponibles
