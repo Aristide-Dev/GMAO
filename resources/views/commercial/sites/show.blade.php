@@ -71,6 +71,21 @@
         <!--/ Cards with few info -->
     </div>
 
+    
+
+    <div class="row">
+        <div class="mb-4 col-md-12 h-[308px]">
+            <div class="border shadow-3xl shadow-gray-500 h-100 card" style="background-image: url('{{ Storage::url("assets/img/sog/station_1.jpg") }}'); background-size:cover; background-position:center;">
+                <div class="mx-auto rounded-lg row h-100">
+                    <div class="mb-3 rounded-lg h-100 col-12 ">
+                        <div class="pb-3 mb-3 card-body text-start ps-sm-0">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="row">
         <x-gmao.type-equipements-list action='commercial' :site="$site"/>
     </div>

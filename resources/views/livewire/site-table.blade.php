@@ -46,7 +46,7 @@
                         {{ $key+1 }}
                     </td>
                     <td>
-                        <a href="{{ route('admin.sites.show', $site) }}">{{ $site->name }}</a>
+                        <a href="{{ route($url.'.sites.show', $site) }}">{{ $site->name }}</a>
                     </td>
                     <td>
                         <p class="uppercase">{{ $site->registre }}</p>

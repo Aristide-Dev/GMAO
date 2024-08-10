@@ -23,7 +23,9 @@
                     <th>zone</th>
                     <th>priorite</th>
                     <th>Delais</th>
+                    @if ($canActions)
                     <th>Actions</th>
+                    @endif
                 </tr>
             </thead>
             <tbody class="table-border-bottom-0">
@@ -43,7 +45,8 @@
                         {{ $key+1 }}
                     </td>
                     <td>
-                        <a href="{{ route('admin.zones.show', $zone) }}">{{ $zone->name }}</a>
+                        <p>{{ $zone->name }}</p>
+                        {{-- <a href="{{ route('admin.zones.show', $zone) }}">{{ $zone->name }}</a> --}}
                     </td>
                     <td>
                         <div class="fw-bold p-1 rounded-pill text-center bg-label-{{ $zone->prioriteColor() }}">{{ $zone->prioriteText() }}</div>
@@ -68,8 +71,6 @@
                                 </button>
                             </form>
                         </div>
-                        @else
-                        ---
                         @endif
                     </td>
                 </tr>
@@ -92,7 +93,10 @@
                     <th>zone</th>
                     <th>priorite</th>
                     <th>Delais</th>
+                    
+                    @if ($canActions)
                     <th>Actions</th>
+                    @endif
                 </tr>
             </tfoot>
 
