@@ -301,6 +301,7 @@ $password_active_btn = "active";
                             </div> --}}
                         </div>
                         <!--/ Change Password -->
+                        @auth
                         @if (Auth::user?->role == "super_admin" || Auth::user?->role == "admin")
                         @if($utilisateur->role == "commercial" || $utilisateur->role == "demandeur" || $utilisateur->role == "maintenance" || $utilisateur->role == "admin")
                         <!-- Change role -->
@@ -343,6 +344,7 @@ $password_active_btn = "active";
                         </div>
                         @endif
                         @endif
+                        @endauth
                         <!-- Change Password -->
                         <div class="mb-4 {{ ($utilisateur->status == true) ? '':'bg-red-100' }} card">
                             <h5 class="mt-2 mb-0 card-header">Renitialiser le mot de passe</h5>
