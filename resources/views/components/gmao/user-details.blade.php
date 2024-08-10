@@ -302,48 +302,48 @@ $password_active_btn = "active";
                         </div>
                         <!--/ Change Password -->
                         @auth
-                        @if (Auth::user?->role == "super_admin" || Auth::user?->role == "admin")
-                        @if($utilisateur->role == "commercial" || $utilisateur->role == "demandeur" || $utilisateur->role == "maintenance" || $utilisateur->role == "admin")
-                        <!-- Change role -->
-                        <div class="mb-4 {{ ($utilisateur->status == true) ? '':'bg-red-100' }} card">
-                            <h5 class="mt-2 mb-0 card-header">Changer de role</h5>
+                            @if (Auth::user()?->role == "super_admin" || Auth::user()?->role == "admin")
+                                @if($utilisateur->role == "commercial" || $utilisateur->role == "demandeur" || $utilisateur->role == "maintenance" || $utilisateur->role == "admin")
+                                <!-- Change role -->
+                                <div class="mb-4 {{ ($utilisateur->status == true) ? '':'bg-red-100' }} card">
+                                    <h5 class="mt-2 mb-0 card-header">Changer de role</h5>
 
-                            <div class="px-3 row">
-                                @if (session('status'))
-                                <div class="mb-4 text-sm font-medium text-green-600">
-                                    {{ session('status') }}
+                                    <div class="px-3 row">
+                                        @if (session('status'))
+                                        <div class="mb-4 text-sm font-medium text-green-600">
+                                            {{ session('status') }}
+                                        </div>
+                                        @endif
+
+                                        <x-validation-errors class="mb-4" />
+
+                                        <form method="POST" action="{{ route('admin.utilisateurs.switchRole', $utilisateur) }}" class="w-full pt-2">
+                                            @csrf
+                                            @method('patch')
+
+                                            <div class="flex items-center justify-center w-full gap-2">
+
+                                                <div class="w-1/3 mb-3">
+                                                    <select id="role" name="role" class="select2 form-select form-select-sm" data-allow-clear="true" data-placeholder="-- CHOISIR --">
+                                                        <option value="commercial" @if($utilisateur->role === "commercial") selected @endif>Commercial</option>
+                                                        <option value="demandeur" @if($utilisateur->role === "demandeur") selected @endif>Demandeur</option>
+                                                        <option value="maintenance" @if($utilisateur->role === "maintenance") selected @endif>Agent maintenance</option>
+                                                        <option value="admin" @if($utilisateur->role === "admin") selected @endif>Admin</option>
+                                                    </select>
+                                                    <x-input-error bag="switchRole" for="role" class="mt-2" />
+                                                </div>
+                                                
+                                                <div class="w-1/2 mb-3">
+                                                    <button type="submit" class="text-white bg-green-500 btn hover:bg-green-600">
+                                                        {{ __('Changer') }}
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
                                 </div>
                                 @endif
-
-                                <x-validation-errors class="mb-4" />
-
-                                <form method="POST" action="{{ route('admin.utilisateurs.switchRole', $utilisateur) }}" class="w-full pt-2">
-                                    @csrf
-                                    @method('patch')
-
-                                    <div class="flex items-center justify-center w-full gap-2">
-
-                                        <div class="w-1/3 mb-3">
-                                            <select id="role" name="role" class="select2 form-select form-select-sm" data-allow-clear="true" data-placeholder="-- CHOISIR --">
-                                                <option value="commercial" @if($utilisateur->role === "commercial") selected @endif>Commercial</option>
-                                                <option value="demandeur" @if($utilisateur->role === "demandeur") selected @endif>Demandeur</option>
-                                                <option value="maintenance" @if($utilisateur->role === "maintenance") selected @endif>Agent maintenance</option>
-                                                <option value="admin" @if($utilisateur->role === "admin") selected @endif>Admin</option>
-                                            </select>
-                                            <x-input-error bag="switchRole" for="role" class="mt-2" />
-                                        </div>
-                                        
-                                        <div class="w-1/2 mb-3">
-                                            <button type="submit" class="text-white bg-green-500 btn hover:bg-green-600">
-                                                {{ __('Changer') }}
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        @endif
-                        @endif
+                            @endif
                         @endauth
                         <!-- Change Password -->
                         <div class="mb-4 {{ ($utilisateur->status == true) ? '':'bg-red-100' }} card">
