@@ -102,8 +102,9 @@ class EvolutionRequetes extends Component
             ->reduce(function ($columnChartModel, $data) {
                 $status = $data->first()->status;
                 $value = count($data);
+                $status = ($status == "Clôturé") ? $status.'es' : $status;
 
-                return $columnChartModel->addColumn($status, $value, StatusEnum::getColor($status));
+                return $columnChartModel->addColumn($status, $value, StatusEnum::getColor(($status == "Clôturées") ? 'Clôturé' : $status));
             }, LivewireCharts::columnChartModel()
                 ->setTitle('Demandes par Statut')
                 ->setAnimated($this->firstRun)
@@ -120,8 +121,9 @@ class EvolutionRequetes extends Component
             ->reduce(function ($pieChartModel, $data) use ($total) {
                 $status = $data->first()->status;
                 $value = (count($data) * 100) / $total;
+                $status = ($status == "Clôturé") ? $status.'es' : $status;
 
-                return $pieChartModel->addSlice($status, $value, StatusEnum::getColor($status));
+                return $pieChartModel->addSlice($status, $value, StatusEnum::getColor(($status == "Clôturées") ? 'Clôturé' : $status));
             }, LivewireCharts::pieChartModel()
                 ->setTitle('Taux')
                 ->setAnimated($this->firstRun)

@@ -51,7 +51,7 @@
                                             $total_per_cent += $percentage;
                                         @endphp
                                         <tr>
-                                            <td class="text-sm font-bold text-gray-500 whitespace-nowrap">{{ $status['name'] }}</td>
+                                            <td class="text-sm font-bold text-gray-500 whitespace-nowrap text-capitalize">{{ ($status['name'] == 'Clôturé') ? $status['name']."es":$status['name'] }}</td>
                                             <td class="text-sm text-gray-800 whitespace-nowrap">{{ $status_count }}</td>
                                             <td class="text-sm text-gray-800 whitespace-nowrap">{{ number_format($percentage, 0) }}%</td>
                                         </tr>
