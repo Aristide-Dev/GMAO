@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
@@ -10,6 +11,14 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 class Equipement extends Model
 {
     use HasFactory;
+
+    // Définir la portée globale
+    protected static function booted()
+    {
+        static::addGlobalScope('actif', function (Builder $builder) {
+            $builder->where('actif', true);
+        });
+    }
 
     /**
      * The attributes that are mass assignable.
@@ -28,6 +37,16 @@ class Equipement extends Model
         'annee_fabrication',
         'puissance',
         'observations',
+        'actif',
+    ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'actif' => 'boolean',
     ];
 
     public function site()

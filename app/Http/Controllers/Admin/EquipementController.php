@@ -96,4 +96,19 @@ class EquipementController extends Controller
 
         return redirect(route("admin.sites.show", $site))->with('success', 'Equipement supprimé avec success!');
     }
+
+    /**
+     * switch Status the specified resource from storage.
+     */
+    public function switchStatus(Site $site, Equipement $equipement)
+    {
+        $equipement->actif = !$equipement->actif;
+        $equipement->save();
+
+        $msg = $equipement->actif ? 'Equipement activé avec success!' : 'Equipement désactivé avec success!';
+
+        return redirect(route("admin.sites.show", $site))->with('success', $msg);
+    }
+
+
 }

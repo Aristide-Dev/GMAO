@@ -105,7 +105,10 @@ Route::middleware([
         ->name('sites.equipement.update');
         
     Route::delete('/sites/{site}/equipement/{equipement}', [AdminEquipementController::class, 'destroy'])
-        ->name('sites.equipement.destroy');
+            ->name('sites.equipement.destroy');
+        
+    Route::patch('/sites/{site}/equipement/{equipement}', [AdminEquipementController::class, 'switchStatus'])
+        ->name('sites.equipement.switchStatus');
 
     Route::resource('/utilisateurs', AdminUtilisateurController::class);
     Route::patch('/utilisateurs/{utilisateur}/status', [AdminUtilisateurController::class, 'status'])->name('utilisateurs.status');

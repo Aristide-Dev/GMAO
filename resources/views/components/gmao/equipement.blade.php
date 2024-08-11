@@ -205,7 +205,19 @@
                 <div class="flex mt-3 justify-content-between">
                     <a href="{{ route('admin.sites.equipement.edit', ['site' => $equipement->site, 'equipement' => $equipement]) }}"
                         class="btn btn-warning"><i class="tf-icons ti ti-edit ti-sm me-1 animate-pulse"></i>
-                        Editer</a>
+                        Editer
+                    </a>
+                        
+                    <form method="POST"
+                        action="{{ route('admin.sites.equipement.switchStatus', ['site' => $equipement->site, 'equipement' => $equipement]) }}">
+                        @csrf
+                        @method('patch')
+                        <button type="submit" class="text-white bg-yellow-500 btn hover:bg-yellow-600">
+                            <i class="fa-solid fa-triangle-exclamation fa-sm me-1 animate-pulse"></i>
+                            Désactiver
+                        </button>
+                    </form>
+                    
                     <form method="POST"
                         action="{{ route('admin.sites.equipement.destroy', ['site' => $equipement->site, 'equipement' => $equipement]) }}"
                         onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ?');">
