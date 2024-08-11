@@ -191,4 +191,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Prestataire::class, 'prestataire_own','id');
     }
+
+    public function demandeur_sites()
+    {
+        return $this->belongsToMany(Site::class, 'site_user');
+    }
 }

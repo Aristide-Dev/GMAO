@@ -18,8 +18,12 @@ class DemandeInterventionController extends Controller
      */
     public function index()
     {
-        // dd($demandes);
-        $sites = Site::all();
+        $demandeur = Auth::user();
+        if ($demandeur->role !== 'demandeur') {
+            return redirect()->back()->with('error', 'Action non autorisée');
+        }
+        $sites = $demandeur->demandeur_sites;
+        // dd($sites);
         return view('demandeur.demandes.index', compact('sites'));
     }
 

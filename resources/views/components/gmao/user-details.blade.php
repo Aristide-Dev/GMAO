@@ -7,6 +7,9 @@ $details_active_btn = "active";
 $password_active_class = "";
 $password_active_btn = "active";
 
+$affectation_active_class = "";
+$affectation_active_btn = "active";
+
 if($errors->edit_utilisateur->isNotEmpty())
 {
 $details_active_class = "show active";
@@ -18,11 +21,26 @@ $password_active_btn = "";
 
 if($errors->rest_password_for_utilisateur->isNotEmpty())
 {
-$details_active_class = "";
-$details_active_btn = "";
+    $details_active_class = "";
+    $details_active_btn = "";
 
-$password_active_class = "show active";
-$password_active_btn = "active";
+    $affectation_active_class = "";
+    $affectation_active_btn = "";
+
+    $password_active_class = "show active";
+    $password_active_btn = "active";
+}
+
+if($errors->affectation_site->isNotEmpty())
+{
+    $details_active_class = "";
+    $details_active_btn = "";
+
+    $password_active_class = "";
+    $password_active_btn = "";
+
+    $affectation_active_class = "show active";
+    $affectation_active_btn = "active";
 }
 @endphp
 
@@ -92,10 +110,24 @@ $password_active_btn = "active";
                             <i class="tf-icons ti ti-lock ti-md me-1"></i> Sécurité
                         </button>
                     </li>
+                    
+                    @auth()
+                    @if($utilisateur?->role == 'demandeur')
+                    <li class="mx-1 nav-item">
+                        <button type="button"
+                            class="border nav-link @if($errors->affectation_site->isNotEmpty()) {{'active show'}} @endif"
+                            role="tab" data-bs-toggle="tab" data-bs-target="#affectation-site-tabs"
+                            aria-controls="affectation-site-tabs" aria-selected="false">
+                            <i class="tf-icons ti ti-lock ti-md me-1"></i> Affectation
+                        </button>
+                    </li>
+                    @endif
+                    @endauth
                 </ul>
             </div>
             <div class="card-body">
                 <div class="p-0 tab-content">
+                    {{-- informations-personnellles-tabs --}}
                     <div class="tab-pane fade  {{ $details_active_class }}" id="informations-personnellles-tabs"
                         role="tabpanel">
                         <!-- Basic with Icons -->
@@ -224,7 +256,9 @@ $password_active_btn = "active";
                             </div>
                         </div>
                     </div>
+                    {{-- informations-personnellles-tabs --}}
 
+                    {{-- securite-tabs --}}
                     <div class="tab-pane fade {{ $password_active_class }}" id="securite-tabs" role="tabpanel">
                         <!-- Change Password -->
                         <div class="mb-4 {{ ($utilisateur->status == true) ? '':'bg-red-100' }} card">
@@ -378,8 +412,20 @@ $password_active_btn = "active";
 
                         <!--/ Change Password -->
                     </div>
+                    {{-- securite-tabs --}}
+
+                    @auth()
+                    @if($utilisateur?->role == 'demandeur')
+                        {{-- affectation-site-tabs --}}
+                    <div class="tab-pane fade {{ $affectation_active_class }}" id="affectation-site-tabs" role="tabpanel">
+                        {{-- @dd($utilisateur) --}}
+                        <livewire:admin.site-affectation :user="$utilisateur" />      
+                    </div>
+                    {{-- affectation-site-tabs --}}
+                    @endif
+                    @endauth
                 </div>
             </div>
         </div>
-
     </div>
+    

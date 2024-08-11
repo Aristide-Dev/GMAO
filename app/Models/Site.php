@@ -193,4 +193,9 @@ class Site extends Model
     {
         return EquipementEnum::getText($categorie);
     }
+
+    public function demandeurs()
+    {
+        return $this->belongsToMany(User::class, 'site_user');
+    }
 }
