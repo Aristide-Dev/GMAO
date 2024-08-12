@@ -25,14 +25,14 @@ break;
 {{-- distributeur --}}
 <a href="{{ route($routeName, ['site' => $site, 'categorie_equipement' => 'distributeur']) }}" class="mb-4 col-md-4">
     <div class="card card-border-shadow-primary">
-        <div class="card-body">
+        <div class="card-body {{ (count($site->equipementsActiveByCategory('distributeur')) === count($site->equipementsByCategory('distributeur')) ) ? '':'bg-red-100 animate-pulse' }}">
             <div class="pb-1 mb-2 d-flex align-items-center">
                 <div class="avatar me-2">
                     <span class="rounded">
                         <i class="fa-solid fa-gas-pump fa-2xl" style="color: {{ $site->categorieEquipementColor('distributeur') }};"></i>
                     </span>
                 </div>
-                <h4 class="mb-0 ms-1">{{ count($site->equipementsByCategory('distributeur')) }}</h4>
+                <h4 class="mb-0 ms-1">{{ count($site->equipementsActiveByCategory('distributeur')) }}/{{ count($site->equipementsByCategory('distributeur')) }}</h4>
             </div>
             <h5 class="mb-1 fw-bold">{{ $site->categorieEquipementText('distributeur') }}</h5>
             <ul class="mb-0 list-unstyled d-flex align-items-center avatar-group">
@@ -58,14 +58,14 @@ break;
 {{-- stockage-et-tuyauterie --}}
 <a href="{{ route($routeName, ['site' => $site, 'categorie_equipement' => 'stockage-et-tuyauterie']) }}" class="mb-4 col-md-4">
     <div class="card card-border-shadow-warning">
-        <div class="card-body">
+        <div class="card-body {{ (count($site->equipementsActiveByCategory('stockage-et-tuyauterie')) === count($site->equipementsByCategory('stockage-et-tuyauterie')) ) ? '':'bg-red-100 animate-pulse' }}">
             <div class="pb-1 mb-2 d-flex align-items-center">
                 <div class="avatar me-2">
                     <span class="rounded">
                         <i class="fa-solid fa-database fa-2xl" style="color: {{ $site->categorieEquipementColor('stockage-et-tuyauterie') }};"></i>
                     </span>
                 </div>
-                <h4 class="mb-0 ms-1">{{ count($site->equipementsByCategory('stockage-et-tuyauterie')) }}</h4>
+                <h4 class="mb-0 ms-1">{{ count($site->equipementsActiveByCategory('stockage-et-tuyauterie')) }}/{{ count($site->equipementsByCategory('stockage-et-tuyauterie')) }}</h4>
             </div>
             <h5 class="mb-1 fw-bold">{{ $site->categorieEquipementText('stockage-et-tuyauterie') }}</h5>
             <ul class="mb-0 list-unstyled d-flex align-items-center avatar-group">
@@ -91,14 +91,14 @@ break;
 {{-- forage --}}
 <a href="{{ route($routeName, ['site' => $site, 'categorie_equipement' => 'forage']) }}" class="mb-4 col-md-4">
     <div class="card card-border-shadow-danger">
-        <div class="card-body">
+        <div class="card-body {{ (count($site->equipementsActiveByCategory('forage')) === count($site->equipementsByCategory('forage')) ) ? '':'bg-red-100 animate-pulse' }}">
             <div class="pb-1 mb-2 d-flex align-items-center">
                 <div class="avatar me-2">
                     <span class="rounded">
                         <i class="fa-solid fa-bore-hole fa-2xl" style="color: {{ $site->categorieEquipementColor('forage') }};"></i>
                     </span>
                 </div>
-                <h4 class="mb-0 ms-1">{{ count($site->equipementsByCategory('forage')) }}</h4>
+                <h4 class="mb-0 ms-1">{{ count($site->equipementsActiveByCategory('forage')) }}/{{ count($site->equipementsByCategory('forage')) }}</h4>
             </div>
             <h5 class="mb-1 fw-bold">{{ $site->categorieEquipementText('forage') }}</h5>
             <ul class="mb-0 list-unstyled d-flex align-items-center avatar-group">
@@ -124,14 +124,14 @@ break;
 {{-- servicing --}}
 <a href="{{ route($routeName, ['site' => $site, 'categorie_equipement' => 'servicing']) }}" class="mb-4 col-md-4">
     <div class="card card-border-shadow-info">
-        <div class="card-body">
+        <div class="card-body {{ (count($site->equipementsActiveByCategory('servicing')) === count($site->equipementsByCategory('servicing')) ) ? '':'bg-red-100 animate-pulse' }}">
             <div class="pb-1 mb-2 d-flex align-items-center">
                 <div class="avatar me-2">
                     <span class="rounded">
                         <i class="fa-solid fa-gears fa-2xl" style="color: {{ $site->categorieEquipementColor('servicing') }};"></i>
                     </span>
                 </div>
-                <h4 class="mb-0 ms-1">{{ count($site->equipementsByCategory('servicing')) }}</h4>
+                <h4 class="mb-0 ms-1">{{ count($site->equipementsActiveByCategory('servicing')) }}/{{ count($site->equipementsByCategory('servicing')) }}</h4>
             </div>
             <h5 class="mb-1 fw-bold">{{ $site->categorieEquipementText('servicing') }}</h5>
             <ul class="mb-0 list-unstyled d-flex align-items-center avatar-group">
@@ -157,14 +157,14 @@ break;
 {{-- branding --}}
 <a href="{{ route($routeName, ['site' => $site, 'categorie_equipement' => 'branding']) }}" class="mb-4 col-md-4">
     <div class="card card-border-shadow-dark">
-        <div class="card-body">
+        <div class="card-body {{ (count($site->equipementsActiveByCategory('branding')) === count($site->equipementsByCategory('branding')) ) ? '':'bg-red-100 animate-pulse' }}">
             <div class="pb-1 mb-2 d-flex align-items-center">
                 <div class="avatar me-2">
                     <span class="rounded">
                         <i class="fa-solid fa-ranking-star fa-2xl" style="color: {{ $site->categorieEquipementColor('branding') }};"></i>
                     </span>
                 </div>
-                <h4 class="mb-0 ms-1">{{ count($site->equipementsByCategory('branding')) }}</h4>
+                <h4 class="mb-0 ms-1">{{ count($site->equipementsActiveByCategory('branding')) }}/{{ count($site->equipementsByCategory('branding')) }}</h4>
             </div>
             <h5 class="mb-1 fw-bold">{{ $site->categorieEquipementText('branding') }}</h5>
             <ul class="mb-0 list-unstyled d-flex align-items-center avatar-group">
@@ -190,14 +190,14 @@ break;
 {{-- groupe-electrogene --}}
 <a href="{{ route($routeName, ['site' => $site, 'categorie_equipement' => 'groupe-electrogene']) }}" class="mb-4 col-md-4">
     <div class="card card-border-shadow-success">
-        <div class="card-body">
+        <div class="card-body {{ (count($site->equipementsActiveByCategory('groupe-electrogene')) === count($site->equipementsByCategory('groupe-electrogene')) ) ? '':'bg-red-100 animate-pulse' }}">
             <div class="pb-1 mb-2 d-flex align-items-center">
                 <div class="avatar me-2">
                     <span class="rounded">
                         <i class="fa-solid fa-charging-station fa-2xl" style="color: {{ $site->categorieEquipementColor('groupe-electrogene') }};"></i>
                     </span>
                 </div>
-                <h4 class="mb-0 ms-1">{{ count($site->equipementsByCategory('groupe-electrogene')) }}</h4>
+                <h4 class="mb-0 ms-1">{{ count($site->equipementsActiveByCategory('groupe-electrogene')) }}/{{ count($site->equipementsByCategory('groupe-electrogene')) }}</h4>
             </div>
             <h5 class="mb-1 fw-bold">{{ $site->categorieEquipementText('groupe-electrogene') }}</h5>
             <ul class="mb-0 list-unstyled d-flex align-items-center avatar-group">
@@ -223,14 +223,14 @@ break;
 {{-- electricite --}}
 <a href="{{ route($routeName, ['site' => $site, 'categorie_equipement' => 'electricite']) }}" class="mb-4 col-md-4">
     <div class="card card-border-shadow-danger">
-        <div class="card-body">
+        <div class="card-body {{ (count($site->equipementsActiveByCategory('electricite')) === count($site->equipementsByCategory('electricite')) ) ? '':'bg-red-100 animate-pulse' }}">
             <div class="pb-1 mb-2 d-flex align-items-center">
                 <div class="avatar me-2">
                     <span class="rounded">
                         <i class="fa-solid fa-bolt fa-2xl" style="color: {{ $site->categorieEquipementColor('electricite') }};"></i>
                     </span>
                 </div>
-                <h4 class="mb-0 ms-1">{{ count($site->equipementsByCategory('electricite')) }}</h4>
+                <h4 class="mb-0 ms-1">{{ count($site->equipementsActiveByCategory('electricite')) }}/{{ count($site->equipementsByCategory('electricite')) }}</h4>
             </div>
             <h5 class="mb-1 fw-bold">{{ $site->categorieEquipementText('electricite') }}</h5>
             <ul class="mb-0 list-unstyled d-flex align-items-center avatar-group">
@@ -256,14 +256,14 @@ break;
 {{-- equipement-incendie --}}
 <a href="{{ route($routeName, ['site' => $site, 'categorie_equipement' => 'equipement-incendie']) }}" class="mb-4 col-md-4">
     <div class="card card-border-shadow-secondary">
-        <div class="card-body">
+        <div class="card-body {{ (count($site->equipementsActiveByCategory('equipement-incendie')) === count($site->equipementsByCategory('equipement-incendie')) ) ? '':'bg-red-100 animate-pulse' }}">
             <div class="pb-1 mb-2 d-flex align-items-center">
                 <div class="avatar me-2">
                     <span class="rounded">
                         <i class="fa-solid fa-fire-extinguisher fa-2xl" style="color: {{ $site->categorieEquipementColor('equipement-incendie') }};"></i>
                     </span>
                 </div>
-                <h4 class="mb-0 ms-1">{{ count($site->equipementsByCategory('equipement-incendie')) }}</h4>
+                <h4 class="mb-0 ms-1">{{ count($site->equipementsActiveByCategory('equipement-incendie')) }}/{{ count($site->equipementsByCategory('equipement-incendie')) }}</h4>
             </div>
             <h5 class="mb-1 fw-bold">{{ $site->categorieEquipementText('equipement-incendie') }}</h5>
             <ul class="mb-0 list-unstyled d-flex align-items-center avatar-group">
@@ -290,14 +290,14 @@ break;
 {{-- compteur-et-pompes-de-transfert --}}
 <a href="{{ route($routeName, ['site' => $site, 'categorie_equipement' => 'compteur-et-pompes-de-transfert']) }}" class="mb-4 col-md-4">
     <div class="card card-border-shadow-primary">
-        <div class="card-body">
+        <div class="card-body {{ (count($site->equipementsActiveByCategory('compteur-et-pompes-de-transfert')) === count($site->equipementsByCategory('compteur-et-pompes-de-transfert')) ) ? '':'bg-red-100 animate-pulse' }}">
             <div class="pb-1 mb-2 d-flex align-items-center">
                 <div class="avatar me-2">
                     <span class="rounded">
                         <img src="{{Storage::url('svg/compteur-et-pompes-de-transfert.svg')}}" alt="" width="500px"  style="color: {{ $site->categorieEquipementColor('compteur-et-pompes-de-transfert') }};">
                     </span>
                 </div>
-                <h4 class="mb-0 ms-1">{{ count($site->equipementsByCategory('compteur-et-pompes-de-transfert')) }}</h4>
+                <h4 class="mb-0 ms-1">{{ count($site->equipementsActiveByCategory('compteur-et-pompes-de-transfert')) }}/{{ count($site->equipementsByCategory('compteur-et-pompes-de-transfert')) }}</h4>
             </div>
             <h5 class="mb-1 fw-bold">{{ $site->categorieEquipementText('compteur-et-pompes-de-transfert') }}</h5>
             <ul class="mb-0 list-unstyled d-flex align-items-center avatar-group">
@@ -324,14 +324,14 @@ break;
 {{-- autres-equipements-et-immobiliers --}}
 <a href="{{ route($routeName, ['site' => $site, 'categorie_equipement' => 'autres-equipements-et-immobiliers']) }}" class="mb-4 col-md-4">
     <div class="card card-border-shadow-primary">
-        <div class="card-body">
+        <div class="card-body {{ (count($site->equipementsActiveByCategory('autres-equipements-et-immobiliers')) === count($site->equipementsByCategory('autres-equipements-et-immobiliers')) ) ? '':'bg-red-100 animate-pulse' }}">
             <div class="pb-1 mb-2 d-flex align-items-center">
                 <div class="avatar me-2">
                     <span class="rounded">
                         <img src="{{Storage::url('svg/autres-equipements-et-immobiliers.svg')}}" alt="" width="500px"  style="color: {{ $site->categorieEquipementColor('autres-equipements-et-immobiliers') }};">
                     </span>
                 </div>
-                <h4 class="mb-0 ms-1">{{ count($site->equipementsByCategory('autres-equipements-et-immobiliers')) }}</h4>
+                <h4 class="mb-0 ms-1">{{ count($site->equipementsActiveByCategory('autres-equipements-et-immobiliers')) }}/{{ count($site->equipementsByCategory('autres-equipements-et-immobiliers')) }}</h4>
             </div>
             <h5 class="mb-1 fw-bold">{{ $site->categorieEquipementText('autres-equipements-et-immobiliers') }}</h5>
             <ul class="mb-0 list-unstyled d-flex align-items-center avatar-group">

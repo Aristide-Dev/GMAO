@@ -73,6 +73,17 @@ class Site extends Model
     }
 
     /**
+     * Get the equipment by category.
+     *
+     * @param string $category
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function equipementsActiveByCategory($category)
+    {
+        return $this->equipements_active()->where('categorie', $category)->get();
+    }
+
+    /**
      * Calculate the total forfait contrat by category.
      *
      * @param string $category
