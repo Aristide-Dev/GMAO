@@ -38,6 +38,16 @@ class Site extends Model
      */
     public function equipements()
     {
+        return $this->hasMany(Equipement::class)->withInactive();
+    }
+
+    /**
+     * Get the equipment associated with the site.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function equipements_active()
+    {
         return $this->hasMany(Equipement::class);
     }
 
@@ -71,8 +81,8 @@ class Site extends Model
     public function totalForfaitContratByCategory($category)
     {
         return $this->equipements()
-                    ->where('categorie', $category)
-                    ->sum('forfait_contrat');
+            ->where('categorie', $category)
+            ->sum('forfait_contrat');
     }
 
     /**
@@ -92,18 +102,18 @@ class Site extends Model
      * @param int $month
      * @return float
      */
-    public function showForfaitContratForPeriod($year=null, $month=null)
+    public function showForfaitContratForPeriod($year = null, $month = null)
     {
         // dd($year,$month);
 
-        $startDate = Carbon::createFromDate($year ?? date('Y'), $month??date('n'), 1)->startOfMonth();
-        $endDate = Carbon::createFromDate($year ?? date('Y'), $month??date('n'), 1)->endOfMonth();
+        $startDate = Carbon::createFromDate($year ?? date('Y'), $month ?? date('n'), 1)->startOfMonth();
+        $endDate = Carbon::createFromDate($year ?? date('Y'), $month ?? date('n'), 1)->endOfMonth();
 
         $forfaitContrat = ForfaitContrat::where('site_id', $this->id)
-                                        ->whereBetween('start_date',[$startDate,$endDate])
-                                        ->whereBetween('end_date',[$startDate,$endDate])
-                                        // ->where('end_date', $endDate)
-                                        ->first();
+            ->whereBetween('start_date', [$startDate, $endDate])
+            ->whereBetween('end_date', [$startDate, $endDate])
+            // ->where('end_date', $endDate)
+            ->first();
         // dd($forfaitContrat);
 
 
@@ -134,7 +144,7 @@ class Site extends Model
 
                     if ($rapportIntervention && $rapportIntervention->injection_pieces) {
                         foreach ($rapportIntervention->injection_pieces as $injectionPiece) {
-                            $totalCost += $injectionPiece->take_in_stock 
+                            $totalCost += $injectionPiece->take_in_stock
                                 ? ($injectionPiece->stock_price * $injectionPiece->quantite)
                                 : ($injectionPiece->fournisseur_price * $injectionPiece->quantite);
                         }
@@ -158,19 +168,16 @@ class Site extends Model
         $startDate = Carbon::parse($startDate)->startOfDay();
         $endDate = Carbon::parse($endDate)->endOfDay();
         $totalCost = 0;
-        
+
         foreach ($this->demande_interventions as $demande) {
             if ($demande->created_at->between($startDate, $endDate)) {
                 $bonTravail = $demande->bon_travail;
-                if($bonTravail)
-                {
+                if ($bonTravail) {
                     $rapportIntervention = $bonTravail->rapportIntervention;
-                    if ($rapportIntervention && $rapportIntervention->injection_pieces) 
-                    {
+                    if ($rapportIntervention && $rapportIntervention->injection_pieces) {
                         foreach ($rapportIntervention->injection_pieces as $injectionPiece) {
-                            if($injectionPiece->created_at->between($startDate, $endDate))
-                            {
-                                $totalCost += $injectionPiece->fournisseur_price 
+                            if ($injectionPiece->created_at->between($startDate, $endDate)) {
+                                $totalCost += $injectionPiece->fournisseur_price
                                     ? ($injectionPiece->fournisseur_price * $injectionPiece->quantite)
                                     : ($injectionPiece->stock_price * $injectionPiece->quantite);
                             }

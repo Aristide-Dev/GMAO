@@ -3,7 +3,7 @@
     <x-slot name="title_desc">{{ __('Informations sur le Site') }}</x-slot>
     <x-slot name="sidebar">admin</x-slot>
     <x-breadcrumb :data="['Sites'=> route('admin.sites.index'), ''.$site->name.'' => '']" />
-    
+
     <div class="row">
 
         <div class="mb-4 col-lg-3 col-sm-6">
@@ -44,7 +44,7 @@
             <div class="card h-100">
                 <div class="card-body d-flex justify-content-between align-items-center">
                     <div class="mb-0 card-title">
-                        <h5 class="mb-0 font-bold me-2">{{ count($site->equipements) }}</h5>
+                        <h5 class="mb-0 font-bold me-2">{{ count($site->equipements_active) }}/{{ count($site->equipements) }}</h5>
                         <small>Equipements</small>
                     </div>
                     <div class="card-icon">
@@ -85,7 +85,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="row">
         <livewire:site-status-switcher :site="$site" />
     </div>

@@ -19,6 +19,12 @@ class Equipement extends Model
             $builder->where('actif', true);
         });
     }
+    
+    // Méthode pour désactiver le scope globalement si besoin
+    public function scopeWithInactive(Builder $builder)
+    {
+        return $builder->withoutGlobalScope('actif');
+    }
 
     /**
      * The attributes that are mass assignable.

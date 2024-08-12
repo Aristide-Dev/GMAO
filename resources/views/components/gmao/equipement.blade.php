@@ -88,7 +88,7 @@
 <!-- Upcoming Webinar -->
 <div class="mb-4 col-md-6">
     <div class="card shadow-3xl" style="height: auto;">
-        <div class="bg-white card-body">
+        <div class="bg-{{ $equipement->actif ? 'white':'red-200 animate-pulse' }} card-body">
             <div class="pt-4 mb-3 text-center bg-label-primary rounded-3 w-100"
                 style="height:200px; background-image: url('{{ $bg_image }}'); background-size:90%; background-position:center; background-repeat:no-repeat;">
                 {{-- <img class="img-fluid w-50" src="{{ $bg_image }}" alt="Card girl image" width="50" /> --}}
@@ -128,7 +128,7 @@
                             </div>
                             <small class="font-bold">{{ $equipement->marque ?? '---' }}</small>
                         </a>
-                        
+
                         <a href="javascript:void(0);"
                             class="list-group-item list-group-item-action d-flex justify-content-between">
                             <div class="li-wrapper d-flex justify-content-start align-items-center">
@@ -139,7 +139,7 @@
                             </div>
                             <small class="font-bold">{{ $equipement->type ?? '---' }}</small>
                         </a>
-                        
+
                         <a href="javascript:void(0);"
                             class="list-group-item list-group-item-action d-flex justify-content-between">
                             <div class="li-wrapper d-flex justify-content-start align-items-center">
@@ -150,7 +150,7 @@
                             </div>
                             <small class="font-bold">{{ $equipement->produit ?? '---' }}</small>
                         </a>
-                        
+
                         <a href="javascript:void(0);"
                             class="list-group-item list-group-item-action d-flex justify-content-between">
                             <div class="li-wrapper d-flex justify-content-start align-items-center">
@@ -161,7 +161,7 @@
                             </div>
                             <small class="font-bold">{{ $equipement->annee_fabrication ?? '---' }}</small>
                         </a>
-                        
+
                         <a href="javascript:void(0);"
                             class="list-group-item list-group-item-action d-flex justify-content-between">
                             <div class="li-wrapper d-flex justify-content-start align-items-center">
@@ -172,7 +172,7 @@
                             </div>
                             <small class="font-bold">{{ $equipement->puissance ?? '---' }}</small>
                         </a>
-                        
+
                         <a href="javascript:void(0);"
                             class="list-group-item list-group-item-action d-flex justify-content-between">
                             <div class="li-wrapper d-flex justify-content-start align-items-center">
@@ -183,7 +183,7 @@
                             </div>
                             <small class="font-bold">{{ $equipement->capacite ?? '---' }}</small>
                         </a>
-                        
+
                         <a href="javascript:void(0);"
                             class="list-group-item list-group-item-action d-flex justify-content-between">
                             <div class="li-wrapper d-flex justify-content-start align-items-center">
@@ -207,17 +207,17 @@
                         class="btn btn-warning"><i class="tf-icons ti ti-edit ti-sm me-1 animate-pulse"></i>
                         Editer
                     </a>
-                        
+
                     <form method="POST"
                         action="{{ route('admin.sites.equipement.switchStatus', ['site' => $equipement->site, 'equipement' => $equipement]) }}">
                         @csrf
                         @method('patch')
                         <button type="submit" class="text-white bg-yellow-500 btn hover:bg-yellow-600">
                             <i class="fa-solid fa-triangle-exclamation fa-sm me-1 animate-pulse"></i>
-                            Désactiver
+                            {{ $equipement->actif ? 'Désactiver':'Activer' }} équipement
                         </button>
                     </form>
-                    
+
                     <form method="POST"
                         action="{{ route('admin.sites.equipement.destroy', ['site' => $equipement->site, 'equipement' => $equipement]) }}"
                         onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ?');">

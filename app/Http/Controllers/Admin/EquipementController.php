@@ -56,7 +56,7 @@ class EquipementController extends Controller
      */
     public function update(Request $request, Site $site, Equipement $equipement)
     {
-        $request->validateWithBag('edit_equipement',[
+        $request->validateWithBag('edit_equipement', [
             'name' => ['required', 'string', 'max:100', Rule::unique('sites')->ignore($site->id)],
             'numero_serie' => ['required', 'string', 'max:30'],
             'categorie' => ['required', 'string', 'max:30', 'in:distributeur,stockage-et-tuyauterie,forage,servicing,branding,groupe-electrogene,electricite,equipement-incendie,compteur-et-pompes-de-transfert,autres-equipements-et-immobiliers'],
@@ -100,8 +100,11 @@ class EquipementController extends Controller
     /**
      * switch Status the specified resource from storage.
      */
-    public function switchStatus(Site $site, Equipement $equipement)
+    public function switchStatus(Site $site, $equipementId)
     {
+        // Rechercher un équipement inactif en ignorant le scope global pour les actifs
+        $equipement = Equipement::withoutGlobalScope('actif')->where('id', $equipementId)->first();
+
         $equipement->actif = !$equipement->actif;
         $equipement->save();
 
@@ -109,6 +112,4 @@ class EquipementController extends Controller
 
         return redirect(route("admin.sites.show", $site))->with('success', $msg);
     }
-
-
 }
