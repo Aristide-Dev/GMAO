@@ -90,6 +90,10 @@
         <livewire:site-status-switcher :site="$site" />
     </div>
 
+    <div class="row">
+        <livewire:site-equipements-data :site="$site" />
+    </div>
+
     <div class="mb-5 row">
         <div class="col-md-12">
             <livewire:equipement-search :site="$site">
