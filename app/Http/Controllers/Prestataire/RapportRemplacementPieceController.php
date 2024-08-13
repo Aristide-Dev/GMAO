@@ -1,15 +1,17 @@
 <?php
 
 namespace App\Http\Controllers\Prestataire;
-use App\Http\Controllers\Controller;
 
-use App\Models\RapportRemplacementPiece;
-use App\Models\BonTravail;
-use App\Models\DemandeIntervention;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Http\File;
 use App\Enums\StatusEnum;
+
+use Illuminate\Http\File;
+use App\Models\BonTravail;
+use Illuminate\Http\Request;
+use App\Models\DemandeIntervention;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
+use App\Events\PrestataireRapportsEvent;
+use App\Models\RapportRemplacementPiece;
 
 class RapportRemplacementPieceController extends Controller
 {
@@ -45,12 +47,12 @@ class RapportRemplacementPieceController extends Controller
         // Récupérer le rapport d'intervention associé au bon de travail
         $rapportIntervention = $bonTravail->rapportIntervention;
 
-        RapportRemplacementPiece::create([
+        $rapportRemplacementPiece = RapportRemplacementPiece::create([
             'ri_reference' => "$rapportIntervention->ri_reference",
             'rapport_remplacement_piece_file' => $imagePath,
             'commentaire' => $request->commentaire ?? "",
         ]);
-        
+
         $rapportIntervention->status = StatusEnum::INJECTION_PIECE;
         $rapportIntervention->save();
 
@@ -59,6 +61,8 @@ class RapportRemplacementPieceController extends Controller
 
         $demande->status = StatusEnum::INJECTION_PIECE;
         $demande->save();
+
+        event(new PrestataireRapportsEvent($bonTravail->prestataire, $rapportIntervention, "rapportRemplacementPiece"));
 
         return redirect()->back()->with('success', 'Nouveau Rapport de remplacement de piece créé avec succès!');
     }
