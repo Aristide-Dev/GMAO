@@ -3,13 +3,14 @@
 namespace App\Http\Controllers\Demandeur;
 
 use App\Models\Site;
+use App\Enums\StatusEnum;
+use Illuminate\Http\File;
 use Illuminate\Http\Request;
 use App\Models\DemandeIntervention;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Http\File;
-use App\Enums\StatusEnum;
+use App\Events\CreateDemandeInterventionEvent;
 
 class DemandeInterventionController extends Controller
 {
@@ -67,13 +68,16 @@ class DemandeInterventionController extends Controller
 
         $imagePath = $this->saveImageWithUniqueName($image, $di_reference, 'demandes');
 
-        DemandeIntervention::create([
+        $semande = DemandeIntervention::create([
             'di_reference' => $di_reference,
             'site_id' => $request->site,
             'demandeur_id' => $demandeur->id,
             'demande_file' => $imagePath,
             'status' => StatusEnum::PAS_TRAITE,
         ])->save();
+
+
+        event(new CreateDemandeInterventionEvent($semande));
 
         return redirect()->back()->with('success', 'Nouvelle demande créée avec succès!');
     }
