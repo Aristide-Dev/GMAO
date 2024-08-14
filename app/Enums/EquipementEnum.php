@@ -56,7 +56,7 @@ enum EquipementEnum: string {
     }
 
     /**
-     * Retourner L'image correspondante à une categorie d'equipement
+     * Retourner La categorie correspondante à un non de categorie d'equipement
      */
     public static function getBG($categorie): string {
         return match ($categorie) {
@@ -70,6 +70,25 @@ enum EquipementEnum: string {
             self::EQUIPEMENT_INCENDIE, 'equipement-incendie' => 'Équipement Incendie',
             self::COMPTEUR_ET_POMPES_DE_TRANSFERT, 'compteur-et-pompes-de-transfert' => 'Compteur et Pompes de transfert',
             default => 'Inconnu',
+        };
+    }
+
+    /**
+     * Retourner L'image correspondante à une categorie d'equipement
+     */
+    public static function get($categorie_name) {
+        return match ($categorie_name) {
+            'Distributeur' => self::DISTRIBUTEUR,
+            'Stockage et Tuyauterie' => self::STOCKAGE_ET_TUYAUTERIE,
+            'Groupe Électrogène' => self::GROUPE_ELECTROGENE,
+            'Forage' => self::FORAGE,
+            'Servicing' => self::SERVICING,
+            'Branding' => self::BRANDING,
+            'Électricité' => self::ELECTRICITE,
+            'Équipement Incendie' => self::EQUIPEMENT_INCENDIE,
+            'Compteur et Pompes de transfert' => self::COMPTEUR_ET_POMPES_DE_TRANSFERT,
+            'Autres équipements et immobiliers' => self::AUTRES_EQUIPEMENTS_ET_IMMOBILIERS,
+            default => null,
         };
     }
 
