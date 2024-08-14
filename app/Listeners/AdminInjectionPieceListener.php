@@ -3,12 +3,11 @@
 namespace App\Listeners;
 
 use Illuminate\Mail\Mailer;
-use App\Mail\RapportIntervention;
-use App\Mail\rapportRemplacementMail;
+use App\Mail\AdminInjectionPieceMail;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class PrestataireRapportsListener
+class AdminInjectionPieceListener
 {
     /**
      * Create the event listener.
@@ -23,6 +22,6 @@ class PrestataireRapportsListener
      */
     public function handle(object $event): void
     {
-        $this->mailer->send(new RapportIntervention($event->rapport_interventon, $event->prestataire));
+        $this->mailer->send(new AdminInjectionPieceMail($event->rapport_interventon, $event->prestataire));
     }
 }

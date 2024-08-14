@@ -19,14 +19,14 @@
 {{ $rapport_interventon->commentaire }}
 @endif
 
-NB: Données disponibles sur G-Maintenance 
+NB: Données disponibles sur G-Maintenance
 {{-- <x-mail::button :url="config('app.url')">
 Cliquer Ici
 </x-mail::button> --}}
 
 @if (config('app.env') != 'production')
-    <img src="https://gn-gmaintenance.com/storage/assets/img/logo.png" alt="Logo Star Oil" width="50%" />
+<img src="https://gn-gmaintenance.com/storage/assets/img/logo.png" alt="Logo Star Oil" width="50%" />
 @else
-    <img src="{{ config('app.url') . '/storage/assets/img/logo.png' }}" alt="Logo Star Oil" width="50%" />
+<img src="{{ config('app.url') . '/storage/assets/img/logo.png' }}" alt="Logo Star Oil" width="50%" />
 @endif
 </x-mail::message>

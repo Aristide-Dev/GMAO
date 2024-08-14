@@ -62,7 +62,7 @@ class RapportRemplacementPieceController extends Controller
         $demande->status = StatusEnum::INJECTION_PIECE;
         $demande->save();
 
-        event(new PrestataireRapportsEvent($bonTravail->prestataire, $rapportIntervention, "rapportRemplacementPiece"));
+        event(new PrestataireRapportsEvent($bonTravail->prestataire, $rapportIntervention));
 
         return redirect()->back()->with('success', 'Nouveau Rapport de remplacement de piece créé avec succès!');
     }

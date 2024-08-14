@@ -118,7 +118,7 @@ class RapportConstatController extends Controller
         $rapportIntervention->save();
 
         // event(new FirstRapportConstatEvent($rapportIntervention, $bonTravail->prestataire));
-        event(new PrestataireRapportsEvent($bonTravail->prestataire, $rapportIntervention, "rapport_interventon"));
+        event(new PrestataireRapportsEvent($bonTravail->prestataire, $rapportIntervention));
 
         return redirect()->back()->with('success', 'Nouveau Rapport généré avec succès!');
     }

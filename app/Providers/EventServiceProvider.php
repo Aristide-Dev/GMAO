@@ -4,14 +4,20 @@ namespace App\Providers;
 
 use App\Events\ClotureEvent;
 use App\Events\CreateBTEvent;
-use App\Events\FirstRapportConstatEvent;
 use App\Listeners\ClotureListener;
 use App\Listeners\CreateBTListener;
-use App\Listeners\FirstRapportConstatListener;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
+use App\Events\AdminInjectionPieceEvent;
+use App\Events\FirstRapportConstatEvent;
+use App\Events\PrestataireRapportsEvent;
+use App\Events\CreateDemandeInterventionEvent;
+use App\Listeners\AdminInjectionPieceListener;
+use App\Listeners\FirstRapportConstatListener;
+use App\Listeners\PrestataireRapportsListener;
+use App\Listeners\CreateDemandeInterventionListener;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Event;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -33,6 +39,21 @@ class EventServiceProvider extends ServiceProvider
         // envois de mail au prestataire
         FirstRapportConstatEvent::class => [
             FirstRapportConstatListener::class,
+        ],
+
+        // envois de mail au prestataire
+        CreateDemandeInterventionEvent::class => [
+            CreateDemandeInterventionListener::class,
+        ],
+
+        // envois de mail au prestataire
+        AdminInjectionPieceEvent::class => [
+            AdminInjectionPieceListener::class,
+        ],
+
+        // envois de mail au prestataire
+        PrestataireRapportsEvent::class => [
+            PrestataireRapportsListener::class,
         ],
 
         // cloture

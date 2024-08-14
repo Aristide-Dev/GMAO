@@ -2,24 +2,26 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Enums\StatusEnum;
-use App\Events\ClotureEvent;
-use App\Events\CreateBTEvent;
-use App\Http\Controllers\Controller;
-use App\Models\DemandeIntervention;
-use App\Models\InjectionPiece;
-use App\Models\Piece;
-use App\Models\Prestataire;
-use App\Models\RapportIntervention;
+use DateTime;
 use App\Models\Site;
 use App\Models\User;
 use App\Models\Zone;
-use DateTime;
+use App\Models\Piece;
+use App\Enums\StatusEnum;
 use Illuminate\Http\File;
+use App\Models\Prestataire;
+use App\Events\ClotureEvent;
 use Illuminate\Http\Request;
+use App\Events\CreateBTEvent;
+use App\Models\InjectionPiece;
+use Illuminate\Validation\Rule;
+use App\Models\DemandeIntervention;
+use App\Models\RapportIntervention;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Validation\Rule;
+use App\Events\AdminInjectionPieceEvent;
+use App\Events\CreateDemandeInterventionEvent;
 
 class DemandeInterventionController extends Controller
 {
@@ -75,13 +77,14 @@ class DemandeInterventionController extends Controller
 
         $imagePath = $this->saveImageWithUniqueName($image, $di_reference, 'demandes');
 
-        DemandeIntervention::create([
+        $demande = DemandeIntervention::create([
             'di_reference' => $di_reference,
             'site_id' => $request->site,
             'demandeur_id' => $request->demandeur,
             'demande_file' => $imagePath,
             'status' => StatusEnum::PAS_TRAITE,
         ]);
+        event(new CreateDemandeInterventionEvent($demande));
 
         return redirect()->back()->with('success', 'Nouvelle demande créée avec succès!');
     }
@@ -228,9 +231,8 @@ class DemandeInterventionController extends Controller
 
         if ($request->pris_dans_le_stock == 'on') {
 
-            if($piece->quantite < $request->quantite)
-            {
-                return redirect()->back()->with('error', 'Pas asser de quantite dans le stock. il reste '.$piece->quantite.' '.$piece->piece.' dans le stock');
+            if ($piece->quantite < $request->quantite) {
+                return redirect()->back()->with('error', 'Pas asser de quantite dans le stock. il reste ' . $piece->quantite . ' ' . $piece->piece . ' dans le stock');
             }
             $validateData['take_in_stock'] = true;
         } else {
@@ -245,34 +247,32 @@ class DemandeInterventionController extends Controller
         }
         // dd($validateData);
 
-        if(!empty($request->injection_file_file))
-        {
+        if (!empty($request->injection_file_file)) {
             // Gestion du téléchargement et du stockage du fichier d'injection
             $injectionFile = $request->file('injection_file_file');
             $injectionFileName = $injectionFile->getClientOriginalName(); // Nom du fichier
             $injectionFilePath = $injectionFile->storeAs('injection_files', $injectionFileName); // Stockage du fichier
-    
+
             $validateData['injection_file_file'] = $injectionFilePath;
-        }else{
+        } else {
             $validateData['injection_file_file'] = null;
         }
 
         // Création de la nouvelle InjectionPiece
         // dd($validateData);
         InjectionPiece::create([
-            'piece_id' =>$validateData['piece_id'],
-            'ri_reference' =>$validateData['ri_reference'],
-            'quantite' =>$validateData['quantite'],
-            'stock_price' =>$validateData['stock_price'],
-            'take_in_fournisseur' =>$validateData['take_in_fournisseur'],
-            'take_in_fournisseur' =>$validateData['take_in_fournisseur'],
-            'fournisseur_name' =>$validateData['fournisseur_name'],
-            'fournisseur_price' =>$validateData['fournisseur_price'],
-            'injection_file' =>$validateData['injection_file_file'],
+            'piece_id' => $validateData['piece_id'],
+            'ri_reference' => $validateData['ri_reference'],
+            'quantite' => $validateData['quantite'],
+            'stock_price' => $validateData['stock_price'],
+            'take_in_fournisseur' => $validateData['take_in_fournisseur'],
+            'take_in_fournisseur' => $validateData['take_in_fournisseur'],
+            'fournisseur_name' => $validateData['fournisseur_name'],
+            'fournisseur_price' => $validateData['fournisseur_price'],
+            'injection_file' => $validateData['injection_file_file'],
         ]);
 
-        if($validateData['take_in_stock'] == true)
-        {
+        if ($validateData['take_in_stock'] == true) {
             $quantite = intval($request->quantite);
             $quantite = abs($quantite);
 
@@ -290,6 +290,7 @@ class DemandeInterventionController extends Controller
 
         $bon_travail->demande->status = StatusEnum::EN_COURS;
         $bon_travail->demande->save();
+        event(new AdminInjectionPieceEvent($rapportIntervention, $bon_travail->prestataire));
 
         return redirect()->back()->with('success', 'Nouvelle Pièce injectée avec succès!');
     }
@@ -327,9 +328,8 @@ class DemandeInterventionController extends Controller
 
         if ($request->pris_dans_le_stock == 'on') {
 
-            if($piece->quantite < $request->quantite)
-            {
-                return redirect()->back()->with('error', 'Pas asser de quantite dans le stock. il reste '.$piece->quantite.' '.$piece->piece.' dans le stock');
+            if ($piece->quantite < $request->quantite) {
+                return redirect()->back()->with('error', 'Pas asser de quantite dans le stock. il reste ' . $piece->quantite . ' ' . $piece->piece . ' dans le stock');
             }
             $validateData['take_in_stock'] = true;
         } else {
@@ -354,19 +354,18 @@ class DemandeInterventionController extends Controller
         // Création de la nouvelle InjectionPiece
         // dd($validateData);
         InjectionPiece::create([
-            'piece_id' =>$validateData['piece_id'],
-            'ri_reference' =>$validateData['ri_reference'],
-            'quantite' =>$validateData['quantite'],
-            'stock_price' =>$validateData['stock_price'],
-            'take_in_fournisseur' =>$validateData['take_in_fournisseur'],
-            'take_in_fournisseur' =>$validateData['take_in_fournisseur'],
-            'fournisseur_name' =>$validateData['fournisseur_name'],
-            'fournisseur_price' =>$validateData['fournisseur_price'],
-            'injection_file' =>$validateData['injection_file_file'],
+            'piece_id' => $validateData['piece_id'],
+            'ri_reference' => $validateData['ri_reference'],
+            'quantite' => $validateData['quantite'],
+            'stock_price' => $validateData['stock_price'],
+            'take_in_fournisseur' => $validateData['take_in_fournisseur'],
+            'take_in_fournisseur' => $validateData['take_in_fournisseur'],
+            'fournisseur_name' => $validateData['fournisseur_name'],
+            'fournisseur_price' => $validateData['fournisseur_price'],
+            'injection_file' => $validateData['injection_file_file'],
         ]);
 
-        if($piece->quantite < $request->quantite)
-        {
+        if ($piece->quantite < $request->quantite) {
             $quantite = intval($request->quantite);
             $quantite = abs($quantite);
 
@@ -492,7 +491,7 @@ class DemandeInterventionController extends Controller
      *
      * @return array Un tableau contenant la durée de prise en charge et les KPIs.
      */
-    private function calculerPriseEnCharge($date_declaration, $date_intervention, $date_echeance) :array
+    private function calculerPriseEnCharge($date_declaration, $date_intervention, $date_echeance): array
     {
         $temps_prise_en_charge_format = '';
         $kpis = '';
@@ -534,9 +533,8 @@ class DemandeInterventionController extends Controller
             $kpis = 0;
         }
 
-        dd("date_declaration",$date_declaration, "date_intervention",$date_intervention, "date_echeance",$date_echeance,"temps_prise_en_charge_format",$temps_prise_en_charge_format,"kpis",$kpis);
+        dd("date_declaration", $date_declaration, "date_intervention", $date_intervention, "date_echeance", $date_echeance, "temps_prise_en_charge_format", $temps_prise_en_charge_format, "kpis", $kpis);
 
         return ['temps_prise_en_charge' => $temps_prise_en_charge_format, 'kpis' => $kpis];
     }
-
 }

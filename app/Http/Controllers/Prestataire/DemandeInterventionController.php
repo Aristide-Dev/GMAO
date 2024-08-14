@@ -21,7 +21,7 @@ class DemandeInterventionController extends Controller
         $agent = Auth::user();
         $prestataire = $agent->prestataire;
 
-        if($prestataire) {
+        if ($prestataire) {
             // Récupérer les bons de travail associés au prestataire et les trier par ID décroissant
             $bon_travails = $prestataire->bon_travails()->orderBy('id', 'desc')->get();
         } else {
@@ -42,16 +42,24 @@ class DemandeInterventionController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-    }
+    public function store(Request $request) {}
 
     /**
      * Display the specified resource.
      */
     public function show(DemandeIntervention $demande)
     {
-        return view('prestataires.demandes.show', compact('demande'));
+        if ($demande->bon_travail) {
+            $bon_travail = $demande->bon_travail;
+
+            $agent = Auth::user();
+            $prestataire = $agent->prestataire ?? null;
+
+            if ($prestataire && ($bon_travail->prestataire->id == $prestataire->id)) {
+                return view('prestataires.demandes.show', compact('demande'));
+            }
+        }
+        abort(403, 'Vous n\'êtes pas authorisé à accéder à cette ressource');
     }
 
     /**

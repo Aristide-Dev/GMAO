@@ -6,24 +6,22 @@ use App\Models\Prestataire;
 use App\Models\RapportIntervention;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
-use App\Models\RapportRemplacementPiece;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class PrestataireRapportsEvent
+class AdminInjectionPieceEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-
 
     /**
      * Create a new event instance.
      */
-    public function __construct(public Prestataire $prestataire, public RapportIntervention $rapport_interventon)
+    public function __construct(public RapportIntervention $rapport_interventon, public Prestataire $prestataire)
     {
-        // dd($this);
+        //
     }
 
     /**
