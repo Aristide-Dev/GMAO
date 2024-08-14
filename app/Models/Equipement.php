@@ -2,11 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Builder;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Builder;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Equipement extends Model
 {
@@ -138,6 +139,16 @@ class Equipement extends Model
                     ->margin(1)
                     ->merge('/storage/app/public/assets/img/logo.png',.3)
                     ->generate($data);
+    }
+
+    // Accessor pour vérifier si l'équipement est récent
+    public function getIsRecentAttribute()
+    {
+        // Définir la période "récente" (ex. : 7 jours)
+        $recentPeriod = Carbon::now()->subDays(7);
+
+        // Vérifier si l'équipement a été créé dans cette période
+        return $this->created_at >= $recentPeriod;
     }
 
 

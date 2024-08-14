@@ -89,6 +89,9 @@
 <div class="mb-4 col-md-6">
     <div class="card shadow-3xl" style="height: auto;">
         <div class="bg-{{ $equipement->actif ? 'white':'red-200 animate-pulse' }} card-body">
+            @if($equipement->is_recent)
+                <span class="px-3 py-2 font-bold shadow-lg badge bg-primary animate-pulse text-italic float-end">Nouveau</span>
+            @endif
             <div class="pt-4 mb-3 text-center bg-label-primary rounded-3 w-100"
                 style="height:200px; background-image: url('{{ $bg_image }}'); background-size:90%; background-position:center; background-repeat:no-repeat;">
                 {{-- <img class="img-fluid w-50" src="{{ $bg_image }}" alt="Card girl image" width="50" /> --}}
