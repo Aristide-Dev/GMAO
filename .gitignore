@@ -18,3 +18,6 @@ yarn-error.log
 /.idea
 /.vscode
 .htaccess
+/storage/app/public/demandes/
+/storage/app/public/rapport_constat/
+/storage/app/public/rapport_remplacement_piece/
