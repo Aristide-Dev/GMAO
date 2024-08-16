@@ -90,7 +90,7 @@ class BonTravailController extends Controller
             $break_stepp += 1;
         }
 
-        $status =  $request->create_bt_affectee_travaux?StatusEnum::AFFECTER_TRAVAUX:StatusEnum::EN_COURS;
+        $status =  $request->create_bt_affectee_travaux?StatusEnum::AFFECTER_TRAVAUX:StatusEnum::EN_ATTENTE;
 
         // $bon_travail = BonTravail::create([
         //     'requete' => $request->requete,
@@ -129,21 +129,21 @@ class BonTravailController extends Controller
                 'date_echeance' => $date_echeance,
                 'status' => $status,
             ]);
-        
-            RapportIntervention::create([
+
+            $rapportIntervention = RapportIntervention::create([
                 'ri_reference' => $ri_reference,
                 'bt_reference' => $bon_travail->bt_reference,
                 'status' => $status,
             ]);
-        
+
             $demande->status = $status;
             $demande->save();
 
             return $bon_travail;
         });
-        
+
         // dd($bon_travail);
-        
+
 
         event(new CreateBTEvent($bon_travail, $prestataire));
         // Mail::send(new CreateBTMail($bon_travail, $prestataire));

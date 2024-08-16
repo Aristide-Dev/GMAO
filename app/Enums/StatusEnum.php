@@ -6,7 +6,7 @@ enum StatusEnum: string {
     /**
      * Les statuts
      */
-    case EN_ATTENTE = 'en attente';
+    case EN_ATTENTE = 'en attente prestataire';
     case EN_COURS = 'en cours';
     case ANNULE = 'annulé';
     case TERMINE = 'terminé';

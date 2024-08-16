@@ -158,26 +158,26 @@ class DemandeInterventionController extends Controller
 
 
 
-
+        $status = null;
         switch ($request->status) {
             case 'Clôturé':
-                $request->status = StatusEnum::CLOTURE;
+                $status = StatusEnum::CLOTURE;
                 break;
             case 'annulé':
-                $request->status = StatusEnum::ANNULE;
+                $status = StatusEnum::ANNULE;
                 break;
             case 'affectées travaux':
-                $request->status = StatusEnum::AFFECTER_TRAVAUX;
+                $status = StatusEnum::AFFECTER_TRAVAUX;
                 break;
             default:
-                $request->status = StatusEnum::ANNULE;
+                $status = StatusEnum::ANNULE;
                 break;
         }
 
 
         // Mettre à jour le rapport d'intervention avec les informations fournies et calculées
         $rapportIntervention->update([
-            'status' => $request->status,
+            'status' => $status,
             'numero_devis' => $request->numero_devis,
             'bon_commande' => $request->bon_commande,
             'commentaire' => $request->commentaire,
@@ -188,10 +188,10 @@ class DemandeInterventionController extends Controller
         ]);
 
         $bon_travail = $rapportIntervention->bon_travail;
-        $bon_travail->status = $request->status;
+        $bon_travail->status = $status;
         $bon_travail->save();
 
-        $bon_travail->demande->status = $request->status;
+        $bon_travail->demande->status = $status;
         $bon_travail->demande->save();
         event(new ClotureEvent($rapportIntervention, $bon_travail->prestataire));
 
@@ -280,16 +280,13 @@ class DemandeInterventionController extends Controller
             $piece->save();
         }
 
-        $rapportIntervention->status = StatusEnum::EN_COURS;
+        $rapportIntervention->status = StatusEnum::EN_ATTENTE;
         $rapportIntervention->save();
 
         $bon_travail = $rapportIntervention->bon_travail;
-        $bon_travail = $rapportIntervention->bon_travail;
-        $bon_travail->status = StatusEnum::EN_COURS;
+        $bon_travail->status = StatusEnum::EN_ATTENTE;
         $bon_travail->save();
 
-        $bon_travail->demande->status = StatusEnum::EN_COURS;
-        $bon_travail->demande->save();
         event(new AdminInjectionPieceEvent($rapportIntervention, $bon_travail->prestataire));
 
         return redirect()->back()->with('success', 'Nouvelle Pièce injectée avec succès!');
@@ -373,15 +370,15 @@ class DemandeInterventionController extends Controller
             $piece->save();
         }
 
-        $rapportIntervention->status = StatusEnum::EN_COURS;
+        $rapportIntervention->status = StatusEnum::EN_ATTENTE;
         $rapportIntervention->save();
 
         $bon_travail = $rapportIntervention->bon_travail;
         $bon_travail = $rapportIntervention->bon_travail;
-        $bon_travail->status = StatusEnum::EN_COURS;
+        $bon_travail->status = StatusEnum::EN_ATTENTE;
         $bon_travail->save();
 
-        $bon_travail->demande->status = StatusEnum::EN_COURS;
+        $bon_travail->demande->status = StatusEnum::EN_ATTENTE;
         $bon_travail->demande->save();
 
         return redirect()->back()->with('success', 'Nouvelle Pièce injectée avec succès!');
