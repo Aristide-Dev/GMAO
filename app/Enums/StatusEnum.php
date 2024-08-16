@@ -21,30 +21,30 @@ enum StatusEnum: string {
      */
     public static function getColor($status): string {
         return match ($status) {
-            self::EN_ATTENTE => '#A16207', // Orange
-            'en attente prestataire' => '#A16207', // Orange
+            self::EN_ATTENTE => '#f97316', // Orange
+            'en attente prestataire' => '#f97316', // Orange
 
-            self::EN_COURS => '#FACC15', // Jaune
-            'en cours' => '#FACC15', // Jaune
+            self::EN_COURS => '#fbbf24', // Jaune
+            'en cours' => '#fbbf24', // Jaune
 
             self::ANNULE => '#991B1B', // Rouge
             'annulé' => '#991B1B', // Rouge
 
-            self::AFFECTER_TRAVAUX => '#ff77e9', // Rouge
-            'affectées travaux' => '#ff77e9', // Rouge
+            self::AFFECTER_TRAVAUX => '#EC4899', // pik-500
+            'affectées travaux' => '#EC4899', // pik-500
 
-            self::TERMINE => '#166534', // Vert
-            'terminé' => '#166534', // Vert
+            self::TERMINE => '#22c55e', // Vert
+            'terminé' => '#22c55e', // Vert
 
-            self::CLOTURE => '#166534', // Vert
-            'cloturé' => '#166534', // Vert
-            'Clôturé' => '#166534', // Vert
+            self::CLOTURE => '#22c55e', // Vert
+            'cloturé' => '#22c55e', // Vert
+            'Clôturé' => '#22c55e', // Vert
 
             self::REJETE => '#F87171', // rouge-clair
             'rejeté' => '#F87171', // rouge-clair
 
-            self::INJECTION_PIECE => '#800080', // Violet
-            'injection de pièce' => '#800080', // Violet
+            self::INJECTION_PIECE => '#a21caf', // Violet
+            'injection de pièce' => '#a21caf', // Violet
 
             self::PAS_TRAITE => '#93C5FD', // Violet
             'pas traité' => '#93C5FD', // Violet
