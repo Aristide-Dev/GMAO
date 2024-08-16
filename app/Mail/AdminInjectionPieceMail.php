@@ -29,9 +29,9 @@ class AdminInjectionPieceMail extends Mailable
         if (config('app.env') !== 'production') {
             $this->email_to_send = 'aristidegnimassouu@gmail.com';
         }else{
-            if($this->prestataire->admin)
+            if($this->prestataire->admin())
             {
-                $this->email_to_send = $this->prestataire->admin->email;
+                $this->email_to_send = $this->prestataire->admin()->email;
             }else{
                 $this->email_to_send = $this->prestataire->email;
             }

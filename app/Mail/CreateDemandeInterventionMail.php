@@ -33,7 +33,6 @@ class CreateDemandeInterventionMail extends Mailable
                 new Address('maintenance@staroilgroup.com', 'Star oil Group / G-Maintenance'),
             ],
             subject: 'Demande d\'intervention - ' . config('app.pays_name'),
-            to: (config('app.env') !== 'production') ? 'aristidegnimassouu@gmail.com' : 'maintenance@staroilgroup.com',
         );
     }
 

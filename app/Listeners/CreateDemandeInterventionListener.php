@@ -2,17 +2,18 @@
 
 namespace App\Listeners;
 
-use Illuminate\Mail\Mailer;
 use Illuminate\Queue\InteractsWithQueue;
 use App\Mail\CreateDemandeInterventionMail;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use App\Jobs\DemandeInterventionSendMailJob;
+use App\Events\CreateDemandeInterventionEvent;
 
 class CreateDemandeInterventionListener
 {
     /**
      * Create the event listener.
      */
-    public function __construct(private Mailer $mailer)
+    public function __construct()
     {
         //
     }
@@ -20,8 +21,9 @@ class CreateDemandeInterventionListener
     /**
      * Handle the event.
      */
-    public function handle(object $event): void
+    public function handle(CreateDemandeInterventionEvent $event): void
     {
-        $this->mailer->send(new CreateDemandeInterventionMail($event->demande));
+        DemandeInterventionSendMailJob::dispatch($event->demande);
+        // $this->mailer->send(new CreateDemandeInterventionMail($event->demande));
     }
 }
