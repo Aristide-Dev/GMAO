@@ -22,7 +22,7 @@ enum StatusEnum: string {
     public static function getColor($status): string {
         return match ($status) {
             self::EN_ATTENTE => '#A16207', // Orange
-            'en attente' => '#A16207', // Orange
+            'en attente prestataire' => '#A16207', // Orange
 
             self::EN_COURS => '#FACC15', // Jaune
             'en cours' => '#FACC15', // Jaune
