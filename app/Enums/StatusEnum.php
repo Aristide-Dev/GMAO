@@ -30,8 +30,8 @@ enum StatusEnum: string {
             self::ANNULE => '#991B1B', // Rouge
             'annulé' => '#991B1B', // Rouge
 
-            self::AFFECTER_TRAVAUX => '#EC4899', // pik-500
-            'affectées travaux' => '#EC4899', // pik-500
+            self::AFFECTER_TRAVAUX => '#EC4899', // pink-500
+            'affectées travaux' => '#EC4899', // pink-500
 
             self::TERMINE => '#22c55e', // Vert
             'terminé' => '#22c55e', // Vert
