@@ -1,27 +1,26 @@
-
 @php
-$indices_performance = [
-    [
-        'statut' => 'Mauvais',
-        'color' => 'danger',
-        'value' => rand(0,100),
-    ],
-    [
-        'statut' => 'Moyen',
-        'value' => rand(0,100),
-        'color' => 'warning',
-    ],
-    [
-        'statut' => 'Bon',
-        'value' => rand(0,100),
-        'color' => 'primary',
-    ],
-    [
-        'statut' => 'Excellent',
-        'value' => rand(0,100),
-        'color' => 'success',
-    ],
-];
+    $indices_performance = [
+        [
+            'statut' => 'Mauvais',
+            'color' => 'danger',
+            'value' => rand(0, 100),
+        ],
+        [
+            'statut' => 'Moyen',
+            'value' => rand(0, 100),
+            'color' => 'warning',
+        ],
+        [
+            'statut' => 'Bon',
+            'value' => rand(0, 100),
+            'color' => 'primary',
+        ],
+        [
+            'statut' => 'Excellent',
+            'value' => rand(0, 100),
+            'color' => 'success',
+        ],
+    ];
 @endphp
 <div class="mb-4 shadow-3xl card">
     <!-- Formulaire de recherche -->
@@ -29,7 +28,8 @@ $indices_performance = [
         <div class="flex mt-3 justify-content-center">
             <div class="p-3 my-2 bg-gray-100 d-flex align-items-center justify-content-between w-75 rounded-2xl">
                 <label for="search" class="mx-1 font-bold">Rechercher</label>
-                <input wire:model.live="search" name="search" type="search" placeholder="Rechercher un prestataire" class="mx-2 form-control rounded-e-2xl" />
+                <input wire:model.live="search" name="search" type="search" placeholder="Rechercher un prestataire"
+                    class="mx-2 form-control rounded-e-2xl" />
                 {{-- <button type="submit" class="px-3 py-2 text-white bg-blue-500 btn-icon rounded-xl"><i class="ti ti-search"></i></button> --}}
             </div>
         </div>
@@ -48,7 +48,7 @@ $indices_performance = [
     </div>
     <div class="card-body">
         <div class="mb-4 row gy-4" wire:loading.class="animate-pulse">
-            
+
             <div class="flex justify-content-center col-12" wire:loading>
                 <div class="flex gap-0 p-3 bg-transparent rounded-lg justify-content-center animate-pulse">
                     <div class="demo-inline-spacing display-1">
@@ -69,25 +69,47 @@ $indices_performance = [
                                         {{ $prestataire->name }}
                                     </h5>
                                     (<span class="fw-bolder">{{ $prestataire->slug }}</span>)
-
                                     @php
-                                        $st = $indices_performance[rand(0,3)];
+                                        $st = $indices_performance[rand(0, 3)];
                                     @endphp
-                                    <div class="px-2 py-2 mx-0 mt-3 mb-3 bg-white d-flex justify-content-between w-100 col-12">
-                                        <span class="text-{{ $st['color'] }}"><i class="ti ti-wand me-1 mt-n1"></i></span>
-                                        <span class="badge bg-label-{{ $st['color'] }}">{{ $st['statut'] }}</span>
+                                    <div class="flex justify-between border w-full">
+                                        <div class="user-progress bg-white px-2 rounded">
+                                            
+                                            <small class="text-body">Dans les délais</small>
+                                            <p class="text-success fw-bold mb-0 d-flex align-items-center gap-1">
+                                                <i class='ti ti-chevron-up'></i>
+                                                {{ $prestataire->indice_performance_general_dans_les_delais }}
+                                            </p>
+                                        </div>
+
+
+                                        <div class="user-progress bg-white px-2 rounded">
+                                            <small class="text-body">Hors délais</small>
+                                            <p class="text-danger fw-bold mb-0 d-flex align-items-center gap-1">
+                                                <i class='ti ti-chevron-down'></i>
+                                                {{ $prestataire->indice_performance_general_hors_delais }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="px-2 py-2 mx-0 mt-3 mb-3 bg-white d-flex justify-content-between w-100 col-12">
+                                        <span class="text-{{ $st['color'] }}"><i
+                                                class="ti ti-wand me-1 mt-n1"></i></span>
+                                        <span class="badge bg-label-{{ $prestataire->indicePerformanceColor($prestataire->indice_performance_general)['color'] }}">{{ $prestataire->indicePerformanceColor($prestataire->indice_performance_general)['statut'] }}</span>
                                         <p class="font-bold">
                                             {{ $prestataire->indice_performance_general }}%
                                         </p>
                                     </div>
-                                    <a href="{{ route('admin.prestataires.show', $prestataire) }}" class="btn btn-primary">Voir +</a>
-                                    <a href="{{ route('admin.prestataires.edit', $prestataire) }}" class="btn btn-warning">Editer</a>
+                                    <a href="{{ route('admin.prestataires.show', $prestataire) }}"
+                                        class="btn btn-primary">Voir +</a>
+                                    <a href="{{ route('admin.prestataires.edit', $prestataire) }}"
+                                        class="btn btn-warning">Editer</a>
                                 </div>
                             </div>
                             <div class="text-center col-4 text-sm-left">
                                 <div class="px-0 pb-0 card-body">
-                                    <img src="/storage/assets/img/illustrations/mechanic-male-professional-worker.png" height="240"
-                                        alt="view sales">
+                                    <img src="/storage/assets/img/illustrations/mechanic-male-professional-worker.png"
+                                        height="240" alt="view sales">
                                 </div>
                             </div>
                         </div>
@@ -96,7 +118,8 @@ $indices_performance = [
             @empty
                 <div class="flex justify-content-center col-12" wire:loading.class="hidden">
                     <div class="flex gap-0 p-3 bg-gray-700 rounded-lg justify-content-center animate-pulse">
-                        <span class="px-3 py-2 m-0 font-bold text-center text-white flex-0">Aucun Prestataire trouvé</span>
+                        <span class="px-3 py-2 m-0 font-bold text-center text-white flex-0">Aucun Prestataire
+                            trouvé</span>
                     </div>
                 </div>
             @endforelse

@@ -116,13 +116,18 @@ class Prestataire extends Model
     public function indicePerformancePeriod($startDate = null, $endDate = null)
     {
         // Si aucune date de début ou de fin n'est fournie, on utilise la période complète.
-        $startDate = $startDate ?? now()->startOfYear();
-        $endDate = $endDate ?? now()->endOfYear();
+        // $startDate = $startDate ?? now()->startOfYear();
+        // $endDate = $endDate ?? now()->endOfYear();
     
-        $bonsTravail = $this->bon_travails()
-                            ->whereNotIn('status', [StatusEnum::EN_ATTENTE, StatusEnum::EN_COURS, StatusEnum::PAS_TRAITE])
-                            ->whereBetween('created_at', [$startDate, $endDate])
-                            ->get();
+        $query = $this->bon_travails()
+                            ->whereNotIn('status', [StatusEnum::EN_ATTENTE, StatusEnum::EN_COURS, StatusEnum::PAS_TRAITE]);
+                            
+        if($startDate && $endDate)
+        { 
+            $query->whereBetween('created_at', [$startDate, $endDate]);
+        }                    
+
+        $bonsTravail = $query->get();
     
         $totalRapports = 0;
         $kpiZeroCount = 0;
@@ -161,6 +166,7 @@ class Prestataire extends Model
                             ->get();
                             
         $totalRapports = 0;
+        $OtheTtotalRapports = 0;
         $kpiZeroCount = 0;
         $kpiOneCount = 0;
 
@@ -179,9 +185,105 @@ class Prestataire extends Model
         if ($totalRapports == 0) {
             return 0; // Aucun rapport d'intervention
         }
+        $OtheTtotalRapports = $kpiOneCount - $kpiZeroCount;
 
-        $performanceIndex = ($kpiOneCount * 100) / $totalRapports;
+        $performanceIndex = ($kpiOneCount * 100) / $OtheTtotalRapports;
+        // $performanceIndex = ($kpiOneCount * 100) / $totalRapports;
+        // var_dump("performanceIndex: ",$performanceIndex);
+
 
         return round($performanceIndex, 2); // Arrondir à deux décimales
+    }
+
+    /**
+     * Calculate the performance index.
+     *
+     * @return float
+     */
+    public function getIndicePerformanceGeneralHorsDelaisAttribute()
+    {
+        $bonsTravail = $this->bon_travails()
+                            ->whereNotIn('status', [StatusEnum::EN_ATTENTE, StatusEnum::EN_COURS, StatusEnum::PAS_TRAITE])
+                            ->get();
+                            
+        $kpiZeroCount = 0;
+
+        foreach ($bonsTravail as $bt) {
+            $rapport = $bt->rapportIntervention()->first();
+            if ($rapport) {
+                if ($rapport->kpi == 0) {
+                    $kpiZeroCount++;
+                }
+            }
+        }
+
+        return round($kpiZeroCount, 2); // Arrondir à deux décimales
+    }
+
+    /**
+     * Calculate the performance index.
+     *
+     * @return float
+     */
+    public function getIndicePerformanceGeneralDansLesDelaisAttribute()
+    {
+        $bonsTravail = $this->bon_travails()
+                            ->whereNotIn('status', [StatusEnum::EN_ATTENTE, StatusEnum::EN_COURS, StatusEnum::PAS_TRAITE])
+                            ->get();
+                            
+        $kpiOneCount = 0;
+
+        foreach ($bonsTravail as $bt) {
+            $rapport = $bt->rapportIntervention()->first();
+            if ($rapport) {
+                if ($rapport->kpi == 1) {
+                    $kpiOneCount++;
+                }
+            }
+        }
+
+        return round($kpiOneCount, 2); // Arrondir à deux décimales
+    }
+
+    public function indicePerformanceColor(int $value): array
+    {
+        $indices_performance = [
+            'statut' => 'N/A',
+            'color' => 'light',
+        ];
+
+        if($value < 0 && $value > 30 || $value < 0)
+        {
+            $indices_performance = [
+                'statut' => 'Mauvais',
+                'color' => 'danger',
+            ];
+        }
+
+        if($value >= 30 && $value < 50)
+        {
+            $indices_performance = [
+                'statut' => 'Moyen',
+                'color' => 'warning',
+            ];
+        }
+
+        if($value >= 50 && $value < 80)
+        {
+            $indices_performance = [
+                'statut' => 'Bon',
+                'color' => 'primary',
+            ];
+        }
+
+        if($value >= 80)
+        {
+            $indices_performance = [
+                'statut' => 'Excellent',
+                'color' => 'success',
+            ];
+        }
+
+        return $indices_performance;
     }
 }
