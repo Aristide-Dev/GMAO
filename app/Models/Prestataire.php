@@ -181,11 +181,11 @@ class Prestataire extends Model
                 }
             }
         }
+        $OtheTtotalRapports = $kpiOneCount - $kpiZeroCount;
 
-        if ($totalRapports == 0) {
+        if ($totalRapports == 0 || $totalRapports == 0) {
             return 0; // Aucun rapport d'intervention
         }
-        $OtheTtotalRapports = $kpiOneCount - $kpiZeroCount;
 
         $performanceIndex = ($kpiOneCount * 100) / $OtheTtotalRapports;
         // $performanceIndex = ($kpiOneCount * 100) / $totalRapports;
