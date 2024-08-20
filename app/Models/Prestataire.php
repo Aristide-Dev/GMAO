@@ -183,7 +183,7 @@ class Prestataire extends Model
         }
         $OtheTtotalRapports = $kpiOneCount - $kpiZeroCount;
 
-        if ($totalRapports == 0 || $totalRapports == 0) {
+        if ($totalRapports == 0 || $OtheTtotalRapports == 0) {
             return 0; // Aucun rapport d'intervention
         }
 
