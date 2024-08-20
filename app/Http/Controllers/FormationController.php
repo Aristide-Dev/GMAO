@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Formation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class FormationController extends Controller
 {
@@ -17,13 +18,15 @@ class FormationController extends Controller
 
     public function viewPdf(Formation $formation)
     {
-        $path = storage_path('app/public/' . $formation->pdf_path);
+        $path = Storage::path("public".DIRECTORY_SEPARATOR.$formation->pdf_path);
 
         if (!file_exists($path)) {
             abort(404);
         }
 
-        return response()->file($path);
+        return view('formations.showPdf', compact('path', 'formation'));
+
+        // return response()->file($path);
     }
 
     /**

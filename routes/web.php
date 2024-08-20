@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Formation;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AppController;
@@ -10,21 +11,20 @@ use App\Http\Controllers\Admin\MonthlyReportController;
 use App\Http\Controllers\Admin\SiteController as AdminSiteController;
 use App\Http\Controllers\Admin\ZoneController as AdminZoneController;
 use App\Http\Controllers\Admin\PieceController as AdminPieceController;
+
+
 use App\Http\Controllers\Demandeur\SiteController as DemandeurSiteController;
-
-
 use App\Http\Controllers\Admin\BonTravailController as AdminBonTravailController;
+
+
+
 use App\Http\Controllers\Admin\EquipementController as AdminEquipementController;
-
-
-
 use App\Http\Controllers\Admin\PrestataireController as AdminPrestataireController;
-use App\Http\Controllers\Admin\UtilisateurController as AdminUtilisateurController;
 
+use App\Http\Controllers\Admin\UtilisateurController as AdminUtilisateurController;
 use App\Http\Controllers\Admin\ForfaitContratController as AdminForfaitContratController;
 use App\Http\Controllers\Prestataire\UtilisateurController as PrestataireUtilisateurController;
 use App\Http\Controllers\Admin\DemandeInterventionController as AdminDemandeInterventionController;
-use App\Http\Controllers\Prestataire\RapportConstatController as PrestataireRapportConstatController;
 
 
 /*
@@ -37,6 +37,7 @@ use App\Http\Controllers\Prestataire\RapportConstatController as PrestataireRapp
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+use App\Http\Controllers\Prestataire\RapportConstatController as PrestataireRapportConstatController;
 use App\Http\Controllers\Demandeur\DemandeInterventionController as DemandeurDemandeInterventionController;
 use App\Http\Controllers\Prestataire\DemandeInterventionController as PrestataireDemandeInterventionController;
 use App\Http\Controllers\Prestataire\RapportRemplacementPieceController as PrestataireRapportRemplacementPieceController;
@@ -61,6 +62,22 @@ Route::middleware([
 ])->group(function () {
     Route::resource('formations', FormationController::class);
     Route::get('formations/{formation}/pdf', [FormationController::class, 'viewPdf'])->name('formations.viewPdf');
+
+    Route::get('/view-pdf/{formation}', function (Formation $formation) {
+        // Obtenir le chemin complet du fichier PDF
+        // $path = Storage::path($formation->pdf_path);
+        $path = Storage::path("public".DIRECTORY_SEPARATOR.$formation->pdf_path);
+    
+        if (!file_exists($path)) {
+            abort(404);
+        }
+    
+        // Retourner le fichier PDF avec en-têtes pour le mode inline
+        return Response::file($path, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'inline; filename="' . basename($path) . '"',
+        ]);
+    });
 });
 
 Route::middleware([
