@@ -51,6 +51,15 @@ class Formations extends Component
         $this->reset(['title', 'description', 'pdf_file']);
     }
 
+    public function remove($idFormation)
+    {
+        $formation = Formation::find($idFormation);
+        $formation->delete();
+
+        session()->flash('success', 'Formation supprimée avec succès!');
+        $this->getFormations();
+    }
+
     public function render()
     {
         return view('livewire.formations');
