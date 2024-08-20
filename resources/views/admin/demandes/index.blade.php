@@ -22,8 +22,7 @@
 
             {{-- <x-gmao.demande-list :demandes="$demandes" action="admin" /> --}}
             <livewire:demandes-table action="admin" />
-
-
+        </div>
         <!--/ Hoverable Table rows -->
     </div>
 </x-gmao-layout>

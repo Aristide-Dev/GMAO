@@ -1,30 +1,30 @@
 <?php
 
-use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Admin\BonTravailController as AdminBonTravailController;
-use App\Http\Controllers\Admin\DemandeInterventionController as AdminDemandeInterventionController;
-use App\Http\Controllers\Admin\EquipementController as AdminEquipementController;
-use App\Http\Controllers\Admin\ForfaitContratController as AdminForfaitContratController;
-use App\Http\Controllers\Admin\MonthlyReportController;
-use App\Http\Controllers\Admin\PieceController as AdminPieceController;
-use App\Http\Controllers\Admin\PrestataireController as AdminPrestataireController;
-use App\Http\Controllers\Admin\SiteController as AdminSiteController;
-use App\Http\Controllers\Admin\UtilisateurController as AdminUtilisateurController;
-use App\Http\Controllers\Admin\ZoneController as AdminZoneController;
-
-
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AppController;
+use App\Http\Controllers\FormationController;
 use App\Http\Controllers\CommercialController;
-
-
-
-use App\Http\Controllers\Demandeur\DemandeInterventionController as DemandeurDemandeInterventionController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\MonthlyReportController;
+use App\Http\Controllers\Admin\SiteController as AdminSiteController;
+use App\Http\Controllers\Admin\ZoneController as AdminZoneController;
+use App\Http\Controllers\Admin\PieceController as AdminPieceController;
 use App\Http\Controllers\Demandeur\SiteController as DemandeurSiteController;
 
-use App\Http\Controllers\Prestataire\DemandeInterventionController as PrestataireDemandeInterventionController;
-use App\Http\Controllers\Prestataire\RapportConstatController as PrestataireRapportConstatController;
-use App\Http\Controllers\Prestataire\RapportRemplacementPieceController as PrestataireRapportRemplacementPieceController;
+
+use App\Http\Controllers\Admin\BonTravailController as AdminBonTravailController;
+use App\Http\Controllers\Admin\EquipementController as AdminEquipementController;
+
+
+
+use App\Http\Controllers\Admin\PrestataireController as AdminPrestataireController;
+use App\Http\Controllers\Admin\UtilisateurController as AdminUtilisateurController;
+
+use App\Http\Controllers\Admin\ForfaitContratController as AdminForfaitContratController;
 use App\Http\Controllers\Prestataire\UtilisateurController as PrestataireUtilisateurController;
+use App\Http\Controllers\Admin\DemandeInterventionController as AdminDemandeInterventionController;
+use App\Http\Controllers\Prestataire\RapportConstatController as PrestataireRapportConstatController;
 
 
 /*
@@ -37,8 +37,9 @@ use App\Http\Controllers\Prestataire\UtilisateurController as PrestataireUtilisa
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Demandeur\DemandeInterventionController as DemandeurDemandeInterventionController;
+use App\Http\Controllers\Prestataire\DemandeInterventionController as PrestataireDemandeInterventionController;
+use App\Http\Controllers\Prestataire\RapportRemplacementPieceController as PrestataireRapportRemplacementPieceController;
 
 
 Route::get('robots.txt', function() {
@@ -52,6 +53,15 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
+    Route::resource('formations', FormationController::class);
+    Route::get('formations/{formation}/pdf', [FormationController::class, 'viewPdf'])->name('formations.viewPdf');
+});
 
 Route::middleware([
     'auth:sanctum',
