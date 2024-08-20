@@ -66,7 +66,7 @@ class DemandeInterventionController extends Controller
         // dd($di_reference,DemandeIntervention::where("di_reference",$di_reference)->first());
 
         while (DemandeIntervention::where("di_reference", $di_reference)->first()) {
-            if ($break_stepp >= 10) {
+            if ($break_stepp >= 50) {
                 return redirect()->back()->with('error', 'Trop de tentative! Recommencer svp.');
             }
             $di_reference = $this->generateDIReference();

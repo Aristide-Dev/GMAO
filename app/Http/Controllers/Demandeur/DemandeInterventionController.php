@@ -57,7 +57,7 @@ class DemandeInterventionController extends Controller
         // dd($di_reference,DemandeIntervention::where("di_reference",$di_reference)->first());
 
         while (DemandeIntervention::where("di_reference", $di_reference)->first()) {
-            if ($break_stepp >= 10) {
+            if ($break_stepp >= 50) {
                 return redirect()->back()->with('error', 'Trop de tentative! Recommencer svp.');
             }
             $di_reference = $this->generateDIReference();
@@ -68,16 +68,14 @@ class DemandeInterventionController extends Controller
 
         $imagePath = $this->saveImageWithUniqueName($image, $di_reference, 'demandes');
 
-        $semande = DemandeIntervention::create([
+        $demande = DemandeIntervention::create([
             'di_reference' => $di_reference,
             'site_id' => $request->site,
             'demandeur_id' => $demandeur->id,
             'demande_file' => $imagePath,
             'status' => StatusEnum::PAS_TRAITE,
-        ])->save();
-
-
-        event(new CreateDemandeInterventionEvent($semande));
+        ]);
+        event(new CreateDemandeInterventionEvent($demande));
 
         return redirect()->back()->with('success', 'Nouvelle demande créée avec succès!');
     }
