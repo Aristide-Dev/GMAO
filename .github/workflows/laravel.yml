@@ -30,7 +30,7 @@ jobs:
 
     # Copier le fichier .env s'il n'existe pas
     - name: Copy .env
-      run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+      run: php -r "file_exists('.env') || copy('.env.example.original', '.env');"
 
     # Installer les dépendances PHP
     - name: Install Dependencies
