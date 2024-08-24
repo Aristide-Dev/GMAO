@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Formation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class FormationController extends Controller
@@ -13,11 +14,19 @@ class FormationController extends Controller
      */
     public function index()
     {
+        $auth_user = Auth::user();
+        if ($auth_user->role !== 'super_admin' && $auth_user->role !== 'admin' && $auth_user->role !== 'maintenance' && $auth_user->role !== 'commercial') {
+            return redirect()->back()->with('error', 'Action non autorisée');
+        }
         return view('formations.index');
     }
 
     public function viewPdf(Formation $formation)
     {
+        $auth_user = Auth::user();
+        if ($auth_user->role !== 'super_admin' && $auth_user->role !== 'admin' && $auth_user->role !== 'maintenance' && $auth_user->role !== 'commercial') {
+            return redirect()->back()->with('error', 'Action non autorisée');
+        }
         $path = Storage::path("public".DIRECTORY_SEPARATOR.$formation->pdf_path);
 
         if (!file_exists($path)) {

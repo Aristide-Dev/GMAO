@@ -31,16 +31,5 @@
             <div data-i18n="Utilisateurs">Utilisateurs</div>
         </a>
     </x-gmao.nav-link>
-
-    
-
-
-    {{-- Dashboards --}}
-    <x-gmao.nav-link :active="request()->routeIs('formations.index')">
-        <a href="{{ route('formations.index') }}" class="menu-link">
-            <i class="menu-icon fa-solid fa-graduation-cap"></i>
-            <div data-i18n="Formations">Formations</div>
-        </a>
-    </x-gmao.nav-link>
 </ul>
 

@@ -29,14 +29,14 @@
                     <div class="mb-3 col-12">
 
                         <div class="text-end">
+                            <a href="{{ route('formations.viewPdf', $formation) }}" class="btn btn-primary" target="_blank">
+                                Voir le PDF
+                            </a>
                             @if (Auth::user())
                                 @if (Auth::user()->role == 'admin' || Auth::user()->role == 'maintenance' || Auth::user()->role == 'super_admin')
-                                    <a href="{{ route('formations.viewPdf', $formation) }}" class="btn btn-primary"
-                                        target="_blank">Voir le PDF</a>
+                                    <button wire:click.prevent='remove({{$formation->id}})' class="btn btn-danger">Supprimer</button>
                                 @endif
                             @endif
-
-                            <button wire:click.prevent='remove({{$formation->id}})' class="btn btn-danger">Supprimer</button>
                         </div>
                     </div>
             @endforeach
