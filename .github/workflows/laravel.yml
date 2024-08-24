@@ -1,4 +1,4 @@
-name: Laravel
+name: G-MAINTENANCE
 
 on:
   push:
@@ -8,26 +8,53 @@ on:
 
 jobs:
   laravel-tests:
-
     runs-on: ubuntu-latest
 
     steps:
+    # Utiliser une version spécifique de PHP
     - uses: shivammathur/setup-php@15c43e89cdef867065b0213be354c2841860869e
       with:
-        php-version: '8.0'
+        php-version: '8.2.2'
+
+    # Récupérer le code du dépôt
     - uses: actions/checkout@v3
+
+    # Mettre en cache les dépendances Composer
+    - name: Cache Composer dependencies
+      uses: actions/cache@v3
+      with:
+        path: vendor
+        key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-composer-
+
+    # Copier le fichier .env s'il n'existe pas
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+
+    # Installer les dépendances PHP
     - name: Install Dependencies
       run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+
+    # Générer la clé d'application Laravel
     - name: Generate key
       run: php artisan key:generate
+
+    # Définir les permissions des répertoires nécessaires
     - name: Directory Permissions
-      run: chmod -R 777 storage bootstrap/cache
+      run: chmod -R 755 storage bootstrap/cache
+
+    # Créer une base de données SQLite pour les tests
     - name: Create Database
       run: |
         mkdir -p database
         touch database/database.sqlite
+
+    # Lancer les migrations de la base de données
+    - name: Run Database Migrations
+      run: php artisan migrate --force
+
+    # Exécuter les tests (tests unitaires et de fonctionnalités) via PHPUnit
     - name: Execute tests (Unit and Feature tests) via PHPUnit
       env:
         DB_CONNECTION: sqlite
