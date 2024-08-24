@@ -15,7 +15,7 @@ class FormationController extends Controller
     public function index()
     {
         $auth_user = Auth::user();
-        if ($auth_user->role !== 'super_admin' && $auth_user->role !== 'admin' && $auth_user->role !== 'maintenance' && $auth_user->role !== 'commercial') {
+        if ($auth_user->role !== 'super_admin' && $auth_user->role !== 'admin' && $auth_user->role !== 'maintenance' && $auth_user->role !== 'commercial' && $auth_user->role !== 'demandeur') {
             return redirect()->back()->with('error', 'Action non autorisée');
         }
         return view('formations.index');
@@ -24,7 +24,7 @@ class FormationController extends Controller
     public function viewPdf(Formation $formation)
     {
         $auth_user = Auth::user();
-        if ($auth_user->role !== 'super_admin' && $auth_user->role !== 'admin' && $auth_user->role !== 'maintenance' && $auth_user->role !== 'commercial') {
+        if ($auth_user->role !== 'super_admin' && $auth_user->role !== 'admin' && $auth_user->role !== 'maintenance' && $auth_user->role !== 'commercial' && $auth_user->role !== 'demandeur') {
             return redirect()->back()->with('error', 'Action non autorisée');
         }
         $path = Storage::path("public".DIRECTORY_SEPARATOR.$formation->pdf_path);
