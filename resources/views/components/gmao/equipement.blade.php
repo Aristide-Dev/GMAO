@@ -96,20 +96,27 @@
                 style="height:200px; background-image: url('{{ $bg_image }}'); background-size:90%; background-position:center; background-repeat:no-repeat;">
                 {{-- <img class="img-fluid w-50" src="{{ $bg_image }}" alt="Card girl image" width="50" /> --}}
             </div>
-            <div class="flex justify-between gap-1 mt-3 mb-0 border-b border-black rounded">
-                <div class="row">
-                    <div class="p-4 col-12">
-                        <h3 class="mb-1 font-bold uppercase h4">{{ $equipement->name }}</h3>
-                        <p class="mb-1 uppercase">Numero Serie: <span
-                                class="font-bold ">{{ $equipement->numero_serie }}<span></p>
-                        <p class="mb-1 uppercase">Forfait Contrat: <span
-                                class="font-bold ">{{ number_format($equipement->forfait_contrat, 2, '.', ' ') }} F<span>
-                        </p>
+            <div class="mt-3 mb-0 border-b border-black rounded">
+                <div class="flex justify-between gap-1">
+                    <div class="row">
+                        <div class="p-4 col-12">
+                            <h3 class="mb-1 font-bold uppercase h4">{{ $equipement->name }}</h3>
+                            <p class="mb-1 uppercase">Numero Serie: <span
+                                    class="font-bold ">{{ $equipement->numero_serie }}<span></p>
+                            <p class="mb-1 uppercase">Forfait Contrat: <span
+                                    class="font-bold ">{{ number_format($equipement->forfait_contrat, 2, '.', ' ') }} F<span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="items-center justify-center w-auto h-100">
+                        <div class="flex justify-center p-0 m-0 text-center h-100 rounded-3xl">
+                            {!! $equipement->qr_code !!}
+                        </div>
                     </div>
                 </div>
-                <div class="items-center justify-center w-auto h-100">
-                    <div class="flex justify-center p-0 m-0 text-center h-100 rounded-3xl">
-                        {!! $equipement->qr_code !!}
+                <div class="items-center justify-center w-auto h-100 my-3">
+                    <div class="flex justify-center p-0 m-0 text-center h-100 rounded-3xl p-3">
+                        {!! $equipement->bar_code !!}
                     </div>
                 </div>
 
