@@ -154,6 +154,17 @@
                             class="list-group-item list-group-item-action d-flex justify-content-between">
                             <div class="li-wrapper d-flex justify-content-start align-items-center">
                                 <div class="list-content">
+                                    <h6 class="mb-1">Position</h6>
+                                    {{-- <small class="text-muted">Donec id elit non mi porta.</small> --}}
+                                </div>
+                            </div>
+                            <small class="font-bold">{{ $equipement->position ?? '---' }}</small>
+                        </a>
+
+                        <a href="javascript:void(0);"
+                            class="list-group-item list-group-item-action d-flex justify-content-between">
+                            <div class="li-wrapper d-flex justify-content-start align-items-center">
+                                <div class="list-content">
                                     <h6 class="mb-1">Produit</h6>
                                     {{-- <small class="text-muted">Donec id elit non mi porta.</small> --}}
                                 </div>
@@ -170,6 +181,17 @@
                                 </div>
                             </div>
                             <small class="font-bold">{{ $equipement->annee_fabrication ?? '---' }}</small>
+                        </a>
+
+                        <a href="javascript:void(0);"
+                            class="list-group-item list-group-item-action d-flex justify-content-between">
+                            <div class="li-wrapper d-flex justify-content-start align-items-center">
+                                <div class="list-content">
+                                    <h6 class="mb-1">Date de mise en service</h6>
+                                    {{-- <small class="text-muted">Donec id elit non mi porta.</small> --}}
+                                </div>
+                            </div>
+                            <small class="font-bold">{{ $equipement->date_mise_en_service ?? '---' }}</small>
                         </a>
 
                         <a href="javascript:void(0);"

@@ -76,15 +76,23 @@
 
                             <div class="bg-gray-100 border shadow-lg col-md-4 rounded-xl">
                                 <h1 class="mt-2 mb-3 font-bold">Autres Propriétés</h1>
+
                                 <div class="mb-3">
                                     <label for="marque" class="form-label">marque</label>
                                     <input type="text" id="marque" name="marque" placeholder="Marque de l'équipement" class="rounded form-control form-control-sm" value="{{ old('marque',$equipement->marque) }}" />
                                     <x-input-error bag="edit_equipement" for="marque" class="mt-2" />
                                 </div>
+
                                 <div class="mb-3">
                                     <label for="type" class="form-label">Type</label>
                                     <input type="text" id="type" name="type" placeholder="exemple: 2-2" class="rounded form-control form-control-sm" value="{{ old('type',$equipement->type) }}" />
                                     <x-input-error bag="edit_equipement" for="type" class="mt-2" />
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="position" class="form-label">position</label>
+                                    <input type="text" id="position" name="position" placeholder="position" class="rounded form-control form-control-sm" value="{{ old('position',$equipement->position) }}" />
+                                    <x-input-error bag="edit_equipement" for="position" class="mt-2" />
                                 </div>
                                 
                                 <div class="mb-3">
@@ -104,19 +112,28 @@
                                 
                                 <div class="mb-3">
                                     <label for="annee_fabrication" class="form-label">Année de Fabrication</label>
-                                    <input type="number" id="annee_fabrication" name="annee_fabrication" placeholder="Année de Fabrication" class="rounded form-control form-control-sm" value="{{ old('annee_fabrication', $equipement->annee_fabrication) }}" />
+                                    <input type="number" min="1900" max="{{date('Y')}}" step="1" id="annee_fabrication" name="annee_fabrication" placeholder="Année de Fabrication" class="rounded form-control form-control-sm" value="{{ old('annee_fabrication', $equipement->annee_fabrication) }}" />
                                     <x-input-error bag="edit_equipement" for="annee_fabrication" class="mt-2" />
                                 </div>
+
+                                <div class="mb-3">
+                                    <label for="date_mise_en_service" class="form-label">Date de mise en service</label>
+                                    <input type="date" id="date_mise_en_service" name="date_mise_en_service" placeholder="Date de mise en service" class="rounded form-control form-control-sm" value="{{ old('date_mise_en_service', $equipement->date_mise_en_service) }}" />
+                                    <x-input-error bag="edit_equipement" for="date_mise_en_service" class="mt-2" />
+                                </div>
+
                                 <div class="mb-3">
                                     <label for="puissance" class="form-label">Puissance</label>
                                     <input type="number" id="puissance" name="puissance" placeholder="Puissance" class="rounded form-control form-control-sm" value="{{ old('puissance', $equipement->puissance) }}" />
                                     <x-input-error bag="edit_equipement" for="puissance" class="mt-2" />
                                 </div>
+
                                 <div class="mb-3">
                                     <label for="capacite" class="form-label">Capacité</label>
                                     <input type="number" id="capacite" name="capacite" placeholder="Capacité" class="rounded form-control form-control-sm" value="{{ old('capacite', $equipement->capacite) }}" />
                                     <x-input-error bag="edit_equipement" for="capacite" class="mt-2" />
                                 </div>
+                                
                                 <div class="mb-3">
                                     <label for="observations" class="form-label">Observations</label>
                                     <textarea id="observations" name="observations" placeholder="Observations" class="rounded form-control form-control-sm">{{ old('observations', $equipement->observations) }}</textarea>

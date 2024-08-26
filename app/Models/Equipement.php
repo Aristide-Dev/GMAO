@@ -47,6 +47,8 @@ class Equipement extends Model
         'puissance',
         'observations',
         'actif',
+        'date_mise_en_service',
+        'position',
     ];
 
     /**

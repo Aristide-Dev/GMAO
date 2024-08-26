@@ -64,8 +64,10 @@ class EquipementController extends Controller
 
             'marque' => 'nullable|string|max:255',
             'type' => 'nullable|string|max:255',
+            'position' => 'nullable|string|max:255',
             'produit' => 'nullable|string|max:20',
             'annee_fabrication' => 'nullable|integer|min:1900|max:' . date('Y'),
+            'date_mise_en_service' => 'nullable|date',
             'puissance' => 'nullable|integer|min:0',
             'capacite' => 'nullable|integer|min:0',
             'observations' => 'nullable|string',
@@ -78,8 +80,10 @@ class EquipementController extends Controller
 
         $equipement->marque = $request->marque;
         $equipement->type = $request->type;
+        $equipement->position = $request->position;
         $equipement->produit = $request->produit;
         $equipement->annee_fabrication = $request->annee_fabrication;
+        $equipement->date_mise_en_service = $request->date_mise_en_service;
         $equipement->puissance = $request->puissance;
         $equipement->capacite = $request->capacite;
         $equipement->observations = $request->observations;
