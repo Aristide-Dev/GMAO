@@ -92,7 +92,7 @@
 <body>
 
     <!-- Layout wrapper -->
-    <div class="layout-wrapper layout-content-navbar">
+    <div id="layout-menu" class="layout-wrapper layout-content-navbar">
         <div class="min-h-screen layout-container">
 
             <!-- Menu -->
@@ -108,6 +108,8 @@
                         <i class="ti menu-toggle-icon d-none d-xl-block align-middle"></i>
                         <i class="ti ti-x d-block d-xl-none ti-md align-middle"></i>
                     </a>
+                    
+                    <div class="menu-inner-shadow"></div>
                     
                 </div>
                 @if(!empty($sidebar))

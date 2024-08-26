@@ -196,4 +196,10 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Site::class, 'site_user');
     }
+
+
+    public function ownedTeams()
+    {
+        return $this->hasMany(Team::class, 'user_id');
+    }
 }
