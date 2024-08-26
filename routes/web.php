@@ -117,6 +117,15 @@ Route::middleware([
     Route::put('/rapportIntervention/injection-Piece/{injectionPiece}', [AdminDemandeInterventionController::class, 'injection_update'])
         ->name('demandes.injection-update');
 
+        Route::get('/sites/zones', [AdminSiteController::class, 'zones'])
+        ->name('sites_zones.index');
+
+        Route::get('/sites/regions', [AdminSiteController::class, 'regions'])
+            ->name('sites_regions.index');
+
+            Route::get('/sites/localites', [AdminSiteController::class, 'localites'])
+                ->name('sites_localites.index');
+
     Route::resource('/sites', AdminSiteController::class);
 
     Route::post('/sites/{site}/equipement/store', [AdminSiteController::class, 'add_equipement'])

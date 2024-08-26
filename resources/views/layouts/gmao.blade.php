@@ -38,6 +38,7 @@
     <link rel="stylesheet" href="/storage/assets/vendor/libs/datatables-checkboxes-jquery/datatables.checkboxes.css">
     <link rel="stylesheet" href="/storage/assets/vendor/libs/flatpickr/flatpickr.css" />
     <link rel="stylesheet" href="/storage/assets/vendor/libs/dropzone/dropzone.css" />
+    <link rel="stylesheet" href="/storage/assets/vendor/libs/spinkit/spinkit.css" />
     
     <link rel="stylesheet" href="/storage/assets/vendor/libs/bootstrap-datepicker/bootstrap-datepicker.css" />
     <link rel="stylesheet" href="/storage/assets/vendor/libs/bootstrap-daterangepicker/bootstrap-daterangepicker.422.delay" />

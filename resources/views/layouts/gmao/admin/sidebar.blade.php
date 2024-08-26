@@ -26,7 +26,23 @@
 
 
     {{-- site --}}
-    <x-gmao.sub-nav-link :active="request()->routeIs('admin.sites.*')" :title="'Sites - Régions et Localité'"
+@php
+$site_admin_nav = false;
+
+if(request()->routeIs('admin.sites.*') || 
+request()->routeIs('admin.sites_localites.*') || 
+request()->routeIs('admin.sites_zones.*') || 
+request()->routeIs('admin.sites_regions.*'))
+{
+    $site_admin_nav = true;
+}
+@endphp
+    <x-gmao.sub-nav-link 
+        :active="request()->routeIs('admin.sites.*') || 
+        request()->routeIs('admin.sites_localites.*') || 
+        request()->routeIs('admin.sites_zones.*') || 
+        request()->routeIs('admin.sites_regions.*')"
+        :title="'Sites - Régions et Localité'"
         icon='<i class="menu-icon fa-solid fa-screwdriver-wrench"></i>'>
 
         {{-- site --}}
@@ -38,29 +54,29 @@
         </x-gmao.nav-link>
 
         {{-- Zones --}}
-        <x-gmao.nav-link :active="request()->routeIs('admin.sites.zones.*')">
-            <a href="{{ route('admin.sites.index') }}" class="menu-link">
+        <x-gmao.nav-link :active="request()->routeIs('admin.sites_zones.*')">
+            <a href="{{ route('admin.sites_zones.index') }}" class="menu-link">
                 {{-- <i class="menu-icon fa-solid fa-screwdriver-wrench"></i> --}}
                 <div data-i18n="Zones">Zones</div>
             </a>
         </x-gmao.nav-link>
 
         {{-- Régions --}}
-        <x-gmao.nav-link :active="request()->routeIs('admin.sites.regions.*')">
-            <a href="{{ route('admin.sites.index') }}" class="menu-link">
+        <x-gmao.nav-link :active="request()->routeIs('admin.sites_regions.*')">
+            <a href="{{ route('admin.sites_regions.index') }}" class="menu-link">
                 {{-- <i class="menu-icon fa-solid fa-screwdriver-wrench"></i> --}}
                 <div data-i18n="Régions">Régions</div>
             </a>
         </x-gmao.nav-link>
 
         {{-- Localités --}}
-        <x-gmao.nav-link :active="request()->routeIs('admin.sites.regions.*')">
-            <a href="{{ route('admin.sites.index') }}" class="menu-link">
+        <x-gmao.nav-link :active="request()->routeIs('admin.sites_localites.*')">
+            <a href="{{ route('admin.sites_localites.index') }}" class="menu-link">
                 {{-- <i class="menu-icon fa-solid fa-screwdriver-wrench"></i> --}}
                 <div data-i18n="Localités">Localités</div>
             </a>
         </x-gmao.nav-link>
-      </x-gmao.sub-nav-link>
+    </x-gmao.sub-nav-link>
 
         {{-- prestataire --}}
         <x-gmao.nav-link :active="request()->routeIs('admin.prestataires.*')">

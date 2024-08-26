@@ -146,4 +146,19 @@ class SiteController extends Controller
         // Retourner la vue avec les équipements
         return view('admin.sites.equipements', ['site' => $site,'type_equipement' => $categorie_equipement,'equipements' => $equipements]);
     }
+
+    public function zones()
+    {   
+        return view('admin.sites.zones');
+    }
+
+    public function regions()
+    {   
+        return view('admin.sites.regions');
+    }
+
+    public function localites()
+    {   
+        return view('admin.sites.localites');
+    }
 }
