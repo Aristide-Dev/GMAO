@@ -111,31 +111,29 @@
                     
                 </div>
                 @if(!empty($sidebar))
-                @switch($sidebar)
-                @case($sidebar == "demandeur")
-                @include('layouts.gmao.demandeur.sidebar')
-                @break
+                    @switch($sidebar)
+                        @case($sidebar == "demandeur")
+                        @include('layouts.gmao.demandeur.sidebar')
+                        @break
 
-                @case($sidebar == "prestataire")
-                @include('layouts.gmao.prestataire.sidebar')
-                @break
+                        @case($sidebar == "prestataire")
+                        @include('layouts.gmao.prestataire.sidebar')
+                        @break
 
-                @case($sidebar == "admin")
-                @include('layouts.gmao.admin.sidebar')
-                @break
+                        @case($sidebar == "admin")
+                        @include('layouts.gmao.admin.sidebar')
+                        @break
 
-                @case($sidebar == "commercial")
-                @include('layouts.gmao.commercial.sidebar')
-                @break
+                        @case($sidebar == "commercial")
+                        @include('layouts.gmao.commercial.sidebar')
+                        @break
 
-                @case(2)
-                @break
-                @default
-                @include('layouts.gmao.sidebar')
-                @break
-                @endswitch
+                        @default
+                        @include('layouts.gmao.sidebar')
+                        @break
+                    @endswitch
                 @else
-                @include('layouts.gmao.sidebar')
+                    @include('layouts.gmao.sidebar')
                 @endif
 
 
