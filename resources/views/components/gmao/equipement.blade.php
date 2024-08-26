@@ -192,6 +192,9 @@
                                 </div>
                             </div>
                             <small class="font-bold">{{ $equipement->date_mise_en_service ?? '---' }}</small>
+                            <p>
+                                (<small class="font-bold text-red-400">{{ $equipement->anciennete }}</small>)
+                            </p>
                         </a>
 
                         <a href="javascript:void(0);"

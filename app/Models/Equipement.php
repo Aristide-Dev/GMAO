@@ -183,6 +183,15 @@ class Equipement extends Model
         return $this->created_at >= $recentPeriod;
     }
 
+    public function getAncienneteAttribute()
+    {
+        if (!$this->date_mise_en_service) {
+            return ''; // Retourne une valeur par défaut si la date n'est pas définie
+        }
 
+        $dateMiseEnService = Carbon::parse($this->date_mise_en_service);
+        $diffInYears = $dateMiseEnService->diffInYears(Carbon::now());
 
+        return $diffInYears <= 0 ? '':"{$diffInYears} ans";
+    }
 }

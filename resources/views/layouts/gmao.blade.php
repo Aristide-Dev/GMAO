@@ -72,6 +72,7 @@
     <link rel="stylesheet" href="/storage/assets/vendor/css/pages/cards-advance.css" />
     <!-- Helpers -->
     <script src="/storage/assets/vendor/js/helpers.js"></script>
+    <script src="/storage/assets/vendor/js/template-customizer.js"></script>
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="/storage/assets/js/config.js"></script>
     
@@ -102,6 +103,12 @@
                             <img src="{{ asset('storage/assets/img/logo.png') }}" alt="logo" width="35%" />
                         </span>
                     </a>
+
+                    <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
+                        <i class="ti menu-toggle-icon d-none d-xl-block align-middle"></i>
+                        <i class="ti ti-x d-block d-xl-none ti-md align-middle"></i>
+                    </a>
+                    
                 </div>
                 @if(!empty($sidebar))
                 @switch($sidebar)
