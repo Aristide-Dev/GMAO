@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact " dir="ltr" data-theme="theme-default" data-assets-path="/storage/assets/" data-template="vertical-menu-template">
+<html lang="fr" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact " dir="ltr" data-theme="theme-default" data-assets-path="/storage/assets/" data-template="vertical-menu-template" data-style="light">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
@@ -27,9 +27,9 @@
 
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="/storage/assets/vendor/libs/node-waves/node-waves.css" />
-    <link rel="stylesheet" href="/storage/assets/vendor/libs/select2/select2.css" />
     <link rel="stylesheet" href="/storage/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
     <link rel="stylesheet" href="/storage/assets/vendor/libs/typeahead-js/typeahead.css" />
+    <link rel="stylesheet" href="/storage/assets/vendor/libs/select2/select2.css" />
     <link rel="stylesheet" href="/storage/assets/vendor/libs/bootstrap-select/bootstrap-select.css" />
     <link rel="stylesheet" href="/storage/assets/vendor/libs/apex-charts/apex-charts.css" />
     <link rel="stylesheet" href="/storage/assets/vendor/libs/swiper/swiper.css" />
@@ -70,7 +70,7 @@
 
     
     <!-- Page CSS -->
-    <link rel="stylesheet" href="/storage/assets/vendor/css/pages/cards-advance.css" />
+    {{-- <link rel="stylesheet" href="/storage/assets/vendor/css/pages/cards-advance.css" /> --}}
     <!-- Helpers -->
     <script src="/storage/assets/vendor/js/helpers.js"></script>
     <script src="/storage/assets/vendor/js/template-customizer.js"></script>
@@ -93,11 +93,11 @@
 <body>
 
     <!-- Layout wrapper -->
-    <div id="layout-menu" class="layout-wrapper layout-content-navbar">
+    <div class="layout-wrapper layout-content-navbar">
         <div class="min-h-screen layout-container">
 
             <!-- Menu -->
-            <aside class="layout-menu menu-vertical menu bg-menu-theme">
+            <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
                 <div class="app-brand demo">
                     <a href="/" class="app-brand-link">
                         <span class="app-brand-logo">
@@ -105,10 +105,10 @@
                         </span>
                     </a>
 
-                    <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
+                    {{-- <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
                         <i class="ti menu-toggle-icon d-none d-xl-block align-middle"></i>
                         <i class="ti ti-x d-block d-xl-none ti-md align-middle"></i>
-                    </a>
+                    </a> --}}
                     
                     <div class="menu-inner-shadow"></div>
                     
@@ -229,10 +229,10 @@
     <script src="/storage/assets/js/forms-file-upload.js"></script>
     <script src="/storage/assets/js/forms-extras.js"></script>
     <script src="/storage/assets/js/cards-statistics.js"></script>
-    <script src="/storage/assets/js/ui-modals.js"></script>
     <script src="/storage/assets/vendor/libs/bootstrap-datepicker/bootstrap-datepicker.js"></script>
     <script src="/storage/assets/vendor/libs/bootstrap-daterangepicker/bootstrap-daterangepicker.426.delay"></script>
     <script src="/storage/assets/js/forms-pickers.js"></script>
+    <script src="/storage/assets/js/ui-modals.js"></script>
 
     <script>
         // Fonction générique pour afficher une image en grand
